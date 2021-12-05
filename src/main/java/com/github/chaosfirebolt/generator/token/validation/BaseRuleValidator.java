@@ -8,7 +8,7 @@ import java.util.function.Predicate;
 /**
  * Created by ChaosFire on 12/5/2021
  */
-public abstract class BaseRuleValidator implements RuleValidator {
+public class BaseRuleValidator implements RuleValidator {
 
     /**
      * Condition testing if the rule is valid
@@ -24,7 +24,7 @@ public abstract class BaseRuleValidator implements RuleValidator {
      * @param ruleValidityCondition condition for rule validity
      * @param errorMessageCreator creator for error messages
      */
-    protected BaseRuleValidator(Predicate<GeneratorRule> ruleValidityCondition, ErrorMessageCreator errorMessageCreator) {
+    public BaseRuleValidator(Predicate<GeneratorRule> ruleValidityCondition, ErrorMessageCreator errorMessageCreator) {
         this.ruleValidityCondition = ruleValidityCondition;
         this.errorMessageCreator = errorMessageCreator;
     }
@@ -33,7 +33,8 @@ public abstract class BaseRuleValidator implements RuleValidator {
     public void validate(GeneratorRule rule) {
         boolean isValid = this.ruleValidityCondition.test(rule);
         if (!isValid) {
-            throw new InvalidGeneratorRuleException(this.errorMessageCreator.create(rule));
+            String errorMessage = this.errorMessageCreator.create(rule);
+            throw new InvalidGeneratorRuleException(errorMessage);
         }
     }
 }

@@ -22,14 +22,29 @@ public class BaseGeneratorRule implements GeneratorRule {
     private final int length;
 
     /**
-     * Constructor creating rule for token generation with supplied token parts
-     * <br/>
+     * Constructor creating rule for token generation with supplied token parts and total length
      * @param parts parts for this rule
      * @param length required length of the token
      */
     public BaseGeneratorRule(List<TokenPart> parts, int length) {
         this.parts = Collections.unmodifiableList(parts);
         this.length = length;
+    }
+
+    /**
+     * Constructor creating rule for token generation with supplied token parts
+     * @param parts parts for this rule
+     */
+    public BaseGeneratorRule(List<TokenPart> parts) {
+        this(parts, calculateLength(parts));
+    }
+
+    private static int calculateLength(List<TokenPart> parts) {
+        int sum = 0;
+        for (TokenPart part : parts) {
+            sum += part.getLength();
+        }
+        return sum;
     }
 
     @Override
