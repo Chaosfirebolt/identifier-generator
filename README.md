@@ -1,2 +1,2 @@
-# token-generator
+# Token Generator
 Library for token generation
