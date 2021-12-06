@@ -11,10 +11,24 @@ import java.util.function.Predicate;
  */
 public class NoOpRuleValidator extends BaseRuleValidator {
 
-    private static final Predicate<GeneratorRule> ALWAYS_VALID = rule -> true;
-    private static final ErrorMessageCreator NO_MESSAGE = rule -> null;
+    private static Predicate<GeneratorRule> ALWAYS_VALID;
+    private static ErrorMessageCreator NO_MESSAGE;
 
     public NoOpRuleValidator() {
-        super(ALWAYS_VALID, NO_MESSAGE);
+        super(getCondition(), getMessageCreator());
+    }
+
+    private static Predicate<GeneratorRule> getCondition() {
+        if (ALWAYS_VALID == null) {
+            ALWAYS_VALID = rule -> true;
+        }
+        return ALWAYS_VALID;
+    }
+
+    private static ErrorMessageCreator getMessageCreator() {
+        if (NO_MESSAGE == null) {
+            NO_MESSAGE = rule -> null;
+        }
+        return NO_MESSAGE;
     }
 }
