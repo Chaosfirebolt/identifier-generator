@@ -1,7 +1,7 @@
 package com.github.chaosfirebolt.generator.token.validation;
 
-import com.github.chaosfirebolt.generator.token.part.TokenPart;
 import com.github.chaosfirebolt.generator.token.rule.GeneratorRule;
+import com.github.chaosfirebolt.generator.token.util.CalculationUtility;
 
 import java.util.function.Predicate;
 
@@ -13,23 +13,15 @@ import java.util.function.Predicate;
 public class StrictLengthRuleValidator extends BaseRuleValidator {
 
     private static final Predicate<GeneratorRule> CONDITION = rule -> {
-        int sum = calculateLengthOfParts(rule);
+        int sum = CalculationUtility.totalLength(rule.getParts());
         return rule.getLength() == sum;
     };
     private static final ErrorMessageCreator ERROR_MESSAGE_CREATOR = rule -> {
-        int sum = calculateLengthOfParts(rule);
+        int sum = CalculationUtility.totalLength(rule.getParts());
         return String.format("Required length of '%d' must be equal to sum of parts lengths, but was '%d'", rule.getLength(), sum);
     };
 
     public StrictLengthRuleValidator() {
         super(CONDITION, ERROR_MESSAGE_CREATOR);
-    }
-
-    private static int calculateLengthOfParts(GeneratorRule rule) {
-        int sum = 0;
-        for (TokenPart part : rule.getParts()) {
-            sum += part.getLength();
-        }
-        return sum;
     }
 }

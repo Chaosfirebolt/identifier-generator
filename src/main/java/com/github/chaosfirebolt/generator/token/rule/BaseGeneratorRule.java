@@ -1,6 +1,7 @@
 package com.github.chaosfirebolt.generator.token.rule;
 
 import com.github.chaosfirebolt.generator.token.part.TokenPart;
+import com.github.chaosfirebolt.generator.token.util.CalculationUtility;
 
 import java.util.Collections;
 import java.util.List;
@@ -36,15 +37,7 @@ public class BaseGeneratorRule implements GeneratorRule {
      * @param parts parts for this rule
      */
     public BaseGeneratorRule(List<TokenPart> parts) {
-        this(parts, calculateLength(parts));
-    }
-
-    private static int calculateLength(List<TokenPart> parts) {
-        int sum = 0;
-        for (TokenPart part : parts) {
-            sum += part.getLength();
-        }
-        return sum;
+        this(parts, CalculationUtility.totalLength(parts));
     }
 
     @Override
