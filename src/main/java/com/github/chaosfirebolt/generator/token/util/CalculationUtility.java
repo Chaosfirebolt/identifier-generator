@@ -5,10 +5,17 @@ import com.github.chaosfirebolt.generator.token.part.TokenPart;
 import java.util.List;
 
 /**
+ * Calculation utility methods.
+ * <br/>
  * Created by ChaosFire on 12/6/2021
  */
 public class CalculationUtility {
 
+    /**
+     * Calculates the total length of all parts.
+     * @param parts parts whose total length is to be calculated
+     * @return the total length
+     */
     public static int totalLength(List<TokenPart> parts) {
         int sum = 0;
         for (TokenPart part : parts) {
