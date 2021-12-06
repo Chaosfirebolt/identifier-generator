@@ -11,6 +11,10 @@ import java.util.UUID;
  */
 public class UuidStringTokenGenerator extends StringTokenGenerator {
 
+    public UuidStringTokenGenerator() {
+        super(null, null, null);
+    }
+
     @Override
     public String generate() {
         return generateRandomUuidString();
