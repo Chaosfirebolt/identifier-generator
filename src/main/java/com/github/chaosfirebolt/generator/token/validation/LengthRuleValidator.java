@@ -10,7 +10,7 @@ import java.util.function.Predicate;
  * <br/>
  * Created by ChaosFire on 12/5/2021
  */
-public class StrictLengthRuleValidator extends BaseRuleValidator {
+public class LengthRuleValidator extends BaseRuleValidator {
 
     private static final Predicate<GeneratorRule> CONDITION = rule -> {
         int sum = CalculationUtility.totalLength(rule.getParts());
@@ -21,7 +21,7 @@ public class StrictLengthRuleValidator extends BaseRuleValidator {
         return String.format("Required length of '%d' must be equal to sum of parts lengths, but was '%d'", rule.getLength(), sum);
     };
 
-    public StrictLengthRuleValidator() {
+    public LengthRuleValidator() {
         super(CONDITION, ERROR_MESSAGE_CREATOR);
     }
 }

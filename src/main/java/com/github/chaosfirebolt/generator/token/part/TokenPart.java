@@ -16,6 +16,14 @@ public interface TokenPart {
     int getLength();
 
     /**
+     * Get the minimum length for this token part
+     * @return the minimum length of this part
+     */
+    default int getMinLength() {
+        return this.getLength();
+    }
+
+    /**
      * Get possible characters for this token part.
      * @return possible characters for this part
      */

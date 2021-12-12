@@ -22,4 +22,12 @@ public interface GeneratorRule {
      * @return total length of the token
      */
     int getLength();
+
+    /**
+     * Get the minimum length required by this rule
+     * @return the minimum length of the token
+     */
+    default int getMinLength() {
+        return this.getLength();
+    }
 }

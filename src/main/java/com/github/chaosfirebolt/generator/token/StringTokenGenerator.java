@@ -2,11 +2,17 @@ package com.github.chaosfirebolt.generator.token;
 
 import com.github.chaosfirebolt.generator.token.part.TokenPart;
 import com.github.chaosfirebolt.generator.token.rule.GeneratorRule;
+import com.github.chaosfirebolt.generator.token.util.ShuffleUtility;
+import com.github.chaosfirebolt.generator.token.validation.MinimumLengthEqualOrLessThanLength;
+import com.github.chaosfirebolt.generator.token.validation.MinimumLengthRuleValidator;
 import com.github.chaosfirebolt.generator.token.validation.RuleValidator;
-import com.github.chaosfirebolt.generator.token.validation.StrictLengthRuleValidator;
+import com.github.chaosfirebolt.generator.token.validation.LengthRuleValidator;
 
 import java.security.SecureRandom;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Random;
+import java.util.function.ToIntFunction;
 
 /**
  * Base class for generating string tokens.
@@ -15,50 +21,107 @@ import java.util.Random;
  */
 public class StringTokenGenerator extends BaseTokenGenerator<String> {
 
+    private static final List<RuleValidator> DEFAULT_VALIDATORS = Arrays.asList(new LengthRuleValidator(), new MinimumLengthRuleValidator(), new MinimumLengthEqualOrLessThanLength());
+    private static final ToIntFunction<TokenPart> PART_LENGTH_FUNC = TokenPart::getLength;
+    private static final ToIntFunction<TokenPart> PART_MIN_LENGTH_FUNC = TokenPart::getMinLength;
+
+    /**
+     * The random generator.
+     */
     protected final Random random;
+
+    /**
+     * Rule to be used for generation of string tokens.
+     */
     protected final GeneratorRule generatorRule;
-    private final RuleValidator ruleValidator;
 
+    /**
+     * Constructs instance of StringTokenGenerator, using provided {@link GeneratorRule}, a new instance of Secure Random and default list of rule validators.
+     * @param generatorRule rule to be used for token generation
+     * @throws com.github.chaosfirebolt.generator.token.exception.InvalidGeneratorRuleException if provided rule does not conform with default RuleValidators
+     */
     public StringTokenGenerator(GeneratorRule generatorRule) {
-        this(generatorRule, new StrictLengthRuleValidator());
+        this(generatorRule, DEFAULT_VALIDATORS);
     }
 
-    public StringTokenGenerator(GeneratorRule generatorRule, RuleValidator ruleValidator) {
-        this(new SecureRandom(), generatorRule, ruleValidator);
+    /**
+     * Constructs instance of StringTokenGenerator, using provided {@link GeneratorRule}, provided list of {@link RuleValidator}, and a new instance of Secure Random.
+     * @param generatorRule rule to be used for token generation
+     * @param ruleValidators validators to be used for validation of provided generator rule
+     * @throws com.github.chaosfirebolt.generator.token.exception.InvalidGeneratorRuleException if provided rule does not conform with provided RuleValidators
+     */
+    public StringTokenGenerator(GeneratorRule generatorRule, List<RuleValidator> ruleValidators) {
+        this(new SecureRandom(), generatorRule, ruleValidators);
     }
 
-    public StringTokenGenerator(Random random, GeneratorRule generatorRule, RuleValidator ruleValidator) {
+    /**
+     * Constructs instance of StringTokenGenerator, using provided {@link GeneratorRule}, provided list of {@link RuleValidator}, and provided {@link Random}.
+     * @param random random number generator
+     * @param generatorRule rule to be used for token generation
+     * @param ruleValidators validators to be used for validation of provided generator rule
+     */
+    public StringTokenGenerator(Random random, GeneratorRule generatorRule, List<RuleValidator> ruleValidators) {
         this.random = random;
         this.generatorRule = generatorRule;
-        this.ruleValidator = ruleValidator;
-        this.validateRule();
+        validateRule(ruleValidators, generatorRule);
     }
 
-    private void validateRule() {
-        this.ruleValidator.validate(this.generatorRule);
+    private static void validateRule(List<RuleValidator> ruleValidators, GeneratorRule generatorRule) {
+        for (RuleValidator ruleValidator : ruleValidators) {
+            ruleValidator.validate(generatorRule);
+        }
     }
 
     @Override
     public String generate() {
-        //TODO extract generation in a method
         char[] token = new char[this.generatorRule.getLength()];
-        int tokenIndex = 0;
+        this.fillToken(token, 0, PART_LENGTH_FUNC);
+        this.shuffleArray(token);
+        return new String(token);
+    }
+
+    private int fillToken(char[] token, int tokenIndex, ToIntFunction<TokenPart> partSizeFunction) {
         for (TokenPart part : this.generatorRule.getParts()) {
-            for (int i = 0; i < part.getLength(); i++) {
-                int randomIndex = this.random.nextInt(part.getLength());
-                char nextChar = part.getCharacters().get(randomIndex);
+            int partSize = partSizeFunction.applyAsInt(part);
+            for (int i = 0; i < partSize; i++) {
+                char nextChar = this.getRandomElement(part.getCharacters());
                 token[tokenIndex++] = nextChar;
             }
         }
-        //TODO shuffle char array
-        return new String(token);
+        return tokenIndex;
+    }
+
+    /**
+     * Shuffles supplied array using implementation of Fisher-Yates algorithm.
+     * <br/>
+     * Override this method to use different shuffling strategy.
+     * @param array array to be shuffled
+     */
+    protected void shuffleArray(char[] array) {
+        ShuffleUtility.shuffleFisherYates(this.random, array);
     }
 
     @Override
     public String generate(int tokenLength) {
-        //TODO generate using supplied length
-        //TODO if length ==, just like generate, if length < get 1 char from each part, then the rest at random, if length > just like generate, then the rest at random
-        //TODO shuffle char array
-        return null;
+        //in this implementation token length can not be less than minimum length from the rule
+        if (tokenLength < this.generatorRule.getMinLength()) {
+            tokenLength = this.generatorRule.getMinLength();
+        }
+        char[] token = new char[tokenLength];
+        int tokenIndex = 0;
+        tokenIndex = this.fillToken(token, tokenIndex, PART_MIN_LENGTH_FUNC);
+        int lastIndex = tokenLength - 1;
+        while (tokenIndex < lastIndex) {
+            TokenPart randomPart = this.getRandomElement(this.generatorRule.getParts());
+            char nextChar = this.getRandomElement(randomPart.getCharacters());
+            token[tokenIndex++] = nextChar;
+        }
+        this.shuffleArray(token);
+        return new String(token);
+    }
+
+    private <E> E getRandomElement(List<E> list) {
+        int randomIndex = this.random.nextInt(list.size());
+        return list.get(randomIndex);
     }
 }

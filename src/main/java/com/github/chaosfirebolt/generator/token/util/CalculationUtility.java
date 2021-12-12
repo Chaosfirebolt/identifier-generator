@@ -23,4 +23,17 @@ public class CalculationUtility {
         }
         return sum;
     }
+
+    /**
+     * Calculates the minimum length of all parts.
+     * @param parts parts whose total minimum length is to be calculated
+     * @return the total minimum length
+     */
+    public static int minimumLength(List<TokenPart> parts) {
+        int sum = 0;
+        for (TokenPart part : parts) {
+            sum += part.getMinLength();
+        }
+        return sum;
+    }
 }

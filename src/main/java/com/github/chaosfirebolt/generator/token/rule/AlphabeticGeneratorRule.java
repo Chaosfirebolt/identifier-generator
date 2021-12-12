@@ -13,6 +13,6 @@ import java.util.Arrays;
 public class AlphabeticGeneratorRule extends BaseGeneratorRule {
 
     public AlphabeticGeneratorRule(int lowerCaseLength, int upperCaseLength) {
-        super(Arrays.asList(new LowerAlphabeticTokenPart(lowerCaseLength), new UpperAlphabeticTokenPart(upperCaseLength)), lowerCaseLength + upperCaseLength);
+        super(Arrays.asList(new LowerAlphabeticTokenPart(lowerCaseLength), new UpperAlphabeticTokenPart(upperCaseLength)));
     }
 }
