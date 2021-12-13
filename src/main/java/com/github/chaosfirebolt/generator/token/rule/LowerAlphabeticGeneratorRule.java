@@ -12,6 +12,6 @@ import java.util.Collections;
 public class LowerAlphabeticGeneratorRule extends BaseGeneratorRule {
 
     public LowerAlphabeticGeneratorRule(int length) {
-        super(Collections.singletonList(new LowerAlphabeticTokenPart(length)), length, length);
+        super(Collections.singletonList(new LowerAlphabeticTokenPart(length)));
     }
 }

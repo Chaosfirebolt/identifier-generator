@@ -29,22 +29,17 @@ public class BaseGeneratorRule implements GeneratorRule {
     private final int minLength;
 
     /**
-     * Constructor creating rule for token generation with supplied token parts, total and minimum lengths
-     * @param parts parts for this rule
-     * @param length required length of the token
-     */
-    public BaseGeneratorRule(List<TokenPart> parts, int length, int minLength) {
-        this.parts = Collections.unmodifiableList(parts);
-        this.length = length;
-        this.minLength = minLength;
-    }
-
-    /**
      * Constructor creating rule for token generation with supplied token parts
      * @param parts parts for this rule
      */
     public BaseGeneratorRule(List<TokenPart> parts) {
         this(parts, CalculationUtility.totalLength(parts), CalculationUtility.minimumLength(parts));
+    }
+
+    private BaseGeneratorRule(List<TokenPart> parts, int length, int minLength) {
+        this.parts = Collections.unmodifiableList(parts);
+        this.length = length;
+        this.minLength = minLength;
     }
 
     @Override

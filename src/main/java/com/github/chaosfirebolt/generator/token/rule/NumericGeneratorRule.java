@@ -12,6 +12,6 @@ import java.util.Collections;
 public class NumericGeneratorRule extends BaseGeneratorRule {
 
     public NumericGeneratorRule(int length) {
-        super(Collections.singletonList(new NumericTokenPart(length)), length, length);
+        super(Collections.singletonList(new NumericTokenPart(length)));
     }
 }

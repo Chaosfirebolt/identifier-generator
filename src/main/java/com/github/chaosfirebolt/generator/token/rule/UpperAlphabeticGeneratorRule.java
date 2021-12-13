@@ -12,6 +12,6 @@ import java.util.Collections;
 public class UpperAlphabeticGeneratorRule extends BaseGeneratorRule {
 
     public UpperAlphabeticGeneratorRule(int length) {
-        super(Collections.singletonList(new UpperAlphabeticTokenPart(length)), length, length);
+        super(Collections.singletonList(new UpperAlphabeticTokenPart(length)));
     }
 }
