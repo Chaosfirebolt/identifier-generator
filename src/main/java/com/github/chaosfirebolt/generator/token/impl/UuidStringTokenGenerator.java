@@ -11,6 +11,9 @@ import java.util.UUID;
  */
 public class UuidStringTokenGenerator extends StringTokenGenerator {
 
+    /**
+     * Constructs new UuidStringTokenGenerator.
+     */
     public UuidStringTokenGenerator() {
         super(null, null, null);
     }

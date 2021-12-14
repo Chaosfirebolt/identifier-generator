@@ -14,6 +14,9 @@ public class NoOpRuleValidator extends BaseRuleValidator {
     private static Predicate<GeneratorRule> ALWAYS_VALID;
     private static ErrorMessageCreator NO_MESSAGE;
 
+    /**
+     * Constructs new instance of NoOpRuleValidator
+     */
     public NoOpRuleValidator() {
         super(getCondition(), getMessageCreator());
     }

@@ -21,6 +21,9 @@ public class LengthRuleValidator extends BaseRuleValidator {
         return String.format("Required length of '%d' must be equal to sum of parts lengths, but was '%d'", rule.getLength(), sum);
     };
 
+    /**
+     * Constructs new LengthRuleValidator with preconfigured condition for rule validity and error message creator.
+     */
     public LengthRuleValidator() {
         super(CONDITION, ERROR_MESSAGE_CREATOR);
     }

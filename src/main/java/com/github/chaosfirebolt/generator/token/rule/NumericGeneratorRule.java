@@ -11,6 +11,10 @@ import java.util.Collections;
  */
 public class NumericGeneratorRule extends BaseGeneratorRule {
 
+    /**
+     * Constructs new NumericGeneratorRule with specified length for numeric part.
+     * @param length desired length of numeric part
+     */
     public NumericGeneratorRule(int length) {
         super(Collections.singletonList(new NumericTokenPart(length)));
     }

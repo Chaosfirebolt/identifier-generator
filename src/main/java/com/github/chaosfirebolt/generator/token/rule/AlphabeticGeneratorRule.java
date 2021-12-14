@@ -12,6 +12,11 @@ import java.util.Arrays;
  */
 public class AlphabeticGeneratorRule extends BaseGeneratorRule {
 
+    /**
+     * Constructs new AlphabeticGeneratorRule with specified lengths for lower case and upper case parts
+     * @param lowerCaseLength desired length of lower case part
+     * @param upperCaseLength desired length of upper case part
+     */
     public AlphabeticGeneratorRule(int lowerCaseLength, int upperCaseLength) {
         super(Arrays.asList(new LowerAlphabeticTokenPart(lowerCaseLength), new UpperAlphabeticTokenPart(upperCaseLength)));
     }

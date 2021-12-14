@@ -3,7 +3,7 @@ package com.github.chaosfirebolt.generator.token;
 import com.github.chaosfirebolt.generator.token.part.TokenPart;
 import com.github.chaosfirebolt.generator.token.rule.GeneratorRule;
 import com.github.chaosfirebolt.generator.token.util.ShuffleUtility;
-import com.github.chaosfirebolt.generator.token.validation.MinimumLengthEqualOrLessThanLength;
+import com.github.chaosfirebolt.generator.token.validation.MinimumLengthEqualOrLessThanLengthRuleValidator;
 import com.github.chaosfirebolt.generator.token.validation.MinimumLengthRuleValidator;
 import com.github.chaosfirebolt.generator.token.validation.RuleValidator;
 import com.github.chaosfirebolt.generator.token.validation.LengthRuleValidator;
@@ -21,7 +21,8 @@ import java.util.function.ToIntFunction;
  */
 public class StringTokenGenerator extends BaseTokenGenerator<String> {
 
-    private static final List<RuleValidator> DEFAULT_VALIDATORS = Arrays.asList(new LengthRuleValidator(), new MinimumLengthRuleValidator(), new MinimumLengthEqualOrLessThanLength());
+    private static final List<RuleValidator> DEFAULT_VALIDATORS = Arrays.asList(new LengthRuleValidator(), new MinimumLengthRuleValidator(),
+            new MinimumLengthEqualOrLessThanLengthRuleValidator());
     private static final ToIntFunction<TokenPart> PART_LENGTH_FUNC = TokenPart::getLength;
     private static final ToIntFunction<TokenPart> PART_MIN_LENGTH_FUNC = TokenPart::getMinLength;
 

@@ -6,6 +6,8 @@ import com.github.chaosfirebolt.generator.token.util.CalculationUtility;
 import java.util.function.Predicate;
 
 /**
+ * This validator considers rules valid, only if the sum of the minimum lengths of token parts equals the minimum length of the token.
+ * <br/>
  * Created by ChaosFire on 12-Dec-21
  */
 public class MinimumLengthRuleValidator extends BaseRuleValidator {
@@ -19,6 +21,9 @@ public class MinimumLengthRuleValidator extends BaseRuleValidator {
         return String.format("Required minimum length of '%d' must be equal to sum of parts minimum lengths, but was '%d'", rule.getMinLength(), sum);
     };
 
+    /**
+     * Constructs new MinimumLengthRuleValidator with preconfigured condition for rule validity and error message creator.
+     */
     public MinimumLengthRuleValidator() {
         super(CONDITION, ERROR_MESSAGE_CREATOR);
     }

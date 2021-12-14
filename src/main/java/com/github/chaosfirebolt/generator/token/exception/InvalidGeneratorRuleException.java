@@ -7,6 +7,10 @@ package com.github.chaosfirebolt.generator.token.exception;
  */
 public class InvalidGeneratorRuleException extends RuntimeException {
 
+    /**
+     * Constructs new InvalidGeneratorRuleException with the specified message
+     * @param message the message
+     */
     public InvalidGeneratorRuleException(String message) {
         super(message);
     }

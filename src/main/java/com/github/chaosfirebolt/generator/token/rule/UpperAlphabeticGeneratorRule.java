@@ -11,6 +11,10 @@ import java.util.Collections;
  */
 public class UpperAlphabeticGeneratorRule extends BaseGeneratorRule {
 
+    /**
+     * Constructs new UpperAlphabeticGeneratorRule with specified length for upper case alphabetic part.
+     * @param length desired length of upper case alphabetic part
+     */
     public UpperAlphabeticGeneratorRule(int length) {
         super(Collections.singletonList(new UpperAlphabeticTokenPart(length)));
     }
