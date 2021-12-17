@@ -14,10 +14,21 @@ public class UpperAlphabeticTokenPart extends BaseTokenPart {
     private static final List<Character> CHARACTERS = CharacterUtility.characterListFromIntRange(65, 91);
 
     /**
-     * Constructor creating instance of token part for upper alphabetic chars, with desired length
+     * Constructor creating instance of token part for upper alphabetic chars, with desired length.
+     * <br/>
+     * Minimum length is equal to the specified length.
      * @param length required length of the part
      */
     public UpperAlphabeticTokenPart(int length) {
-        super(length, CHARACTERS);
+        this(length, length);
+    }
+
+    /**
+     * Constructor creating instance of token part for upper alphabetic chars, with desired length and minimum length
+     * @param length required length of the part
+     * @param minLength required minimum length of the part
+     */
+    public UpperAlphabeticTokenPart(int length, int minLength) {
+        super(length, minLength, CHARACTERS);
     }
 }
