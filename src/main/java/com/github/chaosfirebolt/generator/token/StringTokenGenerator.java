@@ -60,6 +60,7 @@ public class StringTokenGenerator extends BaseTokenGenerator<String> {
      * @param random random number generator
      * @param generatorRule rule to be used for token generation
      * @param ruleValidators validators to be used for validation of provided generator rule
+     * @throws com.github.chaosfirebolt.generator.token.exception.InvalidGeneratorRuleException if provided rule does not conform with provided RuleValidators
      */
     public StringTokenGenerator(Random random, GeneratorRule generatorRule, List<RuleValidator> ruleValidators) {
         this.random = random;
