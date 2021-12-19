@@ -2,6 +2,7 @@ package com.github.chaosfirebolt.generator.token.part;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * Basic implementation of {@link TokenPart}
@@ -12,7 +13,9 @@ public class BaseTokenPart implements TokenPart {
 
     private static final String LENGTH_PARAM_NAME = "Part length";
     private static final String MIN_LENGTH_PARAM_NAME = "Minimum part length";
-    private static final int MIN_PART_LENGTH = 0;
+    private static final int MIN_PART_LENGTH = 1;
+    private static final String NULL_CHARACTERS_ERROR_MESSAGE = "Characters list can't be null";
+    private static final String EMPTY_CHARACTERS_ERROR_MESSAGE = "Characters list can't be empty";
 
     /**
      * Desired length of this part.
@@ -35,7 +38,8 @@ public class BaseTokenPart implements TokenPart {
      * Collection of characters is changed to unmodifiable list.
      * @param length required length of the part
      * @param characters possible characters for the part
-     * @throws IllegalArgumentException if length is less than 1
+     * @throws IllegalArgumentException if length is less than 1, or characters is empty
+     * @throws NullPointerException if characters is null
      */
     public BaseTokenPart(int length, List<Character> characters) {
         this(length, length, characters);
@@ -48,12 +52,14 @@ public class BaseTokenPart implements TokenPart {
      * @param length required length of the part
      * @param minLength required minimum length of the part
      * @param characters possible characters for the part
-     * @throws IllegalArgumentException if length or minLength are less than 1, or length is less than minLength
+     * @throws IllegalArgumentException if length or minLength are less than 1, length is less than minLength, or characters is empty
+     * @throws NullPointerException if characters is null
      */
     public BaseTokenPart(int length, int minLength, List<Character> characters) {
         validateLength(LENGTH_PARAM_NAME, MIN_PART_LENGTH, length);
         validateLength(MIN_LENGTH_PARAM_NAME, MIN_PART_LENGTH, minLength);
         validateLength(LENGTH_PARAM_NAME, minLength, length);
+        validateCharacters(characters);
         this.length = length;
         this.minLength = minLength;
         this.characters = Collections.unmodifiableList(characters);
@@ -63,6 +69,13 @@ public class BaseTokenPart implements TokenPart {
         if (actualValue < minValue) {
             String errorMessage = String.format("%s can't be less than '%d', but was '%d'", parameter, minValue, actualValue);
             throw new IllegalArgumentException(errorMessage);
+        }
+    }
+
+    private static void validateCharacters(List<Character> characters) {
+        Objects.requireNonNull(characters, NULL_CHARACTERS_ERROR_MESSAGE);
+        if (characters.isEmpty()) {
+            throw new IllegalArgumentException(EMPTY_CHARACTERS_ERROR_MESSAGE);
         }
     }
 
