@@ -10,6 +10,10 @@ import java.util.List;
  */
 public class BaseTokenPart implements TokenPart {
 
+    private static final String LENGTH_PARAM_NAME = "Part length";
+    private static final String MIN_LENGTH_PARAM_NAME = "Minimum part length";
+    private static final int MIN_PART_LENGTH = 0;
+
     /**
      * Desired length of this part.
      */
@@ -31,6 +35,7 @@ public class BaseTokenPart implements TokenPart {
      * Collection of characters is changed to unmodifiable list.
      * @param length required length of the part
      * @param characters possible characters for the part
+     * @throws IllegalArgumentException if length is less than 1
      */
     public BaseTokenPart(int length, List<Character> characters) {
         this(length, length, characters);
@@ -43,11 +48,22 @@ public class BaseTokenPart implements TokenPart {
      * @param length required length of the part
      * @param minLength required minimum length of the part
      * @param characters possible characters for the part
+     * @throws IllegalArgumentException if length or minLength are less than 1, or length is less than minLength
      */
     public BaseTokenPart(int length, int minLength, List<Character> characters) {
+        validateLength(LENGTH_PARAM_NAME, MIN_PART_LENGTH, length);
+        validateLength(MIN_LENGTH_PARAM_NAME, MIN_PART_LENGTH, minLength);
+        validateLength(LENGTH_PARAM_NAME, minLength, length);
         this.length = length;
         this.minLength = minLength;
         this.characters = Collections.unmodifiableList(characters);
+    }
+
+    private static void validateLength(String parameter, int minValue, int actualValue) {
+        if (actualValue < minValue) {
+            String errorMessage = String.format("%s can't be less than '%d', but was '%d'", parameter, minValue, actualValue);
+            throw new IllegalArgumentException(errorMessage);
+        }
     }
 
     @Override
