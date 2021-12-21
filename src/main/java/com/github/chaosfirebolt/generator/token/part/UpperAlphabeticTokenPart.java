@@ -18,6 +18,7 @@ public class UpperAlphabeticTokenPart extends BaseTokenPart {
      * <br/>
      * Minimum length is equal to the specified length.
      * @param length required length of the part
+     * @throws IllegalArgumentException if length is less than 1
      */
     public UpperAlphabeticTokenPart(int length) {
         this(length, length);
@@ -27,6 +28,7 @@ public class UpperAlphabeticTokenPart extends BaseTokenPart {
      * Constructor creating instance of token part for upper alphabetic chars, with desired length and minimum length
      * @param length required length of the part
      * @param minLength required minimum length of the part
+     * @throws IllegalArgumentException if length or minLength are less than 1 or length is less than minLength
      */
     public UpperAlphabeticTokenPart(int length, int minLength) {
         super(length, minLength, CHARACTERS);
