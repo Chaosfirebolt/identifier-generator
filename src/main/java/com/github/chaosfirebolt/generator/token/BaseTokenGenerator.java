@@ -1,5 +1,8 @@
 package com.github.chaosfirebolt.generator.token;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.util.function.Predicate;
 
 /**
@@ -11,12 +14,21 @@ import java.util.function.Predicate;
  */
 public abstract class BaseTokenGenerator<T> implements TokenGenerator<T> {
 
+    private final Logger logger;
+
+    protected BaseTokenGenerator() {
+        this.logger = LoggerFactory.getLogger(this.getClass());
+    }
+
     @Override
     public T generate(Predicate<T> uniquenessCondition) {
         T token = this.generate();
+        int count = 1;
         while (!uniquenessCondition.test(token)) {
             token = this.regenerateToken(token);
+            count++;
         }
+        this.logger.trace("Unique token generated after {} attempts", count);
         return token;
     }
 
@@ -37,9 +49,12 @@ public abstract class BaseTokenGenerator<T> implements TokenGenerator<T> {
     @Override
     public T generate(int tokenLength, Predicate<T> uniquenessCondition) {
         T token = this.generate(tokenLength);
+        int count = 1;
         while (!uniquenessCondition.test(token)) {
             token = this.regenerateToken(token, tokenLength);
+            count++;
         }
+        this.logger.trace("Unique token generated after {} attempts", count);
         return token;
     }
 
