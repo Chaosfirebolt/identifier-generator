@@ -19,6 +19,7 @@ public interface TokenGenerator<T> {
      * Generates a token which is unique according to the provided condition
      * @param uniquenessCondition condition for uniqueness of the generated token
      * @return the generated unique token
+     * @throws com.github.chaosfirebolt.generator.token.exception.TooManyAttemptsException if a maximum number of attempts to generate unique token has been set, and that number is reached
      */
     T generate(Predicate<T> uniquenessCondition);
 
@@ -34,6 +35,7 @@ public interface TokenGenerator<T> {
      * @param tokenLength required length of the generated token
      * @param uniquenessCondition condition for uniqueness of the generated token
      * @return the generated unique token
+     * @throws com.github.chaosfirebolt.generator.token.exception.TooManyAttemptsException if a maximum number of attempts to generate unique token has been set, and that number is reached
      */
     T generate(int tokenLength, Predicate<T> uniquenessCondition);
 }

@@ -1,5 +1,6 @@
 package com.github.chaosfirebolt.generator.token;
 
+import com.github.chaosfirebolt.generator.token.exception.TooManyAttemptsException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -14,10 +15,26 @@ import java.util.function.Predicate;
  */
 public abstract class BaseTokenGenerator<T> implements TokenGenerator<T> {
 
-    private final Logger logger;
+    /**
+     * Default value for maximum number of attempts.
+     */
+    private static final int DEFAULT_MAX_ATTEMPTS = -1;
+
+    /**
+     * The logger.
+     */
+    protected final Logger logger;
+
+    /**
+     * Maximum number of attempts to generate unique token, before throwing exception.
+     * <br/>
+     * Negative value means attempting forever.
+     */
+    private int maximumAttempts;
 
     protected BaseTokenGenerator() {
         this.logger = LoggerFactory.getLogger(this.getClass());
+        this.maximumAttempts = DEFAULT_MAX_ATTEMPTS;
     }
 
     @Override
@@ -25,11 +42,20 @@ public abstract class BaseTokenGenerator<T> implements TokenGenerator<T> {
         T token = this.generate();
         int count = 1;
         while (!uniquenessCondition.test(token)) {
+            this.throwIfMaxAttemptsExceeded(count);
             token = this.regenerateToken(token);
             count++;
         }
         this.logger.trace("Unique token generated after {} attempts", count);
         return token;
+    }
+
+    private void throwIfMaxAttemptsExceeded(int currentCount) {
+        if (this.maximumAttempts > 0 && currentCount >= this.maximumAttempts) {
+            String message = "Maximum number of attempts to generate unique token reached - " + currentCount;
+            this.logger.trace(message);
+            throw new TooManyAttemptsException(message);
+        }
     }
 
     /**
@@ -51,6 +77,7 @@ public abstract class BaseTokenGenerator<T> implements TokenGenerator<T> {
         T token = this.generate(tokenLength);
         int count = 1;
         while (!uniquenessCondition.test(token)) {
+            this.throwIfMaxAttemptsExceeded(count);
             token = this.regenerateToken(token, tokenLength);
             count++;
         }
@@ -71,5 +98,18 @@ public abstract class BaseTokenGenerator<T> implements TokenGenerator<T> {
     @SuppressWarnings("unused")
     protected T regenerateToken(T previousToken, int tokenLength) {
         return this.generate(tokenLength);
+    }
+
+    /**
+     * Sets the value of maximum number of attempts. Attempting to set negative value or zero will have no effect.
+     * <br/>
+     * Positive value can be assigned once. Subsequent invocations will have no effect.
+     * @param maximumAttempts maximum number of attempts to generate unique token before throwing exception.
+     */
+    public void setMaximumAttempts(int maximumAttempts) {
+        if (maximumAttempts <= 0 || this.maximumAttempts > 0) {
+            return;
+        }
+        this.maximumAttempts = maximumAttempts;
     }
 }
