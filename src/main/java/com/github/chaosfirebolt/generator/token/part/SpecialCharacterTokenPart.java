@@ -32,6 +32,7 @@ public class SpecialCharacterTokenPart extends BaseTokenPart {
      * <br/>
      * Minimum length is equal to the specified length.
      * @param length required length of the part
+     * @throws IllegalArgumentException if length is less than 1
      */
     public SpecialCharacterTokenPart(int length) {
         this(length, length);
@@ -41,6 +42,7 @@ public class SpecialCharacterTokenPart extends BaseTokenPart {
      * Constructor creating instance of token part for special chars, with desired length and minimum length
      * @param length required length of the part
      * @param minLength required minimum length of the part
+     * @throws IllegalArgumentException if length or minLength are less than 1 or length is less than minLength
      */
     public SpecialCharacterTokenPart(int length, int minLength) {
         super(length, minLength, CHARACTERS);

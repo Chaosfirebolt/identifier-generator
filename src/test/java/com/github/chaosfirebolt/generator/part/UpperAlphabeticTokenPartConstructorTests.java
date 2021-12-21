@@ -1,6 +1,6 @@
 package com.github.chaosfirebolt.generator.part;
 
-import com.github.chaosfirebolt.generator.token.part.LowerAlphabeticTokenPart;
+import com.github.chaosfirebolt.generator.token.part.UpperAlphabeticTokenPart;
 import org.junit.jupiter.api.function.Executable;
 
 /**
@@ -10,36 +10,36 @@ public class UpperAlphabeticTokenPartConstructorTests extends TokenPartConstruct
 
     @Override
     protected Executable intConstructor_LengthIsNegative() {
-        return () -> new LowerAlphabeticTokenPart(-4);
+        return () -> new UpperAlphabeticTokenPart(-4);
     }
 
     @Override
     protected Executable intConstructor_LengthIsZero() {
-        return () -> new LowerAlphabeticTokenPart(0);
+        return () -> new UpperAlphabeticTokenPart(0);
     }
 
     @Override
     protected Executable intConstructor_LengthIsPositive() {
-        return () -> new LowerAlphabeticTokenPart(4);
+        return () -> new UpperAlphabeticTokenPart(4);
     }
 
     @Override
     protected Executable intIntConstructor_MinLengthIsNegative() {
-        return () -> new LowerAlphabeticTokenPart(4, -9);
+        return () -> new UpperAlphabeticTokenPart(4, -9);
     }
 
     @Override
     protected Executable intIntConstructor_MinLengthIsZero() {
-        return () -> new LowerAlphabeticTokenPart(4, 0);
+        return () -> new UpperAlphabeticTokenPart(4, 0);
     }
 
     @Override
     protected Executable intIntConstructor_MinLengthIsPositive() {
-        return () -> new LowerAlphabeticTokenPart(4, 2);
+        return () -> new UpperAlphabeticTokenPart(4, 2);
     }
 
     @Override
     protected Executable intIntConstructor_LengthIsLessThanMinLength() {
-        return () -> new LowerAlphabeticTokenPart(8, 11);
+        return () -> new UpperAlphabeticTokenPart(8, 11);
     }
 }
