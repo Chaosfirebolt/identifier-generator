@@ -2,6 +2,7 @@ package com.github.chaosfirebolt.generator.token.impl;
 
 import com.github.chaosfirebolt.generator.token.StringTokenGenerator;
 
+import java.util.Collections;
 import java.util.UUID;
 
 /**
@@ -15,7 +16,7 @@ public class UuidStringTokenGenerator extends StringTokenGenerator {
      * Constructs new UuidStringTokenGenerator.
      */
     public UuidStringTokenGenerator() {
-        super(null, null, null);
+        super(null, null, Collections.emptyList());
     }
 
     @Override
