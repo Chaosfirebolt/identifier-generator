@@ -7,11 +7,11 @@ import org.slf4j.LoggerFactory;
 /**
  * Created by ChaosFire on 22-Dec-21
  */
-public class UuidStringTokenGeneratorTests extends TokenGeneratorTests {
+public class UuidStringTokenGeneratorMethodTests extends TokenGeneratorMethodTests {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(UuidStringTokenGeneratorTests.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(UuidStringTokenGeneratorMethodTests.class);
 
-    public UuidStringTokenGeneratorTests() {
+    public UuidStringTokenGeneratorMethodTests() {
         super(LOGGER, 20, 36, 36);
     }
 

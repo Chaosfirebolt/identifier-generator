@@ -20,7 +20,7 @@ import static org.mockito.Mockito.doReturn;
 /**
  * Created by ChaosFire on 22-Dec-21
  */
-public abstract class TokenGeneratorTests {
+public abstract class TokenGeneratorMethodTests {
 
     private static final String MOCK_ERROR_MESSAGE = "Mocking generator did not work";
 
@@ -32,7 +32,7 @@ public abstract class TokenGeneratorTests {
     private final int expectedLength;
     private final int expectedMinLength;
 
-    protected TokenGeneratorTests(Logger logger, int maxAttempts, int expectedLength, int expectedMinLength) {
+    protected TokenGeneratorMethodTests(Logger logger, int maxAttempts, int expectedLength, int expectedMinLength) {
         this.logger = logger;
         this.maxAttempts = maxAttempts;
         this.expectedLength = expectedLength;

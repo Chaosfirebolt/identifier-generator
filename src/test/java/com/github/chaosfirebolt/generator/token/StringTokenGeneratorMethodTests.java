@@ -13,11 +13,11 @@ import java.util.Arrays;
 /**
  * Created by ChaosFire on 22-Dec-21
  */
-public class StringTokenGeneratorTests extends TokenGeneratorTests {
+public class StringTokenGeneratorMethodTests extends TokenGeneratorMethodTests {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(StringTokenGeneratorTests.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(StringTokenGeneratorMethodTests.class);
 
-    public StringTokenGeneratorTests() {
+    public StringTokenGeneratorMethodTests() {
         super(LOGGER, 49, 233, 233);
     }
 

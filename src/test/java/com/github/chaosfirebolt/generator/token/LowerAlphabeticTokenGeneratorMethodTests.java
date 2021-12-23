@@ -7,11 +7,11 @@ import org.slf4j.LoggerFactory;
 /**
  * Created by ChaosFire on 22-Dec-21
  */
-public class LowerAlphabeticTokenGeneratorTests extends TokenGeneratorTests {
+public class LowerAlphabeticTokenGeneratorMethodTests extends TokenGeneratorMethodTests {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(LowerAlphabeticTokenGeneratorTests.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(LowerAlphabeticTokenGeneratorMethodTests.class);
 
-    public LowerAlphabeticTokenGeneratorTests() {
+    public LowerAlphabeticTokenGeneratorMethodTests() {
         super(LOGGER, 11, 20, 20);
     }
 
