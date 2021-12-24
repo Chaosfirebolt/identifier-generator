@@ -19,6 +19,7 @@ public class AlphaNumericTokenGenerator extends StringTokenGenerator {
      * @param lowerCaseLength length of lower case characters
      * @param upperCaseLength length of upper case characters
      * @param numericLength length of numeric characters
+     * @throws IllegalArgumentException if any of the length parameters is negative or zero, the underlying TokenPart constructors will throw this exception
      */
     public AlphaNumericTokenGenerator(int lowerCaseLength, int upperCaseLength, int numericLength) {
         super(new AlphaNumericGeneratorRule(lowerCaseLength, upperCaseLength, numericLength));
@@ -30,6 +31,7 @@ public class AlphaNumericTokenGenerator extends StringTokenGenerator {
      * @param upperCaseLength length of upper case characters
      * @param numericLength length of numeric characters
      * @param ruleValidators validators for the rule
+     * @throws IllegalArgumentException if any of the length parameters is negative or zero, the underlying TokenPart constructors will throw this exception
      */
     public AlphaNumericTokenGenerator(int lowerCaseLength, int upperCaseLength, int numericLength, List<RuleValidator> ruleValidators) {
         super(new AlphaNumericGeneratorRule(lowerCaseLength, upperCaseLength, numericLength), ruleValidators);
@@ -42,6 +44,7 @@ public class AlphaNumericTokenGenerator extends StringTokenGenerator {
      * @param upperCaseLength length of upper case characters
      * @param numericLength length of numeric characters
      * @param ruleValidators validators for the rule
+     * @throws IllegalArgumentException if any of the length parameters is negative or zero, the underlying TokenPart constructors will throw this exception
      */
     public AlphaNumericTokenGenerator(Random random, int lowerCaseLength, int upperCaseLength, int numericLength, List<RuleValidator> ruleValidators) {
         super(random, new AlphaNumericGeneratorRule(lowerCaseLength, upperCaseLength, numericLength), ruleValidators);

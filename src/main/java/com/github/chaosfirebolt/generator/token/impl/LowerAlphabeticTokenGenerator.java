@@ -17,6 +17,7 @@ public class LowerAlphabeticTokenGenerator extends StringTokenGenerator {
     /**
      * Constructs new instance of token generator, with desired length for lower case characters.
      * @param length length of lower case characters
+     * @throws IllegalArgumentException if length is negative or zero, the underlying TokenPart constructor will throw this exception
      */
     public LowerAlphabeticTokenGenerator(int length) {
         super(new LowerAlphabeticGeneratorRule(length));
@@ -26,6 +27,7 @@ public class LowerAlphabeticTokenGenerator extends StringTokenGenerator {
      * Constructs new instance of token generator, with desired length for lower case characters and provided validators.
      * @param length length of lower case characters
      * @param ruleValidators validators for the rule
+     * @throws IllegalArgumentException if length is negative or zero, the underlying TokenPart constructor will throw this exception
      */
     public LowerAlphabeticTokenGenerator(int length, List<RuleValidator> ruleValidators) {
         super(new LowerAlphabeticGeneratorRule(length), ruleValidators);
@@ -36,6 +38,7 @@ public class LowerAlphabeticTokenGenerator extends StringTokenGenerator {
      * @param random random number generator
      * @param length length of lower case characters
      * @param ruleValidators validators for the rule
+     * @throws IllegalArgumentException if length is negative or zero, the underlying TokenPart constructor will throw this exception
      */
     public LowerAlphabeticTokenGenerator(Random random, int length, List<RuleValidator> ruleValidators) {
         super(random, new LowerAlphabeticGeneratorRule(length), ruleValidators);

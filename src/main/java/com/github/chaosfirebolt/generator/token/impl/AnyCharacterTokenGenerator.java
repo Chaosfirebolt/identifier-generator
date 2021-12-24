@@ -20,6 +20,7 @@ public class AnyCharacterTokenGenerator extends StringTokenGenerator {
      * @param upperCaseLength length of upper case characters
      * @param numericLength length of numeric characters
      * @param specialCharLength length of special characters
+     * @throws IllegalArgumentException if any of the length parameters is negative or zero, the underlying TokenPart constructors will throw this exception
      */
     public AnyCharacterTokenGenerator(int lowerCaseLength, int upperCaseLength, int numericLength, int specialCharLength) {
         super(new AnyCharacterGeneratorRule(lowerCaseLength, upperCaseLength, numericLength, specialCharLength));
@@ -32,6 +33,7 @@ public class AnyCharacterTokenGenerator extends StringTokenGenerator {
      * @param numericLength length of numeric characters
      * @param specialCharLength length of special characters
      * @param ruleValidators validators for the rule
+     * @throws IllegalArgumentException if any of the length parameters is negative or zero, the underlying TokenPart constructors will throw this exception
      */
     public AnyCharacterTokenGenerator(int lowerCaseLength, int upperCaseLength, int numericLength, int specialCharLength, List<RuleValidator> ruleValidators) {
         super(new AnyCharacterGeneratorRule(lowerCaseLength, upperCaseLength, numericLength, specialCharLength), ruleValidators);
@@ -45,6 +47,7 @@ public class AnyCharacterTokenGenerator extends StringTokenGenerator {
      * @param numericLength length of numeric characters
      * @param specialCharLength length of special characters
      * @param ruleValidators validators for the rule
+     * @throws IllegalArgumentException if any of the length parameters is negative or zero, the underlying TokenPart constructors will throw this exception
      */
     public AnyCharacterTokenGenerator(Random random, int lowerCaseLength, int upperCaseLength, int numericLength, int specialCharLength, List<RuleValidator> ruleValidators) {
         super(random, new AnyCharacterGeneratorRule(lowerCaseLength, upperCaseLength, numericLength, specialCharLength), ruleValidators);

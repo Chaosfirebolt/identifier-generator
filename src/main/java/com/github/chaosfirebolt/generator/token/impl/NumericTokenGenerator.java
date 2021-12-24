@@ -17,6 +17,7 @@ public class NumericTokenGenerator extends StringTokenGenerator {
     /**
      * Constructs new instance of token generator, with desired length for numeric characters.
      * @param length length of numeric characters
+     * @throws IllegalArgumentException if length is negative or zero, the underlying TokenPart constructor will throw this exception
      */
     public NumericTokenGenerator(int length) {
         super(new NumericGeneratorRule(length));
@@ -26,6 +27,7 @@ public class NumericTokenGenerator extends StringTokenGenerator {
      * Constructs new instance of token generator, with desired length for numeric characters and provided validators.
      * @param length length of numeric characters
      * @param ruleValidators validators for the rule
+     * @throws IllegalArgumentException if length is negative or zero, the underlying TokenPart constructor will throw this exception
      */
     public NumericTokenGenerator(int length, List<RuleValidator> ruleValidators) {
         super(new NumericGeneratorRule(length), ruleValidators);
@@ -36,6 +38,7 @@ public class NumericTokenGenerator extends StringTokenGenerator {
      * @param random random number generator
      * @param length length of numeric characters
      * @param ruleValidators validators for the rule
+     * @throws IllegalArgumentException if length is negative or zero, the underlying TokenPart constructor will throw this exception
      */
     public NumericTokenGenerator(Random random, int length, List<RuleValidator> ruleValidators) {
         super(random, new NumericGeneratorRule(length), ruleValidators);

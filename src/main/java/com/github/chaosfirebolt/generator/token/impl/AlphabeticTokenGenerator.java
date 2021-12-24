@@ -18,6 +18,7 @@ public class AlphabeticTokenGenerator extends StringTokenGenerator {
      * Constructs new instance of token generator, with desired lengths for lower and upper case characters.
      * @param lowerCaseLength length of lower case characters
      * @param upperCaseLength length of upper case characters
+     * @throws IllegalArgumentException if any of the length parameters is negative or zero, the underlying TokenPart constructors will throw this exception
      */
     public AlphabeticTokenGenerator(int lowerCaseLength, int upperCaseLength) {
         super(new AlphabeticGeneratorRule(lowerCaseLength, upperCaseLength));
@@ -28,6 +29,7 @@ public class AlphabeticTokenGenerator extends StringTokenGenerator {
      * @param lowerCaseLength length of lower case characters
      * @param upperCaseLength length of upper case characters
      * @param ruleValidators validators for the rule
+     * @throws IllegalArgumentException if any of the length parameters is negative or zero, the underlying TokenPart constructors will throw this exception
      */
     public AlphabeticTokenGenerator(int lowerCaseLength, int upperCaseLength, List<RuleValidator> ruleValidators) {
         super(new AlphabeticGeneratorRule(lowerCaseLength, upperCaseLength), ruleValidators);
@@ -39,6 +41,7 @@ public class AlphabeticTokenGenerator extends StringTokenGenerator {
      * @param lowerCaseLength length of lower case characters
      * @param upperCaseLength length of upper case characters
      * @param ruleValidators validators for the rule
+     * @throws IllegalArgumentException if any of the length parameters is negative or zero, the underlying TokenPart constructors will throw this exception
      */
     public AlphabeticTokenGenerator(Random random, int lowerCaseLength, int upperCaseLength, List<RuleValidator> ruleValidators) {
         super(random, new AlphabeticGeneratorRule(lowerCaseLength, upperCaseLength), ruleValidators);
