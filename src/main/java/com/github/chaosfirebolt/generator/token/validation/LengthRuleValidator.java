@@ -18,7 +18,7 @@ public class LengthRuleValidator extends BaseRuleValidator {
     };
     private static final ErrorMessageCreator ERROR_MESSAGE_CREATOR = rule -> {
         int sum = CalculationUtility.totalLength(rule.getParts());
-        return String.format("Required length of '%d' must be equal to sum of parts lengths, but was '%d'", rule.getLength(), sum);
+        return String.format("Required length of '%d' must be equal to sum of parts lengths, which is '%d'", rule.getLength(), sum);
     };
 
     /**

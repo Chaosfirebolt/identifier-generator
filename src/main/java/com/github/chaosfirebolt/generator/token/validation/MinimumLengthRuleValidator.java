@@ -18,7 +18,7 @@ public class MinimumLengthRuleValidator extends BaseRuleValidator {
     };
     private static final ErrorMessageCreator ERROR_MESSAGE_CREATOR = rule -> {
         int sum = CalculationUtility.minimumLength(rule.getParts());
-        return String.format("Required minimum length of '%d' must be equal to sum of parts minimum lengths, but was '%d'", rule.getMinLength(), sum);
+        return String.format("Required minimum length of '%d' must be equal to sum of parts minimum lengths, which is '%d'", rule.getMinLength(), sum);
     };
 
     /**
