@@ -8,7 +8,7 @@ import java.util.List;
 
 /**
  * Basic implementation of {@link GeneratorRule}
- * <br/>
+ * <br>
  * Created by ChaosFire on 12/5/2021
  */
 public class BaseGeneratorRule implements GeneratorRule {

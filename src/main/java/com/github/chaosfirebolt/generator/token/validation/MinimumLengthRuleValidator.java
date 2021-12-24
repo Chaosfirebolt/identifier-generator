@@ -7,7 +7,7 @@ import java.util.function.Predicate;
 
 /**
  * This validator considers rules valid, only if the sum of the minimum lengths of token parts equals the minimum length of the token.
- * <br/>
+ * <br>
  * Created by ChaosFire on 12-Dec-21
  */
 public class MinimumLengthRuleValidator extends BaseRuleValidator {

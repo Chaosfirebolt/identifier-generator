@@ -8,9 +8,9 @@ import java.util.function.Predicate;
 
 /**
  * Provides basic and somewhat naive functionality for generating unique tokens.
- * <br/>
+ * <br>
  * New tokens will be generated until the condition proves one to be unique.
- * <br/>
+ * <br>
  * Created by ChaosFire on 12/5/2021
  */
 public abstract class BaseTokenGenerator<T> implements TokenGenerator<T> {
@@ -27,7 +27,7 @@ public abstract class BaseTokenGenerator<T> implements TokenGenerator<T> {
 
     /**
      * Maximum number of attempts to generate unique token, before throwing exception.
-     * <br/>
+     * <br>
      * Negative value means attempting forever.
      */
     private int maximumAttempts;
@@ -60,9 +60,9 @@ public abstract class BaseTokenGenerator<T> implements TokenGenerator<T> {
 
     /**
      * Generates a new token, if the previously generated one is not unique.
-     * <br/>
+     * <br>
      * This implementation will just create a new one from scratch, without taking into account the previous token.
-     * <br/>
+     * <br>
      * Override this method for better/faster regeneration.
      * @param previousToken previously generated and not unique token
      * @return newly generated token
@@ -87,9 +87,9 @@ public abstract class BaseTokenGenerator<T> implements TokenGenerator<T> {
 
     /**
      * Generates a new token, if the previously generated one is not unique.
-     * <br/>
+     * <br>
      * This implementation will just create a new one from scratch, without taking into account the previous token.
-     * <br/>
+     * <br>
      * Override this method for better/faster regeneration.
      * @param previousToken previously generated and not unique token
      * @param tokenLength required length of the token
@@ -102,7 +102,7 @@ public abstract class BaseTokenGenerator<T> implements TokenGenerator<T> {
 
     /**
      * Sets the value of maximum number of attempts. Attempting to set negative value or zero will have no effect.
-     * <br/>
+     * <br>
      * Positive value can be assigned once. Subsequent invocations will have no effect.
      * @param maximumAttempts maximum number of attempts to generate unique token before throwing exception.
      */

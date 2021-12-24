@@ -9,7 +9,7 @@ import java.util.Random;
 
 /**
  * Implementation generating alphabetic tokens.
- * <br/>
+ * <br>
  * Created by ChaosFire on 18-Dec-21
  */
 public class AlphabeticTokenGenerator extends StringTokenGenerator {

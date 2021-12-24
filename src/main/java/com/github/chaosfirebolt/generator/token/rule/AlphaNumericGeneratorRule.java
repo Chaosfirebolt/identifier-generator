@@ -8,7 +8,7 @@ import java.util.Arrays;
 
 /**
  * {@link GeneratorRule} rule for alphanumeric tokens.
- * <br/>
+ * <br>
  * Created by ChaosFire on 12/6/2021
  */
 public class AlphaNumericGeneratorRule extends BaseGeneratorRule {

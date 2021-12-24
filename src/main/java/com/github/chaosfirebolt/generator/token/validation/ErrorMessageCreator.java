@@ -4,7 +4,7 @@ import com.github.chaosfirebolt.generator.token.rule.GeneratorRule;
 
 /**
  * Represents generator for error messages
- * <br/>
+ * <br>
  * Created by ChaosFire on 12/5/2021
  */
 @FunctionalInterface

@@ -6,7 +6,7 @@ import java.util.Collections;
 
 /**
  * {@link GeneratorRule} rule for lower case alphabetic tokens.
- * <br/>
+ * <br>
  * Created by ChaosFire on 12/6/2021
  */
 public class LowerAlphabeticGeneratorRule extends BaseGeneratorRule {

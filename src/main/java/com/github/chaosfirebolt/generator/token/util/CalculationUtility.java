@@ -6,7 +6,7 @@ import java.util.List;
 
 /**
  * Calculation utility methods.
- * <br/>
+ * <br>
  * Created by ChaosFire on 12/6/2021
  */
 public class CalculationUtility {

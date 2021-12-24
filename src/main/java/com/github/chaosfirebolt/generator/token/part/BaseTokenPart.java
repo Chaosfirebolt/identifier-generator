@@ -6,7 +6,7 @@ import java.util.Objects;
 
 /**
  * Basic implementation of {@link TokenPart}
- * <br/>
+ * <br>
  * Created by ChaosFire on 12/5/2021
  */
 public class BaseTokenPart implements TokenPart {
@@ -34,7 +34,7 @@ public class BaseTokenPart implements TokenPart {
 
     /**
      * Constructor creating token part from supplied length and characters.
-     * <br/>
+     * <br>
      * Collection of characters is changed to unmodifiable list.
      * @param length required length of the part
      * @param characters possible characters for the part
@@ -47,7 +47,7 @@ public class BaseTokenPart implements TokenPart {
 
     /**
      * Constructor creating token part from supplied length, minimum length and characters.
-     * <br/>
+     * <br>
      * Collection of characters is changed to unmodifiable list.
      * @param length required length of the part
      * @param minLength required minimum length of the part

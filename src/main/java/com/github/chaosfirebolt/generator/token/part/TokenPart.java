@@ -4,7 +4,7 @@ import java.util.List;
 
 /**
  * Represents a part of this token.
- * <br/>
+ * <br>
  * Created by ChaosFire on 12/5/2021
  */
 public interface TokenPart {

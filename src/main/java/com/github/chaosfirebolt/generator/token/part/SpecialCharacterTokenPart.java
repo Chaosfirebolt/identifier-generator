@@ -7,7 +7,7 @@ import java.util.List;
 
 /**
  * Token part for special characters.
- * <br/>
+ * <br>
  * Created by ChaosFire on 12/5/2021
  */
 public class SpecialCharacterTokenPart extends BaseTokenPart {
@@ -29,7 +29,7 @@ public class SpecialCharacterTokenPart extends BaseTokenPart {
 
     /**
      * Constructor creating instance of token part for special chars, with desired length.
-     * <br/>
+     * <br>
      * Minimum length is equal to the specified length.
      * @param length required length of the part
      * @throws IllegalArgumentException if length is less than 1

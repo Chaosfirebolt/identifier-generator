@@ -6,7 +6,7 @@ import java.util.List;
 
 /**
  * Token part for numeric characters.
- * <br/>
+ * <br>
  * Created by ChaosFire on 12/5/2021
  */
 public class NumericTokenPart extends BaseTokenPart {
@@ -15,7 +15,7 @@ public class NumericTokenPart extends BaseTokenPart {
 
     /**
      * Constructor creating instance of token part for numeric chars, with desired length.
-     * <br/>
+     * <br>
      * Minimum length is equal to the specified length.
      * @param length required length of the part
      * @throws IllegalArgumentException if length is less than 1

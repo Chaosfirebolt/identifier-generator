@@ -4,7 +4,7 @@ import com.github.chaosfirebolt.generator.token.rule.GeneratorRule;
 
 /**
  * Represent validator for a {@link GeneratorRule}
- * <br/>
+ * <br>
  * Created by ChaosFire on 12/5/2021
  */
 public interface RuleValidator {

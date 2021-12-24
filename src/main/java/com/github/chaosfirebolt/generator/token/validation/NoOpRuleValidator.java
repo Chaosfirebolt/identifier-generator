@@ -6,7 +6,7 @@ import java.util.function.Predicate;
 
 /**
  * Validator, which considers every rule valid.
- * <br/>
+ * <br>
  * Created by ChaosFire on 12/5/2021
  */
 public class NoOpRuleValidator extends BaseRuleValidator {

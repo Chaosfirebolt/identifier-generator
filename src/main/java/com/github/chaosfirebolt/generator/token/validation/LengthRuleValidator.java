@@ -7,7 +7,7 @@ import java.util.function.Predicate;
 
 /**
  * This validator considers rules valid, only if the sum of the lengths of token parts equals the total length of the token.
- * <br/>
+ * <br>
  * Created by ChaosFire on 12/5/2021
  */
 public class LengthRuleValidator extends BaseRuleValidator {

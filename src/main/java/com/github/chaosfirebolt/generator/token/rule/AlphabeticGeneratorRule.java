@@ -7,7 +7,7 @@ import java.util.Arrays;
 
 /**
  * {@link GeneratorRule} rule for upper and lower case alphabetic tokens.
- * <br/>
+ * <br>
  * Created by ChaosFire on 12/6/2021
  */
 public class AlphabeticGeneratorRule extends BaseGeneratorRule {

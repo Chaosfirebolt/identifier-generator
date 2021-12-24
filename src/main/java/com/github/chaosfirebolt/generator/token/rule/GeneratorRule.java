@@ -6,7 +6,7 @@ import java.util.List;
 
 /**
  * Represents a rule for token generation.
- * <br/>
+ * <br>
  * Created by ChaosFire on 12/5/2021
  */
 public interface GeneratorRule {

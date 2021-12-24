@@ -4,7 +4,7 @@ import java.util.function.Predicate;
 
 /**
  * This interface defines the basic functionality for generating tokens.
- * <br/>
+ * <br>
  * Created by ChaosFire on 12/5/2021
  */
 public interface TokenGenerator<T> {

@@ -16,7 +16,7 @@ import java.util.function.ToIntFunction;
 
 /**
  * Base class for generating string tokens.
- * <br/>
+ * <br>
  * Created by ChaosFire on 12/5/2021
  */
 public class StringTokenGenerator extends BaseTokenGenerator<String> {
@@ -95,7 +95,7 @@ public class StringTokenGenerator extends BaseTokenGenerator<String> {
 
     /**
      * Shuffles supplied array using implementation of Fisher-Yates algorithm.
-     * <br/>
+     * <br>
      * Override this method to use different shuffling strategy.
      * @param array array to be shuffled
      */

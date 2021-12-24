@@ -5,7 +5,7 @@ import java.util.Random;
 
 /**
  * Shuffle utility methods
- * <br/>
+ * <br>
  * Created by ChaosFire on 12-Dec-21
  */
 public class ShuffleUtility {

@@ -6,7 +6,7 @@ import java.util.Arrays;
 
 /**
  * {@link GeneratorRule} rule for tokens consisting of alphanumeric and special characters.
- * <br/>
+ * <br>
  * Created by ChaosFire on 12/6/2021
  */
 public class AnyCharacterGeneratorRule extends BaseGeneratorRule {

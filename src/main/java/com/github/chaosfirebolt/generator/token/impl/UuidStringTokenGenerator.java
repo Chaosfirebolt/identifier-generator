@@ -7,7 +7,7 @@ import java.util.UUID;
 
 /**
  * Implementation generating tokens as random uuid strings.
- * <br/>
+ * <br>
  * Created by ChaosFire on 12/5/2021
  */
 public class UuidStringTokenGenerator extends StringTokenGenerator {

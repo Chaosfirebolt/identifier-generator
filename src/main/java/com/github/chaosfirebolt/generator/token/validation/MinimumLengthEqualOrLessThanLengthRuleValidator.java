@@ -6,7 +6,7 @@ import java.util.function.Predicate;
 
 /**
  * This validator considers rules valid, only if the minimum length of the rule is less than or equals rule desired length.
- * <br/>
+ * <br>
  * Created by ChaosFire on 12-Dec-21
  */
 public class MinimumLengthEqualOrLessThanLengthRuleValidator extends BaseRuleValidator {

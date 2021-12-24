@@ -9,7 +9,7 @@ import java.util.Random;
 
 /**
  * Implementation generating tokens consisting of alphanumeric and special characters.
- * <br/>
+ * <br>
  * Created by ChaosFire on 18-Dec-21
  */
 public class AnyCharacterTokenGenerator extends StringTokenGenerator {

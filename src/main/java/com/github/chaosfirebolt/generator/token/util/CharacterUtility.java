@@ -5,7 +5,7 @@ import java.util.List;
 
 /**
  * Utility methods for characters
- * <br/>
+ * <br>
  * Created by ChaosFire on 12/5/2021
  */
 public class CharacterUtility {
