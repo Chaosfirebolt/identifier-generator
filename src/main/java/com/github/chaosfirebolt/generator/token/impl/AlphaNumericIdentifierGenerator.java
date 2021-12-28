@@ -16,7 +16,7 @@
 
 package com.github.chaosfirebolt.generator.token.impl;
 
-import com.github.chaosfirebolt.generator.token.StringTokenGenerator;
+import com.github.chaosfirebolt.generator.token.StringIdentifierGenerator;
 import com.github.chaosfirebolt.generator.token.rule.AlphaNumericGeneratorRule;
 import com.github.chaosfirebolt.generator.token.validation.RuleValidator;
 
@@ -28,7 +28,7 @@ import java.util.Random;
  * <br>
  * Created by ChaosFire on 18-Dec-21
  */
-public class AlphaNumericTokenGenerator extends StringTokenGenerator {
+public class AlphaNumericIdentifierGenerator extends StringIdentifierGenerator {
 
     /**
      * Constructs new instance of token generator, with desired lengths for lower case, upper case and numeric characters.
@@ -37,7 +37,7 @@ public class AlphaNumericTokenGenerator extends StringTokenGenerator {
      * @param numericLength length of numeric characters
      * @throws IllegalArgumentException if any of the length parameters is negative or zero, the underlying TokenPart constructors will throw this exception
      */
-    public AlphaNumericTokenGenerator(int lowerCaseLength, int upperCaseLength, int numericLength) {
+    public AlphaNumericIdentifierGenerator(int lowerCaseLength, int upperCaseLength, int numericLength) {
         super(new AlphaNumericGeneratorRule(lowerCaseLength, upperCaseLength, numericLength));
     }
 
@@ -49,7 +49,7 @@ public class AlphaNumericTokenGenerator extends StringTokenGenerator {
      * @param ruleValidators validators for the rule
      * @throws IllegalArgumentException if any of the length parameters is negative or zero, the underlying TokenPart constructors will throw this exception
      */
-    public AlphaNumericTokenGenerator(int lowerCaseLength, int upperCaseLength, int numericLength, List<RuleValidator> ruleValidators) {
+    public AlphaNumericIdentifierGenerator(int lowerCaseLength, int upperCaseLength, int numericLength, List<RuleValidator> ruleValidators) {
         super(new AlphaNumericGeneratorRule(lowerCaseLength, upperCaseLength, numericLength), ruleValidators);
     }
 
@@ -62,7 +62,7 @@ public class AlphaNumericTokenGenerator extends StringTokenGenerator {
      * @param ruleValidators validators for the rule
      * @throws IllegalArgumentException if any of the length parameters is negative or zero, the underlying TokenPart constructors will throw this exception
      */
-    public AlphaNumericTokenGenerator(Random random, int lowerCaseLength, int upperCaseLength, int numericLength, List<RuleValidator> ruleValidators) {
+    public AlphaNumericIdentifierGenerator(Random random, int lowerCaseLength, int upperCaseLength, int numericLength, List<RuleValidator> ruleValidators) {
         super(random, new AlphaNumericGeneratorRule(lowerCaseLength, upperCaseLength, numericLength), ruleValidators);
     }
 }

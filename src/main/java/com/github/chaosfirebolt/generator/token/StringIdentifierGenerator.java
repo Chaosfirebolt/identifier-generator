@@ -35,7 +35,7 @@ import java.util.function.ToIntFunction;
  * <br>
  * Created by ChaosFire on 12/5/2021
  */
-public class StringTokenGenerator extends BaseTokenGenerator<String> {
+public class StringIdentifierGenerator extends BaseIdentifierGenerator<String> {
 
     private static final List<RuleValidator> DEFAULT_VALIDATORS = Arrays.asList(new LengthRuleValidator(), new MinimumLengthRuleValidator(),
             new MinimumLengthEqualOrLessThanLengthRuleValidator());
@@ -57,7 +57,7 @@ public class StringTokenGenerator extends BaseTokenGenerator<String> {
      * @param generatorRule rule to be used for token generation
      * @throws com.github.chaosfirebolt.generator.token.exception.InvalidGeneratorRuleException if provided rule does not conform with default RuleValidators
      */
-    public StringTokenGenerator(GeneratorRule generatorRule) {
+    public StringIdentifierGenerator(GeneratorRule generatorRule) {
         this(generatorRule, DEFAULT_VALIDATORS);
     }
 
@@ -67,7 +67,7 @@ public class StringTokenGenerator extends BaseTokenGenerator<String> {
      * @param ruleValidators validators to be used for validation of provided generator rule
      * @throws com.github.chaosfirebolt.generator.token.exception.InvalidGeneratorRuleException if provided rule does not conform with provided RuleValidators
      */
-    public StringTokenGenerator(GeneratorRule generatorRule, List<RuleValidator> ruleValidators) {
+    public StringIdentifierGenerator(GeneratorRule generatorRule, List<RuleValidator> ruleValidators) {
         this(new SecureRandom(), generatorRule, ruleValidators);
     }
 
@@ -78,7 +78,7 @@ public class StringTokenGenerator extends BaseTokenGenerator<String> {
      * @param ruleValidators validators to be used for validation of provided generator rule
      * @throws com.github.chaosfirebolt.generator.token.exception.InvalidGeneratorRuleException if provided rule does not conform with provided RuleValidators
      */
-    public StringTokenGenerator(Random random, GeneratorRule generatorRule, List<RuleValidator> ruleValidators) {
+    public StringIdentifierGenerator(Random random, GeneratorRule generatorRule, List<RuleValidator> ruleValidators) {
         this.random = random;
         this.generatorRule = generatorRule;
         validateRule(ruleValidators, generatorRule);

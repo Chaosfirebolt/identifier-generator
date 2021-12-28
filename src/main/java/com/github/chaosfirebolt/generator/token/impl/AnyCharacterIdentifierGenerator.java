@@ -16,7 +16,7 @@
 
 package com.github.chaosfirebolt.generator.token.impl;
 
-import com.github.chaosfirebolt.generator.token.StringTokenGenerator;
+import com.github.chaosfirebolt.generator.token.StringIdentifierGenerator;
 import com.github.chaosfirebolt.generator.token.rule.AnyCharacterGeneratorRule;
 import com.github.chaosfirebolt.generator.token.validation.RuleValidator;
 
@@ -28,7 +28,7 @@ import java.util.Random;
  * <br>
  * Created by ChaosFire on 18-Dec-21
  */
-public class AnyCharacterTokenGenerator extends StringTokenGenerator {
+public class AnyCharacterIdentifierGenerator extends StringIdentifierGenerator {
 
     /**
      * Constructs new instance of token generator, with desired lengths for lower case, upper case, special and numeric characters.
@@ -38,7 +38,7 @@ public class AnyCharacterTokenGenerator extends StringTokenGenerator {
      * @param specialCharLength length of special characters
      * @throws IllegalArgumentException if any of the length parameters is negative or zero, the underlying TokenPart constructors will throw this exception
      */
-    public AnyCharacterTokenGenerator(int lowerCaseLength, int upperCaseLength, int numericLength, int specialCharLength) {
+    public AnyCharacterIdentifierGenerator(int lowerCaseLength, int upperCaseLength, int numericLength, int specialCharLength) {
         super(new AnyCharacterGeneratorRule(lowerCaseLength, upperCaseLength, numericLength, specialCharLength));
     }
 
@@ -51,7 +51,7 @@ public class AnyCharacterTokenGenerator extends StringTokenGenerator {
      * @param ruleValidators validators for the rule
      * @throws IllegalArgumentException if any of the length parameters is negative or zero, the underlying TokenPart constructors will throw this exception
      */
-    public AnyCharacterTokenGenerator(int lowerCaseLength, int upperCaseLength, int numericLength, int specialCharLength, List<RuleValidator> ruleValidators) {
+    public AnyCharacterIdentifierGenerator(int lowerCaseLength, int upperCaseLength, int numericLength, int specialCharLength, List<RuleValidator> ruleValidators) {
         super(new AnyCharacterGeneratorRule(lowerCaseLength, upperCaseLength, numericLength, specialCharLength), ruleValidators);
     }
 
@@ -65,7 +65,7 @@ public class AnyCharacterTokenGenerator extends StringTokenGenerator {
      * @param ruleValidators validators for the rule
      * @throws IllegalArgumentException if any of the length parameters is negative or zero, the underlying TokenPart constructors will throw this exception
      */
-    public AnyCharacterTokenGenerator(Random random, int lowerCaseLength, int upperCaseLength, int numericLength, int specialCharLength, List<RuleValidator> ruleValidators) {
+    public AnyCharacterIdentifierGenerator(Random random, int lowerCaseLength, int upperCaseLength, int numericLength, int specialCharLength, List<RuleValidator> ruleValidators) {
         super(random, new AnyCharacterGeneratorRule(lowerCaseLength, upperCaseLength, numericLength, specialCharLength), ruleValidators);
     }
 }

@@ -16,23 +16,23 @@
 
 package com.github.chaosfirebolt.generator.token;
 
-import com.github.chaosfirebolt.generator.token.impl.UpperAlphabeticTokenGenerator;
+import com.github.chaosfirebolt.generator.token.impl.UpperAlphabeticIdentifierGenerator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
  * Created by ChaosFire on 22-Dec-21
  */
-public class UpperAlphabeticTokenGeneratorMethodTests extends TokenGeneratorMethodTests {
+public class UpperAlphabeticIdentifierGeneratorMethodTests extends IdentifierGeneratorMethodTests {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(UpperAlphabeticTokenGeneratorMethodTests.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(UpperAlphabeticIdentifierGeneratorMethodTests.class);
 
-    public UpperAlphabeticTokenGeneratorMethodTests() {
+    public UpperAlphabeticIdentifierGeneratorMethodTests() {
         super(LOGGER, 50, 111, 111);
     }
 
     @Override
-    protected BaseTokenGenerator<String> getGenerator() {
-        return new UpperAlphabeticTokenGenerator(111);
+    protected BaseIdentifierGenerator<String> getGenerator() {
+        return new UpperAlphabeticIdentifierGenerator(111);
     }
 }

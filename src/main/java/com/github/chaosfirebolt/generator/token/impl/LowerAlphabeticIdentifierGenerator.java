@@ -16,47 +16,47 @@
 
 package com.github.chaosfirebolt.generator.token.impl;
 
-import com.github.chaosfirebolt.generator.token.StringTokenGenerator;
-import com.github.chaosfirebolt.generator.token.rule.NumericGeneratorRule;
+import com.github.chaosfirebolt.generator.token.StringIdentifierGenerator;
+import com.github.chaosfirebolt.generator.token.rule.LowerAlphabeticGeneratorRule;
 import com.github.chaosfirebolt.generator.token.validation.RuleValidator;
 
 import java.util.List;
 import java.util.Random;
 
 /**
- * Implementation generating numeric tokens.
+ * Implementation generating lower case tokens.
  * <br>
  * Created by ChaosFire on 18-Dec-21
  */
-public class NumericTokenGenerator extends StringTokenGenerator {
+public class LowerAlphabeticIdentifierGenerator extends StringIdentifierGenerator {
 
     /**
-     * Constructs new instance of token generator, with desired length for numeric characters.
-     * @param length length of numeric characters
+     * Constructs new instance of token generator, with desired length for lower case characters.
+     * @param length length of lower case characters
      * @throws IllegalArgumentException if length is negative or zero, the underlying TokenPart constructor will throw this exception
      */
-    public NumericTokenGenerator(int length) {
-        super(new NumericGeneratorRule(length));
+    public LowerAlphabeticIdentifierGenerator(int length) {
+        super(new LowerAlphabeticGeneratorRule(length));
     }
 
     /**
-     * Constructs new instance of token generator, with desired length for numeric characters and provided validators.
-     * @param length length of numeric characters
+     * Constructs new instance of token generator, with desired length for lower case characters and provided validators.
+     * @param length length of lower case characters
      * @param ruleValidators validators for the rule
      * @throws IllegalArgumentException if length is negative or zero, the underlying TokenPart constructor will throw this exception
      */
-    public NumericTokenGenerator(int length, List<RuleValidator> ruleValidators) {
-        super(new NumericGeneratorRule(length), ruleValidators);
+    public LowerAlphabeticIdentifierGenerator(int length, List<RuleValidator> ruleValidators) {
+        super(new LowerAlphabeticGeneratorRule(length), ruleValidators);
     }
 
     /**
-     * Constructs new instance of token generator, with desired length for numeric characters, provided validators and random.
+     * Constructs new instance of token generator, with desired length for lower case characters provided validators and random.
      * @param random random number generator
-     * @param length length of numeric characters
+     * @param length length of lower case characters
      * @param ruleValidators validators for the rule
      * @throws IllegalArgumentException if length is negative or zero, the underlying TokenPart constructor will throw this exception
      */
-    public NumericTokenGenerator(Random random, int length, List<RuleValidator> ruleValidators) {
-        super(random, new NumericGeneratorRule(length), ruleValidators);
+    public LowerAlphabeticIdentifierGenerator(Random random, int length, List<RuleValidator> ruleValidators) {
+        super(random, new LowerAlphabeticGeneratorRule(length), ruleValidators);
     }
 }

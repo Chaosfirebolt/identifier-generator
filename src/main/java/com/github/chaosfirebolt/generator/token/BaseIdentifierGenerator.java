@@ -29,7 +29,7 @@ import java.util.function.Predicate;
  * <br>
  * Created by ChaosFire on 12/5/2021
  */
-public abstract class BaseTokenGenerator<T> implements TokenGenerator<T> {
+public abstract class BaseIdentifierGenerator<T> implements IdentifierGenerator<T> {
 
     /**
      * Default value for maximum number of attempts.
@@ -48,7 +48,7 @@ public abstract class BaseTokenGenerator<T> implements TokenGenerator<T> {
      */
     private int maximumAttempts;
 
-    protected BaseTokenGenerator() {
+    protected BaseIdentifierGenerator() {
         this.logger = LoggerFactory.getLogger(this.getClass());
         this.maximumAttempts = DEFAULT_MAX_ATTEMPTS;
     }

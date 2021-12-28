@@ -23,7 +23,7 @@ import java.util.function.Predicate;
  * <br>
  * Created by ChaosFire on 12/5/2021
  */
-public interface TokenGenerator<T> {
+public interface IdentifierGenerator<T> {
 
     /**
      * Generates a token

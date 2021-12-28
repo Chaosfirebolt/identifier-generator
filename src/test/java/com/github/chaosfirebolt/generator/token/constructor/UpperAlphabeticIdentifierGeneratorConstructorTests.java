@@ -16,8 +16,8 @@
 
 package com.github.chaosfirebolt.generator.token.constructor;
 
-import com.github.chaosfirebolt.generator.token.TokenGenerator;
-import com.github.chaosfirebolt.generator.token.impl.LowerAlphabeticTokenGenerator;
+import com.github.chaosfirebolt.generator.token.IdentifierGenerator;
+import com.github.chaosfirebolt.generator.token.impl.UpperAlphabeticIdentifierGenerator;
 import org.junit.jupiter.api.function.Executable;
 
 import java.util.Collections;
@@ -28,44 +28,44 @@ import java.util.concurrent.Callable;
 /**
  * Created by ChaosFire on 23-Dec-21
  */
-public class LowerAlphabeticTokenGeneratorConstructorTests extends TokenGeneratorConstructorTests {
+public class UpperAlphabeticIdentifierGeneratorConstructorTests extends IdentifierGeneratorConstructorTests {
 
     @Override
     protected List<InvalidConstructorInvocationWrapper> getLengthParamNegative() {
         int length = -6;
-        return Collections.singletonList(buildWrapperForIllegalArgument(() -> new LowerAlphabeticTokenGenerator(length), length));
+        return Collections.singletonList(buildWrapperForIllegalArgument(() -> new UpperAlphabeticIdentifierGenerator(length), length));
     }
 
     @Override
     protected List<InvalidConstructorInvocationWrapper> getLengthParamZero() {
         int length = 0;
-        return Collections.singletonList(buildWrapperForIllegalArgument(() -> new LowerAlphabeticTokenGenerator(length), length));
+        return Collections.singletonList(buildWrapperForIllegalArgument(() -> new UpperAlphabeticIdentifierGenerator(length), length));
     }
 
     @Override
-    protected List<Callable<? extends TokenGenerator<?>>> getValidLengthParams() {
-        return Collections.singletonList(() -> new LowerAlphabeticTokenGenerator(9));
+    protected List<Callable<? extends IdentifierGenerator<?>>> getValidLengthParams() {
+        return Collections.singletonList(() -> new UpperAlphabeticIdentifierGenerator(9));
     }
 
     @Override
     protected List<InvalidConstructorInvocationWrapper> getParamsDoNotConformRules() {
-        Executable executable = () -> new LowerAlphabeticTokenGenerator(9, Collections.singletonList(MIN_TOKEN_LENGTH_VALIDATOR));
+        Executable executable = () -> new UpperAlphabeticIdentifierGenerator(9, Collections.singletonList(MIN_TOKEN_LENGTH_VALIDATOR));
         return Collections.singletonList(buildWrapperForInvalidGeneratorRule(executable));
     }
 
     @Override
-    protected List<Callable<? extends TokenGenerator<?>>> getParamsConformRules() {
-        return Collections.singletonList(() -> new LowerAlphabeticTokenGenerator(30, Collections.singletonList(MIN_TOKEN_LENGTH_VALIDATOR)));
+    protected List<Callable<? extends IdentifierGenerator<?>>> getParamsConformRules() {
+        return Collections.singletonList(() -> new UpperAlphabeticIdentifierGenerator(30, Collections.singletonList(MIN_TOKEN_LENGTH_VALIDATOR)));
     }
 
     @Override
     protected List<InvalidConstructorInvocationWrapper> getParamsWithRandomDoNotConformRules() {
-        Executable executable = () -> new LowerAlphabeticTokenGenerator(new Random(), 9, Collections.singletonList(MIN_TOKEN_LENGTH_VALIDATOR));
+        Executable executable = () -> new UpperAlphabeticIdentifierGenerator(new Random(), 9, Collections.singletonList(MIN_TOKEN_LENGTH_VALIDATOR));
         return Collections.singletonList(buildWrapperForInvalidGeneratorRule(executable));
     }
 
     @Override
-    protected List<Callable<? extends TokenGenerator<?>>> getParamsWithRandomConformRules() {
-        return Collections.singletonList(() -> new LowerAlphabeticTokenGenerator(new Random(), 40, Collections.singletonList(MIN_TOKEN_LENGTH_VALIDATOR)));
+    protected List<Callable<? extends IdentifierGenerator<?>>> getParamsWithRandomConformRules() {
+        return Collections.singletonList(() -> new UpperAlphabeticIdentifierGenerator(new Random(), 40, Collections.singletonList(MIN_TOKEN_LENGTH_VALIDATOR)));
     }
 }

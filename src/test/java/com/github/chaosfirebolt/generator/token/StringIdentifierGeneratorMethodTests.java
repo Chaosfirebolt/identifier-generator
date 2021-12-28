@@ -29,17 +29,17 @@ import java.util.Arrays;
 /**
  * Created by ChaosFire on 22-Dec-21
  */
-public class StringTokenGeneratorMethodTests extends TokenGeneratorMethodTests {
+public class StringIdentifierGeneratorMethodTests extends IdentifierGeneratorMethodTests {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(StringTokenGeneratorMethodTests.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(StringIdentifierGeneratorMethodTests.class);
 
-    public StringTokenGeneratorMethodTests() {
+    public StringIdentifierGeneratorMethodTests() {
         super(LOGGER, 49, 233, 233);
     }
 
     @Override
-    protected BaseTokenGenerator<String> getGenerator() {
+    protected BaseIdentifierGenerator<String> getGenerator() {
         GeneratorRule generatorRule = new BaseGeneratorRule(Arrays.asList(new SpecialCharacterTokenPart(11), new UpperAlphabeticTokenPart(111), new NumericTokenPart(111)));
-        return new StringTokenGenerator(generatorRule);
+        return new StringIdentifierGenerator(generatorRule);
     }
 }

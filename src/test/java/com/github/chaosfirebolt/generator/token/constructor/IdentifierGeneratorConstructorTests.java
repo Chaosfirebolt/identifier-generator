@@ -16,7 +16,7 @@
 
 package com.github.chaosfirebolt.generator.token.constructor;
 
-import com.github.chaosfirebolt.generator.token.TokenGenerator;
+import com.github.chaosfirebolt.generator.token.IdentifierGenerator;
 import com.github.chaosfirebolt.generator.token.exception.InvalidGeneratorRuleException;
 import com.github.chaosfirebolt.generator.token.validation.BaseRuleValidator;
 import com.github.chaosfirebolt.generator.token.validation.RuleValidator;
@@ -33,20 +33,20 @@ import static org.junit.jupiter.api.Assertions.*;
 /**
  * Created by ChaosFire on 23-Dec-21
  */
-public abstract class TokenGeneratorConstructorTests {
+public abstract class IdentifierGeneratorConstructorTests {
 
     private static final String ERROR_MESSAGE = "Token length can't be less than 30";
     protected static final RuleValidator MIN_TOKEN_LENGTH_VALIDATOR = new BaseRuleValidator(rule -> rule.getLength() >= 30, rule -> ERROR_MESSAGE);
 
     private final List<InvalidConstructorInvocationWrapper> lengthParamNegative;
     private final List<InvalidConstructorInvocationWrapper> lengthParamZero;
-    private final List<Callable<? extends TokenGenerator<?>>> validLengthParams;
+    private final List<Callable<? extends IdentifierGenerator<?>>> validLengthParams;
     private final List<InvalidConstructorInvocationWrapper> paramsDoNotConformRules;
-    private final List<Callable<? extends TokenGenerator<?>>> paramsConformRules;
+    private final List<Callable<? extends IdentifierGenerator<?>>> paramsConformRules;
     private final List<InvalidConstructorInvocationWrapper> paramsWithRandomDoNotConformRules;
-    private final List<Callable<? extends TokenGenerator<?>>> paramsWithRandomConformRules;
+    private final List<Callable<? extends IdentifierGenerator<?>>> paramsWithRandomConformRules;
 
-    protected TokenGeneratorConstructorTests() {
+    protected IdentifierGeneratorConstructorTests() {
         this.lengthParamNegative = this.getLengthParamNegative();
         this.lengthParamZero = this.getLengthParamZero();
         this.validLengthParams = this.getValidLengthParams();
@@ -60,15 +60,15 @@ public abstract class TokenGeneratorConstructorTests {
 
     protected abstract List<InvalidConstructorInvocationWrapper> getLengthParamZero();
 
-    protected abstract List<Callable<? extends TokenGenerator<?>>> getValidLengthParams();
+    protected abstract List<Callable<? extends IdentifierGenerator<?>>> getValidLengthParams();
 
     protected abstract List<InvalidConstructorInvocationWrapper> getParamsDoNotConformRules();
 
-    protected abstract List<Callable<? extends TokenGenerator<?>>> getParamsConformRules();
+    protected abstract List<Callable<? extends IdentifierGenerator<?>>> getParamsConformRules();
 
     protected abstract List<InvalidConstructorInvocationWrapper> getParamsWithRandomDoNotConformRules();
 
-    protected abstract List<Callable<? extends TokenGenerator<?>>> getParamsWithRandomConformRules();
+    protected abstract List<Callable<? extends IdentifierGenerator<?>>> getParamsWithRandomConformRules();
 
     protected static InvalidConstructorInvocationWrapper buildWrapperForIllegalArgument(Executable executable, int length) {
         return new InvalidConstructorInvocationWrapper(executable, IllegalArgumentException.class, String.format("Part length can't be less than '1', but was '%d'", length));
@@ -100,10 +100,10 @@ public abstract class TokenGeneratorConstructorTests {
         assertInstancesGenerated(this.validLengthParams);
     }
 
-    private static void assertInstancesGenerated(List<Callable<? extends TokenGenerator<?>>> constructorInvocations) throws Exception {
-        Set<TokenGenerator<?>> instances = new HashSet<>(constructorInvocations.size());
-        for (Callable<? extends TokenGenerator<?>> constructorInvocation : constructorInvocations) {
-            TokenGenerator<?> instance = constructorInvocation.call();
+    private static void assertInstancesGenerated(List<Callable<? extends IdentifierGenerator<?>>> constructorInvocations) throws Exception {
+        Set<IdentifierGenerator<?>> instances = new HashSet<>(constructorInvocations.size());
+        for (Callable<? extends IdentifierGenerator<?>> constructorInvocation : constructorInvocations) {
+            IdentifierGenerator<?> instance = constructorInvocation.call();
             assertNotNull(instance, "New instance was null");
             boolean isNewInstance = instances.add(instance);
             assertTrue(isNewInstance, "Instance was reused");

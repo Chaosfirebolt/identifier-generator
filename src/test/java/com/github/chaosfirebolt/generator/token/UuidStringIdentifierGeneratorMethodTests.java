@@ -16,24 +16,24 @@
 
 package com.github.chaosfirebolt.generator.token;
 
-import com.github.chaosfirebolt.generator.token.impl.UuidStringTokenGenerator;
+import com.github.chaosfirebolt.generator.token.impl.UuidStringIdentifierGenerator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
  * Created by ChaosFire on 22-Dec-21
  */
-public class UuidStringTokenGeneratorMethodTests extends TokenGeneratorMethodTests {
+public class UuidStringIdentifierGeneratorMethodTests extends IdentifierGeneratorMethodTests {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(UuidStringTokenGeneratorMethodTests.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(UuidStringIdentifierGeneratorMethodTests.class);
 
-    public UuidStringTokenGeneratorMethodTests() {
+    public UuidStringIdentifierGeneratorMethodTests() {
         super(LOGGER, 20, 36, 36);
     }
 
     @Override
-    protected BaseTokenGenerator<String> getGenerator() {
-        return new UuidStringTokenGenerator();
+    protected BaseIdentifierGenerator<String> getGenerator() {
+        return new UuidStringIdentifierGenerator();
     }
 
     @Override

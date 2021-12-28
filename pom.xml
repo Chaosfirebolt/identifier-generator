@@ -21,19 +21,18 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.github.chaosfirebolt.generator</groupId>
-    <artifactId>token-generator</artifactId>
+    <artifactId>identifier-generator</artifactId>
     <version>1.0.0-SNAPSHOT</version>
     <packaging>jar</packaging>
 
     <name>${project.groupId}:${project.artifactId}</name>
-    <description>Library for token generation.</description>
-    <url>https://github.com/Chaosfirebolt/token-generator</url>
+    <description>Library for identifier generation.</description>
+    <url>https://github.com/Chaosfirebolt/identifier-generator</url>
 
-    <!--TODO add license-->
     <licenses>
         <license>
-            <name></name>
-            <url></url>
+            <name>Apache License 2.0</name>
+            <url>https://github.com/Chaosfirebolt/identifier-generator/blob/master/LICENSE.txt</url>
         </license>
     </licenses>
 

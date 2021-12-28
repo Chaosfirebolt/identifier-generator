@@ -16,7 +16,7 @@
 
 package com.github.chaosfirebolt.generator.token.constructor;
 
-import com.github.chaosfirebolt.generator.token.StringTokenGenerator;
+import com.github.chaosfirebolt.generator.token.StringIdentifierGenerator;
 import com.github.chaosfirebolt.generator.token.exception.InvalidGeneratorRuleException;
 import com.github.chaosfirebolt.generator.token.part.TokenPart;
 import com.github.chaosfirebolt.generator.token.rule.GeneratorRule;
@@ -34,7 +34,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 /**
  * Created by ChaosFire on 24-Dec-21
  */
-public class StringTokenGeneratorValidationTests {
+public class StringIdentifierGeneratorValidationTests {
 
     private static final List<Character> CHARACTERS = CharacterUtility.characterListFromIntRange(97, 123);
 
@@ -49,7 +49,7 @@ public class StringTokenGeneratorValidationTests {
         TokenPart part = new TestTokenPart(15, 10, CHARACTERS);
         GeneratorRule rule = new TestGeneratorRule(part, 15, 16);
         String expectedErrorMessage = "Required minimum length of '16' must be equal to or less than total length, which is '15'";
-        assertException(() -> new StringTokenGenerator(rule, Collections.singletonList(new MinimumLengthEqualOrLessThanLengthRuleValidator())), expectedErrorMessage);
+        assertException(() -> new StringIdentifierGenerator(rule, Collections.singletonList(new MinimumLengthEqualOrLessThanLengthRuleValidator())), expectedErrorMessage);
     }
 
     @Test
@@ -57,7 +57,7 @@ public class StringTokenGeneratorValidationTests {
         TokenPart part = new TestTokenPart(15, 10, CHARACTERS);
         GeneratorRule rule = new TestGeneratorRule(part, 15, 9);
         String expectedErrorMessage = "Required minimum length of '9' must be equal to sum of parts minimum lengths, which is '10'";
-        assertException(() -> new StringTokenGenerator(rule), expectedErrorMessage);
+        assertException(() -> new StringIdentifierGenerator(rule), expectedErrorMessage);
     }
 
     @Test
@@ -65,7 +65,7 @@ public class StringTokenGeneratorValidationTests {
         TokenPart part = new TestTokenPart(15, 10, CHARACTERS);
         GeneratorRule rule = new TestGeneratorRule(part, 15, 11);
         String expectedErrorMessage = "Required minimum length of '11' must be equal to sum of parts minimum lengths, which is '10'";
-        assertException(() -> new StringTokenGenerator(rule), expectedErrorMessage);
+        assertException(() -> new StringIdentifierGenerator(rule), expectedErrorMessage);
     }
 
     @Test
@@ -73,7 +73,7 @@ public class StringTokenGeneratorValidationTests {
         TokenPart part = new TestTokenPart(15, 10, CHARACTERS);
         GeneratorRule rule = new TestGeneratorRule(part, 14, 10);
         String expectedErrorMessage = "Required length of '14' must be equal to sum of parts lengths, which is '15'";
-        assertException(() -> new StringTokenGenerator(rule), expectedErrorMessage);
+        assertException(() -> new StringIdentifierGenerator(rule), expectedErrorMessage);
     }
 
     @Test
@@ -81,7 +81,7 @@ public class StringTokenGeneratorValidationTests {
         TokenPart part = new TestTokenPart(15, 10, CHARACTERS);
         GeneratorRule rule = new TestGeneratorRule(part, 16, 10);
         String expectedErrorMessage = "Required length of '16' must be equal to sum of parts lengths, which is '15'";
-        assertException(() -> new StringTokenGenerator(rule), expectedErrorMessage);
+        assertException(() -> new StringIdentifierGenerator(rule), expectedErrorMessage);
     }
 
     private static final class TestTokenPart implements TokenPart {

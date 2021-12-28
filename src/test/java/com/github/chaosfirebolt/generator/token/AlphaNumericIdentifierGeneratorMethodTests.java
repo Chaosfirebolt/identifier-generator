@@ -16,23 +16,23 @@
 
 package com.github.chaosfirebolt.generator.token;
 
-import com.github.chaosfirebolt.generator.token.impl.NumericTokenGenerator;
+import com.github.chaosfirebolt.generator.token.impl.AlphaNumericIdentifierGenerator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
  * Created by ChaosFire on 22-Dec-21
  */
-public class NumericTokenGeneratorMethodTests extends TokenGeneratorMethodTests {
+public class AlphaNumericIdentifierGeneratorMethodTests extends IdentifierGeneratorMethodTests {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(NumericTokenGeneratorMethodTests.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(AlphaNumericIdentifierGeneratorMethodTests.class);
 
-    public NumericTokenGeneratorMethodTests() {
-        super(LOGGER, 100, 29, 29);
+    public AlphaNumericIdentifierGeneratorMethodTests() {
+        super(LOGGER, 5, 41, 41);
     }
 
     @Override
-    protected BaseTokenGenerator<String> getGenerator() {
-        return new NumericTokenGenerator(29);
+    protected BaseIdentifierGenerator<String> getGenerator() {
+        return new AlphaNumericIdentifierGenerator(15, 15, 11);
     }
 }

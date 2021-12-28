@@ -16,7 +16,7 @@
 
 package com.github.chaosfirebolt.generator.token.impl;
 
-import com.github.chaosfirebolt.generator.token.StringTokenGenerator;
+import com.github.chaosfirebolt.generator.token.StringIdentifierGenerator;
 
 import java.util.Collections;
 import java.util.UUID;
@@ -26,12 +26,12 @@ import java.util.UUID;
  * <br>
  * Created by ChaosFire on 12/5/2021
  */
-public class UuidStringTokenGenerator extends StringTokenGenerator {
+public class UuidStringIdentifierGenerator extends StringIdentifierGenerator {
 
     /**
      * Constructs new UuidStringTokenGenerator.
      */
-    public UuidStringTokenGenerator() {
+    public UuidStringIdentifierGenerator() {
         super(null, null, Collections.emptyList());
     }
 
