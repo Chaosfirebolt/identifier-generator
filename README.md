@@ -1,2 +1,2 @@
-# Token Generator
+# Identifier Generator
 Library for identifier generation.
