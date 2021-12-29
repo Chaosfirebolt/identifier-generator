@@ -81,7 +81,7 @@ public abstract class IdentifierGeneratorMethodTests {
     }
 
     private void logToken(String token) {
-        this.logger.info("{} generated token - {}", this.identifierGenerator.getClass().getSimpleName(), token);
+        this.logger.info("{} generated identifier - {}", this.identifierGenerator.getClass().getSimpleName(), token);
     }
 
     @Test
@@ -90,7 +90,7 @@ public abstract class IdentifierGeneratorMethodTests {
             String token = this.identifierGenerator.generate();
             this.logToken(token);
             boolean exists = !this.existingTokens.add(token);
-            assertFalse(exists, () -> String.format("Token '%s' already generated", token));
+            assertFalse(exists, () -> String.format("Identifier '%s' already generated", token));
         }
     }
 
