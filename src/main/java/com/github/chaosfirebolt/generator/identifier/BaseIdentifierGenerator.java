@@ -57,19 +57,20 @@ public abstract class BaseIdentifierGenerator<T> implements IdentifierGenerator<
     public T generate(Predicate<T> uniquenessCondition) {
         T token = this.generate();
         int count = 1;
+        this.logger.debug("Starting unique identifier generation");
         while (!uniquenessCondition.test(token)) {
             this.throwIfMaxAttemptsExceeded(count);
             token = this.regenerateToken(token);
             count++;
         }
-        this.logger.trace("Unique token generated after {} attempts", count);
+        this.logger.debug("Unique identifier generated after {} attempts", count);
         return token;
     }
 
     private void throwIfMaxAttemptsExceeded(int currentCount) {
         if (this.maximumAttempts > 0 && currentCount >= this.maximumAttempts) {
-            String message = "Maximum number of attempts to generate unique token reached - " + currentCount;
-            this.logger.trace(message);
+            String message = "Maximum number of attempts to generate unique identifier reached - " + currentCount;
+            this.logger.debug(message);
             throw new TooManyAttemptsException(message);
         }
     }
@@ -92,12 +93,13 @@ public abstract class BaseIdentifierGenerator<T> implements IdentifierGenerator<
     public T generate(int tokenLength, Predicate<T> uniquenessCondition) {
         T token = this.generate(tokenLength);
         int count = 1;
+        this.logger.debug("Starting unique identifier generation");
         while (!uniquenessCondition.test(token)) {
             this.throwIfMaxAttemptsExceeded(count);
             token = this.regenerateToken(token, tokenLength);
             count++;
         }
-        this.logger.trace("Unique token generated after {} attempts", count);
+        this.logger.debug("Unique identifier generated after {} attempts", count);
         return token;
     }
 

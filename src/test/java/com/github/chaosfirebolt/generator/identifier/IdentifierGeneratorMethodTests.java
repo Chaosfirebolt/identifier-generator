@@ -121,7 +121,7 @@ public abstract class IdentifierGeneratorMethodTests {
         assertEquals(toBeReturned, firstGenerated, MOCK_ERROR_MESSAGE);
 
         TooManyAttemptsException exc = assertThrows(TooManyAttemptsException.class, () -> generator.generate(this.uniqueCondition));
-        String expectedMessage = "Maximum number of attempts to generate unique token reached - " + this.maxAttempts;
+        String expectedMessage = "Maximum number of attempts to generate unique identifier reached - " + this.maxAttempts;
         assertEquals(expectedMessage, exc.getMessage());
     }
 
@@ -188,7 +188,7 @@ public abstract class IdentifierGeneratorMethodTests {
         assertEquals(toBeReturned, firstGenerated, MOCK_ERROR_MESSAGE);
 
         TooManyAttemptsException exc = assertThrows(TooManyAttemptsException.class, () -> generator.generate(length, this.uniqueCondition));
-        String expectedMessage = "Maximum number of attempts to generate unique token reached - " + this.maxAttempts;
+        String expectedMessage = "Maximum number of attempts to generate unique identifier reached - " + this.maxAttempts;
         assertEquals(expectedMessage, exc.getMessage());
     }
 
