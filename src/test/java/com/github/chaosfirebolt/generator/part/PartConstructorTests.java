@@ -24,7 +24,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 /**
  * Created by ChaosFire on 19-Dec-21
  */
-public abstract class TokenPartConstructorTests {
+public abstract class PartConstructorTests {
 
     @Test
     public void intConstructor_LengthIsNegative_ShouldThrowIllegalArgumentException() {

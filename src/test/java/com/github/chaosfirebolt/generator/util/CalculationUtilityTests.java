@@ -16,10 +16,10 @@
 
 package com.github.chaosfirebolt.generator.util;
 
-import com.github.chaosfirebolt.generator.identifier.part.LowerAlphabeticTokenPart;
-import com.github.chaosfirebolt.generator.identifier.part.NumericTokenPart;
-import com.github.chaosfirebolt.generator.identifier.part.TokenPart;
-import com.github.chaosfirebolt.generator.identifier.part.UpperAlphabeticTokenPart;
+import com.github.chaosfirebolt.generator.identifier.part.LowerAlphabeticPart;
+import com.github.chaosfirebolt.generator.identifier.part.NumericPart;
+import com.github.chaosfirebolt.generator.identifier.part.Part;
+import com.github.chaosfirebolt.generator.identifier.part.UpperAlphabeticPart;
 import com.github.chaosfirebolt.generator.identifier.util.CalculationUtility;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -35,13 +35,13 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
  */
 public class CalculationUtilityTests {
 
-    private final List<TokenPart> parts = new ArrayList<>();
+    private final List<Part> parts = new ArrayList<>();
 
     @BeforeEach
     void setUp() {
-        this.parts.add(new LowerAlphabeticTokenPart(5, 3));
-        this.parts.add(new UpperAlphabeticTokenPart(15, 10));
-        this.parts.add(new NumericTokenPart(35, 20));
+        this.parts.add(new LowerAlphabeticPart(5, 3));
+        this.parts.add(new UpperAlphabeticPart(15, 10));
+        this.parts.add(new NumericPart(35, 20));
     }
 
     @AfterEach

@@ -16,8 +16,8 @@
 
 package com.github.chaosfirebolt.generator.rule;
 
-import com.github.chaosfirebolt.generator.identifier.part.TokenPart;
-import com.github.chaosfirebolt.generator.identifier.part.UpperAlphabeticTokenPart;
+import com.github.chaosfirebolt.generator.identifier.part.Part;
+import com.github.chaosfirebolt.generator.identifier.part.UpperAlphabeticPart;
 import com.github.chaosfirebolt.generator.identifier.rule.GeneratorRule;
 
 import java.util.Collections;
@@ -33,7 +33,7 @@ public class GeneratorRuleDefaultImplementationTests extends GeneratorRuleTests 
     }
 
     private static GeneratorRule createRule() {
-        return new UnvalidatedGeneratorRule(Collections.singletonList(new UpperAlphabeticTokenPart(10)), 10);
+        return new UnvalidatedGeneratorRule(Collections.singletonList(new UpperAlphabeticPart(10)), 10);
     }
 
     @Override
@@ -53,16 +53,16 @@ public class GeneratorRuleDefaultImplementationTests extends GeneratorRuleTests 
 
     private static final class UnvalidatedGeneratorRule implements GeneratorRule {
 
-        private final List<TokenPart> parts;
+        private final List<Part> parts;
         private final int length;
 
-        private UnvalidatedGeneratorRule(List<TokenPart> parts, int length) {
+        private UnvalidatedGeneratorRule(List<Part> parts, int length) {
             this.parts = parts;
             this.length = length;
         }
 
         @Override
-        public List<TokenPart> getParts() {
+        public List<Part> getParts() {
             return this.parts;
         }
 

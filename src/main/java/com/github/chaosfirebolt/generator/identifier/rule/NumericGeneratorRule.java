@@ -16,7 +16,7 @@
 
 package com.github.chaosfirebolt.generator.identifier.rule;
 
-import com.github.chaosfirebolt.generator.identifier.part.NumericTokenPart;
+import com.github.chaosfirebolt.generator.identifier.part.NumericPart;
 
 import java.util.Collections;
 
@@ -32,6 +32,6 @@ public class NumericGeneratorRule extends BaseGeneratorRule {
      * @param length desired length of numeric part
      */
     public NumericGeneratorRule(int length) {
-        super(Collections.singletonList(new NumericTokenPart(length)));
+        super(Collections.singletonList(new NumericPart(length)));
     }
 }

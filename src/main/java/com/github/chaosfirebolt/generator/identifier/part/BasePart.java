@@ -21,11 +21,11 @@ import java.util.List;
 import java.util.Objects;
 
 /**
- * Basic implementation of {@link TokenPart}
+ * Basic implementation of {@link Part}
  * <br>
  * Created by ChaosFire on 12/5/2021
  */
-public class BaseTokenPart implements TokenPart {
+public class BasePart implements Part {
 
     private static final String LENGTH_PARAM_NAME = "Part length";
     private static final String MIN_LENGTH_PARAM_NAME = "Minimum part length";
@@ -57,7 +57,7 @@ public class BaseTokenPart implements TokenPart {
      * @throws IllegalArgumentException if length is less than 1, or characters is empty
      * @throws NullPointerException if characters is null
      */
-    public BaseTokenPart(int length, List<Character> characters) {
+    public BasePart(int length, List<Character> characters) {
         this(length, length, characters);
     }
 
@@ -71,7 +71,7 @@ public class BaseTokenPart implements TokenPart {
      * @throws IllegalArgumentException if length or minLength are less than 1, length is less than minLength, or characters is empty
      * @throws NullPointerException if characters is null
      */
-    public BaseTokenPart(int length, int minLength, List<Character> characters) {
+    public BasePart(int length, int minLength, List<Character> characters) {
         validateLength(LENGTH_PARAM_NAME, MIN_PART_LENGTH, length);
         validateLength(MIN_LENGTH_PARAM_NAME, MIN_PART_LENGTH, minLength);
         validateLength(LENGTH_PARAM_NAME, minLength, length);

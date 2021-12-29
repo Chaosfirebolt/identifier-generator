@@ -18,8 +18,8 @@ package com.github.chaosfirebolt.generator.identifier.constructor;
 
 import com.github.chaosfirebolt.generator.identifier.StringIdentifierGenerator;
 import com.github.chaosfirebolt.generator.identifier.exception.InvalidGeneratorRuleException;
-import com.github.chaosfirebolt.generator.identifier.part.NumericTokenPart;
-import com.github.chaosfirebolt.generator.identifier.part.TokenPart;
+import com.github.chaosfirebolt.generator.identifier.part.NumericPart;
+import com.github.chaosfirebolt.generator.identifier.part.Part;
 import com.github.chaosfirebolt.generator.identifier.rule.BaseGeneratorRule;
 import com.github.chaosfirebolt.generator.identifier.rule.GeneratorRule;
 import com.github.chaosfirebolt.generator.identifier.util.CharacterUtility;
@@ -45,7 +45,7 @@ public class StringIdentifierGeneratorConstructorTests {
 
     @Test
     public void ruleValidatorsConstructor_RuleDoesNotConform_ShouldThrowInvalidGeneratorRuleException() {
-        TokenPart part = new NumericTokenPart(60, 10);
+        Part part = new NumericPart(60, 10);
         GeneratorRule rule = new BaseGeneratorRule(Collections.singletonList(part));
         InvalidGeneratorRuleException exception = assertThrows(InvalidGeneratorRuleException.class, () -> new StringIdentifierGenerator(rule, Collections.singletonList(VALIDATOR)));
         assertEquals(ERROR_MESSAGE, exception.getMessage());
@@ -53,28 +53,28 @@ public class StringIdentifierGeneratorConstructorTests {
 
     @Test
     public void ruleValidatorsConstructor_RuleDoesConform_Test1_ShouldNotThrow() {
-        TokenPart part = new NumericTokenPart(60, 50);
+        Part part = new NumericPart(60, 50);
         GeneratorRule rule = new BaseGeneratorRule(Collections.singletonList(part));
         new StringIdentifierGenerator(rule, Collections.singletonList(VALIDATOR));
     }
 
     @Test
     public void ruleValidatorsConstructor_RuleDoesConform_Test2_ShouldNotThrow() {
-        TokenPart part = new NumericTokenPart(60, 55);
+        Part part = new NumericPart(60, 55);
         GeneratorRule rule = new BaseGeneratorRule(Collections.singletonList(part));
         new StringIdentifierGenerator(rule, Collections.singletonList(VALIDATOR));
     }
 
     @Test
     public void ruleValidatorsConstructor_NoOpValidator_ShouldNotThrow() {
-        List<TokenPart> parts = Collections.singletonList(new UnvalidatedTokenPart(0, CharacterUtility.characterListFromIntRange(48, 58)));
+        List<Part> parts = Collections.singletonList(new UnvalidatedPart(0, CharacterUtility.characterListFromIntRange(48, 58)));
         GeneratorRule rule = new BaseGeneratorRule(parts);
         new StringIdentifierGenerator(rule, Collections.singletonList(new NoOpRuleValidator()));
     }
 
     @Test
     public void randomRuleValidatorsConstructor_RuleDoesNotConform_ShouldThrowInvalidGeneratorRuleException() {
-        TokenPart part = new NumericTokenPart(60, 10);
+        Part part = new NumericPart(60, 10);
         GeneratorRule rule = new BaseGeneratorRule(Collections.singletonList(part));
         InvalidGeneratorRuleException exception = assertThrows(InvalidGeneratorRuleException.class, () -> new StringIdentifierGenerator(new Random(), rule, Collections.singletonList(VALIDATOR)));
         assertEquals(ERROR_MESSAGE, exception.getMessage());
@@ -82,24 +82,24 @@ public class StringIdentifierGeneratorConstructorTests {
 
     @Test
     public void randomRuleValidatorsConstructor_RuleDoesConform_Test1_ShouldNotThrow() {
-        TokenPart part = new NumericTokenPart(60, 50);
+        Part part = new NumericPart(60, 50);
         GeneratorRule rule = new BaseGeneratorRule(Collections.singletonList(part));
         new StringIdentifierGenerator(new Random(), rule, Collections.singletonList(VALIDATOR));
     }
 
     @Test
     public void randomRuleValidatorsConstructor_RuleDoesConform_Test2_ShouldNotThrow() {
-        TokenPart part = new NumericTokenPart(60, 55);
+        Part part = new NumericPart(60, 55);
         GeneratorRule rule = new BaseGeneratorRule(Collections.singletonList(part));
         new StringIdentifierGenerator(new Random(), rule, Collections.singletonList(VALIDATOR));
     }
 
-    private static final class UnvalidatedTokenPart implements TokenPart {
+    private static final class UnvalidatedPart implements Part {
 
         private final int length;
         private final List<Character> characters;
 
-        private UnvalidatedTokenPart(int length, List<Character> characters) {
+        private UnvalidatedPart(int length, List<Character> characters) {
             this.length = length;
             this.characters = characters;
         }

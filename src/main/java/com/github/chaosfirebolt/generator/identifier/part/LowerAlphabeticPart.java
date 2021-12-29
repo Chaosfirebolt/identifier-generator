@@ -18,49 +18,35 @@ package com.github.chaosfirebolt.generator.identifier.part;
 
 import com.github.chaosfirebolt.generator.identifier.util.CharacterUtility;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Token part for special characters.
+ * Token part for lower alphabetic characters.
  * <br>
  * Created by ChaosFire on 12/5/2021
  */
-public class SpecialCharacterTokenPart extends BaseTokenPart {
+public class LowerAlphabeticPart extends BasePart {
 
-    private static final List<Character> CHARACTERS;
-
-    static {
-        List<Character> firstRange = CharacterUtility.characterListFromIntRange(33, 48);
-        List<Character> secondRange = CharacterUtility.characterListFromIntRange(58, 65);
-        List<Character> thirdRange = CharacterUtility.characterListFromIntRange(91, 97);
-        List<Character> fourthRange = CharacterUtility.characterListFromIntRange(123, 127);
-        List<Character> specialCharacters = new ArrayList<>(firstRange.size() + secondRange.size() + thirdRange.size() + fourthRange.size());
-        specialCharacters.addAll(firstRange);
-        specialCharacters.addAll(secondRange);
-        specialCharacters.addAll(thirdRange);
-        specialCharacters.addAll(fourthRange);
-        CHARACTERS = specialCharacters;
-    }
+    private static final List<Character> CHARACTERS = CharacterUtility.characterListFromIntRange(97, 123);
 
     /**
-     * Constructor creating instance of token part for special chars, with desired length.
+     * Constructor creating instance of token part for lower alphabetic chars, with desired length.
      * <br>
      * Minimum length is equal to the specified length.
      * @param length required length of the part
      * @throws IllegalArgumentException if length is less than 1
      */
-    public SpecialCharacterTokenPart(int length) {
+    public LowerAlphabeticPart(int length) {
         this(length, length);
     }
 
     /**
-     * Constructor creating instance of token part for special chars, with desired length and minimum length
+     * Constructor creating instance of token part for lower alphabetic chars, with desired length and minimum length
      * @param length required length of the part
      * @param minLength required minimum length of the part
      * @throws IllegalArgumentException if length or minLength are less than 1 or length is less than minLength
      */
-    public SpecialCharacterTokenPart(int length, int minLength) {
+    public LowerAlphabeticPart(int length, int minLength) {
         super(length, minLength, CHARACTERS);
     }
 }

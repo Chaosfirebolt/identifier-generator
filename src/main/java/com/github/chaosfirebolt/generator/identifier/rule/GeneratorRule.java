@@ -16,7 +16,7 @@
 
 package com.github.chaosfirebolt.generator.identifier.rule;
 
-import com.github.chaosfirebolt.generator.identifier.part.TokenPart;
+import com.github.chaosfirebolt.generator.identifier.part.Part;
 
 import java.util.List;
 
@@ -31,7 +31,7 @@ public interface GeneratorRule {
      * Get token parts required by this rule
      * @return the token parts
      */
-    List<TokenPart> getParts();
+    List<Part> getParts();
 
     /**
      * Get token length required by this rule

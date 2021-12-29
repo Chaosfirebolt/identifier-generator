@@ -16,7 +16,7 @@
 
 package com.github.chaosfirebolt.generator.identifier.util;
 
-import com.github.chaosfirebolt.generator.identifier.part.TokenPart;
+import com.github.chaosfirebolt.generator.identifier.part.Part;
 
 import java.util.List;
 
@@ -32,9 +32,9 @@ public class CalculationUtility {
      * @param parts parts whose total length is to be calculated
      * @return the total length
      */
-    public static int totalLength(List<TokenPart> parts) {
+    public static int totalLength(List<Part> parts) {
         int sum = 0;
-        for (TokenPart part : parts) {
+        for (Part part : parts) {
             sum += part.getLength();
         }
         return sum;
@@ -45,9 +45,9 @@ public class CalculationUtility {
      * @param parts parts whose total minimum length is to be calculated
      * @return the total minimum length
      */
-    public static int minimumLength(List<TokenPart> parts) {
+    public static int minimumLength(List<Part> parts) {
         int sum = 0;
-        for (TokenPart part : parts) {
+        for (Part part : parts) {
             sum += part.getMinLength();
         }
         return sum;

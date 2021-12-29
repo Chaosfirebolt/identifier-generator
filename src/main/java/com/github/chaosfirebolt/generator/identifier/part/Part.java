@@ -14,24 +14,34 @@
  * limitations under the License.
  */
 
-package com.github.chaosfirebolt.generator.identifier.rule;
+package com.github.chaosfirebolt.generator.identifier.part;
 
-import com.github.chaosfirebolt.generator.identifier.part.LowerAlphabeticPart;
-
-import java.util.Collections;
+import java.util.List;
 
 /**
- * {@link GeneratorRule} rule for lower case alphabetic tokens.
+ * Represents a part of this token.
  * <br>
- * Created by ChaosFire on 12/6/2021
+ * Created by ChaosFire on 12/5/2021
  */
-public class LowerAlphabeticGeneratorRule extends BaseGeneratorRule {
+public interface Part {
 
     /**
-     * Constructs new LowerAlphabeticGeneratorRule with specified length for lower case alphabetic part.
-     * @param length desired length of lower case alphabetic part
+     * Gets the length of this token part
+     * @return the length of this part
      */
-    public LowerAlphabeticGeneratorRule(int length) {
-        super(Collections.singletonList(new LowerAlphabeticPart(length)));
+    int getLength();
+
+    /**
+     * Get the minimum length for this token part
+     * @return the minimum length of this part
+     */
+    default int getMinLength() {
+        return this.getLength();
     }
+
+    /**
+     * Get possible characters for this token part.
+     * @return possible characters for this part
+     */
+    List<Character> getCharacters();
 }

@@ -14,34 +14,24 @@
  * limitations under the License.
  */
 
-package com.github.chaosfirebolt.generator.identifier.part;
+package com.github.chaosfirebolt.generator.part;
 
+import com.github.chaosfirebolt.generator.identifier.part.NumericPart;
+
+import java.util.Arrays;
 import java.util.List;
 
 /**
- * Represents a part of this token.
- * <br>
- * Created by ChaosFire on 12/5/2021
+ * Created by ChaosFire on 19-Dec-21
  */
-public interface TokenPart {
+public class NumericPartMethodTests extends PartMethodTests {
 
-    /**
-     * Gets the length of this token part
-     * @return the length of this part
-     */
-    int getLength();
+    private static final int LENGTH = 7;
+    private static final int MIN_LENGTH = 3;
+    private static final List<Character> CHARACTERS = Arrays.asList('0', '1', '2', '3', '4', '5', '6', '7', '8', '9');
+    private static final NumericPart PART = new NumericPart(LENGTH, MIN_LENGTH);
 
-    /**
-     * Get the minimum length for this token part
-     * @return the minimum length of this part
-     */
-    default int getMinLength() {
-        return this.getLength();
+    public NumericPartMethodTests() {
+        super(LENGTH, MIN_LENGTH, CHARACTERS, PART);
     }
-
-    /**
-     * Get possible characters for this token part.
-     * @return possible characters for this part
-     */
-    List<Character> getCharacters();
 }

@@ -16,7 +16,7 @@
 
 package com.github.chaosfirebolt.generator.identifier;
 
-import com.github.chaosfirebolt.generator.identifier.part.TokenPart;
+import com.github.chaosfirebolt.generator.identifier.part.Part;
 import com.github.chaosfirebolt.generator.identifier.rule.GeneratorRule;
 import com.github.chaosfirebolt.generator.identifier.util.ShuffleUtility;
 import com.github.chaosfirebolt.generator.identifier.validation.MinimumLengthEqualOrLessThanLengthRuleValidator;
@@ -39,8 +39,8 @@ public class StringIdentifierGenerator extends BaseIdentifierGenerator<String> {
 
     private static final List<RuleValidator> DEFAULT_VALIDATORS = Arrays.asList(new LengthRuleValidator(), new MinimumLengthRuleValidator(),
             new MinimumLengthEqualOrLessThanLengthRuleValidator());
-    private static final ToIntFunction<TokenPart> PART_LENGTH_FUNC = TokenPart::getLength;
-    private static final ToIntFunction<TokenPart> PART_MIN_LENGTH_FUNC = TokenPart::getMinLength;
+    private static final ToIntFunction<Part> PART_LENGTH_FUNC = Part::getLength;
+    private static final ToIntFunction<Part> PART_MIN_LENGTH_FUNC = Part::getMinLength;
 
     /**
      * The random generator.
@@ -98,8 +98,8 @@ public class StringIdentifierGenerator extends BaseIdentifierGenerator<String> {
         return new String(token);
     }
 
-    private int fillToken(char[] token, int tokenIndex, ToIntFunction<TokenPart> partSizeFunction) {
-        for (TokenPart part : this.generatorRule.getParts()) {
+    private int fillToken(char[] token, int tokenIndex, ToIntFunction<Part> partSizeFunction) {
+        for (Part part : this.generatorRule.getParts()) {
             int partSize = partSizeFunction.applyAsInt(part);
             for (int i = 0; i < partSize; i++) {
                 char nextChar = this.getRandomElement(part.getCharacters());
@@ -130,7 +130,7 @@ public class StringIdentifierGenerator extends BaseIdentifierGenerator<String> {
         tokenIndex = this.fillToken(token, tokenIndex, PART_MIN_LENGTH_FUNC);
         int lastIndex = tokenLength - 1;
         while (tokenIndex < lastIndex) {
-            TokenPart randomPart = this.getRandomElement(this.generatorRule.getParts());
+            Part randomPart = this.getRandomElement(this.generatorRule.getParts());
             char nextChar = this.getRandomElement(randomPart.getCharacters());
             token[tokenIndex++] = nextChar;
         }

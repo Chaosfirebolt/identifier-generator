@@ -16,9 +16,9 @@
 
 package com.github.chaosfirebolt.generator.identifier.rule;
 
-import com.github.chaosfirebolt.generator.identifier.part.LowerAlphabeticTokenPart;
-import com.github.chaosfirebolt.generator.identifier.part.NumericTokenPart;
-import com.github.chaosfirebolt.generator.identifier.part.UpperAlphabeticTokenPart;
+import com.github.chaosfirebolt.generator.identifier.part.LowerAlphabeticPart;
+import com.github.chaosfirebolt.generator.identifier.part.NumericPart;
+import com.github.chaosfirebolt.generator.identifier.part.UpperAlphabeticPart;
 
 import java.util.Arrays;
 
@@ -36,6 +36,6 @@ public class AlphaNumericGeneratorRule extends BaseGeneratorRule {
      * @param numericLength desired length of numeric part
      */
     public AlphaNumericGeneratorRule(int lowerCaseLength, int upperCaseLength, int numericLength) {
-        super(Arrays.asList(new LowerAlphabeticTokenPart(lowerCaseLength), new UpperAlphabeticTokenPart(upperCaseLength), new NumericTokenPart(numericLength)));
+        super(Arrays.asList(new LowerAlphabeticPart(lowerCaseLength), new UpperAlphabeticPart(upperCaseLength), new NumericPart(numericLength)));
     }
 }

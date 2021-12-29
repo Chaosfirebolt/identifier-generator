@@ -16,9 +16,9 @@
 
 package com.github.chaosfirebolt.generator.identifier;
 
-import com.github.chaosfirebolt.generator.identifier.part.NumericTokenPart;
-import com.github.chaosfirebolt.generator.identifier.part.SpecialCharacterTokenPart;
-import com.github.chaosfirebolt.generator.identifier.part.UpperAlphabeticTokenPart;
+import com.github.chaosfirebolt.generator.identifier.part.NumericPart;
+import com.github.chaosfirebolt.generator.identifier.part.SpecialCharacterPart;
+import com.github.chaosfirebolt.generator.identifier.part.UpperAlphabeticPart;
 import com.github.chaosfirebolt.generator.identifier.rule.BaseGeneratorRule;
 import com.github.chaosfirebolt.generator.identifier.rule.GeneratorRule;
 import org.slf4j.Logger;
@@ -39,7 +39,7 @@ public class StringIdentifierGeneratorMethodTests extends IdentifierGeneratorMet
 
     @Override
     protected BaseIdentifierGenerator<String> getGenerator() {
-        GeneratorRule generatorRule = new BaseGeneratorRule(Arrays.asList(new SpecialCharacterTokenPart(11), new UpperAlphabeticTokenPart(111), new NumericTokenPart(111)));
+        GeneratorRule generatorRule = new BaseGeneratorRule(Arrays.asList(new SpecialCharacterPart(11), new UpperAlphabeticPart(111), new NumericPart(111)));
         return new StringIdentifierGenerator(generatorRule);
     }
 }

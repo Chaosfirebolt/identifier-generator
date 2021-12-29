@@ -16,7 +16,7 @@
 
 package com.github.chaosfirebolt.generator.part;
 
-import com.github.chaosfirebolt.generator.identifier.part.NumericTokenPart;
+import com.github.chaosfirebolt.generator.identifier.part.LowerAlphabeticPart;
 
 import java.util.Arrays;
 import java.util.List;
@@ -24,14 +24,15 @@ import java.util.List;
 /**
  * Created by ChaosFire on 19-Dec-21
  */
-public class NumericTokenPartMethodTests extends TokenPartMethodTests {
+public class LowerAlphabeticPartTests extends PartMethodTests {
 
-    private static final int LENGTH = 7;
-    private static final int MIN_LENGTH = 3;
-    private static final List<Character> CHARACTERS = Arrays.asList('0', '1', '2', '3', '4', '5', '6', '7', '8', '9');
-    private static final NumericTokenPart PART = new NumericTokenPart(LENGTH, MIN_LENGTH);
+    private static final int LENGTH = 5;
+    private static final int MIN_LENGTH = 4;
+    private static final List<Character> CHARACTERS = Arrays.asList('a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n',
+            'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z');
+    private static final LowerAlphabeticPart PART = new LowerAlphabeticPart(LENGTH, MIN_LENGTH);
 
-    public NumericTokenPartMethodTests() {
+    public LowerAlphabeticPartTests() {
         super(LENGTH, MIN_LENGTH, CHARACTERS, PART);
     }
 }

@@ -16,8 +16,8 @@
 
 package com.github.chaosfirebolt.generator.rule;
 
-import com.github.chaosfirebolt.generator.identifier.part.NumericTokenPart;
-import com.github.chaosfirebolt.generator.identifier.part.SpecialCharacterTokenPart;
+import com.github.chaosfirebolt.generator.identifier.part.NumericPart;
+import com.github.chaosfirebolt.generator.identifier.part.SpecialCharacterPart;
 import com.github.chaosfirebolt.generator.identifier.rule.BaseGeneratorRule;
 
 import java.util.Arrays;
@@ -28,7 +28,7 @@ import java.util.Arrays;
 public class BaseGeneratorRuleTests extends GeneratorRuleTests {
 
     public BaseGeneratorRuleTests() {
-        super(new BaseGeneratorRule(Arrays.asList(new SpecialCharacterTokenPart(3, 1), new NumericTokenPart(19, 17))));
+        super(new BaseGeneratorRule(Arrays.asList(new SpecialCharacterPart(3, 1), new NumericPart(19, 17))));
     }
 
     @Override

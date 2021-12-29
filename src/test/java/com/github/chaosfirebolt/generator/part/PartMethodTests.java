@@ -16,7 +16,7 @@
 
 package com.github.chaosfirebolt.generator.part;
 
-import com.github.chaosfirebolt.generator.identifier.part.TokenPart;
+import com.github.chaosfirebolt.generator.identifier.part.Part;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
@@ -26,35 +26,35 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 /**
  * Created by ChaosFire on 19-Dec-21
  */
-public abstract class TokenPartMethodTests {
+public abstract class PartMethodTests {
 
     private final int expectedLength;
     private final int expectedMinLength;
     private final List<Character> expectedCharacters;
-    private final TokenPart tokenPart;
+    private final Part part;
 
-    protected TokenPartMethodTests(int expectedLength, int expectedMinLength, List<Character> expectedCharacters, TokenPart tokenPart) {
+    protected PartMethodTests(int expectedLength, int expectedMinLength, List<Character> expectedCharacters, Part part) {
         this.expectedLength = expectedLength;
         this.expectedMinLength = expectedMinLength;
         this.expectedCharacters = expectedCharacters;
-        this.tokenPart = tokenPart;
+        this.part = part;
     }
 
     @Test
     public void getLength_ResultShouldBeCorrect() {
-        int actual = this.tokenPart.getLength();
+        int actual = this.part.getLength();
         assertEquals(this.expectedLength, actual);
     }
 
     @Test
     public void getMinLength_ResultShouldBeCorrect() {
-        int actual = this.tokenPart.getMinLength();
+        int actual = this.part.getMinLength();
         assertEquals(this.expectedMinLength, actual);
     }
 
     @Test
     public void getCharacters_ResultShouldBeCorrect() {
-        List<Character> actual = this.tokenPart.getCharacters();
+        List<Character> actual = this.part.getCharacters();
         assertEquals(this.expectedCharacters, actual);
     }
 }

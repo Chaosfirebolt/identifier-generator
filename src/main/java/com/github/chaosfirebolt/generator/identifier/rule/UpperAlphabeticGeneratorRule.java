@@ -16,7 +16,7 @@
 
 package com.github.chaosfirebolt.generator.identifier.rule;
 
-import com.github.chaosfirebolt.generator.identifier.part.UpperAlphabeticTokenPart;
+import com.github.chaosfirebolt.generator.identifier.part.UpperAlphabeticPart;
 
 import java.util.Collections;
 
@@ -32,6 +32,6 @@ public class UpperAlphabeticGeneratorRule extends BaseGeneratorRule {
      * @param length desired length of upper case alphabetic part
      */
     public UpperAlphabeticGeneratorRule(int length) {
-        super(Collections.singletonList(new UpperAlphabeticTokenPart(length)));
+        super(Collections.singletonList(new UpperAlphabeticPart(length)));
     }
 }

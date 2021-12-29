@@ -34,7 +34,7 @@ public class AnyCharacterGeneratorRule extends BaseGeneratorRule {
      * @param specialCharLength desired length of special characters part
      */
     public AnyCharacterGeneratorRule(int lowerCaseLength, int upperCaseLength, int numericLength, int specialCharLength) {
-        super(Arrays.asList(new LowerAlphabeticTokenPart(lowerCaseLength), new UpperAlphabeticTokenPart(upperCaseLength),
-                new NumericTokenPart(numericLength), new SpecialCharacterTokenPart(specialCharLength)));
+        super(Arrays.asList(new LowerAlphabeticPart(lowerCaseLength), new UpperAlphabeticPart(upperCaseLength),
+                new NumericPart(numericLength), new SpecialCharacterPart(specialCharLength)));
     }
 }

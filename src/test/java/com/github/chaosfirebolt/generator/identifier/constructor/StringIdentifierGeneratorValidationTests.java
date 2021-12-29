@@ -18,7 +18,7 @@ package com.github.chaosfirebolt.generator.identifier.constructor;
 
 import com.github.chaosfirebolt.generator.identifier.StringIdentifierGenerator;
 import com.github.chaosfirebolt.generator.identifier.exception.InvalidGeneratorRuleException;
-import com.github.chaosfirebolt.generator.identifier.part.TokenPart;
+import com.github.chaosfirebolt.generator.identifier.part.Part;
 import com.github.chaosfirebolt.generator.identifier.rule.GeneratorRule;
 import com.github.chaosfirebolt.generator.identifier.util.CharacterUtility;
 import com.github.chaosfirebolt.generator.identifier.validation.MinimumLengthEqualOrLessThanLengthRuleValidator;
@@ -46,7 +46,7 @@ public class StringIdentifierGeneratorValidationTests {
 
     @Test
     public void minimumLengthHigherThanLength_ShouldThrowInvalidGeneratorRuleException() {
-        TokenPart part = new TestTokenPart(15, 10, CHARACTERS);
+        Part part = new TestPart(15, 10, CHARACTERS);
         GeneratorRule rule = new TestGeneratorRule(part, 15, 16);
         String expectedErrorMessage = "Required minimum length of '16' must be equal to or less than total length, which is '15'";
         assertException(() -> new StringIdentifierGenerator(rule, Collections.singletonList(new MinimumLengthEqualOrLessThanLengthRuleValidator())), expectedErrorMessage);
@@ -54,7 +54,7 @@ public class StringIdentifierGeneratorValidationTests {
 
     @Test
     public void ruleMinimumLengthLessThanPartsMinLength_ShouldThrowInvalidGeneratorRuleException() {
-        TokenPart part = new TestTokenPart(15, 10, CHARACTERS);
+        Part part = new TestPart(15, 10, CHARACTERS);
         GeneratorRule rule = new TestGeneratorRule(part, 15, 9);
         String expectedErrorMessage = "Required minimum length of '9' must be equal to sum of parts minimum lengths, which is '10'";
         assertException(() -> new StringIdentifierGenerator(rule), expectedErrorMessage);
@@ -62,7 +62,7 @@ public class StringIdentifierGeneratorValidationTests {
 
     @Test
     public void ruleMinimumLengthMoreThanPartsMinLength_ShouldThrowInvalidGeneratorRuleException() {
-        TokenPart part = new TestTokenPart(15, 10, CHARACTERS);
+        Part part = new TestPart(15, 10, CHARACTERS);
         GeneratorRule rule = new TestGeneratorRule(part, 15, 11);
         String expectedErrorMessage = "Required minimum length of '11' must be equal to sum of parts minimum lengths, which is '10'";
         assertException(() -> new StringIdentifierGenerator(rule), expectedErrorMessage);
@@ -70,7 +70,7 @@ public class StringIdentifierGeneratorValidationTests {
 
     @Test
     public void ruleLengthLessThanPartsLength_ShouldThrowInvalidGeneratorRuleException() {
-        TokenPart part = new TestTokenPart(15, 10, CHARACTERS);
+        Part part = new TestPart(15, 10, CHARACTERS);
         GeneratorRule rule = new TestGeneratorRule(part, 14, 10);
         String expectedErrorMessage = "Required length of '14' must be equal to sum of parts lengths, which is '15'";
         assertException(() -> new StringIdentifierGenerator(rule), expectedErrorMessage);
@@ -78,19 +78,19 @@ public class StringIdentifierGeneratorValidationTests {
 
     @Test
     public void ruleLengthMoreThanPartsLength_ShouldThrowInvalidGeneratorRuleException() {
-        TokenPart part = new TestTokenPart(15, 10, CHARACTERS);
+        Part part = new TestPart(15, 10, CHARACTERS);
         GeneratorRule rule = new TestGeneratorRule(part, 16, 10);
         String expectedErrorMessage = "Required length of '16' must be equal to sum of parts lengths, which is '15'";
         assertException(() -> new StringIdentifierGenerator(rule), expectedErrorMessage);
     }
 
-    private static final class TestTokenPart implements TokenPart {
+    private static final class TestPart implements Part {
 
         private final int length;
         private final int minLength;
         private final List<Character> characters;
 
-        private TestTokenPart(int length, int minLength, List<Character> characters) {
+        private TestPart(int length, int minLength, List<Character> characters) {
             this.length = length;
             this.minLength = minLength;
             this.characters = characters;
@@ -114,18 +114,18 @@ public class StringIdentifierGeneratorValidationTests {
 
     private static final class TestGeneratorRule implements GeneratorRule {
 
-        private final List<TokenPart> parts;
+        private final List<Part> parts;
         private final int length;
         private final int minLength;
 
-        private TestGeneratorRule(TokenPart part, int length, int minLength) {
+        private TestGeneratorRule(Part part, int length, int minLength) {
             this.parts = Collections.singletonList(part);
             this.length = length;
             this.minLength = minLength;
         }
 
         @Override
-        public List<TokenPart> getParts() {
+        public List<Part> getParts() {
             return this.parts;
         }
 
