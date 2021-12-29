@@ -16,7 +16,7 @@
 
 package com.github.chaosfirebolt.generator.part;
 
-import com.github.chaosfirebolt.generator.token.part.BaseTokenPart;
+import com.github.chaosfirebolt.generator.identifier.part.BaseTokenPart;
 import org.junit.jupiter.api.Test;
 
 import java.util.Collections;

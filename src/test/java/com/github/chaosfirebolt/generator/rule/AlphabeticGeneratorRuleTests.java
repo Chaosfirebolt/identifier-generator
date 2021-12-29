@@ -16,7 +16,7 @@
 
 package com.github.chaosfirebolt.generator.rule;
 
-import com.github.chaosfirebolt.generator.token.rule.AlphabeticGeneratorRule;
+import com.github.chaosfirebolt.generator.identifier.rule.AlphabeticGeneratorRule;
 
 /**
  * Created by ChaosFire on 21-Dec-21

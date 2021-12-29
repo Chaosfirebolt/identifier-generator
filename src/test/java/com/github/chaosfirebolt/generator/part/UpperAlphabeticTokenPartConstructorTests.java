@@ -16,7 +16,7 @@
 
 package com.github.chaosfirebolt.generator.part;
 
-import com.github.chaosfirebolt.generator.token.part.UpperAlphabeticTokenPart;
+import com.github.chaosfirebolt.generator.identifier.part.UpperAlphabeticTokenPart;
 import org.junit.jupiter.api.function.Executable;
 
 /**

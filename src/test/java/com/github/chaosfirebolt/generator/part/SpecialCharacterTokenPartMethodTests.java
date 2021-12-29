@@ -16,7 +16,7 @@
 
 package com.github.chaosfirebolt.generator.part;
 
-import com.github.chaosfirebolt.generator.token.part.SpecialCharacterTokenPart;
+import com.github.chaosfirebolt.generator.identifier.part.SpecialCharacterTokenPart;
 
 import java.util.Arrays;
 import java.util.List;

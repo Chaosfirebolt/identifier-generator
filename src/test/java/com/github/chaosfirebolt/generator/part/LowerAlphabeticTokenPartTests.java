@@ -16,7 +16,7 @@
 
 package com.github.chaosfirebolt.generator.part;
 
-import com.github.chaosfirebolt.generator.token.part.LowerAlphabeticTokenPart;
+import com.github.chaosfirebolt.generator.identifier.part.LowerAlphabeticTokenPart;
 
 import java.util.Arrays;
 import java.util.List;

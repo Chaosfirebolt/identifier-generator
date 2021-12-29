@@ -16,7 +16,7 @@
 
 package com.github.chaosfirebolt.generator.part;
 
-import com.github.chaosfirebolt.generator.token.part.NumericTokenPart;
+import com.github.chaosfirebolt.generator.identifier.part.NumericTokenPart;
 
 import java.util.Arrays;
 import java.util.List;

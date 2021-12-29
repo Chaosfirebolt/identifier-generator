@@ -16,11 +16,11 @@
 
 package com.github.chaosfirebolt.generator.util;
 
-import com.github.chaosfirebolt.generator.token.part.LowerAlphabeticTokenPart;
-import com.github.chaosfirebolt.generator.token.part.NumericTokenPart;
-import com.github.chaosfirebolt.generator.token.part.TokenPart;
-import com.github.chaosfirebolt.generator.token.part.UpperAlphabeticTokenPart;
-import com.github.chaosfirebolt.generator.token.util.CalculationUtility;
+import com.github.chaosfirebolt.generator.identifier.part.LowerAlphabeticTokenPart;
+import com.github.chaosfirebolt.generator.identifier.part.NumericTokenPart;
+import com.github.chaosfirebolt.generator.identifier.part.TokenPart;
+import com.github.chaosfirebolt.generator.identifier.part.UpperAlphabeticTokenPart;
+import com.github.chaosfirebolt.generator.identifier.util.CalculationUtility;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

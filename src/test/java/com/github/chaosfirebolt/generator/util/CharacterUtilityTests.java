@@ -16,7 +16,7 @@
 
 package com.github.chaosfirebolt.generator.util;
 
-import com.github.chaosfirebolt.generator.token.util.CharacterUtility;
+import com.github.chaosfirebolt.generator.identifier.util.CharacterUtility;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;

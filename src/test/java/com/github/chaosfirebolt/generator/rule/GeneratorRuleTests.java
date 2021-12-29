@@ -16,7 +16,7 @@
 
 package com.github.chaosfirebolt.generator.rule;
 
-import com.github.chaosfirebolt.generator.token.rule.GeneratorRule;
+import com.github.chaosfirebolt.generator.identifier.rule.GeneratorRule;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;

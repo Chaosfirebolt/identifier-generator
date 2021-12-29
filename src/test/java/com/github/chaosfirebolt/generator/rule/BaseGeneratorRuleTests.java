@@ -16,9 +16,9 @@
 
 package com.github.chaosfirebolt.generator.rule;
 
-import com.github.chaosfirebolt.generator.token.part.NumericTokenPart;
-import com.github.chaosfirebolt.generator.token.part.SpecialCharacterTokenPart;
-import com.github.chaosfirebolt.generator.token.rule.BaseGeneratorRule;
+import com.github.chaosfirebolt.generator.identifier.part.NumericTokenPart;
+import com.github.chaosfirebolt.generator.identifier.part.SpecialCharacterTokenPart;
+import com.github.chaosfirebolt.generator.identifier.rule.BaseGeneratorRule;
 
 import java.util.Arrays;
 

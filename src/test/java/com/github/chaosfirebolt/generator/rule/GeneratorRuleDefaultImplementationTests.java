@@ -16,9 +16,9 @@
 
 package com.github.chaosfirebolt.generator.rule;
 
-import com.github.chaosfirebolt.generator.token.part.TokenPart;
-import com.github.chaosfirebolt.generator.token.part.UpperAlphabeticTokenPart;
-import com.github.chaosfirebolt.generator.token.rule.GeneratorRule;
+import com.github.chaosfirebolt.generator.identifier.part.TokenPart;
+import com.github.chaosfirebolt.generator.identifier.part.UpperAlphabeticTokenPart;
+import com.github.chaosfirebolt.generator.identifier.rule.GeneratorRule;
 
 import java.util.Collections;
 import java.util.List;
