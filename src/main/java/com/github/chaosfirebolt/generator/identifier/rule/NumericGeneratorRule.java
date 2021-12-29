@@ -21,7 +21,7 @@ import com.github.chaosfirebolt.generator.identifier.part.NumericPart;
 import java.util.Collections;
 
 /**
- * {@link GeneratorRule} rule for numeric tokens.
+ * {@link GeneratorRule} rule for numeric identifiers.
  * <br>
  * Created by ChaosFire on 12/6/2021
  */

@@ -56,29 +56,29 @@ public class AlphaNumericIdentifierGeneratorConstructorTests extends IdentifierG
 
     @Override
     protected List<InvalidConstructorInvocationWrapper> getParamsDoNotConformRules() {
-        Executable executable = () -> new AlphaNumericIdentifierGenerator(9, 9, 9, Collections.singletonList(MIN_TOKEN_LENGTH_VALIDATOR));
+        Executable executable = () -> new AlphaNumericIdentifierGenerator(9, 9, 9, Collections.singletonList(MIN_IDENTIFIER_LENGTH_VALIDATOR));
         return Collections.singletonList(buildWrapperForInvalidGeneratorRule(executable));
     }
 
     @Override
     protected List<Callable<? extends IdentifierGenerator<?>>> getParamsConformRules() {
         List<Callable<? extends IdentifierGenerator<?>>> list = new ArrayList<>();
-        list.add(() -> new AlphaNumericIdentifierGenerator(10, 10, 10, Collections.singletonList(MIN_TOKEN_LENGTH_VALIDATOR)));
-        list.add(() -> new AlphaNumericIdentifierGenerator(20, 11, 5, Collections.singletonList(MIN_TOKEN_LENGTH_VALIDATOR)));
+        list.add(() -> new AlphaNumericIdentifierGenerator(10, 10, 10, Collections.singletonList(MIN_IDENTIFIER_LENGTH_VALIDATOR)));
+        list.add(() -> new AlphaNumericIdentifierGenerator(20, 11, 5, Collections.singletonList(MIN_IDENTIFIER_LENGTH_VALIDATOR)));
         return list;
     }
 
     @Override
     protected List<InvalidConstructorInvocationWrapper> getParamsWithRandomDoNotConformRules() {
-        Executable executable = () -> new AlphaNumericIdentifierGenerator(new Random(), 9, 9, 9, Collections.singletonList(MIN_TOKEN_LENGTH_VALIDATOR));
+        Executable executable = () -> new AlphaNumericIdentifierGenerator(new Random(), 9, 9, 9, Collections.singletonList(MIN_IDENTIFIER_LENGTH_VALIDATOR));
         return Collections.singletonList(buildWrapperForInvalidGeneratorRule(executable));
     }
 
     @Override
     protected List<Callable<? extends IdentifierGenerator<?>>> getParamsWithRandomConformRules() {
         List<Callable<? extends IdentifierGenerator<?>>> list = new ArrayList<>();
-        list.add(() -> new AlphaNumericIdentifierGenerator(new Random(), 10, 10, 10, Collections.singletonList(MIN_TOKEN_LENGTH_VALIDATOR)));
-        list.add(() -> new AlphaNumericIdentifierGenerator(new Random(), 20, 11, 3, Collections.singletonList(MIN_TOKEN_LENGTH_VALIDATOR)));
+        list.add(() -> new AlphaNumericIdentifierGenerator(new Random(), 10, 10, 10, Collections.singletonList(MIN_IDENTIFIER_LENGTH_VALIDATOR)));
+        list.add(() -> new AlphaNumericIdentifierGenerator(new Random(), 20, 11, 3, Collections.singletonList(MIN_IDENTIFIER_LENGTH_VALIDATOR)));
         return list;
     }
 }

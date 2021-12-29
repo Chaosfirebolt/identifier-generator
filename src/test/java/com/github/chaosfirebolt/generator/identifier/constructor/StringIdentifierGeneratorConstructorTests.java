@@ -40,7 +40,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
  */
 public class StringIdentifierGeneratorConstructorTests {
 
-    private static final String ERROR_MESSAGE = "Token minimum length can not be less than 50";
+    private static final String ERROR_MESSAGE = "identifier minimum length can not be less than 50";
     private static final RuleValidator VALIDATOR = new BaseRuleValidator(rule -> rule.getMinLength() >= 50, rule -> ERROR_MESSAGE);
 
     @Test

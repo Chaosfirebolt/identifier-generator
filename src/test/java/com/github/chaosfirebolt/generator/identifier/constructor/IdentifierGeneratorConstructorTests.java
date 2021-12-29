@@ -35,8 +35,8 @@ import static org.junit.jupiter.api.Assertions.*;
  */
 public abstract class IdentifierGeneratorConstructorTests {
 
-    private static final String ERROR_MESSAGE = "Token length can't be less than 30";
-    protected static final RuleValidator MIN_TOKEN_LENGTH_VALIDATOR = new BaseRuleValidator(rule -> rule.getLength() >= 30, rule -> ERROR_MESSAGE);
+    private static final String ERROR_MESSAGE = "identifier length can't be less than 30";
+    protected static final RuleValidator MIN_IDENTIFIER_LENGTH_VALIDATOR = new BaseRuleValidator(rule -> rule.getLength() >= 30, rule -> ERROR_MESSAGE);
 
     private final List<InvalidConstructorInvocationWrapper> lengthParamNegative;
     private final List<InvalidConstructorInvocationWrapper> lengthParamZero;

@@ -19,39 +19,39 @@ package com.github.chaosfirebolt.generator.identifier;
 import java.util.function.Predicate;
 
 /**
- * This interface defines the basic functionality for generating tokens.
+ * This interface defines the basic functionality for generating identifiers.
  * <br>
  * Created by ChaosFire on 12/5/2021
  */
 public interface IdentifierGenerator<T> {
 
     /**
-     * Generates a token
-     * @return the generated token
+     * Generates an identifier
+     * @return the generated identifier
      */
     T generate();
 
     /**
-     * Generates a token which is unique according to the provided condition
-     * @param uniquenessCondition condition for uniqueness of the generated token
-     * @return the generated unique token
-     * @throws com.github.chaosfirebolt.generator.identifier.exception.TooManyAttemptsException if a maximum number of attempts to generate unique token has been set, and that number is reached
+     * Generates an identifier which is unique according to the provided condition
+     * @param uniquenessCondition condition for uniqueness of the generated identifier
+     * @return the generated unique identifier
+     * @throws com.github.chaosfirebolt.generator.identifier.exception.TooManyAttemptsException if a maximum number of attempts to generate unique identifier has been set, and that number is reached
      */
     T generate(Predicate<T> uniquenessCondition);
 
     /**
-     * Generates a token with the specified length
-     * @param tokenLength required length of the generated token
-     * @return the generated token
+     * Generates an identifier with the specified length
+     * @param identifierLength required length of the generated identifier
+     * @return the generated identifier
      */
-    T generate(int tokenLength);
+    T generate(int identifierLength);
 
     /**
-     * Generates a token with the specified length, which is unique according to the provided condition
-     * @param tokenLength required length of the generated token
-     * @param uniquenessCondition condition for uniqueness of the generated token
-     * @return the generated unique token
-     * @throws com.github.chaosfirebolt.generator.identifier.exception.TooManyAttemptsException if a maximum number of attempts to generate unique token has been set, and that number is reached
+     * Generates an identifier with the specified length, which is unique according to the provided condition
+     * @param identifierLength required length of the generated identifier
+     * @param uniquenessCondition condition for uniqueness of the generated identifier
+     * @return the generated unique identifier
+     * @throws com.github.chaosfirebolt.generator.identifier.exception.TooManyAttemptsException if a maximum number of attempts to generate unique identifier has been set, and that number is reached
      */
-    T generate(int tokenLength, Predicate<T> uniquenessCondition);
+    T generate(int identifierLength, Predicate<T> uniquenessCondition);
 }

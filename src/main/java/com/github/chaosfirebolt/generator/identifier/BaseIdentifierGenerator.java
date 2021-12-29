@@ -23,9 +23,9 @@ import org.slf4j.LoggerFactory;
 import java.util.function.Predicate;
 
 /**
- * Provides basic and somewhat naive functionality for generating unique tokens.
+ * Provides basic and somewhat naive functionality for generating unique identifiers.
  * <br>
- * New tokens will be generated until the condition proves one to be unique.
+ * New identifiers will be generated until the condition proves one to be unique.
  * <br>
  * Created by ChaosFire on 12/5/2021
  */
@@ -42,7 +42,7 @@ public abstract class BaseIdentifierGenerator<T> implements IdentifierGenerator<
     protected final Logger logger;
 
     /**
-     * Maximum number of attempts to generate unique token, before throwing exception.
+     * Maximum number of attempts to generate unique identifier, before throwing exception.
      * <br>
      * Negative value means attempting forever.
      */
@@ -55,16 +55,16 @@ public abstract class BaseIdentifierGenerator<T> implements IdentifierGenerator<
 
     @Override
     public T generate(Predicate<T> uniquenessCondition) {
-        T token = this.generate();
+        T identifier = this.generate();
         int count = 1;
         this.logger.debug("Starting unique identifier generation");
-        while (!uniquenessCondition.test(token)) {
+        while (!uniquenessCondition.test(identifier)) {
             this.throwIfMaxAttemptsExceeded(count);
-            token = this.regenerateToken(token);
+            identifier = this.regenerateIdentifier(identifier);
             count++;
         }
         this.logger.debug("Unique identifier generated after {} attempts", count);
-        return token;
+        return identifier;
     }
 
     private void throwIfMaxAttemptsExceeded(int currentCount) {
@@ -76,53 +76,53 @@ public abstract class BaseIdentifierGenerator<T> implements IdentifierGenerator<
     }
 
     /**
-     * Generates a new token, if the previously generated one is not unique.
+     * Generates a new identifier, if the previously generated one is not unique.
      * <br>
-     * This implementation will just create a new one from scratch, without taking into account the previous token.
+     * This implementation will just create a new one from scratch, without taking into account the previous identifier.
      * <br>
      * Override this method for better/faster regeneration.
-     * @param previousToken previously generated and not unique token
-     * @return newly generated token
+     * @param previousIdentifier previously generated and not unique identifier
+     * @return newly generated identifier
      */
     @SuppressWarnings("unused")
-    protected T regenerateToken(T previousToken) {
+    protected T regenerateIdentifier(T previousIdentifier) {
         return this.generate();
     }
 
     @Override
-    public T generate(int tokenLength, Predicate<T> uniquenessCondition) {
-        T token = this.generate(tokenLength);
+    public T generate(int identifierLength, Predicate<T> uniquenessCondition) {
+        T identifier = this.generate(identifierLength);
         int count = 1;
         this.logger.debug("Starting unique identifier generation");
-        while (!uniquenessCondition.test(token)) {
+        while (!uniquenessCondition.test(identifier)) {
             this.throwIfMaxAttemptsExceeded(count);
-            token = this.regenerateToken(token, tokenLength);
+            identifier = this.regenerateIdentifier(identifier, identifierLength);
             count++;
         }
         this.logger.debug("Unique identifier generated after {} attempts", count);
-        return token;
+        return identifier;
     }
 
     /**
-     * Generates a new token, if the previously generated one is not unique.
+     * Generates a new identifier, if the previously generated one is not unique.
      * <br>
-     * This implementation will just create a new one from scratch, without taking into account the previous token.
+     * This implementation will just create a new one from scratch, without taking into account the previous identifier.
      * <br>
      * Override this method for better/faster regeneration.
-     * @param previousToken previously generated and not unique token
-     * @param tokenLength required length of the token
-     * @return newly generated token
+     * @param previousIdentifier previously generated and not unique identifier
+     * @param identifierLength required length of the identifier
+     * @return newly generated identifier
      */
     @SuppressWarnings("unused")
-    protected T regenerateToken(T previousToken, int tokenLength) {
-        return this.generate(tokenLength);
+    protected T regenerateIdentifier(T previousIdentifier, int identifierLength) {
+        return this.generate(identifierLength);
     }
 
     /**
      * Sets the value of maximum number of attempts. Attempting to set negative value or zero will have no effect.
      * <br>
      * Positive value can be assigned once. Subsequent invocations will have no effect.
-     * @param maximumAttempts maximum number of attempts to generate unique token before throwing exception.
+     * @param maximumAttempts maximum number of attempts to generate unique identifier before throwing exception.
      */
     public void setMaximumAttempts(int maximumAttempts) {
         if (maximumAttempts <= 0 || this.maximumAttempts > 0) {

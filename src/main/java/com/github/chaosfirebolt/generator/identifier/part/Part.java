@@ -19,20 +19,20 @@ package com.github.chaosfirebolt.generator.identifier.part;
 import java.util.List;
 
 /**
- * Represents a part of this token.
+ * Represents a part of this identifier.
  * <br>
  * Created by ChaosFire on 12/5/2021
  */
 public interface Part {
 
     /**
-     * Gets the length of this token part
+     * Gets the length of this identifier part
      * @return the length of this part
      */
     int getLength();
 
     /**
-     * Get the minimum length for this token part
+     * Get the minimum length for this identifier part
      * @return the minimum length of this part
      */
     default int getMinLength() {
@@ -40,7 +40,7 @@ public interface Part {
     }
 
     /**
-     * Get possible characters for this token part.
+     * Get possible characters for this identifier part.
      * @return possible characters for this part
      */
     List<Character> getCharacters();

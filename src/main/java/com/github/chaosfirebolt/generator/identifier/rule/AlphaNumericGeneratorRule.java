@@ -23,7 +23,7 @@ import com.github.chaosfirebolt.generator.identifier.part.UpperAlphabeticPart;
 import java.util.Arrays;
 
 /**
- * {@link GeneratorRule} rule for alphanumeric tokens.
+ * {@link GeneratorRule} rule for alphanumeric identifiers.
  * <br>
  * Created by ChaosFire on 12/6/2021
  */

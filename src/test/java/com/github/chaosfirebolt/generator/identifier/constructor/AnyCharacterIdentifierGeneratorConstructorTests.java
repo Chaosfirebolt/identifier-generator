@@ -59,7 +59,7 @@ public class AnyCharacterIdentifierGeneratorConstructorTests extends IdentifierG
     @Override
     protected List<InvalidConstructorInvocationWrapper> getParamsDoNotConformRules() {
         int length = 7;
-        Executable executable = () -> new AnyCharacterIdentifierGenerator(length, length, length, length, Collections.singletonList(MIN_TOKEN_LENGTH_VALIDATOR));
+        Executable executable = () -> new AnyCharacterIdentifierGenerator(length, length, length, length, Collections.singletonList(MIN_IDENTIFIER_LENGTH_VALIDATOR));
         return Collections.singletonList(buildWrapperForInvalidGeneratorRule(executable));
     }
 
@@ -67,13 +67,13 @@ public class AnyCharacterIdentifierGeneratorConstructorTests extends IdentifierG
     protected List<Callable<? extends IdentifierGenerator<?>>> getParamsConformRules() {
         int ten = 10;
         int five = 5;
-        return Collections.singletonList(() -> new AnyCharacterIdentifierGenerator(ten, ten, five, five, Collections.singletonList(MIN_TOKEN_LENGTH_VALIDATOR)));
+        return Collections.singletonList(() -> new AnyCharacterIdentifierGenerator(ten, ten, five, five, Collections.singletonList(MIN_IDENTIFIER_LENGTH_VALIDATOR)));
     }
 
     @Override
     protected List<InvalidConstructorInvocationWrapper> getParamsWithRandomDoNotConformRules() {
         int length = 7;
-        Executable executable = () -> new AnyCharacterIdentifierGenerator(new Random(), length, length, length, length, Collections.singletonList(MIN_TOKEN_LENGTH_VALIDATOR));
+        Executable executable = () -> new AnyCharacterIdentifierGenerator(new Random(), length, length, length, length, Collections.singletonList(MIN_IDENTIFIER_LENGTH_VALIDATOR));
         return Collections.singletonList(buildWrapperForInvalidGeneratorRule(executable));
     }
 
@@ -81,6 +81,6 @@ public class AnyCharacterIdentifierGeneratorConstructorTests extends IdentifierG
     protected List<Callable<? extends IdentifierGenerator<?>>> getParamsWithRandomConformRules() {
         int ten = 10;
         int five = 5;
-        return Collections.singletonList(() -> new AnyCharacterIdentifierGenerator(new Random(), ten, ten, five, five, Collections.singletonList(MIN_TOKEN_LENGTH_VALIDATOR)));
+        return Collections.singletonList(() -> new AnyCharacterIdentifierGenerator(new Random(), ten, ten, five, five, Collections.singletonList(MIN_IDENTIFIER_LENGTH_VALIDATOR)));
     }
 }

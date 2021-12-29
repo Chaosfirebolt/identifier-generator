@@ -21,27 +21,27 @@ import com.github.chaosfirebolt.generator.identifier.part.Part;
 import java.util.List;
 
 /**
- * Represents a rule for token generation.
+ * Represents a rule for identifier generation.
  * <br>
  * Created by ChaosFire on 12/5/2021
  */
 public interface GeneratorRule {
 
     /**
-     * Get token parts required by this rule
-     * @return the token parts
+     * Get identifier parts required by this rule
+     * @return the identifier parts
      */
     List<Part> getParts();
 
     /**
-     * Get token length required by this rule
-     * @return total length of the token
+     * Get identifier length required by this rule
+     * @return total length of the identifier
      */
     int getLength();
 
     /**
      * Get the minimum length required by this rule
-     * @return the minimum length of the token
+     * @return the minimum length of the identifier
      */
     default int getMinLength() {
         return this.getLength();

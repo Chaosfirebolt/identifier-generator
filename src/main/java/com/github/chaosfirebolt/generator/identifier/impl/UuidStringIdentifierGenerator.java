@@ -22,14 +22,14 @@ import java.util.Collections;
 import java.util.UUID;
 
 /**
- * Implementation generating tokens as random uuid strings.
+ * Implementation generating identifiers as random uuid strings.
  * <br>
  * Created by ChaosFire on 12/5/2021
  */
 public class UuidStringIdentifierGenerator extends StringIdentifierGenerator {
 
     /**
-     * Constructs new UuidStringTokenGenerator.
+     * Constructs new UuidStringIdentifierGenerator.
      */
     public UuidStringIdentifierGenerator() {
         super(null, null, Collections.emptyList());
@@ -41,7 +41,7 @@ public class UuidStringIdentifierGenerator extends StringIdentifierGenerator {
     }
 
     @Override
-    public String generate(int tokenLength) {
+    public String generate(int identifierLength) {
         return generateRandomUuidString();
     }
 

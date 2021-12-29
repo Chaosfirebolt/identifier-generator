@@ -22,7 +22,7 @@ import com.github.chaosfirebolt.generator.identifier.util.CalculationUtility;
 import java.util.function.Predicate;
 
 /**
- * This validator considers rules valid, only if the sum of the lengths of token parts equals the total length of the token.
+ * This validator considers rules valid, only if the sum of the lengths of identifier parts equals the total length of the identifier.
  * <br>
  * Created by ChaosFire on 12/5/2021
  */

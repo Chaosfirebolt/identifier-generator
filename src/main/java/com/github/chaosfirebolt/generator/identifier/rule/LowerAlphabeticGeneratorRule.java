@@ -21,7 +21,7 @@ import com.github.chaosfirebolt.generator.identifier.part.LowerAlphabeticPart;
 import java.util.Collections;
 
 /**
- * {@link GeneratorRule} rule for lower case alphabetic tokens.
+ * {@link GeneratorRule} rule for lower case alphabetic identifiers.
  * <br>
  * Created by ChaosFire on 12/6/2021
  */

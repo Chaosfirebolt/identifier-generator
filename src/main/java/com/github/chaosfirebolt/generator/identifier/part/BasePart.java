@@ -49,7 +49,7 @@ public class BasePart implements Part {
     private final List<Character> characters;
 
     /**
-     * Constructor creating token part from supplied length and characters.
+     * Constructor creating identifier part from supplied length and characters.
      * <br>
      * Collection of characters is changed to unmodifiable list.
      * @param length required length of the part
@@ -62,7 +62,7 @@ public class BasePart implements Part {
     }
 
     /**
-     * Constructor creating token part from supplied length, minimum length and characters.
+     * Constructor creating identifier part from supplied length, minimum length and characters.
      * <br>
      * Collection of characters is changed to unmodifiable list.
      * @param length required length of the part

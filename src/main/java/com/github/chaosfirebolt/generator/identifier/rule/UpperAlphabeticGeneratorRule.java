@@ -21,7 +21,7 @@ import com.github.chaosfirebolt.generator.identifier.part.UpperAlphabeticPart;
 import java.util.Collections;
 
 /**
- * {@link GeneratorRule} rule for upper case alphabetic tokens.
+ * {@link GeneratorRule} rule for upper case alphabetic identifiers.
  * <br>
  * Created by ChaosFire on 12/6/2021
  */

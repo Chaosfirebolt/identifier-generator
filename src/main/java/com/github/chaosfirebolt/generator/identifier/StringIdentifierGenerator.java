@@ -31,7 +31,7 @@ import java.util.Random;
 import java.util.function.ToIntFunction;
 
 /**
- * Base class for generating string tokens.
+ * Base class for generating string identifiers.
  * <br>
  * Created by ChaosFire on 12/5/2021
  */
@@ -48,13 +48,13 @@ public class StringIdentifierGenerator extends BaseIdentifierGenerator<String> {
     protected final Random random;
 
     /**
-     * Rule to be used for generation of string tokens.
+     * Rule to be used for generation of string identifiers.
      */
     protected final GeneratorRule generatorRule;
 
     /**
-     * Constructs instance of StringTokenGenerator, using provided {@link GeneratorRule}, a new instance of Secure Random and default list of rule validators.
-     * @param generatorRule rule to be used for token generation
+     * Constructs instance of StringIdentifierGenerator, using provided {@link GeneratorRule}, a new instance of Secure Random and default list of rule validators.
+     * @param generatorRule rule to be used for identifier generation
      * @throws com.github.chaosfirebolt.generator.identifier.exception.InvalidGeneratorRuleException if provided rule does not conform with default RuleValidators
      */
     public StringIdentifierGenerator(GeneratorRule generatorRule) {
@@ -62,8 +62,8 @@ public class StringIdentifierGenerator extends BaseIdentifierGenerator<String> {
     }
 
     /**
-     * Constructs instance of StringTokenGenerator, using provided {@link GeneratorRule}, provided list of {@link RuleValidator}, and a new instance of Secure Random.
-     * @param generatorRule rule to be used for token generation
+     * Constructs instance of StringIdentifierGenerator, using provided {@link GeneratorRule}, provided list of {@link RuleValidator}, and a new instance of Secure Random.
+     * @param generatorRule rule to be used for identifier generation
      * @param ruleValidators validators to be used for validation of provided generator rule
      * @throws com.github.chaosfirebolt.generator.identifier.exception.InvalidGeneratorRuleException if provided rule does not conform with provided RuleValidators
      */
@@ -72,9 +72,9 @@ public class StringIdentifierGenerator extends BaseIdentifierGenerator<String> {
     }
 
     /**
-     * Constructs instance of StringTokenGenerator, using provided {@link GeneratorRule}, provided list of {@link RuleValidator}, and provided {@link Random}.
+     * Constructs instance of StringIdentifierGenerator, using provided {@link GeneratorRule}, provided list of {@link RuleValidator}, and provided {@link Random}.
      * @param random random number generator
-     * @param generatorRule rule to be used for token generation
+     * @param generatorRule rule to be used for identifier generation
      * @param ruleValidators validators to be used for validation of provided generator rule
      * @throws com.github.chaosfirebolt.generator.identifier.exception.InvalidGeneratorRuleException if provided rule does not conform with provided RuleValidators
      */
@@ -92,21 +92,21 @@ public class StringIdentifierGenerator extends BaseIdentifierGenerator<String> {
 
     @Override
     public String generate() {
-        char[] token = new char[this.generatorRule.getLength()];
-        this.fillToken(token, 0, PART_LENGTH_FUNC);
-        this.shuffleArray(token);
-        return new String(token);
+        char[] identifier = new char[this.generatorRule.getLength()];
+        this.fillIdentifier(identifier, 0, PART_LENGTH_FUNC);
+        this.shuffleArray(identifier);
+        return new String(identifier);
     }
 
-    private int fillToken(char[] token, int tokenIndex, ToIntFunction<Part> partSizeFunction) {
+    private int fillIdentifier(char[] identifier, int identifierIndex, ToIntFunction<Part> partSizeFunction) {
         for (Part part : this.generatorRule.getParts()) {
             int partSize = partSizeFunction.applyAsInt(part);
             for (int i = 0; i < partSize; i++) {
                 char nextChar = this.getRandomElement(part.getCharacters());
-                token[tokenIndex++] = nextChar;
+                identifier[identifierIndex++] = nextChar;
             }
         }
-        return tokenIndex;
+        return identifierIndex;
     }
 
     /**
@@ -120,22 +120,22 @@ public class StringIdentifierGenerator extends BaseIdentifierGenerator<String> {
     }
 
     @Override
-    public String generate(int tokenLength) {
-        //in this implementation token length can not be less than minimum length from the rule
-        if (tokenLength < this.generatorRule.getMinLength()) {
-            tokenLength = this.generatorRule.getMinLength();
+    public String generate(int identifierLength) {
+        //in this implementation identifier length can not be less than minimum length from the rule
+        if (identifierLength < this.generatorRule.getMinLength()) {
+            identifierLength = this.generatorRule.getMinLength();
         }
-        char[] token = new char[tokenLength];
-        int tokenIndex = 0;
-        tokenIndex = this.fillToken(token, tokenIndex, PART_MIN_LENGTH_FUNC);
-        int lastIndex = tokenLength - 1;
-        while (tokenIndex < lastIndex) {
+        char[] identifier = new char[identifierLength];
+        int identifierIndex = 0;
+        identifierIndex = this.fillIdentifier(identifier, identifierIndex, PART_MIN_LENGTH_FUNC);
+        int lastIndex = identifierLength - 1;
+        while (identifierIndex < lastIndex) {
             Part randomPart = this.getRandomElement(this.generatorRule.getParts());
             char nextChar = this.getRandomElement(randomPart.getCharacters());
-            token[tokenIndex++] = nextChar;
+            identifier[identifierIndex++] = nextChar;
         }
-        this.shuffleArray(token);
-        return new String(token);
+        this.shuffleArray(identifier);
+        return new String(identifier);
     }
 
     private <E> E getRandomElement(List<E> list) {

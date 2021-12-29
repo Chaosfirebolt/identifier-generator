@@ -22,7 +22,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Token part for special characters.
+ * identifier part for special characters.
  * <br>
  * Created by ChaosFire on 12/5/2021
  */
@@ -44,7 +44,7 @@ public class SpecialCharacterPart extends BasePart {
     }
 
     /**
-     * Constructor creating instance of token part for special chars, with desired length.
+     * Constructor creating instance of identifier part for special chars, with desired length.
      * <br>
      * Minimum length is equal to the specified length.
      * @param length required length of the part
@@ -55,7 +55,7 @@ public class SpecialCharacterPart extends BasePart {
     }
 
     /**
-     * Constructor creating instance of token part for special chars, with desired length and minimum length
+     * Constructor creating instance of identifier part for special chars, with desired length and minimum length
      * @param length required length of the part
      * @param minLength required minimum length of the part
      * @throws IllegalArgumentException if length or minLength are less than 1 or length is less than minLength

@@ -21,7 +21,7 @@ import com.github.chaosfirebolt.generator.identifier.part.*;
 import java.util.Arrays;
 
 /**
- * {@link GeneratorRule} rule for tokens consisting of alphanumeric and special characters.
+ * {@link GeneratorRule} rule for identifiers consisting of alphanumeric and special characters.
  * <br>
  * Created by ChaosFire on 12/6/2021
  */

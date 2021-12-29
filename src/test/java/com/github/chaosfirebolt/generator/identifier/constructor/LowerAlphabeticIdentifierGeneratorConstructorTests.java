@@ -49,23 +49,23 @@ public class LowerAlphabeticIdentifierGeneratorConstructorTests extends Identifi
 
     @Override
     protected List<InvalidConstructorInvocationWrapper> getParamsDoNotConformRules() {
-        Executable executable = () -> new LowerAlphabeticIdentifierGenerator(9, Collections.singletonList(MIN_TOKEN_LENGTH_VALIDATOR));
+        Executable executable = () -> new LowerAlphabeticIdentifierGenerator(9, Collections.singletonList(MIN_IDENTIFIER_LENGTH_VALIDATOR));
         return Collections.singletonList(buildWrapperForInvalidGeneratorRule(executable));
     }
 
     @Override
     protected List<Callable<? extends IdentifierGenerator<?>>> getParamsConformRules() {
-        return Collections.singletonList(() -> new LowerAlphabeticIdentifierGenerator(30, Collections.singletonList(MIN_TOKEN_LENGTH_VALIDATOR)));
+        return Collections.singletonList(() -> new LowerAlphabeticIdentifierGenerator(30, Collections.singletonList(MIN_IDENTIFIER_LENGTH_VALIDATOR)));
     }
 
     @Override
     protected List<InvalidConstructorInvocationWrapper> getParamsWithRandomDoNotConformRules() {
-        Executable executable = () -> new LowerAlphabeticIdentifierGenerator(new Random(), 9, Collections.singletonList(MIN_TOKEN_LENGTH_VALIDATOR));
+        Executable executable = () -> new LowerAlphabeticIdentifierGenerator(new Random(), 9, Collections.singletonList(MIN_IDENTIFIER_LENGTH_VALIDATOR));
         return Collections.singletonList(buildWrapperForInvalidGeneratorRule(executable));
     }
 
     @Override
     protected List<Callable<? extends IdentifierGenerator<?>>> getParamsWithRandomConformRules() {
-        return Collections.singletonList(() -> new LowerAlphabeticIdentifierGenerator(new Random(), 40, Collections.singletonList(MIN_TOKEN_LENGTH_VALIDATOR)));
+        return Collections.singletonList(() -> new LowerAlphabeticIdentifierGenerator(new Random(), 40, Collections.singletonList(MIN_IDENTIFIER_LENGTH_VALIDATOR)));
     }
 }

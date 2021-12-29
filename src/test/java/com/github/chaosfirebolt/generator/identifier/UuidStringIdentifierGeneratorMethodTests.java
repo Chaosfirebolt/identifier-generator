@@ -37,12 +37,12 @@ public class UuidStringIdentifierGeneratorMethodTests extends IdentifierGenerato
     }
 
     @Override
-    public void generateTokenWithLength_LengthIsMoreThanMinimum_TokenShouldHaveCorrectLength() {
-        //test not applicable for uuid token generator
+    public void generateIdentifierWithLength_LengthIsMoreThanMinimum_IdentifierShouldHaveCorrectLength() {
+        //test not applicable for uuid identifier generator
     }
 
     @Override
-    public void generateUniqueTokenWithLength_LengthIsMoreThanMinimum_TokenShouldHaveCorrectLength() {
-        //test not applicable for uuid token generator
+    public void generateUniqueIdentifierWithLength_LengthIsMoreThanMinimum_IdentifierShouldHaveCorrectLength() {
+        //test not applicable for uuid identifier generator
     }
 }

@@ -24,37 +24,37 @@ import java.util.List;
 import java.util.Random;
 
 /**
- * Implementation generating numeric tokens.
+ * Implementation generating numeric identifiers.
  * <br>
  * Created by ChaosFire on 18-Dec-21
  */
 public class NumericIdentifierGenerator extends StringIdentifierGenerator {
 
     /**
-     * Constructs new instance of token generator, with desired length for numeric characters.
+     * Constructs new instance of identifier generator, with desired length for numeric characters.
      * @param length length of numeric characters
-     * @throws IllegalArgumentException if length is negative or zero, the underlying TokenPart constructor will throw this exception
+     * @throws IllegalArgumentException if length is negative or zero, the underlying Part constructor will throw this exception
      */
     public NumericIdentifierGenerator(int length) {
         super(new NumericGeneratorRule(length));
     }
 
     /**
-     * Constructs new instance of token generator, with desired length for numeric characters and provided validators.
+     * Constructs new instance of identifier generator, with desired length for numeric characters and provided validators.
      * @param length length of numeric characters
      * @param ruleValidators validators for the rule
-     * @throws IllegalArgumentException if length is negative or zero, the underlying TokenPart constructor will throw this exception
+     * @throws IllegalArgumentException if length is negative or zero, the underlying Part constructor will throw this exception
      */
     public NumericIdentifierGenerator(int length, List<RuleValidator> ruleValidators) {
         super(new NumericGeneratorRule(length), ruleValidators);
     }
 
     /**
-     * Constructs new instance of token generator, with desired length for numeric characters, provided validators and random.
+     * Constructs new instance of identifier generator, with desired length for numeric characters, provided validators and random.
      * @param random random number generator
      * @param length length of numeric characters
      * @param ruleValidators validators for the rule
-     * @throws IllegalArgumentException if length is negative or zero, the underlying TokenPart constructor will throw this exception
+     * @throws IllegalArgumentException if length is negative or zero, the underlying Part constructor will throw this exception
      */
     public NumericIdentifierGenerator(Random random, int length, List<RuleValidator> ruleValidators) {
         super(random, new NumericGeneratorRule(length), ruleValidators);

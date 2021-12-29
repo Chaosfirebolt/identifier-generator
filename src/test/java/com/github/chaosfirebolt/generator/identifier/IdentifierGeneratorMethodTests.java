@@ -40,7 +40,7 @@ public abstract class IdentifierGeneratorMethodTests {
 
     private static final String MOCK_ERROR_MESSAGE = "Mocking generator did not work";
 
-    private Set<String> existingTokens;
+    private Set<String> existingIdentifiers;
     private IdentifierGenerator<String> identifierGenerator;
     private Predicate<String> uniqueCondition;
     private final Logger logger;
@@ -57,62 +57,62 @@ public abstract class IdentifierGeneratorMethodTests {
 
     @BeforeEach
     void setUp() {
-        this.existingTokens = new HashSet<>();
-        this.uniqueCondition = token -> this.existingTokens.add(token);
-        BaseIdentifierGenerator<String> tokenGenerator = this.getGenerator();
-        tokenGenerator.setMaximumAttempts(this.maxAttempts);
-        this.identifierGenerator = tokenGenerator;
+        this.existingIdentifiers = new HashSet<>();
+        this.uniqueCondition = identifier -> this.existingIdentifiers.add(identifier);
+        BaseIdentifierGenerator<String> identifierGenerator = this.getGenerator();
+        identifierGenerator.setMaximumAttempts(this.maxAttempts);
+        this.identifierGenerator = identifierGenerator;
     }
 
     protected abstract BaseIdentifierGenerator<String> getGenerator();
 
     @AfterEach
     void tearDown() {
-        this.existingTokens.clear();
-        this.existingTokens = null;
+        this.existingIdentifiers.clear();
+        this.existingIdentifiers = null;
         this.identifierGenerator = null;
     }
 
     @Test
-    public void generateToken_TokenShouldHaveCorrectLength() {
-        String token = this.identifierGenerator.generate();
-        this.logToken(token);
-        assertEquals(this.expectedLength, token.length());
+    public void generateIdentifier_IdentifierShouldHaveCorrectLength() {
+        String identifier = this.identifierGenerator.generate();
+        this.logIdentifier(identifier);
+        assertEquals(this.expectedLength, identifier.length());
     }
 
-    private void logToken(String token) {
-        this.logger.info("{} generated identifier - {}", this.identifierGenerator.getClass().getSimpleName(), token);
+    private void logIdentifier(String identifier) {
+        this.logger.info("{} generated identifier - {}", this.identifierGenerator.getClass().getSimpleName(), identifier);
     }
 
     @Test
-    public void generateToken_GenerateMany_AllShouldBeDifferent() {
+    public void generateIdentifier_GenerateMany_AllShouldBeDifferent() {
         for (int i = 0; i < 100; i++) {
-            String token = this.identifierGenerator.generate();
-            this.logToken(token);
-            boolean exists = !this.existingTokens.add(token);
-            assertFalse(exists, () -> String.format("Identifier '%s' already generated", token));
+            String identifier = this.identifierGenerator.generate();
+            this.logIdentifier(identifier);
+            boolean exists = !this.existingIdentifiers.add(identifier);
+            assertFalse(exists, () -> String.format("Identifier '%s' already generated", identifier));
         }
     }
 
     @Test
-    public void generateUniqueToken_TokenShouldHaveCorrectLength() {
-        String token = this.identifierGenerator.generate(this.uniqueCondition);
-        this.logToken(token);
-        assertEquals(this.expectedLength, token.length());
+    public void generateUniqueIdentifier_IdentifierShouldHaveCorrectLength() {
+        String identifier = this.identifierGenerator.generate(this.uniqueCondition);
+        this.logIdentifier(identifier);
+        assertEquals(this.expectedLength, identifier.length());
     }
 
     @Test
     @Timeout(1)
-    public void generateUniqueToken_ExpectedNumberOfUniqueTokensShouldBeGenerated() {
+    public void generateUniqueIdentifier_ExpectedNumberOfUniqueIdentifiersShouldBeGenerated() {
         int targetCount = 10_000;
         for (int i = 0; i < targetCount; i++) {
             this.identifierGenerator.generate(this.uniqueCondition);
         }
-        assertEquals(targetCount, this.existingTokens.size());
+        assertEquals(targetCount, this.existingIdentifiers.size());
     }
 
     @Test
-    public void generateUniqueToken_MaximumAttemptsReached_ShouldThrowTooManyAttemptsExceptionWithCorrectMessage() {
+    public void generateUniqueIdentifier_MaximumAttemptsReached_ShouldThrowTooManyAttemptsExceptionWithCorrectMessage() {
         String toBeReturned = this.identifierGenerator.generate();
         IdentifierGenerator<String> generator = Mockito.spy(this.identifierGenerator);
         doReturn(toBeReturned).when(generator).generate();
@@ -126,59 +126,59 @@ public abstract class IdentifierGeneratorMethodTests {
     }
 
     @Test
-    public void generateTokenWithLength_LengthIsLessThanMinimum_TokenShouldHaveCorrectLength() {
+    public void generateIdentifierWithLength_LengthIsLessThanMinimum_IdentifierShouldHaveCorrectLength() {
         int length = this.expectedMinLength / 2;
-        String token = this.identifierGenerator.generate(length);
-        this.logToken(token);
-        assertEquals(this.expectedMinLength, token.length());
+        String identifier = this.identifierGenerator.generate(length);
+        this.logIdentifier(identifier);
+        assertEquals(this.expectedMinLength, identifier.length());
     }
 
     @Test
-    public void generateTokenWithLength_LengthIsMoreThanMinimum_TokenShouldHaveCorrectLength() {
+    public void generateIdentifierWithLength_LengthIsMoreThanMinimum_IdentifierShouldHaveCorrectLength() {
         int length = this.expectedMinLength * 2;
-        String token = this.identifierGenerator.generate(length);
-        this.logToken(token);
-        assertEquals(length, token.length());
+        String identifier = this.identifierGenerator.generate(length);
+        this.logIdentifier(identifier);
+        assertEquals(length, identifier.length());
     }
 
     @Test
-    public void generateTokenWithLength_GenerateMany_AllShouldBeDifferent() {
+    public void generateIdentifierWithLength_GenerateMany_AllShouldBeDifferent() {
         for (int i = 0; i < 100; i++) {
-            String token = this.identifierGenerator.generate(100);
-            this.logToken(token);
-            boolean exists = !this.existingTokens.add(token);
-            assertFalse(exists, () -> String.format("Token '%s' already generated", token));
+            String identifier = this.identifierGenerator.generate(100);
+            this.logIdentifier(identifier);
+            boolean exists = !this.existingIdentifiers.add(identifier);
+            assertFalse(exists, () -> String.format("identifier '%s' already generated", identifier));
         }
     }
 
     @Test
-    public void generateUniqueTokenWithLength_LengthIsLessThanMinimum_TokenShouldHaveCorrectLength() {
+    public void generateUniqueIdentifierWithLength_LengthIsLessThanMinimum_IdentifierShouldHaveCorrectLength() {
         int length = this.expectedMinLength / 2;
-        String token = this.identifierGenerator.generate(length, this.uniqueCondition);
-        this.logToken(token);
-        assertEquals(this.expectedMinLength, token.length());
+        String identifier = this.identifierGenerator.generate(length, this.uniqueCondition);
+        this.logIdentifier(identifier);
+        assertEquals(this.expectedMinLength, identifier.length());
     }
 
     @Test
-    public void generateUniqueTokenWithLength_LengthIsMoreThanMinimum_TokenShouldHaveCorrectLength() {
+    public void generateUniqueIdentifierWithLength_LengthIsMoreThanMinimum_IdentifierShouldHaveCorrectLength() {
         int length = this.expectedMinLength * 2;
-        String token = this.identifierGenerator.generate(length, this.uniqueCondition);
-        this.logToken(token);
-        assertEquals(length, token.length());
+        String identifier = this.identifierGenerator.generate(length, this.uniqueCondition);
+        this.logIdentifier(identifier);
+        assertEquals(length, identifier.length());
     }
 
     @Test
     @Timeout(1)
-    public void generateUniqueTokenWithLength_ExpectedNumberOfUniqueTokensShouldBeGenerated() {
+    public void generateUniqueIdentifierWithLength_ExpectedNumberOfUniqueIdentifiersShouldBeGenerated() {
         int targetCount = 10_000;
         for (int i = 0; i < targetCount; i++) {
             this.identifierGenerator.generate(100, this.uniqueCondition);
         }
-        assertEquals(targetCount, this.existingTokens.size());
+        assertEquals(targetCount, this.existingIdentifiers.size());
     }
 
     @Test
-    public void generateUniqueTokenWithLength_MaximumAttemptsReached_ShouldThrowTooManyAttemptsExceptionWithCorrectMessage() {
+    public void generateUniqueIdentifierWithLength_MaximumAttemptsReached_ShouldThrowTooManyAttemptsExceptionWithCorrectMessage() {
         int length = 100;
         String toBeReturned = this.identifierGenerator.generate(length);
         IdentifierGenerator<String> generator = Mockito.spy(this.identifierGenerator);
@@ -194,9 +194,9 @@ public abstract class IdentifierGeneratorMethodTests {
 
     @Test
     public void setMaximumAttempts_SetNegative_ValueShouldRemainUnchanged() {
-        BaseIdentifierGenerator<String> tokenGenerator = this.getGenerator();
-        tokenGenerator.setMaximumAttempts(-2);
-        int actual = getMaxAttempts(tokenGenerator);
+        BaseIdentifierGenerator<String> identifierGenerator = this.getGenerator();
+        identifierGenerator.setMaximumAttempts(-2);
+        int actual = getMaxAttempts(identifierGenerator);
         assertEquals(-1, actual);
     }
 
@@ -226,28 +226,28 @@ public abstract class IdentifierGeneratorMethodTests {
 
     @Test
     public void setMaximumAttempts_SetZero_ValueShouldRemainUnchanged() {
-        BaseIdentifierGenerator<String> tokenGenerator = this.getGenerator();
-        tokenGenerator.setMaximumAttempts(0);
-        int actual = getMaxAttempts(tokenGenerator);
+        BaseIdentifierGenerator<String> identifierGenerator = this.getGenerator();
+        identifierGenerator.setMaximumAttempts(0);
+        int actual = getMaxAttempts(identifierGenerator);
         assertEquals(-1, actual);
     }
 
     @Test
     public void setMaximumAttempts_SetPositive_ValueShouldChange() {
         int expected = 11;
-        BaseIdentifierGenerator<String> tokenGenerator = this.getGenerator();
-        tokenGenerator.setMaximumAttempts(expected);
-        int actual = getMaxAttempts(tokenGenerator);
+        BaseIdentifierGenerator<String> identifierGenerator = this.getGenerator();
+        identifierGenerator.setMaximumAttempts(expected);
+        int actual = getMaxAttempts(identifierGenerator);
         assertEquals(expected, actual);
     }
 
     @Test
     public void setMaximumAttempts_SetPositiveTwice_ValueShouldBeFirstSet() {
         int expected = 20;
-        BaseIdentifierGenerator<String> tokenGenerator = this.getGenerator();
-        tokenGenerator.setMaximumAttempts(expected);
-        tokenGenerator.setMaximumAttempts(10);
-        int actual = getMaxAttempts(tokenGenerator);
+        BaseIdentifierGenerator<String> identifierGenerator = this.getGenerator();
+        identifierGenerator.setMaximumAttempts(expected);
+        identifierGenerator.setMaximumAttempts(10);
+        int actual = getMaxAttempts(identifierGenerator);
         assertEquals(expected, actual);
     }
 }
