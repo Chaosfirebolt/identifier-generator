@@ -1,10 +1,10 @@
-#Identifier Generator
+# Identifier Generator
 
 Library for identifier generation.
 Provides abstraction for identifier generation - main interface defining functionality is IdentifierGenerator, and implementations for string based identifiers.
 Most combinations of alphabetic, numeric and special characters are covered by provided implementations.
 
-#Examples
+# Examples
 
 Print alphanumeric identifier
 ```
@@ -77,5 +77,5 @@ for (int i = 0; i < 100; i++) {
 }
 ```
 
-#Licence
+# Licence
 This project is licensed under the Apache License 2.0 License - see the [LICENSE](LICENSE.txt) file for details.
