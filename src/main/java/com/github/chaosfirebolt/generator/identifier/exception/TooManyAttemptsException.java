@@ -17,6 +17,8 @@
 package com.github.chaosfirebolt.generator.identifier.exception;
 
 /**
+ * This exception signals, that the maximum number of attempts to generate unique identifier have been reached.
+ * <br>
  * Created by ChaosFire on 21-Dec-21
  */
 public class TooManyAttemptsException extends RuntimeException {

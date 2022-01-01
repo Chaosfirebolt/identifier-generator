@@ -17,7 +17,7 @@
 package com.github.chaosfirebolt.generator.identifier.exception;
 
 /**
- * This exception signals, that a {@link com.github.chaosfirebolt.generator.identifier.rule.GeneratorRule} is not valid
+ * This exception signals, that a {@link com.github.chaosfirebolt.generator.identifier.rule.GeneratorRule} is not valid.
  * <br>
  * Created by ChaosFire on 12/5/2021
  */
