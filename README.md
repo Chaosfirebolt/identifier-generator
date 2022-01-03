@@ -1,7 +1,7 @@
 # Identifier Generator
 
 Library for identifier generation.
-Provides abstraction for identifier generation - main interface defining functionality is IdentifierGenerator, and implementations for string based identifiers.
+Provides abstraction for identifier generation - main interface defining functionality is [IdentifierGenerator](src/main/java/com/github/chaosfirebolt/generator/identifier/IdentifierGenerator.java), and implementations for string based identifiers.
 Most combinations of alphabetic, numeric and special characters are covered by provided implementations.
 
 # Examples
