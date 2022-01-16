@@ -1,8 +1,19 @@
 # Identifier Generator
-
 Library for identifier generation.
 Provides abstraction for identifier generation - main interface defining functionality is [IdentifierGenerator](src/main/java/com/github/chaosfirebolt/generator/identifier/IdentifierGenerator.java), and implementations for string based identifiers.
 Most combinations of alphabetic, numeric and special characters are covered by provided implementations.
+
+# Latest version
+Current latest version is 1.0.0
+<br/>
+Maven dependency
+```
+<dependency>
+    <groupId>com.github.chaosfirebolt.generator</groupId>
+    <artifactId>identifier-generator</artifactId>
+    <version>1.0.0</version>
+</dependency>
+```
 
 # Examples
 
