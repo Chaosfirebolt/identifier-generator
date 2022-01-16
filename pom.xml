@@ -44,6 +44,10 @@
         </developer>
     </developers>
 
+    <scm>
+        <url>https://github.com/Chaosfirebolt/identifier-generator</url>
+    </scm>
+
     <distributionManagement>
         <snapshotRepository>
             <id>ossrh</id>
