@@ -151,6 +151,7 @@
                     <excludes>
                         <exclude>**/README.md</exclude>
                         <exclude>**/MANIFEST.MF</exclude>
+                        <exclude>**/DEPENDENCIES.txt</exclude>
                     </excludes>
                 </configuration>
             </plugin>
