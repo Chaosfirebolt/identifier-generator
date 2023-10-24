@@ -2,19 +2,19 @@
 Identifier Generator
 
 Dependencies
-    - SLF4J API Module (org.slf4j:slf4j-api:1.7.32 - http://www.slf4j.org) - MIT License
+    - SLF4J API Module (org.slf4j:slf4j-api:2.0.9 - http://www.slf4j.org) - MIT License
 
 Test Dependencies
-    - Byte Buddy (without dependencies) (net.bytebuddy:byte-buddy:1.12.4 - https://bytebuddy.net/byte-buddy) - Apache License, Version 2.0
-    - Byte Buddy agent (net.bytebuddy:byte-buddy-agent:1.12.4 - https://bytebuddy.net/byte-buddy-agent) - Apache License, Version 2.0
-    - Apache Log4j API (org.apache.logging.log4j:log4j-api:2.17.0 - https://logging.apache.org/log4j/2.x/log4j-api/) - Apache License, Version 2.0
-    - Apache Log4j Core (org.apache.logging.log4j:log4j-core:2.17.0 - https://logging.apache.org/log4j/2.x/log4j-core/) - Apache License, Version 2.0
-    - Apache Log4j SLF4J Binding (org.apache.logging.log4j:log4j-slf4j-impl:2.17.0 - https://logging.apache.org/log4j/2.x/log4j-slf4j-impl/) - Apache License, Version 2.0
+    - Byte Buddy (without dependencies) (net.bytebuddy:byte-buddy:1.14.8 - https://bytebuddy.net/byte-buddy) - Apache License, Version 2.0
+    - Byte Buddy agent (net.bytebuddy:byte-buddy-agent:1.14.8 - https://bytebuddy.net/byte-buddy-agent) - Apache License, Version 2.0
+    - Apache Log4j API (org.apache.logging.log4j:log4j-api:2.21.0 - https://logging.apache.org/log4j/2.x/log4j/log4j-api/) - Apache-2.0
+    - Apache Log4j Core (org.apache.logging.log4j:log4j-core:2.21.0 - https://logging.apache.org/log4j/2.x/log4j/log4j-core/) - Apache-2.0
+    - Apache Log4j SLF4J Binding (org.apache.logging.log4j:log4j-slf4j-impl:2.21.0 - https://logging.apache.org/log4j/2.x/log4j/log4j-slf4j-impl/) - Apache-2.0
     - org.apiguardian:apiguardian-api (org.apiguardian:apiguardian-api:1.1.2 - https://github.com/apiguardian-team/apiguardian) - The Apache License, Version 2.0
-    - JUnit Jupiter API (org.junit.jupiter:junit-jupiter-api:5.8.2 - https://junit.org/junit5/) - Eclipse Public License v2.0
-    - JUnit Platform Commons (org.junit.platform:junit-platform-commons:1.8.2 - https://junit.org/junit5/) - Eclipse Public License v2.0
-    - mockito-core (org.mockito:mockito-core:4.2.0 - https://github.com/mockito/mockito) - The MIT License
-    - mockito-junit-jupiter (org.mockito:mockito-junit-jupiter:4.2.0 - https://github.com/mockito/mockito) - The MIT License
-    - Objenesis (org.objenesis:objenesis:3.2 - http://objenesis.org/objenesis) - Apache License, Version 2.0
-    - org.opentest4j:opentest4j (org.opentest4j:opentest4j:1.2.0 - https://github.com/ota4j-team/opentest4j) - The Apache License, Version 2.0
-    - SLF4J API Module (org.slf4j:slf4j-api:1.7.32 - http://www.slf4j.org) - MIT License
+    - JUnit Jupiter API (org.junit.jupiter:junit-jupiter-api:5.10.0 - https://junit.org/junit5/) - Eclipse Public License v2.0
+    - JUnit Platform Commons (org.junit.platform:junit-platform-commons:1.10.0 - https://junit.org/junit5/) - Eclipse Public License v2.0
+    - mockito-core (org.mockito:mockito-core:5.6.0 - https://github.com/mockito/mockito) - MIT
+    - mockito-junit-jupiter (org.mockito:mockito-junit-jupiter:5.6.0 - https://github.com/mockito/mockito) - MIT
+    - Objenesis (org.objenesis:objenesis:3.3 - http://objenesis.org/objenesis) - Apache License, Version 2.0
+    - org.opentest4j:opentest4j (org.opentest4j:opentest4j:1.3.0 - https://github.com/ota4j-team/opentest4j) - The Apache License, Version 2.0
+    - SLF4J API Module (org.slf4j:slf4j-api:2.0.9 - http://www.slf4j.org) - MIT License
