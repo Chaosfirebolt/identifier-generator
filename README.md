@@ -4,16 +4,17 @@ Provides abstraction for identifier generation - main interface defining functio
 Most combinations of alphabetic, numeric and special characters are covered by provided implementations.
 
 # Latest version
-Current latest version is 1.0.0
+Current latest version is 1.0.1
 <br/>
 Maven dependency
 ```
 <dependency>
     <groupId>com.github.chaosfirebolt.generator</groupId>
     <artifactId>identifier-generator</artifactId>
-    <version>1.0.0</version>
+    <version>1.0.1</version>
 </dependency>
 ```
+[All artifacts in maven central](https://mvnrepository.com/artifact/com.github.chaosfirebolt.generator/identifier-generator)
 
 # Examples
 
