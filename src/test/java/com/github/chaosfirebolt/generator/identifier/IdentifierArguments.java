@@ -16,37 +16,9 @@
 
 package com.github.chaosfirebolt.generator.identifier;
 
-public class IdentifierArguments {
-
-    private final BaseIdentifierGenerator<String> generator;
-    private final int maxAttempts;
-    private final int expectedLength;
-    private final int expectedMinLength;
-
-    public IdentifierArguments(BaseIdentifierGenerator<String> generator, int maxAttempts, int expectedLength, int expectedMinLength) {
-        this.generator = generator;
-        this.maxAttempts = maxAttempts;
-        this.expectedLength = expectedLength;
-        this.expectedMinLength = expectedMinLength;
-    }
+public record IdentifierArguments(BaseIdentifierGenerator<String> generator, int maxAttempts, int expectedLength, int expectedMinLength) {
 
     public static IdentifierArguments of(BaseIdentifierGenerator<String> generator, int maxAttempts, int expectedLength, int expectedMinLength) {
         return new IdentifierArguments(generator, maxAttempts, expectedLength, expectedMinLength);
-    }
-
-    public BaseIdentifierGenerator<String> getGenerator() {
-        return this.generator;
-    }
-
-    public int getMaxAttempts() {
-        return this.maxAttempts;
-    }
-
-    public int getExpectedLength() {
-        return this.expectedLength;
-    }
-
-    public int getExpectedMinLength() {
-        return this.expectedMinLength;
     }
 }

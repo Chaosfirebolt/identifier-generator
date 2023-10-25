@@ -18,33 +18,5 @@ package com.github.chaosfirebolt.generator.rule;
 
 import com.github.chaosfirebolt.generator.identifier.rule.GeneratorRule;
 
-public class GeneratorRuleArguments {
-
-    private final GeneratorRule rule;
-    private final int expectedNumberOfParts;
-    private final int expectedLength;
-    private final int expectedMinLength;
-
-    public GeneratorRuleArguments(GeneratorRule rule, int expectedNumberOfParts, int expectedLength, int expectedMinLength) {
-        this.rule = rule;
-        this.expectedNumberOfParts = expectedNumberOfParts;
-        this.expectedLength = expectedLength;
-        this.expectedMinLength = expectedMinLength;
-    }
-
-    public GeneratorRule getRule() {
-        return this.rule;
-    }
-
-    public int getExpectedNumberOfParts() {
-        return this.expectedNumberOfParts;
-    }
-
-    public int getExpectedLength() {
-        return this.expectedLength;
-    }
-
-    public int getExpectedMinLength() {
-        return this.expectedMinLength;
-    }
+public record GeneratorRuleArguments(GeneratorRule rule, int expectedNumberOfParts, int expectedLength, int expectedMinLength) {
 }

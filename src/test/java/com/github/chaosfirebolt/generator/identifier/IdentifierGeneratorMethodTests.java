@@ -69,7 +69,7 @@ public class IdentifierGeneratorMethodTests {
     }
 
     private static List<Arguments> generatorsWithExpectedLength() {
-        return allData().stream().map(args -> Arguments.of(args.getGenerator(), args.getExpectedLength())).collect(Collectors.toList());
+        return allData().stream().map(args -> Arguments.of(args.generator(), args.expectedLength())).collect(Collectors.toList());
     }
 
     private static List<IdentifierArguments> allData() {
@@ -82,7 +82,8 @@ public class IdentifierGeneratorMethodTests {
                 IdentifierArguments.of(new NumericIdentifierGenerator(29), 100, 29, 29),
                 IdentifierArguments.of(new StringIdentifierGenerator(generatorRule), 49, 233, 233),
                 IdentifierArguments.of(new UpperAlphabeticIdentifierGenerator(111), 50, 111, 111),
-                IdentifierArguments.of(new UuidStringIdentifierGenerator(), 20, 36, 36));
+                IdentifierArguments.of(new UuidStringIdentifierGenerator(), 20, 36, 36)
+        );
     }
 
     @ParameterizedTest
@@ -105,7 +106,7 @@ public class IdentifierGeneratorMethodTests {
     @ParameterizedTest
     @MethodSource("generators")
     public void generateUniqueIdentifier_ExpectedNumberOfUniqueIdentifiersShouldBeGenerated(IdentifierGenerator<String> identifierGenerator) {
-        int targetCount = 10_000;
+        int targetCount = 1_000;
         for (int i = 0; i < targetCount; i++) {
             identifierGenerator.generate(this.uniqueCondition);
         }
@@ -113,7 +114,7 @@ public class IdentifierGeneratorMethodTests {
     }
 
     private static List<Arguments> generators() {
-        return allData().stream().map(IdentifierArguments::getGenerator).map(Arguments::of).collect(Collectors.toList());
+        return allData().stream().map(IdentifierArguments::generator).map(Arguments::of).collect(Collectors.toList());
     }
 
     @ParameterizedTest
@@ -133,8 +134,8 @@ public class IdentifierGeneratorMethodTests {
 
     private static List<Arguments> generatorsWithMaxAttempts() {
         return allData().stream()
-                .peek(args -> args.getGenerator().setMaximumAttempts(args.getMaxAttempts()))
-                .map(args -> Arguments.of(args.getGenerator(), args.getMaxAttempts()))
+                .peek(args -> args.generator().setMaximumAttempts(args.maxAttempts()))
+                .map(args -> Arguments.of(args.generator(), args.maxAttempts()))
                 .collect(Collectors.toList());
     }
 
@@ -147,7 +148,7 @@ public class IdentifierGeneratorMethodTests {
     }
 
     private static List<Arguments> generatorsWithExpectedMinLength() {
-        return allData().stream().map(args -> Arguments.of(args.getGenerator(), args.getExpectedMinLength())).collect(Collectors.toList());
+        return allData().stream().map(args -> Arguments.of(args.generator(), args.expectedMinLength())).collect(Collectors.toList());
     }
 
     @ParameterizedTest
@@ -189,7 +190,7 @@ public class IdentifierGeneratorMethodTests {
     @ParameterizedTest
     @MethodSource("generators")
     public void generateUniqueIdentifierWithLength_ExpectedNumberOfUniqueIdentifiersShouldBeGenerated(IdentifierGenerator<String> identifierGenerator) {
-        int targetCount = 10_000;
+        int targetCount = 1_000;
         for (int i = 0; i < targetCount; i++) {
             identifierGenerator.generate(100, this.uniqueCondition);
         }

@@ -42,7 +42,7 @@ public class PartMethodTests {
     }
 
     private static Stream<Arguments> getLength_ResultShouldBeCorrect() {
-        return allData().map(args -> Arguments.of(args.getPart(), args.getExpectedLength()));
+        return allData().map(args -> Arguments.of(args.part(), args.expectedLength()));
     }
 
     @ParameterizedTest
@@ -53,7 +53,7 @@ public class PartMethodTests {
     }
 
     private static Stream<Arguments> getMinLength_ResultShouldBeCorrect() {
-        return allData().map(args -> Arguments.of(args.getPart(), args.getExpectedMinLength()));
+        return allData().map(args -> Arguments.of(args.part(), args.expectedMinLength()));
     }
 
     @ParameterizedTest
@@ -64,7 +64,7 @@ public class PartMethodTests {
     }
 
     private static Stream<Arguments> getCharacters_ResultShouldBeCorrect() {
-        return allData().map(args -> Arguments.of(args.getPart(), args.getExpectedCharacters()));
+        return allData().map(args -> Arguments.of(args.part(), args.expectedCharacters()));
     }
 
     private static Stream<PartArguments> allData() {

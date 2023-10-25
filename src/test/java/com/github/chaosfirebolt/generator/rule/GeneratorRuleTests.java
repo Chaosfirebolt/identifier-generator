@@ -45,7 +45,7 @@ public class GeneratorRuleTests {
     }
 
     private static Stream<Arguments> getParts_ShouldReturnCorrectNumberOfParts() {
-        return allData().map(args -> Arguments.of(args.getRule(), args.getExpectedNumberOfParts()));
+        return allData().map(args -> Arguments.of(args.rule(), args.expectedNumberOfParts()));
     }
 
     @ParameterizedTest
@@ -56,7 +56,7 @@ public class GeneratorRuleTests {
     }
 
     private static Stream<Arguments> getLength_ShouldReturnCorrectLength() {
-        return allData().map(args -> Arguments.of(args.getRule(), args.getExpectedLength()));
+        return allData().map(args -> Arguments.of(args.rule(), args.expectedLength()));
     }
 
     @ParameterizedTest
@@ -67,7 +67,7 @@ public class GeneratorRuleTests {
     }
 
     private static Stream<Arguments> getMinLength_ShouldReturnCorrectMinLength() {
-        return allData().map(args -> Arguments.of(args.getRule(), args.getExpectedMinLength()));
+        return allData().map(args -> Arguments.of(args.rule(), args.expectedMinLength()));
     }
 
     private static Stream<GeneratorRuleArguments> allData() {

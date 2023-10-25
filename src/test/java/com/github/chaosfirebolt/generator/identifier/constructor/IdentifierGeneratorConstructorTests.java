@@ -72,9 +72,9 @@ public class IdentifierGeneratorConstructorTests {
     }
 
     private static void assertException(InvalidConstructorInvocationWrapper wrapper) {
-        Class<? extends Throwable> exceptionClass = wrapper.getExpectedException();
-        Throwable throwable = assertThrows(exceptionClass, wrapper.getInvalidInvocation(), () -> String.format("Expected '%s' was not thrown", exceptionClass.getSimpleName()));
-        assertEquals(wrapper.getExpectedErrorMessage(), throwable.getMessage(), "Incorrect exception message");
+        Class<? extends Throwable> exceptionClass = wrapper.expectedException();
+        Throwable throwable = assertThrows(exceptionClass, wrapper.invalidInvocation(), () -> String.format("Expected '%s' was not thrown", exceptionClass.getSimpleName()));
+        assertEquals(wrapper.expectedErrorMessage(), throwable.getMessage(), "Incorrect exception message");
     }
 
     @ParameterizedTest

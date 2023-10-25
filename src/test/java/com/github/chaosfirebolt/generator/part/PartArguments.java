@@ -20,33 +20,5 @@ import com.github.chaosfirebolt.generator.identifier.part.Part;
 
 import java.util.List;
 
-public class PartArguments {
-
-    private final Part part;
-    private final List<Character> expectedCharacters;
-    private final int expectedLength;
-    private final int expectedMinLength;
-
-    public PartArguments(Part part, List<Character> expectedCharacters, int expectedLength, int expectedMinLength) {
-        this.part = part;
-        this.expectedCharacters = expectedCharacters;
-        this.expectedLength = expectedLength;
-        this.expectedMinLength = expectedMinLength;
-    }
-
-    public Part getPart() {
-        return this.part;
-    }
-
-    public List<Character> getExpectedCharacters() {
-        return this.expectedCharacters;
-    }
-
-    public int getExpectedLength() {
-        return this.expectedLength;
-    }
-
-    public int getExpectedMinLength() {
-        return this.expectedMinLength;
-    }
+public record PartArguments(Part part, List<Character> expectedCharacters, int expectedLength, int expectedMinLength) {
 }
