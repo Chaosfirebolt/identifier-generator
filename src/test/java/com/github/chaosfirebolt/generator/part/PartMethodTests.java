@@ -16,45 +16,69 @@
 
 package com.github.chaosfirebolt.generator.part;
 
-import com.github.chaosfirebolt.generator.identifier.part.Part;
-import org.junit.jupiter.api.Test;
+import com.github.chaosfirebolt.generator.identifier.part.*;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
 
+import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
+import java.util.stream.Stream;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 /**
  * Created by ChaosFire on 19-Dec-21
  */
-public abstract class PartMethodTests {
+public class PartMethodTests {
 
-    private final int expectedLength;
-    private final int expectedMinLength;
-    private final List<Character> expectedCharacters;
-    private final Part part;
-
-    protected PartMethodTests(int expectedLength, int expectedMinLength, List<Character> expectedCharacters, Part part) {
-        this.expectedLength = expectedLength;
-        this.expectedMinLength = expectedMinLength;
-        this.expectedCharacters = expectedCharacters;
-        this.part = part;
+    @ParameterizedTest
+    @MethodSource
+    public void getLength_ResultShouldBeCorrect(Part part, int expectedLength) {
+        int actual = part.getLength();
+        assertEquals(expectedLength, actual);
     }
 
-    @Test
-    public void getLength_ResultShouldBeCorrect() {
-        int actual = this.part.getLength();
-        assertEquals(this.expectedLength, actual);
+    private static Stream<Arguments> getLength_ResultShouldBeCorrect() {
+        return allData().map(args -> Arguments.of(args.getPart(), args.getExpectedLength()));
     }
 
-    @Test
-    public void getMinLength_ResultShouldBeCorrect() {
-        int actual = this.part.getMinLength();
-        assertEquals(this.expectedMinLength, actual);
+    @ParameterizedTest
+    @MethodSource
+    public void getMinLength_ResultShouldBeCorrect(Part part, int expectedMinLength) {
+        int actual = part.getMinLength();
+        assertEquals(expectedMinLength, actual);
     }
 
-    @Test
-    public void getCharacters_ResultShouldBeCorrect() {
-        List<Character> actual = this.part.getCharacters();
-        assertEquals(this.expectedCharacters, actual);
+    private static Stream<Arguments> getMinLength_ResultShouldBeCorrect() {
+        return allData().map(args -> Arguments.of(args.getPart(), args.getExpectedMinLength()));
+    }
+
+    @ParameterizedTest
+    @MethodSource
+    public void getCharacters_ResultShouldBeCorrect(Part part, List<Character> expectedCharacters) {
+        List<Character> actual = part.getCharacters();
+        assertEquals(expectedCharacters, actual);
+    }
+
+    private static Stream<Arguments> getCharacters_ResultShouldBeCorrect() {
+        return allData().map(args -> Arguments.of(args.getPart(), args.getExpectedCharacters()));
+    }
+
+    private static Stream<PartArguments> allData() {
+        List<Character> specialChars = Arrays.asList('!', '"', '#', '$', '%', '&', '\'', '(', ')', '*', '+', ',', '-', '.', '/', ':', ';', '<', '=', '>', '?', '@', '[', '\\', ']',
+                '^', '_', '`', '{', '|', '}', '~');
+        return Stream.of(
+                new PartArguments(new SpecialCharacterPart(5, 4), specialChars, 5, 4),
+                new PartArguments(new LowerAlphabeticPart(5, 4), codesToChars(97, 123), 5, 4),
+                new PartArguments(new NumericPart(7, 3), codesToChars(48, 58), 7, 3),
+                new PartArguments(new UpperAlphabeticPart(5, 4), codesToChars(65, 91), 5, 4)
+        );
+    }
+
+    private static List<Character> codesToChars(int startInclusive, int endExclusive) {
+        return IntStream.range(startInclusive, endExclusive).mapToObj(n -> (char) n).collect(Collectors.toList());
     }
 }
