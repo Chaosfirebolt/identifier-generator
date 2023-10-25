@@ -70,8 +70,8 @@
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>3.11.0</version>
                 <configuration>
-                    <source>1.8</source>
-                    <target>1.8</target>
+                    <source>8</source>
+                    <target>8</target>
                 </configuration>
             </plugin>
             <plugin>
@@ -110,6 +110,7 @@
                     <archive>
                         <manifestFile>src/main/resources/META-INF/MANIFEST.MF</manifestFile>
                     </archive>
+                    <source>8</source>
                 </configuration>
                 <executions>
                     <execution>

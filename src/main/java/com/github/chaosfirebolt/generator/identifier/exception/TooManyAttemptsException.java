@@ -23,6 +23,9 @@ package com.github.chaosfirebolt.generator.identifier.exception;
  */
 public class TooManyAttemptsException extends RuntimeException {
 
+    /**
+     * @param message detailed message for the exception
+     */
     public TooManyAttemptsException(String message) {
         super(message);
     }

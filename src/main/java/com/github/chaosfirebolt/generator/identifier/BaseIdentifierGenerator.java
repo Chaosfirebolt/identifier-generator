@@ -48,6 +48,9 @@ public abstract class BaseIdentifierGenerator<T> implements IdentifierGenerator<
      */
     private int maximumAttempts;
 
+    /**
+     * Utility constructor providing default values.
+     */
     protected BaseIdentifierGenerator() {
         this.logger = LoggerFactory.getLogger(this.getClass());
         this.maximumAttempts = DEFAULT_MAX_ATTEMPTS;
