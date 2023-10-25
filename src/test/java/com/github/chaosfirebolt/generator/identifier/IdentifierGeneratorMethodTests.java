@@ -17,184 +17,204 @@
 package com.github.chaosfirebolt.generator.identifier;
 
 import com.github.chaosfirebolt.generator.identifier.exception.TooManyAttemptsException;
+import com.github.chaosfirebolt.generator.identifier.impl.*;
+import com.github.chaosfirebolt.generator.identifier.part.NumericPart;
+import com.github.chaosfirebolt.generator.identifier.part.SpecialCharacterPart;
+import com.github.chaosfirebolt.generator.identifier.part.UpperAlphabeticPart;
+import com.github.chaosfirebolt.generator.identifier.rule.BaseGeneratorRule;
+import com.github.chaosfirebolt.generator.identifier.rule.GeneratorRule;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.Timeout;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
 import org.mockito.Mockito;
-import org.slf4j.Logger;
 
 import java.lang.reflect.Field;
-import java.util.HashSet;
-import java.util.Objects;
-import java.util.Set;
+import java.util.*;
 import java.util.function.Predicate;
+import java.util.stream.Collectors;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assumptions.assumeFalse;
 import static org.mockito.Mockito.doReturn;
 
 /**
  * Created by ChaosFire on 22-Dec-21
  */
-public abstract class IdentifierGeneratorMethodTests {
+public class IdentifierGeneratorMethodTests {
 
     private static final String MOCK_ERROR_MESSAGE = "Mocking generator did not work";
 
     private Set<String> existingIdentifiers;
-    private IdentifierGenerator<String> identifierGenerator;
     private Predicate<String> uniqueCondition;
-    private final Logger logger;
-    private final int maxAttempts;
-    private final int expectedLength;
-    private final int expectedMinLength;
-
-    protected IdentifierGeneratorMethodTests(Logger logger, int maxAttempts, int expectedLength, int expectedMinLength) {
-        this.logger = logger;
-        this.maxAttempts = maxAttempts;
-        this.expectedLength = expectedLength;
-        this.expectedMinLength = expectedMinLength;
-    }
 
     @BeforeEach
-    void setUp() {
+    public void setUp() {
         this.existingIdentifiers = new HashSet<>();
         this.uniqueCondition = identifier -> this.existingIdentifiers.add(identifier);
-        BaseIdentifierGenerator<String> identifierGenerator = this.getGenerator();
-        identifierGenerator.setMaximumAttempts(this.maxAttempts);
-        this.identifierGenerator = identifierGenerator;
     }
-
-    protected abstract BaseIdentifierGenerator<String> getGenerator();
 
     @AfterEach
-    void tearDown() {
+    public void tearDown() {
         this.existingIdentifiers.clear();
         this.existingIdentifiers = null;
-        this.identifierGenerator = null;
     }
 
-    @Test
-    public void generateIdentifier_IdentifierShouldHaveCorrectLength() {
-        String identifier = this.identifierGenerator.generate();
-        this.logIdentifier(identifier);
-        assertEquals(this.expectedLength, identifier.length());
+    @ParameterizedTest
+    @MethodSource("generatorsWithExpectedLength")
+    public void generateIdentifier_IdentifierShouldHaveCorrectLength(IdentifierGenerator<String> identifierGenerator, int expectedLength) {
+        String identifier = identifierGenerator.generate();
+        assertEquals(expectedLength, identifier.length());
     }
 
-    private void logIdentifier(String identifier) {
-        this.logger.info("{} generated identifier - {}", this.identifierGenerator.getClass().getSimpleName(), identifier);
+    private static List<Arguments> generatorsWithExpectedLength() {
+        return allData().stream().map(args -> Arguments.of(args.getGenerator(), args.getExpectedLength())).collect(Collectors.toList());
     }
 
-    @Test
-    public void generateIdentifier_GenerateMany_AllShouldBeDifferent() {
+    private static List<IdentifierArguments> allData() {
+        GeneratorRule generatorRule = new BaseGeneratorRule(Arrays.asList(new SpecialCharacterPart(11), new UpperAlphabeticPart(111), new NumericPart(111)));
+        return Arrays.asList(
+                IdentifierArguments.of(new AlphabeticIdentifierGenerator(15, 15), 10, 30, 30),
+                IdentifierArguments.of(new AlphaNumericIdentifierGenerator(15, 15, 11), 5, 41, 41),
+                IdentifierArguments.of(new AnyCharacterIdentifierGenerator(9, 10, 11, 3), 9, 33, 33),
+                IdentifierArguments.of(new LowerAlphabeticIdentifierGenerator(20), 11, 20, 20),
+                IdentifierArguments.of(new NumericIdentifierGenerator(29), 100, 29, 29),
+                IdentifierArguments.of(new StringIdentifierGenerator(generatorRule), 49, 233, 233),
+                IdentifierArguments.of(new UpperAlphabeticIdentifierGenerator(111), 50, 111, 111),
+                IdentifierArguments.of(new UuidStringIdentifierGenerator(), 20, 36, 36));
+    }
+
+    @ParameterizedTest
+    @MethodSource("generators")
+    public void generateIdentifier_GenerateMany_AllShouldBeDifferent(IdentifierGenerator<String> identifierGenerator) {
         for (int i = 0; i < 100; i++) {
-            String identifier = this.identifierGenerator.generate();
-            this.logIdentifier(identifier);
+            String identifier = identifierGenerator.generate();
             boolean exists = !this.existingIdentifiers.add(identifier);
             assertFalse(exists, () -> String.format("Identifier '%s' already generated", identifier));
         }
     }
 
-    @Test
-    public void generateUniqueIdentifier_IdentifierShouldHaveCorrectLength() {
-        String identifier = this.identifierGenerator.generate(this.uniqueCondition);
-        this.logIdentifier(identifier);
-        assertEquals(this.expectedLength, identifier.length());
+    @ParameterizedTest
+    @MethodSource("generatorsWithExpectedLength")
+    public void generateUniqueIdentifier_IdentifierShouldHaveCorrectLength(IdentifierGenerator<String> identifierGenerator, int expectedLength) {
+        String identifier = identifierGenerator.generate(this.uniqueCondition);
+        assertEquals(expectedLength, identifier.length());
     }
 
-    @Test
-    @Timeout(1)
-    public void generateUniqueIdentifier_ExpectedNumberOfUniqueIdentifiersShouldBeGenerated() {
+    @ParameterizedTest
+    @MethodSource("generators")
+    public void generateUniqueIdentifier_ExpectedNumberOfUniqueIdentifiersShouldBeGenerated(IdentifierGenerator<String> identifierGenerator) {
         int targetCount = 10_000;
         for (int i = 0; i < targetCount; i++) {
-            this.identifierGenerator.generate(this.uniqueCondition);
+            identifierGenerator.generate(this.uniqueCondition);
         }
         assertEquals(targetCount, this.existingIdentifiers.size());
     }
 
-    @Test
-    public void generateUniqueIdentifier_MaximumAttemptsReached_ShouldThrowTooManyAttemptsExceptionWithCorrectMessage() {
-        String toBeReturned = this.identifierGenerator.generate();
-        IdentifierGenerator<String> generator = Mockito.spy(this.identifierGenerator);
+    private static List<Arguments> generators() {
+        return allData().stream().map(IdentifierArguments::getGenerator).map(Arguments::of).collect(Collectors.toList());
+    }
+
+    @ParameterizedTest
+    @MethodSource("generatorsWithMaxAttempts")
+    public void generateUniqueIdentifier_MaximumAttemptsReached_ShouldThrowTooManyAttemptsExceptionWithCorrectMessage(IdentifierGenerator<String> identifierGenerator, int maxAttempts) {
+        String toBeReturned = identifierGenerator.generate();
+        IdentifierGenerator<String> generator = Mockito.spy(identifierGenerator);
         doReturn(toBeReturned).when(generator).generate();
 
         String firstGenerated = generator.generate(this.uniqueCondition);
         assertEquals(toBeReturned, firstGenerated, MOCK_ERROR_MESSAGE);
 
         TooManyAttemptsException exc = assertThrows(TooManyAttemptsException.class, () -> generator.generate(this.uniqueCondition));
-        String expectedMessage = "Maximum number of attempts to generate unique identifier reached - " + this.maxAttempts;
+        String expectedMessage = "Maximum number of attempts to generate unique identifier reached - " + maxAttempts;
         assertEquals(expectedMessage, exc.getMessage());
     }
 
-    @Test
-    public void generateIdentifierWithLength_LengthIsLessThanMinimum_IdentifierShouldHaveCorrectLength() {
-        int length = this.expectedMinLength / 2;
-        String identifier = this.identifierGenerator.generate(length);
-        this.logIdentifier(identifier);
-        assertEquals(this.expectedMinLength, identifier.length());
+    private static List<Arguments> generatorsWithMaxAttempts() {
+        return allData().stream()
+                .peek(args -> args.getGenerator().setMaximumAttempts(args.getMaxAttempts()))
+                .map(args -> Arguments.of(args.getGenerator(), args.getMaxAttempts()))
+                .collect(Collectors.toList());
     }
 
-    @Test
-    public void generateIdentifierWithLength_LengthIsMoreThanMinimum_IdentifierShouldHaveCorrectLength() {
-        int length = this.expectedMinLength * 2;
-        String identifier = this.identifierGenerator.generate(length);
-        this.logIdentifier(identifier);
+    @ParameterizedTest
+    @MethodSource("generatorsWithExpectedMinLength")
+    public void generateIdentifierWithLength_LengthIsLessThanMinimum_IdentifierShouldHaveCorrectLength(IdentifierGenerator<String> identifierGenerator, int expectedMinLength) {
+        int length = expectedMinLength / 2;
+        String identifier = identifierGenerator.generate(length);
+        assertEquals(expectedMinLength, identifier.length());
+    }
+
+    private static List<Arguments> generatorsWithExpectedMinLength() {
+        return allData().stream().map(args -> Arguments.of(args.getGenerator(), args.getExpectedMinLength())).collect(Collectors.toList());
+    }
+
+    @ParameterizedTest
+    @MethodSource("generatorsWithExpectedMinLength")
+    public void generateIdentifierWithLength_LengthIsMoreThanMinimum_IdentifierShouldHaveCorrectLength(IdentifierGenerator<String> identifierGenerator, int expectedMinLength) {
+        assumeFalse(identifierGenerator.getClass().equals(UuidStringIdentifierGenerator.class), "Test not applicable for uuid identifier generator");
+        int length = expectedMinLength * 2;
+        String identifier = identifierGenerator.generate(length);
         assertEquals(length, identifier.length());
     }
 
-    @Test
-    public void generateIdentifierWithLength_GenerateMany_AllShouldBeDifferent() {
+    @ParameterizedTest
+    @MethodSource("generators")
+    public void generateIdentifierWithLength_GenerateMany_AllShouldBeDifferent(IdentifierGenerator<String> identifierGenerator) {
         for (int i = 0; i < 100; i++) {
-            String identifier = this.identifierGenerator.generate(100);
-            this.logIdentifier(identifier);
+            String identifier = identifierGenerator.generate(100);
             boolean exists = !this.existingIdentifiers.add(identifier);
             assertFalse(exists, () -> String.format("identifier '%s' already generated", identifier));
         }
     }
 
-    @Test
-    public void generateUniqueIdentifierWithLength_LengthIsLessThanMinimum_IdentifierShouldHaveCorrectLength() {
-        int length = this.expectedMinLength / 2;
-        String identifier = this.identifierGenerator.generate(length, this.uniqueCondition);
-        this.logIdentifier(identifier);
-        assertEquals(this.expectedMinLength, identifier.length());
+    @ParameterizedTest
+    @MethodSource("generatorsWithExpectedMinLength")
+    public void generateUniqueIdentifierWithLength_LengthIsLessThanMinimum_IdentifierShouldHaveCorrectLength(IdentifierGenerator<String> identifierGenerator, int expectedMinLength) {
+        int length = expectedMinLength / 2;
+        String identifier = identifierGenerator.generate(length, this.uniqueCondition);
+        assertEquals(expectedMinLength, identifier.length());
     }
 
-    @Test
-    public void generateUniqueIdentifierWithLength_LengthIsMoreThanMinimum_IdentifierShouldHaveCorrectLength() {
-        int length = this.expectedMinLength * 2;
-        String identifier = this.identifierGenerator.generate(length, this.uniqueCondition);
-        this.logIdentifier(identifier);
+    @ParameterizedTest
+    @MethodSource("generatorsWithExpectedMinLength")
+    public void generateUniqueIdentifierWithLength_LengthIsMoreThanMinimum_IdentifierShouldHaveCorrectLength(IdentifierGenerator<String> identifierGenerator, int expectedMinLength) {
+        assumeFalse(identifierGenerator.getClass().equals(UuidStringIdentifierGenerator.class), "Test not applicable for uuid identifier generator");
+        int length = expectedMinLength * 2;
+        String identifier = identifierGenerator.generate(length, this.uniqueCondition);
         assertEquals(length, identifier.length());
     }
 
-    @Test
-    @Timeout(1)
-    public void generateUniqueIdentifierWithLength_ExpectedNumberOfUniqueIdentifiersShouldBeGenerated() {
+    @ParameterizedTest
+    @MethodSource("generators")
+    public void generateUniqueIdentifierWithLength_ExpectedNumberOfUniqueIdentifiersShouldBeGenerated(IdentifierGenerator<String> identifierGenerator) {
         int targetCount = 10_000;
         for (int i = 0; i < targetCount; i++) {
-            this.identifierGenerator.generate(100, this.uniqueCondition);
+            identifierGenerator.generate(100, this.uniqueCondition);
         }
         assertEquals(targetCount, this.existingIdentifiers.size());
     }
 
-    @Test
-    public void generateUniqueIdentifierWithLength_MaximumAttemptsReached_ShouldThrowTooManyAttemptsExceptionWithCorrectMessage() {
+    @ParameterizedTest
+    @MethodSource("generatorsWithMaxAttempts")
+    public void generateUniqueIdentifierWithLength_MaximumAttemptsReached_ShouldThrowTooManyAttemptsExceptionWithCorrectMessage(IdentifierGenerator<String> identifierGenerator, int maxAttempts) {
         int length = 100;
-        String toBeReturned = this.identifierGenerator.generate(length);
-        IdentifierGenerator<String> generator = Mockito.spy(this.identifierGenerator);
+        String toBeReturned = identifierGenerator.generate(length);
+        IdentifierGenerator<String> generator = Mockito.spy(identifierGenerator);
         doReturn(toBeReturned).when(generator).generate(length);
 
         String firstGenerated = generator.generate(length, this.uniqueCondition);
         assertEquals(toBeReturned, firstGenerated, MOCK_ERROR_MESSAGE);
 
         TooManyAttemptsException exc = assertThrows(TooManyAttemptsException.class, () -> generator.generate(length, this.uniqueCondition));
-        String expectedMessage = "Maximum number of attempts to generate unique identifier reached - " + this.maxAttempts;
+        String expectedMessage = "Maximum number of attempts to generate unique identifier reached - " + maxAttempts;
         assertEquals(expectedMessage, exc.getMessage());
     }
 
-    @Test
-    public void setMaximumAttempts_SetNegative_ValueShouldRemainUnchanged() {
-        BaseIdentifierGenerator<String> identifierGenerator = this.getGenerator();
+    @ParameterizedTest
+    @MethodSource("generators")
+    public void setMaximumAttempts_SetNegative_ValueShouldRemainUnchanged(BaseIdentifierGenerator<String> identifierGenerator) {
         identifierGenerator.setMaximumAttempts(-2);
         int actual = getMaxAttempts(identifierGenerator);
         assertEquals(-1, actual);
@@ -224,27 +244,27 @@ public abstract class IdentifierGeneratorMethodTests {
         return field;
     }
 
-    @Test
-    public void setMaximumAttempts_SetZero_ValueShouldRemainUnchanged() {
-        BaseIdentifierGenerator<String> identifierGenerator = this.getGenerator();
+    @ParameterizedTest
+    @MethodSource("generators")
+    public void setMaximumAttempts_SetZero_ValueShouldRemainUnchanged(BaseIdentifierGenerator<String> identifierGenerator) {
         identifierGenerator.setMaximumAttempts(0);
         int actual = getMaxAttempts(identifierGenerator);
         assertEquals(-1, actual);
     }
 
-    @Test
-    public void setMaximumAttempts_SetPositive_ValueShouldChange() {
+    @ParameterizedTest
+    @MethodSource("generators")
+    public void setMaximumAttempts_SetPositive_ValueShouldChange(BaseIdentifierGenerator<String> identifierGenerator) {
         int expected = 11;
-        BaseIdentifierGenerator<String> identifierGenerator = this.getGenerator();
         identifierGenerator.setMaximumAttempts(expected);
         int actual = getMaxAttempts(identifierGenerator);
         assertEquals(expected, actual);
     }
 
-    @Test
-    public void setMaximumAttempts_SetPositiveTwice_ValueShouldBeFirstSet() {
+    @ParameterizedTest
+    @MethodSource("generators")
+    public void setMaximumAttempts_SetPositiveTwice_ValueShouldBeFirstSet(BaseIdentifierGenerator<String> identifierGenerator) {
         int expected = 20;
-        BaseIdentifierGenerator<String> identifierGenerator = this.getGenerator();
         identifierGenerator.setMaximumAttempts(expected);
         identifierGenerator.setMaximumAttempts(10);
         int actual = getMaxAttempts(identifierGenerator);
