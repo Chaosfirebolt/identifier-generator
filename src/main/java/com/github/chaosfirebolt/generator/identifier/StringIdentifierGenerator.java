@@ -27,8 +27,8 @@ import com.github.chaosfirebolt.generator.identifier.validation.LengthRuleValida
 import java.security.SecureRandom;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Random;
 import java.util.function.ToIntFunction;
+import java.util.random.RandomGenerator;
 
 /**
  * Base class for generating string identifiers.
@@ -45,7 +45,7 @@ public class StringIdentifierGenerator extends BaseIdentifierGenerator<String> {
     /**
      * The random generator.
      */
-    protected final Random random;
+    protected final RandomGenerator random;
 
     /**
      * Rule to be used for generation of string identifiers.
@@ -53,7 +53,7 @@ public class StringIdentifierGenerator extends BaseIdentifierGenerator<String> {
     protected final GeneratorRule generatorRule;
 
     /**
-     * Constructs instance of StringIdentifierGenerator, using provided {@link GeneratorRule}, a new instance of Secure Random and default list of rule validators.
+     * Constructs instance of StringIdentifierGenerator, using provided {@link GeneratorRule}, a new instance of {@link SecureRandom} and default list of rule validators.
      * @param generatorRule rule to be used for identifier generation
      * @throws com.github.chaosfirebolt.generator.identifier.exception.InvalidGeneratorRuleException if provided rule does not conform with default RuleValidators
      */
@@ -62,7 +62,7 @@ public class StringIdentifierGenerator extends BaseIdentifierGenerator<String> {
     }
 
     /**
-     * Constructs instance of StringIdentifierGenerator, using provided {@link GeneratorRule}, provided list of {@link RuleValidator}, and a new instance of Secure Random.
+     * Constructs instance of StringIdentifierGenerator, using provided {@link GeneratorRule}, provided list of {@link RuleValidator}, and a new instance of {@link  SecureRandom}.
      * @param generatorRule rule to be used for identifier generation
      * @param ruleValidators validators to be used for validation of provided generator rule
      * @throws com.github.chaosfirebolt.generator.identifier.exception.InvalidGeneratorRuleException if provided rule does not conform with provided RuleValidators
@@ -72,13 +72,13 @@ public class StringIdentifierGenerator extends BaseIdentifierGenerator<String> {
     }
 
     /**
-     * Constructs instance of StringIdentifierGenerator, using provided {@link GeneratorRule}, provided list of {@link RuleValidator}, and provided {@link Random}.
+     * Constructs instance of StringIdentifierGenerator, using provided {@link GeneratorRule}, provided list of {@link RuleValidator}, and provided {@link RandomGenerator}.
      * @param random random number generator
      * @param generatorRule rule to be used for identifier generation
      * @param ruleValidators validators to be used for validation of provided generator rule
      * @throws com.github.chaosfirebolt.generator.identifier.exception.InvalidGeneratorRuleException if provided rule does not conform with provided RuleValidators
      */
-    public StringIdentifierGenerator(Random random, GeneratorRule generatorRule, List<RuleValidator> ruleValidators) {
+    public StringIdentifierGenerator(RandomGenerator random, GeneratorRule generatorRule, List<RuleValidator> ruleValidators) {
         this.random = random;
         this.generatorRule = generatorRule;
         validateRule(ruleValidators, generatorRule);

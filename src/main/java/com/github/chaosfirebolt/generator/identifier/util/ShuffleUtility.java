@@ -17,7 +17,7 @@
 package com.github.chaosfirebolt.generator.identifier.util;
 
 import java.security.SecureRandom;
-import java.util.Random;
+import java.util.random.RandomGenerator;
 
 /**
  * Shuffle utility methods
@@ -28,12 +28,12 @@ public class ShuffleUtility {
 
     /**
      * Shuffles the array using Fisher-Yates algorithm.
-     * @param random random to generate random indexes
+     * @param randomGenerator rng to generate random indexes
      * @param array array to be shuffled
      */
-    public static void shuffleFisherYates(Random random, char[] array) {
+    public static void shuffleFisherYates(RandomGenerator randomGenerator, char[] array) {
         for (int i = array.length - 1; i > 0; i--) {
-            int randomIndex = random.nextInt(i + 1);
+            int randomIndex = randomGenerator.nextInt(i + 1);
             char temp = array[i];
             array[i] = array[randomIndex];
             array[randomIndex] = temp;
