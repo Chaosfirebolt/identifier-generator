@@ -14,11 +14,22 @@
  * limitations under the License.
  */
 
-package com.github.chaosfirebolt.generator.part;
+package com.github.chaosfirebolt.generator.identifier.string.validation;
 
-import com.github.chaosfirebolt.generator.identifier.string.part.Part;
+import com.github.chaosfirebolt.generator.identifier.string.rule.GeneratorRule;
 
-import java.util.List;
+/**
+ * Represents generator for error messages
+ * <br>
+ * Created by ChaosFire on 12/5/2021
+ */
+@FunctionalInterface
+public interface ErrorMessageCreator {
 
-public record PartArguments(Part part, List<Character> expectedCharacters, int expectedLength, int expectedMinLength) {
+    /**
+     * Creates error message from the supplied {@link GeneratorRule}
+     * @param rule rule to be used for message generation
+     * @return created error message
+     */
+    String create(GeneratorRule rule);
 }

@@ -14,25 +14,24 @@
  * limitations under the License.
  */
 
-package com.github.chaosfirebolt.generator.util;
+package com.github.chaosfirebolt.generator.identifier.string.rule;
 
-import com.github.chaosfirebolt.generator.identifier.string.util.CharacterUtility;
-import org.junit.jupiter.api.Test;
+import com.github.chaosfirebolt.generator.identifier.string.part.NumericPart;
 
-import java.util.Arrays;
-import java.util.List;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import java.util.Collections;
 
 /**
- * Created by ChaosFire on 19-Dec-21
+ * {@link GeneratorRule} rule for numeric identifiers.
+ * <br>
+ * Created by ChaosFire on 12/6/2021
  */
-public class CharacterUtilityTests {
+public class NumericGeneratorRule extends BaseGeneratorRule {
 
-    @Test
-    public void getCharacterListFromRange_ShouldReturnCorrect() {
-        List<Character> expected = Arrays.asList('A', 'B', 'C');
-        List<Character> actual = CharacterUtility.characterListFromIntRange(65, 68);
-        assertEquals(expected, actual);
+    /**
+     * Constructs new NumericGeneratorRule with specified length for numeric part.
+     * @param length desired length of numeric part
+     */
+    public NumericGeneratorRule(int length) {
+        super(Collections.singletonList(new NumericPart(length)));
     }
 }

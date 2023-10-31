@@ -16,6 +16,8 @@
 
 package com.github.chaosfirebolt.generator.identifier;
 
+import com.github.chaosfirebolt.generator.identifier.exception.TooManyAttemptsException;
+
 import java.util.function.Predicate;
 
 /**
@@ -35,7 +37,7 @@ public interface IdentifierGenerator<T> {
      * Generates an identifier which is unique according to the provided condition
      * @param uniquenessCondition condition for uniqueness of the generated identifier
      * @return the generated unique identifier
-     * @throws com.github.chaosfirebolt.generator.identifier.exception.TooManyAttemptsException if a maximum number of attempts to generate unique identifier has been set, and that number is reached
+     * @throws TooManyAttemptsException if a maximum number of attempts to generate unique identifier has been set, and that number is reached
      */
     T generate(Predicate<T> uniquenessCondition);
 
@@ -51,7 +53,7 @@ public interface IdentifierGenerator<T> {
      * @param identifierLength required length of the generated identifier
      * @param uniquenessCondition condition for uniqueness of the generated identifier
      * @return the generated unique identifier
-     * @throws com.github.chaosfirebolt.generator.identifier.exception.TooManyAttemptsException if a maximum number of attempts to generate unique identifier has been set, and that number is reached
+     * @throws TooManyAttemptsException if a maximum number of attempts to generate unique identifier has been set, and that number is reached
      */
     T generate(int identifierLength, Predicate<T> uniquenessCondition);
 }

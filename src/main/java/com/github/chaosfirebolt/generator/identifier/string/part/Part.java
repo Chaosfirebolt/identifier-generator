@@ -14,22 +14,34 @@
  * limitations under the License.
  */
 
-package com.github.chaosfirebolt.generator.identifier.exception;
+package com.github.chaosfirebolt.generator.identifier.string.part;
 
-import com.github.chaosfirebolt.generator.identifier.string.rule.GeneratorRule;
+import java.util.List;
 
 /**
- * This exception signals, that a {@link GeneratorRule} is not valid.
+ * Represents a part of this identifier.
  * <br>
  * Created by ChaosFire on 12/5/2021
  */
-public class InvalidGeneratorRuleException extends RuntimeException {
+public interface Part {
 
     /**
-     * Constructs new InvalidGeneratorRuleException with the specified message
-     * @param message the message
+     * Gets the length of this identifier part
+     * @return the length of this part
      */
-    public InvalidGeneratorRuleException(String message) {
-        super(message);
+    int getLength();
+
+    /**
+     * Get the minimum length for this identifier part
+     * @return the minimum length of this part
+     */
+    default int getMinLength() {
+        return this.getLength();
     }
+
+    /**
+     * Get possible characters for this identifier part.
+     * @return possible characters for this part
+     */
+    List<Character> getCharacters();
 }

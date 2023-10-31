@@ -16,12 +16,12 @@
 
 package com.github.chaosfirebolt.generator.identifier.constructor;
 
-import com.github.chaosfirebolt.generator.identifier.StringIdentifierGenerator;
+import com.github.chaosfirebolt.generator.identifier.string.StringIdentifierGenerator;
 import com.github.chaosfirebolt.generator.identifier.exception.InvalidGeneratorRuleException;
-import com.github.chaosfirebolt.generator.identifier.part.Part;
-import com.github.chaosfirebolt.generator.identifier.rule.GeneratorRule;
-import com.github.chaosfirebolt.generator.identifier.util.CharacterUtility;
-import com.github.chaosfirebolt.generator.identifier.validation.MinimumLengthEqualOrLessThanLengthRuleValidator;
+import com.github.chaosfirebolt.generator.identifier.string.part.Part;
+import com.github.chaosfirebolt.generator.identifier.string.rule.GeneratorRule;
+import com.github.chaosfirebolt.generator.identifier.string.util.CharacterUtility;
+import com.github.chaosfirebolt.generator.identifier.string.validation.MinimumLengthEqualOrLessThanLengthRuleValidator;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.function.Executable;
 
@@ -125,12 +125,12 @@ public class StringIdentifierGeneratorValidationTests {
         }
 
         @Override
-        public List<Part> getParts() {
+        public List<Part> parts() {
             return this.parts;
         }
 
         @Override
-        public int getLength() {
+        public int length() {
             return this.length;
         }
 

@@ -16,11 +16,11 @@
 
 package com.github.chaosfirebolt.generator.rule;
 
-import com.github.chaosfirebolt.generator.identifier.part.NumericPart;
-import com.github.chaosfirebolt.generator.identifier.part.Part;
-import com.github.chaosfirebolt.generator.identifier.part.SpecialCharacterPart;
-import com.github.chaosfirebolt.generator.identifier.part.UpperAlphabeticPart;
-import com.github.chaosfirebolt.generator.identifier.rule.*;
+import com.github.chaosfirebolt.generator.identifier.string.part.NumericPart;
+import com.github.chaosfirebolt.generator.identifier.string.part.Part;
+import com.github.chaosfirebolt.generator.identifier.string.part.SpecialCharacterPart;
+import com.github.chaosfirebolt.generator.identifier.string.part.UpperAlphabeticPart;
+import com.github.chaosfirebolt.generator.identifier.string.rule.*;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
@@ -40,7 +40,7 @@ public class GeneratorRuleTests {
     @ParameterizedTest
     @MethodSource
     public void getParts_ShouldReturnCorrectNumberOfParts(GeneratorRule generatorRule, int expectedNumberOfParts) {
-        int size = generatorRule.getParts().size();
+        int size = generatorRule.parts().size();
         assertEquals(expectedNumberOfParts, size);
     }
 
@@ -51,7 +51,7 @@ public class GeneratorRuleTests {
     @ParameterizedTest
     @MethodSource
     public void getLength_ShouldReturnCorrectLength(GeneratorRule generatorRule, int expectedLength) {
-        int length = generatorRule.getLength();
+        int length = generatorRule.length();
         assertEquals(expectedLength, length);
     }
 
@@ -83,24 +83,6 @@ public class GeneratorRuleTests {
         );
     }
 
-    private static final class UnvalidatedGeneratorRule implements GeneratorRule {
-
-        private final List<Part> parts;
-        private final int length;
-
-        private UnvalidatedGeneratorRule(List<Part> parts, int length) {
-            this.parts = parts;
-            this.length = length;
-        }
-
-        @Override
-        public List<Part> getParts() {
-            return this.parts;
-        }
-
-        @Override
-        public int getLength() {
-            return this.length;
-        }
+    private record UnvalidatedGeneratorRule(List<Part> parts, int length) implements GeneratorRule {
     }
 }

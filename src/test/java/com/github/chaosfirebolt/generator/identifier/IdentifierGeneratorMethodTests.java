@@ -17,12 +17,13 @@
 package com.github.chaosfirebolt.generator.identifier;
 
 import com.github.chaosfirebolt.generator.identifier.exception.TooManyAttemptsException;
-import com.github.chaosfirebolt.generator.identifier.impl.*;
-import com.github.chaosfirebolt.generator.identifier.part.NumericPart;
-import com.github.chaosfirebolt.generator.identifier.part.SpecialCharacterPart;
-import com.github.chaosfirebolt.generator.identifier.part.UpperAlphabeticPart;
-import com.github.chaosfirebolt.generator.identifier.rule.BaseGeneratorRule;
-import com.github.chaosfirebolt.generator.identifier.rule.GeneratorRule;
+import com.github.chaosfirebolt.generator.identifier.string.StringIdentifierGenerator;
+import com.github.chaosfirebolt.generator.identifier.string.impl.*;
+import com.github.chaosfirebolt.generator.identifier.string.part.NumericPart;
+import com.github.chaosfirebolt.generator.identifier.string.part.SpecialCharacterPart;
+import com.github.chaosfirebolt.generator.identifier.string.part.UpperAlphabeticPart;
+import com.github.chaosfirebolt.generator.identifier.string.rule.BaseGeneratorRule;
+import com.github.chaosfirebolt.generator.identifier.string.rule.GeneratorRule;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.params.ParameterizedTest;

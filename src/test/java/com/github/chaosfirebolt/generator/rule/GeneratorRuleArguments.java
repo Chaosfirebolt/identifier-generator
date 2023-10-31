@@ -16,7 +16,7 @@
 
 package com.github.chaosfirebolt.generator.rule;
 
-import com.github.chaosfirebolt.generator.identifier.rule.GeneratorRule;
+import com.github.chaosfirebolt.generator.identifier.string.rule.GeneratorRule;
 
 public record GeneratorRuleArguments(GeneratorRule rule, int expectedNumberOfParts, int expectedLength, int expectedMinLength) {
 }

@@ -16,11 +16,11 @@
 
 package com.github.chaosfirebolt.generator.util;
 
-import com.github.chaosfirebolt.generator.identifier.part.LowerAlphabeticPart;
-import com.github.chaosfirebolt.generator.identifier.part.NumericPart;
-import com.github.chaosfirebolt.generator.identifier.part.Part;
-import com.github.chaosfirebolt.generator.identifier.part.UpperAlphabeticPart;
-import com.github.chaosfirebolt.generator.identifier.util.CalculationUtility;
+import com.github.chaosfirebolt.generator.identifier.string.part.LowerAlphabeticPart;
+import com.github.chaosfirebolt.generator.identifier.string.part.NumericPart;
+import com.github.chaosfirebolt.generator.identifier.string.part.Part;
+import com.github.chaosfirebolt.generator.identifier.string.part.UpperAlphabeticPart;
+import com.github.chaosfirebolt.generator.identifier.string.util.CalculationUtility;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

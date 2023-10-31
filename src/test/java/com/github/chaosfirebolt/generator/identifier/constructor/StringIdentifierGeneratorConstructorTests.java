@@ -16,16 +16,16 @@
 
 package com.github.chaosfirebolt.generator.identifier.constructor;
 
-import com.github.chaosfirebolt.generator.identifier.StringIdentifierGenerator;
+import com.github.chaosfirebolt.generator.identifier.string.StringIdentifierGenerator;
 import com.github.chaosfirebolt.generator.identifier.exception.InvalidGeneratorRuleException;
-import com.github.chaosfirebolt.generator.identifier.part.NumericPart;
-import com.github.chaosfirebolt.generator.identifier.part.Part;
-import com.github.chaosfirebolt.generator.identifier.rule.BaseGeneratorRule;
-import com.github.chaosfirebolt.generator.identifier.rule.GeneratorRule;
-import com.github.chaosfirebolt.generator.identifier.util.CharacterUtility;
-import com.github.chaosfirebolt.generator.identifier.validation.BaseRuleValidator;
-import com.github.chaosfirebolt.generator.identifier.validation.NoOpRuleValidator;
-import com.github.chaosfirebolt.generator.identifier.validation.RuleValidator;
+import com.github.chaosfirebolt.generator.identifier.string.part.NumericPart;
+import com.github.chaosfirebolt.generator.identifier.string.part.Part;
+import com.github.chaosfirebolt.generator.identifier.string.rule.BaseGeneratorRule;
+import com.github.chaosfirebolt.generator.identifier.string.rule.GeneratorRule;
+import com.github.chaosfirebolt.generator.identifier.string.util.CharacterUtility;
+import com.github.chaosfirebolt.generator.identifier.string.validation.BaseRuleValidator;
+import com.github.chaosfirebolt.generator.identifier.string.validation.NoOpRuleValidator;
+import com.github.chaosfirebolt.generator.identifier.string.validation.RuleValidator;
 import org.junit.jupiter.api.Test;
 
 import java.util.Collections;

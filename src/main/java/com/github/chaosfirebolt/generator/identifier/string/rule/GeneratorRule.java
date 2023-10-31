@@ -14,11 +14,36 @@
  * limitations under the License.
  */
 
-package com.github.chaosfirebolt.generator.part;
+package com.github.chaosfirebolt.generator.identifier.string.rule;
 
 import com.github.chaosfirebolt.generator.identifier.string.part.Part;
 
 import java.util.List;
 
-public record PartArguments(Part part, List<Character> expectedCharacters, int expectedLength, int expectedMinLength) {
+/**
+ * Represents a rule for identifier generation.
+ * <br>
+ * Created by ChaosFire on 12/5/2021
+ */
+public interface GeneratorRule {
+
+    /**
+     * Get identifier parts required by this rule
+     * @return the identifier parts
+     */
+    List<Part> parts();
+
+    /**
+     * Get identifier length required by this rule
+     * @return total length of the identifier
+     */
+    int length();
+
+    /**
+     * Get the minimum length required by this rule
+     * @return the minimum length of the identifier
+     */
+    default int getMinLength() {
+        return this.length();
+    }
 }

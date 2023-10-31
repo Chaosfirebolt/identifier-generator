@@ -14,11 +14,22 @@
  * limitations under the License.
  */
 
-package com.github.chaosfirebolt.generator.part;
+package com.github.chaosfirebolt.generator.identifier.string.validation;
 
-import com.github.chaosfirebolt.generator.identifier.string.part.Part;
+import com.github.chaosfirebolt.generator.identifier.exception.InvalidGeneratorRuleException;
+import com.github.chaosfirebolt.generator.identifier.string.rule.GeneratorRule;
 
-import java.util.List;
+/**
+ * Represent validator for a {@link GeneratorRule}
+ * <br>
+ * Created by ChaosFire on 12/5/2021
+ */
+public interface RuleValidator {
 
-public record PartArguments(Part part, List<Character> expectedCharacters, int expectedLength, int expectedMinLength) {
+    /**
+     * Validates supplied rule.
+     * @param rule rule to be validated
+     * @throws InvalidGeneratorRuleException if the validator considers tested rule invalid
+     */
+    void validate(GeneratorRule rule);
 }

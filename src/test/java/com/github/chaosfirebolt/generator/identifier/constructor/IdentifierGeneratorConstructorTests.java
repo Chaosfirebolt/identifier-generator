@@ -18,9 +18,9 @@ package com.github.chaosfirebolt.generator.identifier.constructor;
 
 import com.github.chaosfirebolt.generator.identifier.IdentifierGenerator;
 import com.github.chaosfirebolt.generator.identifier.exception.InvalidGeneratorRuleException;
-import com.github.chaosfirebolt.generator.identifier.impl.*;
-import com.github.chaosfirebolt.generator.identifier.validation.BaseRuleValidator;
-import com.github.chaosfirebolt.generator.identifier.validation.RuleValidator;
+import com.github.chaosfirebolt.generator.identifier.string.impl.*;
+import com.github.chaosfirebolt.generator.identifier.string.validation.BaseRuleValidator;
+import com.github.chaosfirebolt.generator.identifier.string.validation.RuleValidator;
 import org.junit.jupiter.api.function.Executable;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
@@ -38,7 +38,7 @@ import static org.junit.jupiter.api.Assertions.*;
 public class IdentifierGeneratorConstructorTests {
 
     private static final String ERROR_MESSAGE = "identifier length can't be less than 30";
-    private static final RuleValidator MIN_IDENTIFIER_LENGTH_VALIDATOR = new BaseRuleValidator(rule -> rule.getLength() >= 30, rule -> ERROR_MESSAGE);
+    private static final RuleValidator MIN_IDENTIFIER_LENGTH_VALIDATOR = new BaseRuleValidator(rule -> rule.length() >= 30, rule -> ERROR_MESSAGE);
 
     private static InvalidConstructorInvocationWrapper buildWrapperForIllegalArgument(Executable executable, int length) {
         return new InvalidConstructorInvocationWrapper(executable, IllegalArgumentException.class, String.format("Part length can't be less than '1', but was '%d'", length));
