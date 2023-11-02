@@ -17,18 +17,18 @@
 package com.github.chaosfirebolt.generator.identifier.string.builders;
 
 import com.github.chaosfirebolt.generator.identifier.string.StringIdentifierGenerator;
+import com.github.chaosfirebolt.generator.identifier.string.rule.GeneratorRule;
+import com.github.chaosfirebolt.generator.identifier.string.validation.RuleValidator;
+
+import java.util.random.RandomGenerator;
 
 /**
- * Builder for {@link StringIdentifierGenerator}s.
+ * Factory creating instances of {@link StringIdentifierGenerator} or its' subclasses.
+ * Internal.
+ * @param <R> concrete type of the result
  */
-public class StringIdentifierGeneratorBuilder extends BaseStringIdentifierGeneratorBuilder<StringIdentifierGeneratorBuilder, StringIdentifierGenerator> {
+@FunctionalInterface
+interface GeneratorFactory<R extends StringIdentifierGenerator> {
 
-    StringIdentifierGeneratorBuilder() {
-    }
-
-    @Override
-    GeneratorFactory<StringIdentifierGenerator> getGeneratorFactory() {
-        //TODO implement!!!
-        return null;
-    }
+    R create(RandomGenerator randomGenerator, GeneratorRule generatorRule, RuleValidator ruleValidator);
 }

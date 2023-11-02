@@ -21,7 +21,7 @@ import com.github.chaosfirebolt.generator.identifier.string.rule.AlphabeticGener
 import com.github.chaosfirebolt.generator.identifier.string.validation.RuleValidator;
 
 import java.util.List;
-import java.util.Random;
+import java.util.random.RandomGenerator;
 
 /**
  * Implementation generating alphabetic identifiers.
@@ -53,13 +53,13 @@ public class AlphabeticIdentifierGenerator extends StringIdentifierGenerator {
 
     /**
      * Constructs new instance of identifier generator, with desired lengths for lower and upper case characters, provided validators and random.
-     * @param random random number generator
+     * @param randomGenerator random number generator
      * @param lowerCaseLength length of lower case characters
      * @param upperCaseLength length of upper case characters
      * @param ruleValidators validators for the rule
      * @throws IllegalArgumentException if any of the length parameters is negative or zero, the underlying Part constructors will throw this exception
      */
-    public AlphabeticIdentifierGenerator(Random random, int lowerCaseLength, int upperCaseLength, List<RuleValidator> ruleValidators) {
-        super(random, new AlphabeticGeneratorRule(lowerCaseLength, upperCaseLength), ruleValidators);
+    public AlphabeticIdentifierGenerator(RandomGenerator randomGenerator, int lowerCaseLength, int upperCaseLength, List<RuleValidator> ruleValidators) {
+        super(randomGenerator, new AlphabeticGeneratorRule(lowerCaseLength, upperCaseLength), ruleValidators);
     }
 }
