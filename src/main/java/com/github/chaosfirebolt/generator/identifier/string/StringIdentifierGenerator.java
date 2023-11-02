@@ -27,7 +27,6 @@ import com.github.chaosfirebolt.generator.identifier.string.validation.RuleValid
 import com.github.chaosfirebolt.generator.identifier.string.validation.LengthRuleValidator;
 
 import java.security.SecureRandom;
-import java.util.Arrays;
 import java.util.List;
 import java.util.function.ToIntFunction;
 import java.util.random.RandomGenerator;
@@ -39,8 +38,10 @@ import java.util.random.RandomGenerator;
  */
 public class StringIdentifierGenerator extends BaseIdentifierGenerator<String> {
 
-    private static final List<RuleValidator> DEFAULT_VALIDATORS = Arrays.asList(new LengthRuleValidator(), new MinimumLengthRuleValidator(),
-            new MinimumLengthEqualOrLessThanLengthRuleValidator());
+    /**
+     * The default rule validators.
+     */
+    public static final List<RuleValidator> DEFAULT_VALIDATORS = List.of(new LengthRuleValidator(), new MinimumLengthRuleValidator(), new MinimumLengthEqualOrLessThanLengthRuleValidator());
 
     /**
      * The random generator.
