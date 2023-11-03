@@ -29,12 +29,12 @@ import java.util.function.Predicate;
 public class LengthRuleValidator extends BaseRuleValidator {
 
     private static final Predicate<GeneratorRule> CONDITION = rule -> {
-        int sum = CalculationUtility.totalLength(rule.parts());
-        return rule.length() == sum;
+        int sum = CalculationUtility.totalLength(rule.getParts());
+        return rule.getLength() == sum;
     };
     private static final ErrorMessageCreator ERROR_MESSAGE_CREATOR = rule -> {
-        int sum = CalculationUtility.totalLength(rule.parts());
-        return String.format("Required length of '%d' must be equal to sum of parts lengths, which is '%d'", rule.length(), sum);
+        int sum = CalculationUtility.totalLength(rule.getParts());
+        return String.format("Required length of '%d' must be equal to sum of parts lengths, which is '%d'", rule.getLength(), sum);
     };
 
     /**

@@ -59,12 +59,12 @@ public class BaseGeneratorRule implements GeneratorRule {
     }
 
     @Override
-    public List<Part> parts() {
+    public List<Part> getParts() {
         return this.parts;
     }
 
     @Override
-    public int length() {
+    public int getLength() {
         return this.length;
     }
 

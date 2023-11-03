@@ -20,7 +20,6 @@ import com.github.chaosfirebolt.generator.identifier.string.StringIdentifierGene
 import com.github.chaosfirebolt.generator.identifier.string.rule.AlphabeticGeneratorRule;
 import com.github.chaosfirebolt.generator.identifier.string.validation.RuleValidator;
 
-import java.util.List;
 import java.util.random.RandomGenerator;
 
 /**
@@ -42,24 +41,26 @@ public class AlphabeticIdentifierGenerator extends StringIdentifierGenerator {
 
     /**
      * Constructs new instance of identifier generator, with desired lengths for lower and upper case characters, and provided validators.
+     *
      * @param lowerCaseLength length of lower case characters
      * @param upperCaseLength length of upper case characters
-     * @param ruleValidators validators for the rule
+     * @param ruleValidator   validators for the rule
      * @throws IllegalArgumentException if any of the length parameters is negative or zero, the underlying Part constructors will throw this exception
      */
-    public AlphabeticIdentifierGenerator(int lowerCaseLength, int upperCaseLength, List<RuleValidator> ruleValidators) {
-        super(new AlphabeticGeneratorRule(lowerCaseLength, upperCaseLength), ruleValidators);
+    public AlphabeticIdentifierGenerator(int lowerCaseLength, int upperCaseLength, RuleValidator ruleValidator) {
+        super(new AlphabeticGeneratorRule(lowerCaseLength, upperCaseLength), ruleValidator);
     }
 
     /**
      * Constructs new instance of identifier generator, with desired lengths for lower and upper case characters, provided validators and random.
+     *
      * @param randomGenerator random number generator
      * @param lowerCaseLength length of lower case characters
      * @param upperCaseLength length of upper case characters
-     * @param ruleValidators validators for the rule
+     * @param ruleValidator   validators for the rule
      * @throws IllegalArgumentException if any of the length parameters is negative or zero, the underlying Part constructors will throw this exception
      */
-    public AlphabeticIdentifierGenerator(RandomGenerator randomGenerator, int lowerCaseLength, int upperCaseLength, List<RuleValidator> ruleValidators) {
-        super(randomGenerator, new AlphabeticGeneratorRule(lowerCaseLength, upperCaseLength), ruleValidators);
+    public AlphabeticIdentifierGenerator(RandomGenerator randomGenerator, int lowerCaseLength, int upperCaseLength, RuleValidator ruleValidator) {
+        super(randomGenerator, new AlphabeticGeneratorRule(lowerCaseLength, upperCaseLength), ruleValidator);
     }
 }

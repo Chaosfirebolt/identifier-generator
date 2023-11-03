@@ -31,19 +31,19 @@ public interface GeneratorRule {
      * Get identifier parts required by this rule
      * @return the identifier parts
      */
-    List<Part> parts();
+    List<Part> getParts();
 
     /**
      * Get identifier length required by this rule
      * @return total length of the identifier
      */
-    int length();
+    int getLength();
 
     /**
      * Get the minimum length required by this rule
      * @return the minimum length of the identifier
      */
     default int getMinLength() {
-        return this.length();
+        return this.getLength();
     }
 }

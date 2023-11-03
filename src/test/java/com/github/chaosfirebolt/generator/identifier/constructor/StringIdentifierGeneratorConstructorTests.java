@@ -32,8 +32,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Created by ChaosFire on 23-Dec-21
@@ -41,13 +40,14 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 public class StringIdentifierGeneratorConstructorTests {
 
     private static final String ERROR_MESSAGE = "identifier minimum length can not be less than 50";
+    private static final String ERROR_EXCEPTION_THROWN = "Creating new instance should not have thrown exception";
     private static final RuleValidator VALIDATOR = new BaseRuleValidator(rule -> rule.getMinLength() >= 50, rule -> ERROR_MESSAGE);
 
     @Test
     public void ruleValidatorsConstructor_RuleDoesNotConform_ShouldThrowInvalidGeneratorRuleException() {
         Part part = new NumericPart(60, 10);
         GeneratorRule rule = new BaseGeneratorRule(Collections.singletonList(part));
-        InvalidGeneratorRuleException exception = assertThrows(InvalidGeneratorRuleException.class, () -> new StringIdentifierGenerator(rule, Collections.singletonList(VALIDATOR)));
+        InvalidGeneratorRuleException exception = assertThrows(InvalidGeneratorRuleException.class, () -> new StringIdentifierGenerator(rule, VALIDATOR));
         assertEquals(ERROR_MESSAGE, exception.getMessage());
     }
 
@@ -55,28 +55,28 @@ public class StringIdentifierGeneratorConstructorTests {
     public void ruleValidatorsConstructor_RuleDoesConform_Test1_ShouldNotThrow() {
         Part part = new NumericPart(60, 50);
         GeneratorRule rule = new BaseGeneratorRule(Collections.singletonList(part));
-        new StringIdentifierGenerator(rule, Collections.singletonList(VALIDATOR));
+        assertDoesNotThrow(() -> new StringIdentifierGenerator(rule, VALIDATOR), ERROR_EXCEPTION_THROWN);
     }
 
     @Test
     public void ruleValidatorsConstructor_RuleDoesConform_Test2_ShouldNotThrow() {
         Part part = new NumericPart(60, 55);
         GeneratorRule rule = new BaseGeneratorRule(Collections.singletonList(part));
-        new StringIdentifierGenerator(rule, Collections.singletonList(VALIDATOR));
+        assertDoesNotThrow(() -> new StringIdentifierGenerator(rule, VALIDATOR), ERROR_EXCEPTION_THROWN);
     }
 
     @Test
     public void ruleValidatorsConstructor_NoOpValidator_ShouldNotThrow() {
         List<Part> parts = Collections.singletonList(new UnvalidatedPart(0, CharacterUtility.characterListFromIntRange(48, 58)));
         GeneratorRule rule = new BaseGeneratorRule(parts);
-        new StringIdentifierGenerator(rule, Collections.singletonList(new NoOpRuleValidator()));
+        assertDoesNotThrow(() -> new StringIdentifierGenerator(rule, new NoOpRuleValidator()), ERROR_EXCEPTION_THROWN);
     }
 
     @Test
     public void randomRuleValidatorsConstructor_RuleDoesNotConform_ShouldThrowInvalidGeneratorRuleException() {
         Part part = new NumericPart(60, 10);
         GeneratorRule rule = new BaseGeneratorRule(Collections.singletonList(part));
-        InvalidGeneratorRuleException exception = assertThrows(InvalidGeneratorRuleException.class, () -> new StringIdentifierGenerator(new Random(), rule, Collections.singletonList(VALIDATOR)));
+        InvalidGeneratorRuleException exception = assertThrows(InvalidGeneratorRuleException.class, () -> new StringIdentifierGenerator(new Random(), rule, VALIDATOR));
         assertEquals(ERROR_MESSAGE, exception.getMessage());
     }
 
@@ -84,34 +84,26 @@ public class StringIdentifierGeneratorConstructorTests {
     public void randomRuleValidatorsConstructor_RuleDoesConform_Test1_ShouldNotThrow() {
         Part part = new NumericPart(60, 50);
         GeneratorRule rule = new BaseGeneratorRule(Collections.singletonList(part));
-        new StringIdentifierGenerator(new Random(), rule, Collections.singletonList(VALIDATOR));
+        assertDoesNotThrow(() -> new StringIdentifierGenerator(new Random(), rule, VALIDATOR), ERROR_EXCEPTION_THROWN);
     }
 
     @Test
     public void randomRuleValidatorsConstructor_RuleDoesConform_Test2_ShouldNotThrow() {
         Part part = new NumericPart(60, 55);
         GeneratorRule rule = new BaseGeneratorRule(Collections.singletonList(part));
-        new StringIdentifierGenerator(new Random(), rule, Collections.singletonList(VALIDATOR));
+        assertDoesNotThrow(() -> new StringIdentifierGenerator(new Random(), rule, VALIDATOR), ERROR_EXCEPTION_THROWN);
     }
 
-    private static final class UnvalidatedPart implements Part {
-
-        private final int length;
-        private final List<Character> characters;
-
-        private UnvalidatedPart(int length, List<Character> characters) {
-            this.length = length;
-            this.characters = characters;
-        }
+    private record UnvalidatedPart(int length, List<Character> characters) implements Part {
 
         @Override
         public int getLength() {
-            return this.length;
+            return length();
         }
 
         @Override
         public List<Character> getCharacters() {
-            return this.characters;
+            return characters();
         }
     }
 }

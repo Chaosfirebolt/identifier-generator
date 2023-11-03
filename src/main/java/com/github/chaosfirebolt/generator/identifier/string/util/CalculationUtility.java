@@ -48,7 +48,7 @@ public class CalculationUtility {
     public static int minimumLength(List<Part> parts) {
         int sum = 0;
         for (Part part : parts) {
-            sum += part.getMinLength();
+            sum += part.minLength();
         }
         return sum;
     }

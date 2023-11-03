@@ -20,7 +20,6 @@ import com.github.chaosfirebolt.generator.identifier.string.StringIdentifierGene
 import com.github.chaosfirebolt.generator.identifier.string.rule.NumericGeneratorRule;
 import com.github.chaosfirebolt.generator.identifier.string.validation.RuleValidator;
 
-import java.util.List;
 import java.util.Random;
 
 /**
@@ -41,22 +40,24 @@ public class NumericIdentifierGenerator extends StringIdentifierGenerator {
 
     /**
      * Constructs new instance of identifier generator, with desired length for numeric characters and provided validators.
-     * @param length length of numeric characters
-     * @param ruleValidators validators for the rule
+     *
+     * @param length        length of numeric characters
+     * @param ruleValidator validators for the rule
      * @throws IllegalArgumentException if length is negative or zero, the underlying Part constructor will throw this exception
      */
-    public NumericIdentifierGenerator(int length, List<RuleValidator> ruleValidators) {
-        super(new NumericGeneratorRule(length), ruleValidators);
+    public NumericIdentifierGenerator(int length, RuleValidator ruleValidator) {
+        super(new NumericGeneratorRule(length), ruleValidator);
     }
 
     /**
      * Constructs new instance of identifier generator, with desired length for numeric characters, provided validators and random.
-     * @param random random number generator
-     * @param length length of numeric characters
-     * @param ruleValidators validators for the rule
+     *
+     * @param random        random number generator
+     * @param length        length of numeric characters
+     * @param ruleValidator validators for the rule
      * @throws IllegalArgumentException if length is negative or zero, the underlying Part constructor will throw this exception
      */
-    public NumericIdentifierGenerator(Random random, int length, List<RuleValidator> ruleValidators) {
-        super(random, new NumericGeneratorRule(length), ruleValidators);
+    public NumericIdentifierGenerator(Random random, int length, RuleValidator ruleValidator) {
+        super(random, new NumericGeneratorRule(length), ruleValidator);
     }
 }

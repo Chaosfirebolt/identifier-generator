@@ -20,7 +20,6 @@ import com.github.chaosfirebolt.generator.identifier.string.StringIdentifierGene
 import com.github.chaosfirebolt.generator.identifier.string.rule.AnyCharacterGeneratorRule;
 import com.github.chaosfirebolt.generator.identifier.string.validation.RuleValidator;
 
-import java.util.List;
 import java.util.Random;
 
 /**
@@ -44,28 +43,30 @@ public class AnyCharacterIdentifierGenerator extends StringIdentifierGenerator {
 
     /**
      * Constructs new instance of identifier generator, with desired lengths for lower case, upper case, special and numeric characters, and provided validators.
-     * @param lowerCaseLength length of lower case characters
-     * @param upperCaseLength length of upper case characters
-     * @param numericLength length of numeric characters
+     *
+     * @param lowerCaseLength   length of lower case characters
+     * @param upperCaseLength   length of upper case characters
+     * @param numericLength     length of numeric characters
      * @param specialCharLength length of special characters
-     * @param ruleValidators validators for the rule
+     * @param ruleValidator     validators for the rule
      * @throws IllegalArgumentException if any of the length parameters is negative or zero, the underlying Part constructors will throw this exception
      */
-    public AnyCharacterIdentifierGenerator(int lowerCaseLength, int upperCaseLength, int numericLength, int specialCharLength, List<RuleValidator> ruleValidators) {
-        super(new AnyCharacterGeneratorRule(lowerCaseLength, upperCaseLength, numericLength, specialCharLength), ruleValidators);
+    public AnyCharacterIdentifierGenerator(int lowerCaseLength, int upperCaseLength, int numericLength, int specialCharLength, RuleValidator ruleValidator) {
+        super(new AnyCharacterGeneratorRule(lowerCaseLength, upperCaseLength, numericLength, specialCharLength), ruleValidator);
     }
 
     /**
      * Constructs new instance of identifier generator, with desired lengths for lower case, upper case, special and numeric characters, provided validators and random.
-     * @param random random number generator
-     * @param lowerCaseLength length of lower case characters
-     * @param upperCaseLength length of upper case characters
-     * @param numericLength length of numeric characters
+     *
+     * @param random            random number generator
+     * @param lowerCaseLength   length of lower case characters
+     * @param upperCaseLength   length of upper case characters
+     * @param numericLength     length of numeric characters
      * @param specialCharLength length of special characters
-     * @param ruleValidators validators for the rule
+     * @param ruleValidator     validators for the rule
      * @throws IllegalArgumentException if any of the length parameters is negative or zero, the underlying Part constructors will throw this exception
      */
-    public AnyCharacterIdentifierGenerator(Random random, int lowerCaseLength, int upperCaseLength, int numericLength, int specialCharLength, List<RuleValidator> ruleValidators) {
-        super(random, new AnyCharacterGeneratorRule(lowerCaseLength, upperCaseLength, numericLength, specialCharLength), ruleValidators);
+    public AnyCharacterIdentifierGenerator(Random random, int lowerCaseLength, int upperCaseLength, int numericLength, int specialCharLength, RuleValidator ruleValidator) {
+        super(random, new AnyCharacterGeneratorRule(lowerCaseLength, upperCaseLength, numericLength, specialCharLength), ruleValidator);
     }
 }

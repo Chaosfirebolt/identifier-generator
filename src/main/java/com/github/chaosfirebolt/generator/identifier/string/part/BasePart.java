@@ -101,7 +101,7 @@ public class BasePart implements Part {
     }
 
     @Override
-    public int getMinLength() {
+    public int minLength() {
         return this.minLength;
     }
 

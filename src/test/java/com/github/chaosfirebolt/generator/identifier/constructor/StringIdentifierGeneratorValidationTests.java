@@ -49,7 +49,7 @@ public class StringIdentifierGeneratorValidationTests {
         Part part = new TestPart(15, 10, CHARACTERS);
         GeneratorRule rule = new TestGeneratorRule(part, 15, 16);
         String expectedErrorMessage = "Required minimum length of '16' must be equal to or less than total length, which is '15'";
-        assertException(() -> new StringIdentifierGenerator(rule, Collections.singletonList(new MinimumLengthEqualOrLessThanLengthRuleValidator())), expectedErrorMessage);
+        assertException(() -> new StringIdentifierGenerator(rule, new MinimumLengthEqualOrLessThanLengthRuleValidator()), expectedErrorMessage);
     }
 
     @Test
@@ -84,31 +84,16 @@ public class StringIdentifierGeneratorValidationTests {
         assertException(() -> new StringIdentifierGenerator(rule), expectedErrorMessage);
     }
 
-    private static final class TestPart implements Part {
-
-        private final int length;
-        private final int minLength;
-        private final List<Character> characters;
-
-        private TestPart(int length, int minLength, List<Character> characters) {
-            this.length = length;
-            this.minLength = minLength;
-            this.characters = characters;
-        }
+    private record TestPart(int length, int minLength, List<Character> characters) implements Part {
 
         @Override
         public int getLength() {
-            return this.length;
-        }
-
-        @Override
-        public int getMinLength() {
-            return this.minLength;
+            return length();
         }
 
         @Override
         public List<Character> getCharacters() {
-            return this.characters;
+            return characters();
         }
     }
 
@@ -125,12 +110,12 @@ public class StringIdentifierGeneratorValidationTests {
         }
 
         @Override
-        public List<Part> parts() {
+        public List<Part> getParts() {
             return this.parts;
         }
 
         @Override
-        public int length() {
+        public int getLength() {
             return this.length;
         }
 

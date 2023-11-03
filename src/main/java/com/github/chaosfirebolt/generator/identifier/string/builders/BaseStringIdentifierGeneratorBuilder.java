@@ -90,7 +90,7 @@ abstract class BaseStringIdentifierGeneratorBuilder<T extends BaseStringIdentifi
     public R build() {
         RandomGenerator randomGenerator = this.randomGenerator == null ? new SecureRandom() : this.randomGenerator;
         //TODO make composite validator!!!
-        RuleValidator ruleValidator = this.ruleValidators == null || this.ruleValidators.isEmpty() ? StringIdentifierGenerator.DEFAULT_VALIDATORS.get(0) : null;
+        RuleValidator ruleValidator = this.ruleValidators == null || this.ruleValidators.isEmpty() ? StringIdentifierGenerator.DEFAULT_VALIDATOR : null;
         GeneratorRule generatorRule = Objects.requireNonNull(this.generatorRule, "Missing generator rule");
         return getGeneratorFactory().create(randomGenerator, generatorRule, ruleValidator);
     }

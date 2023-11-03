@@ -40,7 +40,7 @@ public class GeneratorRuleTests {
     @ParameterizedTest
     @MethodSource
     public void getParts_ShouldReturnCorrectNumberOfParts(GeneratorRule generatorRule, int expectedNumberOfParts) {
-        int size = generatorRule.parts().size();
+        int size = generatorRule.getParts().size();
         assertEquals(expectedNumberOfParts, size);
     }
 
@@ -51,7 +51,7 @@ public class GeneratorRuleTests {
     @ParameterizedTest
     @MethodSource
     public void getLength_ShouldReturnCorrectLength(GeneratorRule generatorRule, int expectedLength) {
-        int length = generatorRule.length();
+        int length = generatorRule.getLength();
         assertEquals(expectedLength, length);
     }
 
@@ -84,5 +84,15 @@ public class GeneratorRuleTests {
     }
 
     private record UnvalidatedGeneratorRule(List<Part> parts, int length) implements GeneratorRule {
+
+        @Override
+        public List<Part> getParts() {
+            return parts();
+        }
+
+        @Override
+        public int getLength() {
+            return length();
+        }
     }
 }

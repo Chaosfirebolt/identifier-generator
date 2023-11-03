@@ -35,7 +35,7 @@ public interface Part {
      * Get the minimum length for this identifier part
      * @return the minimum length of this part
      */
-    default int getMinLength() {
+    default int minLength() {
         return this.getLength();
     }
 

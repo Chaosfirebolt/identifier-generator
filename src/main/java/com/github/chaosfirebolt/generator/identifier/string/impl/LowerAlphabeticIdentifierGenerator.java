@@ -20,7 +20,6 @@ import com.github.chaosfirebolt.generator.identifier.string.StringIdentifierGene
 import com.github.chaosfirebolt.generator.identifier.string.rule.LowerAlphabeticGeneratorRule;
 import com.github.chaosfirebolt.generator.identifier.string.validation.RuleValidator;
 
-import java.util.List;
 import java.util.Random;
 
 /**
@@ -41,22 +40,24 @@ public class LowerAlphabeticIdentifierGenerator extends StringIdentifierGenerato
 
     /**
      * Constructs new instance of identifier generator, with desired length for lower case characters and provided validators.
-     * @param length length of lower case characters
-     * @param ruleValidators validators for the rule
+     *
+     * @param length        length of lower case characters
+     * @param ruleValidator validators for the rule
      * @throws IllegalArgumentException if length is negative or zero, the underlying Part constructor will throw this exception
      */
-    public LowerAlphabeticIdentifierGenerator(int length, List<RuleValidator> ruleValidators) {
-        super(new LowerAlphabeticGeneratorRule(length), ruleValidators);
+    public LowerAlphabeticIdentifierGenerator(int length, RuleValidator ruleValidator) {
+        super(new LowerAlphabeticGeneratorRule(length), ruleValidator);
     }
 
     /**
      * Constructs new instance of identifier generator, with desired length for lower case characters provided validators and random.
-     * @param random random number generator
-     * @param length length of lower case characters
-     * @param ruleValidators validators for the rule
+     *
+     * @param random        random number generator
+     * @param length        length of lower case characters
+     * @param ruleValidator validators for the rule
      * @throws IllegalArgumentException if length is negative or zero, the underlying Part constructor will throw this exception
      */
-    public LowerAlphabeticIdentifierGenerator(Random random, int length, List<RuleValidator> ruleValidators) {
-        super(random, new LowerAlphabeticGeneratorRule(length), ruleValidators);
+    public LowerAlphabeticIdentifierGenerator(Random random, int length, RuleValidator ruleValidator) {
+        super(random, new LowerAlphabeticGeneratorRule(length), ruleValidator);
     }
 }

@@ -17,8 +17,8 @@
 package com.github.chaosfirebolt.generator.identifier.string.impl;
 
 import com.github.chaosfirebolt.generator.identifier.string.StringIdentifierGenerator;
+import com.github.chaosfirebolt.generator.identifier.string.validation.NoOpRuleValidator;
 
-import java.util.Collections;
 import java.util.UUID;
 
 /**
@@ -32,7 +32,7 @@ public class UuidStringIdentifierGenerator extends StringIdentifierGenerator {
      * Constructs new UuidStringIdentifierGenerator.
      */
     public UuidStringIdentifierGenerator() {
-        super(null, null, Collections.emptyList());
+        super(null, null, new NoOpRuleValidator());
     }
 
     @Override

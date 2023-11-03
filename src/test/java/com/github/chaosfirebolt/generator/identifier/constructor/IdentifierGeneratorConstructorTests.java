@@ -38,7 +38,7 @@ import static org.junit.jupiter.api.Assertions.*;
 public class IdentifierGeneratorConstructorTests {
 
     private static final String ERROR_MESSAGE = "identifier length can't be less than 30";
-    private static final RuleValidator MIN_IDENTIFIER_LENGTH_VALIDATOR = new BaseRuleValidator(rule -> rule.length() >= 30, rule -> ERROR_MESSAGE);
+    private static final RuleValidator MIN_IDENTIFIER_LENGTH_VALIDATOR = new BaseRuleValidator(rule -> rule.getLength() >= 30, rule -> ERROR_MESSAGE);
 
     private static InvalidConstructorInvocationWrapper buildWrapperForIllegalArgument(Executable executable, int length) {
         return new InvalidConstructorInvocationWrapper(executable, IllegalArgumentException.class, String.format("Part length can't be less than '1', but was '%d'", length));
@@ -130,13 +130,13 @@ public class IdentifierGeneratorConstructorTests {
 
     private static List<Arguments> lengthValidatorsConstructor_ParamsDoNotConformToRules_ShouldThrowInvalidGeneratorRuleException() {
         List<InvalidConstructorInvocationWrapper> list = new ArrayList<>();
-        list.add(buildWrapperForInvalidGeneratorRule(() -> new AlphaNumericIdentifierGenerator(9, 9, 9, Collections.singletonList(MIN_IDENTIFIER_LENGTH_VALIDATOR))));
-        list.add(buildWrapperForInvalidGeneratorRule(() -> new AlphabeticIdentifierGenerator(9, 9, Collections.singletonList(MIN_IDENTIFIER_LENGTH_VALIDATOR))));
+        list.add(buildWrapperForInvalidGeneratorRule(() -> new AlphaNumericIdentifierGenerator(9, 9, 9, MIN_IDENTIFIER_LENGTH_VALIDATOR)));
+        list.add(buildWrapperForInvalidGeneratorRule(() -> new AlphabeticIdentifierGenerator(9, 9, MIN_IDENTIFIER_LENGTH_VALIDATOR)));
         int anyCharLen = 7;
-        list.add(buildWrapperForInvalidGeneratorRule(() -> new AnyCharacterIdentifierGenerator(anyCharLen, anyCharLen, anyCharLen, anyCharLen, Collections.singletonList(MIN_IDENTIFIER_LENGTH_VALIDATOR))));
-        list.add(buildWrapperForInvalidGeneratorRule(() -> new LowerAlphabeticIdentifierGenerator(9, Collections.singletonList(MIN_IDENTIFIER_LENGTH_VALIDATOR))));
-        list.add(buildWrapperForInvalidGeneratorRule(() -> new NumericIdentifierGenerator(9, Collections.singletonList(MIN_IDENTIFIER_LENGTH_VALIDATOR))));
-        list.add(buildWrapperForInvalidGeneratorRule(() -> new UpperAlphabeticIdentifierGenerator(9, Collections.singletonList(MIN_IDENTIFIER_LENGTH_VALIDATOR))));
+        list.add(buildWrapperForInvalidGeneratorRule(() -> new AnyCharacterIdentifierGenerator(anyCharLen, anyCharLen, anyCharLen, anyCharLen, MIN_IDENTIFIER_LENGTH_VALIDATOR)));
+        list.add(buildWrapperForInvalidGeneratorRule(() -> new LowerAlphabeticIdentifierGenerator(9, MIN_IDENTIFIER_LENGTH_VALIDATOR)));
+        list.add(buildWrapperForInvalidGeneratorRule(() -> new NumericIdentifierGenerator(9, MIN_IDENTIFIER_LENGTH_VALIDATOR)));
+        list.add(buildWrapperForInvalidGeneratorRule(() -> new UpperAlphabeticIdentifierGenerator(9, MIN_IDENTIFIER_LENGTH_VALIDATOR)));
         return list.stream().map(Arguments::of).collect(Collectors.toList());
     }
 
@@ -148,14 +148,14 @@ public class IdentifierGeneratorConstructorTests {
 
     private static List<Arguments> lengthValidatorsConstructor_ParamsConformToRules_ShouldNotThrow() {
         List<Callable<? extends IdentifierGenerator<?>>> list = new ArrayList<>();
-        list.add(() -> new AlphaNumericIdentifierGenerator(10, 10, 10, Collections.singletonList(MIN_IDENTIFIER_LENGTH_VALIDATOR)));
-        list.add(() -> new AlphaNumericIdentifierGenerator(20, 11, 5, Collections.singletonList(MIN_IDENTIFIER_LENGTH_VALIDATOR)));
-        list.add(() -> new AlphabeticIdentifierGenerator(15, 15, Collections.singletonList(MIN_IDENTIFIER_LENGTH_VALIDATOR)));
-        list.add(() -> new AlphabeticIdentifierGenerator(20, 11, Collections.singletonList(MIN_IDENTIFIER_LENGTH_VALIDATOR)));
-        list.add(() -> new AnyCharacterIdentifierGenerator(10, 10, 5, 5, Collections.singletonList(MIN_IDENTIFIER_LENGTH_VALIDATOR)));
-        list.add(() -> new LowerAlphabeticIdentifierGenerator(30, Collections.singletonList(MIN_IDENTIFIER_LENGTH_VALIDATOR)));
-        list.add(() -> new NumericIdentifierGenerator(30, Collections.singletonList(MIN_IDENTIFIER_LENGTH_VALIDATOR)));
-        list.add(() -> new UpperAlphabeticIdentifierGenerator(30, Collections.singletonList(MIN_IDENTIFIER_LENGTH_VALIDATOR)));
+        list.add(() -> new AlphaNumericIdentifierGenerator(10, 10, 10, MIN_IDENTIFIER_LENGTH_VALIDATOR));
+        list.add(() -> new AlphaNumericIdentifierGenerator(20, 11, 5, MIN_IDENTIFIER_LENGTH_VALIDATOR));
+        list.add(() -> new AlphabeticIdentifierGenerator(15, 15, MIN_IDENTIFIER_LENGTH_VALIDATOR));
+        list.add(() -> new AlphabeticIdentifierGenerator(20, 11, MIN_IDENTIFIER_LENGTH_VALIDATOR));
+        list.add(() -> new AnyCharacterIdentifierGenerator(10, 10, 5, 5, MIN_IDENTIFIER_LENGTH_VALIDATOR));
+        list.add(() -> new LowerAlphabeticIdentifierGenerator(30, MIN_IDENTIFIER_LENGTH_VALIDATOR));
+        list.add(() -> new NumericIdentifierGenerator(30, MIN_IDENTIFIER_LENGTH_VALIDATOR));
+        list.add(() -> new UpperAlphabeticIdentifierGenerator(30, MIN_IDENTIFIER_LENGTH_VALIDATOR));
         return list.stream().map(Arguments::of).collect(Collectors.toList());
     }
 
@@ -167,13 +167,13 @@ public class IdentifierGeneratorConstructorTests {
 
     private static List<Arguments> randomIntsValidatorsConstructor_ParamsDoNotConformToRules_ShouldThrowInvalidGeneratorRuleException() {
         List<InvalidConstructorInvocationWrapper> list = new ArrayList<>();
-        list.add(buildWrapperForInvalidGeneratorRule(() -> new AlphaNumericIdentifierGenerator(new Random(), 9, 9, 9, Collections.singletonList(MIN_IDENTIFIER_LENGTH_VALIDATOR))));
-        list.add(buildWrapperForInvalidGeneratorRule(() -> new AlphabeticIdentifierGenerator(new Random(), 9, 9, Collections.singletonList(MIN_IDENTIFIER_LENGTH_VALIDATOR))));
+        list.add(buildWrapperForInvalidGeneratorRule(() -> new AlphaNumericIdentifierGenerator(new Random(), 9, 9, 9, MIN_IDENTIFIER_LENGTH_VALIDATOR)));
+        list.add(buildWrapperForInvalidGeneratorRule(() -> new AlphabeticIdentifierGenerator(new Random(), 9, 9, MIN_IDENTIFIER_LENGTH_VALIDATOR)));
         int length = 7;
-        list.add(buildWrapperForInvalidGeneratorRule(() -> new AnyCharacterIdentifierGenerator(new Random(), length, length, length, length, Collections.singletonList(MIN_IDENTIFIER_LENGTH_VALIDATOR))));
-        list.add(buildWrapperForInvalidGeneratorRule(() -> new LowerAlphabeticIdentifierGenerator(new Random(), 9, Collections.singletonList(MIN_IDENTIFIER_LENGTH_VALIDATOR))));
-        list.add(buildWrapperForInvalidGeneratorRule(() -> new NumericIdentifierGenerator(new Random(), 9, Collections.singletonList(MIN_IDENTIFIER_LENGTH_VALIDATOR))));
-        list.add(buildWrapperForInvalidGeneratorRule(() -> new UpperAlphabeticIdentifierGenerator(new Random(), 9, Collections.singletonList(MIN_IDENTIFIER_LENGTH_VALIDATOR))));
+        list.add(buildWrapperForInvalidGeneratorRule(() -> new AnyCharacterIdentifierGenerator(new Random(), length, length, length, length, MIN_IDENTIFIER_LENGTH_VALIDATOR)));
+        list.add(buildWrapperForInvalidGeneratorRule(() -> new LowerAlphabeticIdentifierGenerator(new Random(), 9, MIN_IDENTIFIER_LENGTH_VALIDATOR)));
+        list.add(buildWrapperForInvalidGeneratorRule(() -> new NumericIdentifierGenerator(new Random(), 9, MIN_IDENTIFIER_LENGTH_VALIDATOR)));
+        list.add(buildWrapperForInvalidGeneratorRule(() -> new UpperAlphabeticIdentifierGenerator(new Random(), 9, MIN_IDENTIFIER_LENGTH_VALIDATOR)));
         return list.stream().map(Arguments::of).collect(Collectors.toList());
     }
 
@@ -185,14 +185,14 @@ public class IdentifierGeneratorConstructorTests {
 
     private static List<Arguments> randomIntsValidatorsConstructor_ParamsConformToRules_ShouldNotThrow() {
         List<Callable<? extends IdentifierGenerator<?>>> list = new ArrayList<>();
-        list.add(() -> new AlphaNumericIdentifierGenerator(new Random(), 10, 10, 10, Collections.singletonList(MIN_IDENTIFIER_LENGTH_VALIDATOR)));
-        list.add(() -> new AlphaNumericIdentifierGenerator(new Random(), 20, 11, 3, Collections.singletonList(MIN_IDENTIFIER_LENGTH_VALIDATOR)));
-        list.add(() -> new AlphabeticIdentifierGenerator(new Random(), 15, 15, Collections.singletonList(MIN_IDENTIFIER_LENGTH_VALIDATOR)));
-        list.add(() -> new AlphabeticIdentifierGenerator(new Random(), 20, 11, Collections.singletonList(MIN_IDENTIFIER_LENGTH_VALIDATOR)));
-        list.add(() -> new AnyCharacterIdentifierGenerator(new Random(), 10, 10, 5, 5, Collections.singletonList(MIN_IDENTIFIER_LENGTH_VALIDATOR)));
-        list.add(() -> new LowerAlphabeticIdentifierGenerator(new Random(), 40, Collections.singletonList(MIN_IDENTIFIER_LENGTH_VALIDATOR)));
-        list.add(() -> new NumericIdentifierGenerator(new Random(), 40, Collections.singletonList(MIN_IDENTIFIER_LENGTH_VALIDATOR)));
-        list.add(() -> new UpperAlphabeticIdentifierGenerator(new Random(), 40, Collections.singletonList(MIN_IDENTIFIER_LENGTH_VALIDATOR)));
+        list.add(() -> new AlphaNumericIdentifierGenerator(new Random(), 10, 10, 10, MIN_IDENTIFIER_LENGTH_VALIDATOR));
+        list.add(() -> new AlphaNumericIdentifierGenerator(new Random(), 20, 11, 3, MIN_IDENTIFIER_LENGTH_VALIDATOR));
+        list.add(() -> new AlphabeticIdentifierGenerator(new Random(), 15, 15, MIN_IDENTIFIER_LENGTH_VALIDATOR));
+        list.add(() -> new AlphabeticIdentifierGenerator(new Random(), 20, 11, MIN_IDENTIFIER_LENGTH_VALIDATOR));
+        list.add(() -> new AnyCharacterIdentifierGenerator(new Random(), 10, 10, 5, 5, MIN_IDENTIFIER_LENGTH_VALIDATOR));
+        list.add(() -> new LowerAlphabeticIdentifierGenerator(new Random(), 40, MIN_IDENTIFIER_LENGTH_VALIDATOR));
+        list.add(() -> new NumericIdentifierGenerator(new Random(), 40, MIN_IDENTIFIER_LENGTH_VALIDATOR));
+        list.add(() -> new UpperAlphabeticIdentifierGenerator(new Random(), 40, MIN_IDENTIFIER_LENGTH_VALIDATOR));
         return list.stream().map(Arguments::of).collect(Collectors.toList());
     }
 }

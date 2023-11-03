@@ -48,7 +48,7 @@ public class PartMethodTests {
     @ParameterizedTest
     @MethodSource
     public void getMinLength_ResultShouldBeCorrect(Part part, int expectedMinLength) {
-        int actual = part.getMinLength();
+        int actual = part.minLength();
         assertEquals(expectedMinLength, actual);
     }
 
