@@ -28,7 +28,6 @@ public class StringIdentifierGeneratorBuilder extends BaseStringIdentifierGenera
 
     @Override
     GeneratorFactory<StringIdentifierGenerator> getGeneratorFactory() {
-        //TODO implement!!!
-        return null;
+        return StringIdentifierGenerator::new;
     }
 }

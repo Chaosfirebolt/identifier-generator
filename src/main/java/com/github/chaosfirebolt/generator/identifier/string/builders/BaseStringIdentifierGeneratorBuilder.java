@@ -18,6 +18,7 @@ package com.github.chaosfirebolt.generator.identifier.string.builders;
 
 import com.github.chaosfirebolt.generator.identifier.string.StringIdentifierGenerator;
 import com.github.chaosfirebolt.generator.identifier.string.rule.GeneratorRule;
+import com.github.chaosfirebolt.generator.identifier.string.validation.CompositeRuleValidator;
 import com.github.chaosfirebolt.generator.identifier.string.validation.RuleValidator;
 
 import java.security.SecureRandom;
@@ -89,8 +90,14 @@ abstract class BaseStringIdentifierGeneratorBuilder<T extends BaseStringIdentifi
      */
     public R build() {
         RandomGenerator randomGenerator = this.randomGenerator == null ? new SecureRandom() : this.randomGenerator;
-        //TODO make composite validator!!!
-        RuleValidator ruleValidator = this.ruleValidators == null || this.ruleValidators.isEmpty() ? StringIdentifierGenerator.DEFAULT_VALIDATOR : null;
+        RuleValidator ruleValidator;
+        if (this.ruleValidators == null || this.ruleValidators.isEmpty()) {
+            ruleValidator = StringIdentifierGenerator.DEFAULT_VALIDATOR;
+        } else if (this.ruleValidators.size() == 1) {
+            ruleValidator = this.ruleValidators.get(0);
+        } else {
+            ruleValidator = new CompositeRuleValidator(this.ruleValidators);
+        }
         GeneratorRule generatorRule = Objects.requireNonNull(this.generatorRule, "Missing generator rule");
         return getGeneratorFactory().create(randomGenerator, generatorRule, ruleValidator);
     }
