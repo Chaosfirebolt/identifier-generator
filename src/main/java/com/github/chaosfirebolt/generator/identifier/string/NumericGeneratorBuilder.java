@@ -27,24 +27,24 @@ import java.util.OptionalInt;
 interface NumericGeneratorBuilder<T extends TypeSpecificStringIdentifierBuilder<T>> {
 
     /**
-     * @param numericLength desired length of lower case alphabetic characters
+     * @param numericLength desired length of numeric characters
      * @return this builder
      */
     T setNumericLength(int numericLength);
 
     /**
-     * @param minNumericLength desired minimum length of lower case alphabetic characters
+     * @param minNumericLength desired minimum length of numeric characters
      * @return this builder
      */
     T setMinNumericLength(int minNumericLength);
 
     /**
-     * @return lower case length currently set in the builder
+     * @return numeric length currently set in the builder
      */
     int getNumericLength();
 
     /**
-     * @return optional describing the lower case length currently set in the builder
+     * @return optional describing the minimum numeric length currently set in the builder
      */
     OptionalInt getMinNumericLength();
 

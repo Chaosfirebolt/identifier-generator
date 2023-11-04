@@ -21,12 +21,9 @@ import com.github.chaosfirebolt.generator.identifier.string.part.Part;
 import java.util.List;
 import java.util.OptionalInt;
 
-/**
- * Specification of {@link StringIdentifierGeneratorBuilder} to allow easier setup for alphanumeric identifier generators.
- */
-public final class AlphaNumericIdentifierGeneratorBuilder extends TypeSpecificStringIdentifierBuilder<AlphaNumericIdentifierGeneratorBuilder>
-        implements LowerAlphabeticGeneratorBuilder<AlphaNumericIdentifierGeneratorBuilder>, UpperCaseAlphabeticBuilder<AlphaNumericIdentifierGeneratorBuilder>,
-        NumericGeneratorBuilder<AlphaNumericIdentifierGeneratorBuilder> {
+public final class AnyCharacterIdentifierGeneratorBuilder extends TypeSpecificStringIdentifierBuilder<AnyCharacterIdentifierGeneratorBuilder>
+        implements LowerAlphabeticGeneratorBuilder<AnyCharacterIdentifierGeneratorBuilder>, UpperCaseAlphabeticBuilder<AnyCharacterIdentifierGeneratorBuilder>,
+        NumericGeneratorBuilder<AnyCharacterIdentifierGeneratorBuilder>, SpecialGeneratorBuilder<AnyCharacterIdentifierGeneratorBuilder> {
 
     private int lowerCaseLength;
     private int minLowerCaseLength;
@@ -34,18 +31,20 @@ public final class AlphaNumericIdentifierGeneratorBuilder extends TypeSpecificSt
     private int minUpperCaseLength;
     private int numericLength;
     private int minNumericLength;
+    private int specialCharacterLength;
+    private int minSpecialCharacterLength;
 
-    AlphaNumericIdentifierGeneratorBuilder() {
+    AnyCharacterIdentifierGeneratorBuilder() {
     }
 
     @Override
-    public AlphaNumericIdentifierGeneratorBuilder setLowerCaseLength(int lowerCaseLength) {
+    public AnyCharacterIdentifierGeneratorBuilder setLowerCaseLength(int lowerCaseLength) {
         this.lowerCaseLength = lowerCaseLength;
         return this;
     }
 
     @Override
-    public AlphaNumericIdentifierGeneratorBuilder setMinLowerCaseLength(int minLowerCaseLength) {
+    public AnyCharacterIdentifierGeneratorBuilder setMinLowerCaseLength(int minLowerCaseLength) {
         this.minLowerCaseLength = minLowerCaseLength;
         return this;
     }
@@ -61,13 +60,13 @@ public final class AlphaNumericIdentifierGeneratorBuilder extends TypeSpecificSt
     }
 
     @Override
-    public AlphaNumericIdentifierGeneratorBuilder setNumericLength(int numericLength) {
+    public AnyCharacterIdentifierGeneratorBuilder setNumericLength(int numericLength) {
         this.numericLength = numericLength;
         return this;
     }
 
     @Override
-    public AlphaNumericIdentifierGeneratorBuilder setMinNumericLength(int minNumericLength) {
+    public AnyCharacterIdentifierGeneratorBuilder setMinNumericLength(int minNumericLength) {
         this.minNumericLength = minNumericLength;
         return this;
     }
@@ -83,18 +82,40 @@ public final class AlphaNumericIdentifierGeneratorBuilder extends TypeSpecificSt
     }
 
     @Override
-    List<Part> getParts() {
-        return List.of(createLowerAlphabeticPart(), createUpperAlphabeticPart(), createNumericPart());
+    public AnyCharacterIdentifierGeneratorBuilder setSpecialCharacterLength(int specialCharacterLength) {
+        this.specialCharacterLength = specialCharacterLength;
+        return this;
     }
 
     @Override
-    public AlphaNumericIdentifierGeneratorBuilder setUpperCaseLength(int upperCaseLength) {
+    public AnyCharacterIdentifierGeneratorBuilder setMinSpecialCharacterLength(int minSpecialCharacterLength) {
+        this.minSpecialCharacterLength = minSpecialCharacterLength;
+        return this;
+    }
+
+    @Override
+    public int getSpecialCharacterLength() {
+        return this.specialCharacterLength;
+    }
+
+    @Override
+    public OptionalInt getMinSpecialCharacterLength() {
+        return this.minSpecialCharacterLength < 1 ? OptionalInt.empty() : OptionalInt.of(this.minSpecialCharacterLength);
+    }
+
+    @Override
+    List<Part> getParts() {
+        return List.of(createLowerAlphabeticPart(), createUpperAlphabeticPart(), createNumericPart(), createSpecialCharacterPart());
+    }
+
+    @Override
+    public AnyCharacterIdentifierGeneratorBuilder setUpperCaseLength(int upperCaseLength) {
         this.upperCaseLength = upperCaseLength;
         return this;
     }
 
     @Override
-    public AlphaNumericIdentifierGeneratorBuilder setMinUpperCaseLength(int minUpperCaseLength) {
+    public AnyCharacterIdentifierGeneratorBuilder setMinUpperCaseLength(int minUpperCaseLength) {
         this.minUpperCaseLength = minUpperCaseLength;
         return this;
     }

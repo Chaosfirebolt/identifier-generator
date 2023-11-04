@@ -44,7 +44,7 @@ interface LowerAlphabeticGeneratorBuilder<T extends TypeSpecificStringIdentifier
     int getLowerCaseLength();
 
     /**
-     * @return optional describing the lower case length currently set in the builder
+     * @return optional describing minimum the lower case length currently set in the builder
      */
     OptionalInt getMinLowerCaseLength();
 

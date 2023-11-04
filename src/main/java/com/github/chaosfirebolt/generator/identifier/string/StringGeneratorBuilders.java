@@ -48,4 +48,12 @@ public final class StringGeneratorBuilders {
     public static AlphaNumericIdentifierGeneratorBuilder alphaNumericIdentifierGeneratorBuilder() {
         return new AlphaNumericIdentifierGeneratorBuilder();
     }
+
+    /**
+     * Gets a new builder to set up a generator for alphanumeric identifier - 'asdf67gHn8IK$ed#lOf', etc.
+     * @return builder for any character identifier generator
+     */
+    public static AnyCharacterIdentifierGeneratorBuilder anyCharacterIdentifierGeneratorBuilder() {
+        return new AnyCharacterIdentifierGeneratorBuilder();
+    }
 }

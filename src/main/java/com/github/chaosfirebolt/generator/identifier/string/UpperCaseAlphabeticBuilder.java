@@ -44,7 +44,7 @@ interface UpperCaseAlphabeticBuilder<T extends TypeSpecificStringIdentifierBuild
     int getUpperCaseLength();
 
     /**
-     * @return optional describing the lower case length currently set in the builder
+     * @return optional describing the minimum lower case length currently set in the builder
      */
     OptionalInt getMinUpperCaseLength();
 
