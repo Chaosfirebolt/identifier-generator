@@ -38,7 +38,7 @@ public class StringIdentifierGenerator extends BaseIdentifierGenerator<String> {
     /**
      * The default rule validators.
      */
-    public static final RuleValidator DEFAULT_VALIDATOR = new CompositeRuleValidator(new LengthRuleValidator(), new MinimumLengthRuleValidator(), new MinimumLengthEqualOrLessThanLengthRuleValidator());
+    static final RuleValidator DEFAULT_VALIDATOR = new CompositeRuleValidator(new LengthRuleValidator(), new MinimumLengthRuleValidator(), new MinimumLengthEqualOrLessThanLengthRuleValidator());
 
     /**
      * The random generator.

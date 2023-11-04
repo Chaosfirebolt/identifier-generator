@@ -14,20 +14,15 @@
  * limitations under the License.
  */
 
-package com.github.chaosfirebolt.generator.identifier.string.builders;
-
-import com.github.chaosfirebolt.generator.identifier.string.StringIdentifierGenerator;
+package com.github.chaosfirebolt.generator.identifier.string;
 
 /**
  * Builder for {@link StringIdentifierGenerator}s.
+ * <br>
+ * Use this builder, if complete control over the used {@link com.github.chaosfirebolt.generator.identifier.string.rule.GeneratorRule} is needed.
  */
-public class StringIdentifierGeneratorBuilder extends BaseStringIdentifierGeneratorBuilder<StringIdentifierGeneratorBuilder, StringIdentifierGenerator> {
+public final class StringIdentifierGeneratorBuilder extends BaseStringIdentifierGeneratorBuilder<StringIdentifierGeneratorBuilder> {
 
     StringIdentifierGeneratorBuilder() {
-    }
-
-    @Override
-    GeneratorFactory<StringIdentifierGenerator> getGeneratorFactory() {
-        return StringIdentifierGenerator::new;
     }
 }

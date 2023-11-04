@@ -14,9 +14,8 @@
  * limitations under the License.
  */
 
-package com.github.chaosfirebolt.generator.identifier.string.builders;
+package com.github.chaosfirebolt.generator.identifier.string;
 
-import com.github.chaosfirebolt.generator.identifier.string.StringIdentifierGenerator;
 import com.github.chaosfirebolt.generator.identifier.string.rule.GeneratorRule;
 import com.github.chaosfirebolt.generator.identifier.string.validation.CompositeRuleValidator;
 import com.github.chaosfirebolt.generator.identifier.string.validation.RuleValidator;
@@ -30,10 +29,9 @@ import java.util.random.RandomGenerator;
 /**
  * The base builder for string based identifier generators.
  * @param <T> concrete type of the builder
- * @param <R> concrete result type
  */
 @SuppressWarnings("unchecked")
-abstract class BaseStringIdentifierGeneratorBuilder<T extends BaseStringIdentifierGeneratorBuilder<T, R>, R extends StringIdentifierGenerator> {
+abstract class BaseStringIdentifierGeneratorBuilder<T extends BaseStringIdentifierGeneratorBuilder<T>> {
 
     private RandomGenerator randomGenerator;
     private GeneratorRule generatorRule;
@@ -84,11 +82,11 @@ abstract class BaseStringIdentifierGeneratorBuilder<T extends BaseStringIdentifi
     }
 
     /**
-     * Creates new instance of {@link R}. Provides defaults of some of the parameters are missing, wherever possible.
+     * Creates new instance of {@link StringIdentifierGenerator}. Provides defaults of some of the parameters are missing, wherever possible.
      * @return a new instance
      * @throws NullPointerException if parameter is missing and can't supply default value for it
      */
-    public R build() {
+    public StringIdentifierGenerator build() {
         RandomGenerator randomGenerator = this.randomGenerator == null ? new SecureRandom() : this.randomGenerator;
         RuleValidator ruleValidator;
         if (this.ruleValidators == null || this.ruleValidators.isEmpty()) {
@@ -98,13 +96,18 @@ abstract class BaseStringIdentifierGeneratorBuilder<T extends BaseStringIdentifi
         } else {
             ruleValidator = new CompositeRuleValidator(this.ruleValidators);
         }
-        GeneratorRule generatorRule = Objects.requireNonNull(this.generatorRule, "Missing generator rule");
-        return getGeneratorFactory().create(randomGenerator, generatorRule, ruleValidator);
+        GeneratorRule generatorRule = Objects.requireNonNull(getGeneratorRule(), "Missing generator rule");
+        return new StringIdentifierGenerator(randomGenerator, generatorRule, ruleValidator);
     }
 
     /**
-     * Gets the factory responsible to create specific {@link StringIdentifierGenerator}.
-     * @return the factory
+     * Factory method, returning the rule to use.
+     * <br>
+     * Override wherever applicable.
+     * @return generator rule to use
+     * @throws IllegalArgumentException in case of invalid rule setup
      */
-    abstract GeneratorFactory<R> getGeneratorFactory();
+    GeneratorRule getGeneratorRule() {
+        return this.generatorRule;
+    }
 }

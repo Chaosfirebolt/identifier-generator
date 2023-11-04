@@ -14,12 +14,12 @@
  * limitations under the License.
  */
 
-package com.github.chaosfirebolt.generator.identifier.string.builders;
+package com.github.chaosfirebolt.generator.identifier.string;
 
 /**
- * Utility class for builders of string based identifier generators.
+ * Factory class for builders of string based identifier generators.
  */
-public class StringGeneratorBuilders {
+public final class StringGeneratorBuilders {
 
     private StringGeneratorBuilders() {
         throw new RuntimeException("No instances allowed");
@@ -31,5 +31,13 @@ public class StringGeneratorBuilders {
      */
     public static StringIdentifierGeneratorBuilder stringIdentifierGeneratorBuilder() {
         return new StringIdentifierGeneratorBuilder();
+    }
+
+    /**
+     * Gets a new builder to set up a generator for alphabetic identifier - 'ikuhYTgbH', 'GhjkYUhnbfJt', etc.
+     * @return builder for alphabetic identifier generator
+     */
+    public static AlphabeticIdentifierGeneratorBuilder alphabeticIdentifierGeneratorBuilder() {
+        return new AlphabeticIdentifierGeneratorBuilder();
     }
 }

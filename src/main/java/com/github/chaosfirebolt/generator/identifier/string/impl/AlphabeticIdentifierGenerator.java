@@ -27,6 +27,7 @@ import java.util.random.RandomGenerator;
  * <br>
  * Created by ChaosFire on 18-Dec-21
  */
+@Deprecated(forRemoval = true)
 public class AlphabeticIdentifierGenerator extends StringIdentifierGenerator {
 
     /**
