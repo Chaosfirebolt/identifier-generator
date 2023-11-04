@@ -16,6 +16,8 @@
 
 package com.github.chaosfirebolt.generator.identifier.string;
 
+import com.github.chaosfirebolt.generator.identifier.string.rule.GeneratorRule;
+
 /**
  * Builder for {@link StringIdentifierGenerator}s.
  * <br>
@@ -24,5 +26,11 @@ package com.github.chaosfirebolt.generator.identifier.string;
 public final class StringIdentifierGeneratorBuilder extends BaseStringIdentifierGeneratorBuilder<StringIdentifierGeneratorBuilder> {
 
     StringIdentifierGeneratorBuilder() {
+    }
+
+    @Override
+    public StringIdentifierGeneratorBuilder setGeneratorRule(GeneratorRule generatorRule) {
+        //expose the functionality
+        return super.setGeneratorRule(generatorRule);
     }
 }

@@ -32,7 +32,8 @@ abstract class TypeSpecificStringIdentifierBuilder<T extends TypeSpecificStringI
     }
 
     @Override
-    public final T setGeneratorRule(GeneratorRule generatorRule) {
+    final T setGeneratorRule(GeneratorRule generatorRule) {
+        //no funny stuff with reflection
         throw new UnsupportedOperationException(getClass().getSimpleName() + " does not support directly setting generator rule");
     }
 
@@ -41,5 +42,9 @@ abstract class TypeSpecificStringIdentifierBuilder<T extends TypeSpecificStringI
         return new BaseGeneratorRule(getParts());
     }
 
+    /**
+     * Get the parts the generator rule should be composed of.
+     * @return the parts
+     */
     abstract List<Part> getParts();
 }

@@ -53,7 +53,7 @@ abstract class BaseStringIdentifierGeneratorBuilder<T extends BaseStringIdentifi
      * @param generatorRule the generator rule to be used
      * @return this instance
      */
-    public T setGeneratorRule(GeneratorRule generatorRule) {
+    T setGeneratorRule(GeneratorRule generatorRule) {
         this.generatorRule = generatorRule;
         return (T) this;
     }
