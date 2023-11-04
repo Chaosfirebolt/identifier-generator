@@ -40,4 +40,12 @@ public final class StringGeneratorBuilders {
     public static AlphabeticIdentifierGeneratorBuilder alphabeticIdentifierGeneratorBuilder() {
         return new AlphabeticIdentifierGeneratorBuilder();
     }
+
+    /**
+     * Gets a new builder to set up a generator for alphanumeric identifier - 'aas5F4eD', 'nj67r6Yh98', etc.
+     * @return builder for alphanumeric identifier generator
+     */
+    public static AlphaNumericIdentifierGeneratorBuilder alphaNumericIdentifierGeneratorBuilder() {
+        return new AlphaNumericIdentifierGeneratorBuilder();
+    }
 }
