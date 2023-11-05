@@ -17,6 +17,7 @@
 package com.github.chaosfirebolt.generator.identifier.string;
 
 import com.github.chaosfirebolt.generator.identifier.string.part.Part;
+import com.github.chaosfirebolt.generator.identifier.string.util.OptionalUtility;
 
 import java.util.List;
 import java.util.OptionalInt;
@@ -57,7 +58,7 @@ public final class AlphaNumericIdentifierGeneratorBuilder extends TypeSpecificSt
 
     @Override
     public OptionalInt getMinLowerCaseLength() {
-        return this.minLowerCaseLength < 1 ? OptionalInt.empty() : OptionalInt.of(this.minLowerCaseLength);
+        return OptionalUtility.fromInt(this.minLowerCaseLength);
     }
 
     @Override
@@ -79,7 +80,7 @@ public final class AlphaNumericIdentifierGeneratorBuilder extends TypeSpecificSt
 
     @Override
     public OptionalInt getMinNumericLength() {
-        return this.minNumericLength < 1 ? OptionalInt.empty() : OptionalInt.of(this.minNumericLength);
+        return OptionalUtility.fromInt(this.minNumericLength);
     }
 
     @Override
@@ -106,6 +107,6 @@ public final class AlphaNumericIdentifierGeneratorBuilder extends TypeSpecificSt
 
     @Override
     public OptionalInt getMinUpperCaseLength() {
-        return this.minUpperCaseLength < 1 ? OptionalInt.empty() : OptionalInt.of(this.minUpperCaseLength);
+        return OptionalUtility.fromInt(this.minUpperCaseLength);
     }
 }
