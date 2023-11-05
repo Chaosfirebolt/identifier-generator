@@ -72,4 +72,12 @@ public final class StringGeneratorBuilders {
     public static NumericIdentifierGeneratorBuilder numericIdentifierGeneratorBuilder() {
         return new NumericIdentifierGeneratorBuilder();
     }
+
+    /**
+     * Returns a new builder to set up a generator for upper case alphabetic identifier - 'YHAMOIESWNBS', etc.
+     * @return builder for upper case alphabetic identifier generator
+     */
+    public static UpperAlphabeticIdentifierGeneratorBuilder upperAlphabeticIdentifierGeneratorBuilder() {
+        return new UpperAlphabeticIdentifierGeneratorBuilder();
+    }
 }
