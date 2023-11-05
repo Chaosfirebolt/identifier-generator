@@ -23,41 +23,40 @@ import java.util.List;
 import java.util.OptionalInt;
 
 /**
- * Specification of {@link StringIdentifierGeneratorBuilder} to allow easier setup for lower case alphabetic identifier generators.
+ * Specification of {@link StringIdentifierGeneratorBuilder} to allow easier setup for numeric identifier generators.
  */
-public final class LowerAlphabeticIdentifierGeneratorBuilder extends TypeSpecificStringIdentifierBuilder<LowerAlphabeticIdentifierGeneratorBuilder>
-        implements LowerAlphabeticGeneratorBuilder<LowerAlphabeticIdentifierGeneratorBuilder> {
+public final class NumericIdentifierGeneratorBuilder extends TypeSpecificStringIdentifierBuilder<NumericIdentifierGeneratorBuilder> implements NumericGeneratorBuilder<NumericIdentifierGeneratorBuilder> {
 
-    private int lowerCaseLength;
-    private int minLowerCaseLength;
+    private int numericLength;
+    private int minNumericLength;
 
-    LowerAlphabeticIdentifierGeneratorBuilder() {
+    NumericIdentifierGeneratorBuilder() {
     }
 
     @Override
-    public LowerAlphabeticIdentifierGeneratorBuilder setLowerCaseLength(int lowerCaseLength) {
-        this.lowerCaseLength = lowerCaseLength;
+    public NumericIdentifierGeneratorBuilder setNumericLength(int numericLength) {
+        this.numericLength = numericLength;
         return this;
     }
 
     @Override
-    public LowerAlphabeticIdentifierGeneratorBuilder setMinLowerCaseLength(int minLowerCaseLength) {
-        this.minLowerCaseLength = minLowerCaseLength;
+    public NumericIdentifierGeneratorBuilder setMinNumericLength(int minNumericLength) {
+        this.minNumericLength = minNumericLength;
         return this;
     }
 
     @Override
-    public int getLowerCaseLength() {
-        return this.lowerCaseLength;
+    public int getNumericLength() {
+        return this.numericLength;
     }
 
     @Override
-    public OptionalInt getMinLowerCaseLength() {
-        return OptionalUtility.fromInt(this.minLowerCaseLength);
+    public OptionalInt getMinNumericLength() {
+        return OptionalUtility.fromInt(this.minNumericLength);
     }
 
     @Override
     List<Part> getParts() {
-        return List.of(createLowerAlphabeticPart());
+        return List.of(createNumericPart());
     }
 }
