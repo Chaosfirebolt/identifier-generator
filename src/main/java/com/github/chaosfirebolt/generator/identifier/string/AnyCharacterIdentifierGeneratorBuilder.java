@@ -21,6 +21,9 @@ import com.github.chaosfirebolt.generator.identifier.string.part.Part;
 import java.util.List;
 import java.util.OptionalInt;
 
+/**
+ * Specification of {@link StringIdentifierGeneratorBuilder} to allow easier setup for any character (alphanumeric + special; symbols) identifier generators.
+ */
 public final class AnyCharacterIdentifierGeneratorBuilder extends TypeSpecificStringIdentifierBuilder<AnyCharacterIdentifierGeneratorBuilder>
         implements LowerAlphabeticGeneratorBuilder<AnyCharacterIdentifierGeneratorBuilder>, UpperCaseAlphabeticBuilder<AnyCharacterIdentifierGeneratorBuilder>,
         NumericGeneratorBuilder<AnyCharacterIdentifierGeneratorBuilder>, SpecialGeneratorBuilder<AnyCharacterIdentifierGeneratorBuilder> {
