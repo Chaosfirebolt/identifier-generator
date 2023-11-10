@@ -14,9 +14,8 @@
  * limitations under the License.
  */
 
-package com.github.chaosfirebolt.generator.identifier.string.impl;
+package com.github.chaosfirebolt.generator.identifier.string;
 
-import com.github.chaosfirebolt.generator.identifier.string.StringIdentifierGenerator;
 import com.github.chaosfirebolt.generator.identifier.string.validation.NoOpRuleValidator;
 
 import java.util.UUID;

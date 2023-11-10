@@ -17,7 +17,9 @@
 package com.github.chaosfirebolt.generator.identifier;
 
 import com.github.chaosfirebolt.generator.identifier.exception.TooManyAttemptsException;
+import com.github.chaosfirebolt.generator.identifier.string.StringGeneratorBuilders;
 import com.github.chaosfirebolt.generator.identifier.string.StringIdentifierGenerator;
+import com.github.chaosfirebolt.generator.identifier.string.UuidStringIdentifierGenerator;
 import com.github.chaosfirebolt.generator.identifier.string.impl.*;
 import com.github.chaosfirebolt.generator.identifier.string.part.NumericPart;
 import com.github.chaosfirebolt.generator.identifier.string.part.SpecialCharacterPart;
@@ -82,6 +84,7 @@ public class IdentifierGeneratorMethodTests {
                 IdentifierArguments.of(new LowerAlphabeticIdentifierGenerator(20), 11, 20, 20),
                 IdentifierArguments.of(new NumericIdentifierGenerator(29), 100, 29, 29),
                 IdentifierArguments.of(new StringIdentifierGenerator(generatorRule), 49, 233, 233),
+                IdentifierArguments.of(StringGeneratorBuilders.stringIdentifierGeneratorBuilder().setGeneratorRule(generatorRule).build(), 49, 233, 233),
                 IdentifierArguments.of(new UpperAlphabeticIdentifierGenerator(111), 50, 111, 111),
                 IdentifierArguments.of(new UuidStringIdentifierGenerator(), 20, 36, 36)
         );

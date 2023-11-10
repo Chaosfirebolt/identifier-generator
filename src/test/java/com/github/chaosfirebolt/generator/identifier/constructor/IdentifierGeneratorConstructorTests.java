@@ -18,6 +18,10 @@ package com.github.chaosfirebolt.generator.identifier.constructor;
 
 import com.github.chaosfirebolt.generator.identifier.IdentifierGenerator;
 import com.github.chaosfirebolt.generator.identifier.exception.InvalidGeneratorRuleException;
+import com.github.chaosfirebolt.generator.identifier.string.AlphaNumericIdentifierGeneratorBuilder;
+import com.github.chaosfirebolt.generator.identifier.string.AlphabeticIdentifierGeneratorBuilder;
+import com.github.chaosfirebolt.generator.identifier.string.AnyCharacterIdentifierGeneratorBuilder;
+import com.github.chaosfirebolt.generator.identifier.string.StringGeneratorBuilders;
 import com.github.chaosfirebolt.generator.identifier.string.impl.*;
 import com.github.chaosfirebolt.generator.identifier.string.validation.BaseRuleValidator;
 import com.github.chaosfirebolt.generator.identifier.string.validation.RuleValidator;
@@ -56,19 +60,40 @@ public class IdentifierGeneratorConstructorTests {
 
     private static List<Arguments> anyLengthParamIsNegative_ShouldThrowInvalidArgumentException() {
         List<InvalidConstructorInvocationWrapper> list = new ArrayList<>();
-        list.add(buildWrapperForIllegalArgument(() -> new AlphaNumericIdentifierGenerator(-1, 9, 1), -1));
-        list.add(buildWrapperForIllegalArgument(() -> new AlphaNumericIdentifierGenerator(9, -3, 1), -3));
-        list.add(buildWrapperForIllegalArgument(() -> new AlphaNumericIdentifierGenerator(9, 3, -2), -2));
-        list.add(buildWrapperForIllegalArgument(() -> new AlphabeticIdentifierGenerator(-1, 9), -1));
-        list.add(buildWrapperForIllegalArgument(() -> new AlphabeticIdentifierGenerator(9, -3), -3));
-        list.add(buildWrapperForIllegalArgument(() -> new AnyCharacterIdentifierGenerator(-1, 9, 7, 8), -1));
-        list.add(buildWrapperForIllegalArgument(() -> new AnyCharacterIdentifierGenerator(9, -3, 1, 3), -3));
-        list.add(buildWrapperForIllegalArgument(() -> new AnyCharacterIdentifierGenerator(9, 3, -1, 3), -1));
-        list.add(buildWrapperForIllegalArgument(() -> new AnyCharacterIdentifierGenerator(9, 3, 1, -3), -3));
-        list.add(buildWrapperForIllegalArgument(() -> new LowerAlphabeticIdentifierGenerator(-6), -6));
-        list.add(buildWrapperForIllegalArgument(() -> new NumericIdentifierGenerator(-6), -6));
-        list.add(buildWrapperForIllegalArgument(() -> new UpperAlphabeticIdentifierGenerator(-6), -6));
+        list.add(buildWrapperForIllegalArgument(() -> alphaNumericBuilder(-1, 9, 1).build(), -1));
+        list.add(buildWrapperForIllegalArgument(() -> alphaNumericBuilder(9, -3, 1).build(), -3));
+        list.add(buildWrapperForIllegalArgument(() -> alphaNumericBuilder(9, 3, -2).build(), -2));
+        list.add(buildWrapperForIllegalArgument(() -> alphabeticBuilder(-1, 9).build(), -1));
+        list.add(buildWrapperForIllegalArgument(() -> alphabeticBuilder(9, -3).build(), -3));
+        list.add(buildWrapperForIllegalArgument(() -> anyCharacterBuilder(-1, 9, 7, 8).build(), -1));
+        list.add(buildWrapperForIllegalArgument(() -> anyCharacterBuilder(9, -3, 1, 3).build(), -3));
+        list.add(buildWrapperForIllegalArgument(() -> anyCharacterBuilder(9, 3, -1, 3).build(), -1));
+        list.add(buildWrapperForIllegalArgument(() -> anyCharacterBuilder(9, 3, 1, -3).build(), -3));
+        list.add(buildWrapperForIllegalArgument(() -> StringGeneratorBuilders.lowerAlphabeticIdentifierGeneratorBuilder().setLowerCaseLength(-6).build(), -6));
+        list.add(buildWrapperForIllegalArgument(() -> StringGeneratorBuilders.numericIdentifierGeneratorBuilder().setNumericLength(-6).build(), -6));
+        list.add(buildWrapperForIllegalArgument(() -> StringGeneratorBuilders.upperAlphabeticIdentifierGeneratorBuilder().setUpperCaseLength(-6).build(), -6));
         return list.stream().map(Arguments::of).collect(Collectors.toList());
+    }
+
+    private static AlphaNumericIdentifierGeneratorBuilder alphaNumericBuilder(int lowerCaseLength, int upperCseLength, int numericLength) {
+        return StringGeneratorBuilders.alphaNumericIdentifierGeneratorBuilder()
+                .setLowerCaseLength(lowerCaseLength)
+                .setUpperCaseLength(upperCseLength)
+                .setNumericLength(numericLength);
+    }
+
+    private static AlphabeticIdentifierGeneratorBuilder alphabeticBuilder(int lowerCaseLength, int upperCaseLength) {
+        return StringGeneratorBuilders.alphabeticIdentifierGeneratorBuilder()
+                .setLowerCaseLength(lowerCaseLength)
+                .setUpperCaseLength(upperCaseLength);
+    }
+
+    private static AnyCharacterIdentifierGeneratorBuilder anyCharacterBuilder(int lowerCaseLength, int upperCaseLength, int numericLength, int specialCharLength) {
+        return StringGeneratorBuilders.anyCharacterIdentifierGeneratorBuilder()
+                .setLowerCaseLength(lowerCaseLength)
+                .setUpperCaseLength(upperCaseLength)
+                .setNumericLength(numericLength)
+                .setSpecialCharacterLength(specialCharLength);
     }
 
     private static void assertException(InvalidConstructorInvocationWrapper wrapper) {
@@ -85,18 +110,18 @@ public class IdentifierGeneratorConstructorTests {
 
     private static List<Arguments> anyLengthParamIsZero_ShouldThrowInvalidArgumentException() {
         List<InvalidConstructorInvocationWrapper> list = new ArrayList<>();
-        list.add(buildWrapperForIllegalArgument(() -> new AlphaNumericIdentifierGenerator(0, 9, 3), 0));
-        list.add(buildWrapperForIllegalArgument(() -> new AlphaNumericIdentifierGenerator(9, 0, 3), 0));
-        list.add(buildWrapperForIllegalArgument(() -> new AlphaNumericIdentifierGenerator(9, 3, 0), 0));
-        list.add(buildWrapperForIllegalArgument(() -> new AlphabeticIdentifierGenerator(0, 9), 0));
-        list.add(buildWrapperForIllegalArgument(() -> new AlphabeticIdentifierGenerator(9, 0), 0));
-        list.add(buildWrapperForIllegalArgument(() -> new AnyCharacterIdentifierGenerator(0, 9, 7, 8), 0));
-        list.add(buildWrapperForIllegalArgument(() -> new AnyCharacterIdentifierGenerator(9, 0, 1, 3), 0));
-        list.add(buildWrapperForIllegalArgument(() -> new AnyCharacterIdentifierGenerator(9, 3, 0, 3), 0));
-        list.add(buildWrapperForIllegalArgument(() -> new AnyCharacterIdentifierGenerator(9, 3, 1, 0), 0));
-        list.add(buildWrapperForIllegalArgument(() -> new LowerAlphabeticIdentifierGenerator(0), 0));
-        list.add(buildWrapperForIllegalArgument(() -> new NumericIdentifierGenerator(0), 0));
-        list.add(buildWrapperForIllegalArgument(() -> new UpperAlphabeticIdentifierGenerator(0), 0));
+        list.add(buildWrapperForIllegalArgument(() -> alphaNumericBuilder(0, 9, 3).build(), 0));
+        list.add(buildWrapperForIllegalArgument(() -> alphaNumericBuilder(9, 0, 3).build(), 0));
+        list.add(buildWrapperForIllegalArgument(() -> alphaNumericBuilder(9, 3, 0).build(), 0));
+        list.add(buildWrapperForIllegalArgument(() -> alphabeticBuilder(0, 9).build(), 0));
+        list.add(buildWrapperForIllegalArgument(() -> alphabeticBuilder(9, 0).build(), 0));
+        list.add(buildWrapperForIllegalArgument(() -> anyCharacterBuilder(0, 9, 7, 8).build(), 0));
+        list.add(buildWrapperForIllegalArgument(() -> anyCharacterBuilder(9, 0, 1, 3).build(), 0));
+        list.add(buildWrapperForIllegalArgument(() -> anyCharacterBuilder(9, 3, 0, 3).build(), 0));
+        list.add(buildWrapperForIllegalArgument(() -> anyCharacterBuilder(9, 3, 1, 0).build(), 0));
+        list.add(buildWrapperForIllegalArgument(() -> StringGeneratorBuilders.lowerAlphabeticIdentifierGeneratorBuilder().setLowerCaseLength(0).build(), 0));
+        list.add(buildWrapperForIllegalArgument(() -> StringGeneratorBuilders.numericIdentifierGeneratorBuilder().setNumericLength(0).build(), 0));
+        list.add(buildWrapperForIllegalArgument(() -> StringGeneratorBuilders.upperAlphabeticIdentifierGeneratorBuilder().setUpperCaseLength(0).build(), 0));
         return list.stream().map(Arguments::of).collect(Collectors.toList());
     }
 
@@ -108,12 +133,12 @@ public class IdentifierGeneratorConstructorTests {
 
     private static List<Arguments> validLengthParams_ShouldNotThrow() {
         List<Callable<? extends IdentifierGenerator<?>>> list = new ArrayList<>();
-        list.add(() -> new AlphaNumericIdentifierGenerator(5, 5, 1));
-        list.add(() -> new AlphabeticIdentifierGenerator(5, 5));
-        list.add(() -> new AnyCharacterIdentifierGenerator(3, 4, 5, 6));
-        list.add(() -> new LowerAlphabeticIdentifierGenerator(9));
-        list.add(() -> new NumericIdentifierGenerator(9));
-        list.add(() -> new UpperAlphabeticIdentifierGenerator(9));
+        list.add(() -> alphaNumericBuilder(5, 5, 1).build());
+        list.add(() -> alphabeticBuilder(5, 5).build());
+        list.add(() -> anyCharacterBuilder(3, 4, 5, 6).build());
+        list.add(() -> StringGeneratorBuilders.lowerAlphabeticIdentifierGeneratorBuilder().setLowerCaseLength(9).build());
+        list.add(() -> StringGeneratorBuilders.numericIdentifierGeneratorBuilder().setNumericLength(9).build());
+        list.add(() -> StringGeneratorBuilders.upperAlphabeticIdentifierGeneratorBuilder().setUpperCaseLength(9).build());
         return list.stream().map(Arguments::of).collect(Collectors.toList());
     }
 
@@ -130,13 +155,13 @@ public class IdentifierGeneratorConstructorTests {
 
     private static List<Arguments> lengthValidatorsConstructor_ParamsDoNotConformToRules_ShouldThrowInvalidGeneratorRuleException() {
         List<InvalidConstructorInvocationWrapper> list = new ArrayList<>();
-        list.add(buildWrapperForInvalidGeneratorRule(() -> new AlphaNumericIdentifierGenerator(9, 9, 9, MIN_IDENTIFIER_LENGTH_VALIDATOR)));
-        list.add(buildWrapperForInvalidGeneratorRule(() -> new AlphabeticIdentifierGenerator(9, 9, MIN_IDENTIFIER_LENGTH_VALIDATOR)));
+        list.add(buildWrapperForInvalidGeneratorRule(() -> alphaNumericBuilder(9, 9, 9).setRuleValidators(List.of(MIN_IDENTIFIER_LENGTH_VALIDATOR)).build()));
+        list.add(buildWrapperForInvalidGeneratorRule(() -> alphabeticBuilder(9, 9).setRuleValidators(List.of(MIN_IDENTIFIER_LENGTH_VALIDATOR)).build()));
         int anyCharLen = 7;
-        list.add(buildWrapperForInvalidGeneratorRule(() -> new AnyCharacterIdentifierGenerator(anyCharLen, anyCharLen, anyCharLen, anyCharLen, MIN_IDENTIFIER_LENGTH_VALIDATOR)));
-        list.add(buildWrapperForInvalidGeneratorRule(() -> new LowerAlphabeticIdentifierGenerator(9, MIN_IDENTIFIER_LENGTH_VALIDATOR)));
-        list.add(buildWrapperForInvalidGeneratorRule(() -> new NumericIdentifierGenerator(9, MIN_IDENTIFIER_LENGTH_VALIDATOR)));
-        list.add(buildWrapperForInvalidGeneratorRule(() -> new UpperAlphabeticIdentifierGenerator(9, MIN_IDENTIFIER_LENGTH_VALIDATOR)));
+        list.add(buildWrapperForInvalidGeneratorRule(() -> anyCharacterBuilder(anyCharLen, anyCharLen, anyCharLen, anyCharLen).setRuleValidators(List.of(MIN_IDENTIFIER_LENGTH_VALIDATOR)).build()));
+        list.add(buildWrapperForInvalidGeneratorRule(() -> StringGeneratorBuilders.lowerAlphabeticIdentifierGeneratorBuilder().setLowerCaseLength(9).addRuleValidator(MIN_IDENTIFIER_LENGTH_VALIDATOR).build()));
+        list.add(buildWrapperForInvalidGeneratorRule(() -> StringGeneratorBuilders.numericIdentifierGeneratorBuilder().setNumericLength(9).addRuleValidator(MIN_IDENTIFIER_LENGTH_VALIDATOR).build()));
+        list.add(buildWrapperForInvalidGeneratorRule(() -> StringGeneratorBuilders.upperAlphabeticIdentifierGeneratorBuilder().setUpperCaseLength(9).addRuleValidator(MIN_IDENTIFIER_LENGTH_VALIDATOR).build()));
         return list.stream().map(Arguments::of).collect(Collectors.toList());
     }
 
@@ -148,14 +173,14 @@ public class IdentifierGeneratorConstructorTests {
 
     private static List<Arguments> lengthValidatorsConstructor_ParamsConformToRules_ShouldNotThrow() {
         List<Callable<? extends IdentifierGenerator<?>>> list = new ArrayList<>();
-        list.add(() -> new AlphaNumericIdentifierGenerator(10, 10, 10, MIN_IDENTIFIER_LENGTH_VALIDATOR));
-        list.add(() -> new AlphaNumericIdentifierGenerator(20, 11, 5, MIN_IDENTIFIER_LENGTH_VALIDATOR));
-        list.add(() -> new AlphabeticIdentifierGenerator(15, 15, MIN_IDENTIFIER_LENGTH_VALIDATOR));
-        list.add(() -> new AlphabeticIdentifierGenerator(20, 11, MIN_IDENTIFIER_LENGTH_VALIDATOR));
-        list.add(() -> new AnyCharacterIdentifierGenerator(10, 10, 5, 5, MIN_IDENTIFIER_LENGTH_VALIDATOR));
-        list.add(() -> new LowerAlphabeticIdentifierGenerator(30, MIN_IDENTIFIER_LENGTH_VALIDATOR));
-        list.add(() -> new NumericIdentifierGenerator(30, MIN_IDENTIFIER_LENGTH_VALIDATOR));
-        list.add(() -> new UpperAlphabeticIdentifierGenerator(30, MIN_IDENTIFIER_LENGTH_VALIDATOR));
+        list.add(() -> alphaNumericBuilder(10, 10, 10).addRuleValidator(MIN_IDENTIFIER_LENGTH_VALIDATOR).build());
+        list.add(() -> alphaNumericBuilder(20, 11, 5).addRuleValidator(MIN_IDENTIFIER_LENGTH_VALIDATOR).build());
+        list.add(() -> alphabeticBuilder(15, 15).addRuleValidator(MIN_IDENTIFIER_LENGTH_VALIDATOR).build());
+        list.add(() -> alphabeticBuilder(20, 11).addRuleValidator(MIN_IDENTIFIER_LENGTH_VALIDATOR).build());
+        list.add(() -> anyCharacterBuilder(10, 10, 5, 5).addRuleValidator(MIN_IDENTIFIER_LENGTH_VALIDATOR).build());
+        list.add(() -> StringGeneratorBuilders.lowerAlphabeticIdentifierGeneratorBuilder().setLowerCaseLength(30).addRuleValidator(MIN_IDENTIFIER_LENGTH_VALIDATOR).build());
+        list.add(() -> StringGeneratorBuilders.numericIdentifierGeneratorBuilder().setNumericLength(30).addRuleValidator(MIN_IDENTIFIER_LENGTH_VALIDATOR).build());
+        list.add(() -> StringGeneratorBuilders.upperAlphabeticIdentifierGeneratorBuilder().setUpperCaseLength(30).addRuleValidator(MIN_IDENTIFIER_LENGTH_VALIDATOR).build());
         return list.stream().map(Arguments::of).collect(Collectors.toList());
     }
 
