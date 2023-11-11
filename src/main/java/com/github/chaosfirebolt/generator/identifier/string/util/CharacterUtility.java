@@ -24,7 +24,11 @@ import java.util.List;
  * <br>
  * Created by ChaosFire on 12/5/2021
  */
-public class CharacterUtility {
+public final class CharacterUtility {
+
+    private CharacterUtility() {
+        throw new RuntimeException("No instances allowed");
+    }
 
     /**
      * Creates a list of characters from supplied range of integers cast to char

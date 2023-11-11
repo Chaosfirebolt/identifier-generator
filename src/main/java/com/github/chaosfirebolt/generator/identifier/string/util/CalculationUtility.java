@@ -25,7 +25,11 @@ import java.util.List;
  * <br>
  * Created by ChaosFire on 12/6/2021
  */
-public class CalculationUtility {
+public final class CalculationUtility {
+
+    private CalculationUtility() {
+        throw new RuntimeException("No instances allowed");
+    }
 
     /**
      * Calculates the total length of all parts.

@@ -24,7 +24,11 @@ import java.util.random.RandomGenerator;
  * <br>
  * Created by ChaosFire on 12-Dec-21
  */
-public class ShuffleUtility {
+public final class ShuffleUtility {
+
+    private ShuffleUtility() {
+        throw new RuntimeException("No instances allowed");
+    }
 
     /**
      * Shuffles the array using Fisher-Yates algorithm.
