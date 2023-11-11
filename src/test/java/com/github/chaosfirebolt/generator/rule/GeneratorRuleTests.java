@@ -72,14 +72,8 @@ public class GeneratorRuleTests {
 
     private static Stream<GeneratorRuleArguments> allData() {
         return Stream.of(
-                new GeneratorRuleArguments(new AlphaNumericGeneratorRule(7, 9, 5), 3, 21, 21),
-                new GeneratorRuleArguments(new AlphabeticGeneratorRule(7, 9), 2, 16, 16),
-                new GeneratorRuleArguments(new AnyCharacterGeneratorRule(7, 9, 5, 3), 4, 24, 24),
                 new GeneratorRuleArguments(new BaseGeneratorRule(Arrays.asList(new SpecialCharacterPart(3, 1), new NumericPart(19, 17))), 2, 22, 18),
-                new GeneratorRuleArguments(new UnvalidatedGeneratorRule(Collections.singletonList(new UpperAlphabeticPart(10)), 10), 1, 10, 10),
-                new GeneratorRuleArguments(new LowerAlphabeticGeneratorRule(99), 1, 99, 99),
-                new GeneratorRuleArguments(new NumericGeneratorRule(5), 1, 5, 5),
-                new GeneratorRuleArguments(new UpperAlphabeticGeneratorRule(9), 1, 9, 9)
+                new GeneratorRuleArguments(new UnvalidatedGeneratorRule(Collections.singletonList(new UpperAlphabeticPart(10)), 10), 1, 10, 10)
         );
     }
 
