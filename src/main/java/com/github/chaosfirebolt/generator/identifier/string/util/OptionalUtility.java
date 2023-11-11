@@ -25,7 +25,7 @@ import java.util.function.IntPredicate;
 public final class OptionalUtility {
 
     private OptionalUtility() {
-        throw new RuntimeException("No instances allowed!");
+        throw new RuntimeException("No instances allowed");
     }
 
     /**
