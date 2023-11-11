@@ -14,15 +14,10 @@
  * limitations under the License.
  */
 
-package com.github.chaosfirebolt.generator.identifier.constructor;
+package com.github.chaosfirebolt.generator.identifier.string;
 
 import com.github.chaosfirebolt.generator.identifier.IdentifierGenerator;
 import com.github.chaosfirebolt.generator.identifier.exception.InvalidGeneratorRuleException;
-import com.github.chaosfirebolt.generator.identifier.string.AlphaNumericIdentifierGeneratorBuilder;
-import com.github.chaosfirebolt.generator.identifier.string.AlphabeticIdentifierGeneratorBuilder;
-import com.github.chaosfirebolt.generator.identifier.string.AnyCharacterIdentifierGeneratorBuilder;
-import com.github.chaosfirebolt.generator.identifier.string.StringGeneratorBuilders;
-import com.github.chaosfirebolt.generator.identifier.string.impl.*;
 import com.github.chaosfirebolt.generator.identifier.string.validation.BaseRuleValidator;
 import com.github.chaosfirebolt.generator.identifier.string.validation.RuleValidator;
 import org.junit.jupiter.api.function.Executable;
@@ -39,7 +34,7 @@ import static org.junit.jupiter.api.Assertions.*;
 /**
  * Created by ChaosFire on 23-Dec-21
  */
-public class IdentifierGeneratorConstructorTests {
+public class IdentifierGeneratorConstructionTests {
 
     private static final String ERROR_MESSAGE = "identifier length can't be less than 30";
     private static final RuleValidator MIN_IDENTIFIER_LENGTH_VALIDATOR = new BaseRuleValidator(rule -> rule.getLength() >= 30, rule -> ERROR_MESSAGE);
@@ -192,14 +187,19 @@ public class IdentifierGeneratorConstructorTests {
 
     private static List<Arguments> randomIntsValidatorsConstructor_ParamsDoNotConformToRules_ShouldThrowInvalidGeneratorRuleException() {
         List<InvalidConstructorInvocationWrapper> list = new ArrayList<>();
-        list.add(buildWrapperForInvalidGeneratorRule(() -> new AlphaNumericIdentifierGenerator(new Random(), 9, 9, 9, MIN_IDENTIFIER_LENGTH_VALIDATOR)));
-        list.add(buildWrapperForInvalidGeneratorRule(() -> new AlphabeticIdentifierGenerator(new Random(), 9, 9, MIN_IDENTIFIER_LENGTH_VALIDATOR)));
+        list.add(buildWrapperForInvalidGeneratorRule(() -> configureBuilder(alphaNumericBuilder(9, 9, 9)).build()));
+        list.add(buildWrapperForInvalidGeneratorRule(() -> configureBuilder(alphabeticBuilder(9, 9)).build()));
         int length = 7;
-        list.add(buildWrapperForInvalidGeneratorRule(() -> new AnyCharacterIdentifierGenerator(new Random(), length, length, length, length, MIN_IDENTIFIER_LENGTH_VALIDATOR)));
-        list.add(buildWrapperForInvalidGeneratorRule(() -> new LowerAlphabeticIdentifierGenerator(new Random(), 9, MIN_IDENTIFIER_LENGTH_VALIDATOR)));
-        list.add(buildWrapperForInvalidGeneratorRule(() -> new NumericIdentifierGenerator(new Random(), 9, MIN_IDENTIFIER_LENGTH_VALIDATOR)));
-        list.add(buildWrapperForInvalidGeneratorRule(() -> new UpperAlphabeticIdentifierGenerator(new Random(), 9, MIN_IDENTIFIER_LENGTH_VALIDATOR)));
+        list.add(buildWrapperForInvalidGeneratorRule(() -> configureBuilder(anyCharacterBuilder(length, length, length, length)).build()));
+        list.add(buildWrapperForInvalidGeneratorRule(() -> configureBuilder(StringGeneratorBuilders.lowerAlphabeticIdentifierGeneratorBuilder().setLowerCaseLength(9)).build()));
+        list.add(buildWrapperForInvalidGeneratorRule(() -> configureBuilder(StringGeneratorBuilders.numericIdentifierGeneratorBuilder().setNumericLength(9)).build()));
+        list.add(buildWrapperForInvalidGeneratorRule(() -> configureBuilder(StringGeneratorBuilders.upperAlphabeticIdentifierGeneratorBuilder().setUpperCaseLength(9)).build()));
         return list.stream().map(Arguments::of).collect(Collectors.toList());
+    }
+
+    @SuppressWarnings("unchecked")
+    private static <T extends TypeSpecificStringIdentifierBuilder<?>> T configureBuilder(T builder) {
+        return (T) builder.setRandomGenerator(new Random()).addRuleValidator(MIN_IDENTIFIER_LENGTH_VALIDATOR);
     }
 
     @ParameterizedTest
@@ -210,14 +210,14 @@ public class IdentifierGeneratorConstructorTests {
 
     private static List<Arguments> randomIntsValidatorsConstructor_ParamsConformToRules_ShouldNotThrow() {
         List<Callable<? extends IdentifierGenerator<?>>> list = new ArrayList<>();
-        list.add(() -> new AlphaNumericIdentifierGenerator(new Random(), 10, 10, 10, MIN_IDENTIFIER_LENGTH_VALIDATOR));
-        list.add(() -> new AlphaNumericIdentifierGenerator(new Random(), 20, 11, 3, MIN_IDENTIFIER_LENGTH_VALIDATOR));
-        list.add(() -> new AlphabeticIdentifierGenerator(new Random(), 15, 15, MIN_IDENTIFIER_LENGTH_VALIDATOR));
-        list.add(() -> new AlphabeticIdentifierGenerator(new Random(), 20, 11, MIN_IDENTIFIER_LENGTH_VALIDATOR));
-        list.add(() -> new AnyCharacterIdentifierGenerator(new Random(), 10, 10, 5, 5, MIN_IDENTIFIER_LENGTH_VALIDATOR));
-        list.add(() -> new LowerAlphabeticIdentifierGenerator(new Random(), 40, MIN_IDENTIFIER_LENGTH_VALIDATOR));
-        list.add(() -> new NumericIdentifierGenerator(new Random(), 40, MIN_IDENTIFIER_LENGTH_VALIDATOR));
-        list.add(() -> new UpperAlphabeticIdentifierGenerator(new Random(), 40, MIN_IDENTIFIER_LENGTH_VALIDATOR));
+        list.add(() -> configureBuilder(alphaNumericBuilder(10, 10, 10)).build());
+        list.add(() -> configureBuilder(alphaNumericBuilder(20, 11, 3)).build());
+        list.add(() -> configureBuilder(alphabeticBuilder(15, 15)).build());
+        list.add(() -> configureBuilder(alphabeticBuilder(20, 11)).build());
+        list.add(() -> configureBuilder(anyCharacterBuilder(10, 10, 5, 5)).build());
+        list.add(() -> configureBuilder(StringGeneratorBuilders.lowerAlphabeticIdentifierGeneratorBuilder().setLowerCaseLength(40)).build());
+        list.add(() -> configureBuilder(StringGeneratorBuilders.numericIdentifierGeneratorBuilder().setNumericLength(40)).build());
+        list.add(() -> configureBuilder(StringGeneratorBuilders.upperAlphabeticIdentifierGeneratorBuilder().setUpperCaseLength(40)).build());
         return list.stream().map(Arguments::of).collect(Collectors.toList());
     }
 }

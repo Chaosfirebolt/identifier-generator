@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.github.chaosfirebolt.generator.identifier.constructor;
+package com.github.chaosfirebolt.generator.identifier.string;
 
 import org.junit.jupiter.api.function.Executable;
 
