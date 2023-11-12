@@ -3,6 +3,7 @@ Identifier Generator
 
 Dependencies
     - (MIT License) SLF4J API Module (org.slf4j:slf4j-api:2.0.9 - http://www.slf4j.org)
+    - (The Apache License, Version 2.0) org.apiguardian:apiguardian-api (org.apiguardian:apiguardian-api:1.1.2 - https://github.com/apiguardian-team/apiguardian)
 
 Test Dependencies
     - (Apache License, Version 2.0) Byte Buddy (without dependencies) (net.bytebuddy:byte-buddy:1.14.6 - https://bytebuddy.net/byte-buddy)
