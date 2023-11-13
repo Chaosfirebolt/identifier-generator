@@ -20,7 +20,7 @@ import com.github.chaosfirebolt.generator.identifier.api.BaseIdentifierGenerator
 import com.github.chaosfirebolt.generator.identifier.api.IdentifierGenerator;
 import com.github.chaosfirebolt.generator.identifier.api.exception.TooManyAttemptsException;
 import com.github.chaosfirebolt.generator.identifier.api.string.builders.StringGeneratorBuilders;
-import com.github.chaosfirebolt.generator.identifier.api.string.builders.StringIdentifierGenerator;
+import com.github.chaosfirebolt.generator.identifier.api.string.StringIdentifierGenerator;
 import com.github.chaosfirebolt.generator.identifier.api.string.UuidStringIdentifierGenerator;
 import com.github.chaosfirebolt.generator.identifier.api.string.part.NumericPart;
 import com.github.chaosfirebolt.generator.identifier.api.string.part.SpecialCharacterPart;

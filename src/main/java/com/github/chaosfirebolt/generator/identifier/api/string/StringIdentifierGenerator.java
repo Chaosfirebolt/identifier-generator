@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.github.chaosfirebolt.generator.identifier.api.string.builders;
+package com.github.chaosfirebolt.generator.identifier.api.string;
 
 import com.github.chaosfirebolt.generator.identifier.api.BaseIdentifierGenerator;
 import com.github.chaosfirebolt.generator.identifier.api.exception.InvalidGeneratorRuleException;

@@ -16,7 +16,7 @@
 
 package com.github.chaosfirebolt.generator.identifier.internal.builders;
 
-import com.github.chaosfirebolt.generator.identifier.api.string.builders.StringIdentifierGenerator;
+import com.github.chaosfirebolt.generator.identifier.api.string.StringIdentifierGenerator;
 import com.github.chaosfirebolt.generator.identifier.api.string.part.Part;
 import com.github.chaosfirebolt.generator.identifier.api.string.rule.BaseGeneratorRule;
 import com.github.chaosfirebolt.generator.identifier.api.string.rule.GeneratorRule;

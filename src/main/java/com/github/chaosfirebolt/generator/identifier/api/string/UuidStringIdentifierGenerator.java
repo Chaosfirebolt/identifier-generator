@@ -16,7 +16,6 @@
 
 package com.github.chaosfirebolt.generator.identifier.api.string;
 
-import com.github.chaosfirebolt.generator.identifier.api.string.builders.StringIdentifierGenerator;
 import com.github.chaosfirebolt.generator.identifier.api.string.validation.NoOpRuleValidator;
 import org.apiguardian.api.API;
 
