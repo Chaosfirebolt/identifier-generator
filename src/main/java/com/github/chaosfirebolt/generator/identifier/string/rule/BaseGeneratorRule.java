@@ -18,6 +18,7 @@ package com.github.chaosfirebolt.generator.identifier.string.rule;
 
 import com.github.chaosfirebolt.generator.identifier.string.part.Part;
 import com.github.chaosfirebolt.generator.identifier.string.util.CalculationUtility;
+import org.apiguardian.api.API;
 
 import java.util.Collections;
 import java.util.List;
@@ -27,6 +28,7 @@ import java.util.List;
  * <br>
  * Created by ChaosFire on 12/5/2021
  */
+@API(status = API.Status.STABLE)
 public class BaseGeneratorRule implements GeneratorRule {
 
     /**

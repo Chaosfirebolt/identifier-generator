@@ -16,6 +16,8 @@
 
 package com.github.chaosfirebolt.generator.identifier.string.util;
 
+import org.apiguardian.api.API;
+
 import java.security.SecureRandom;
 import java.util.random.RandomGenerator;
 
@@ -24,6 +26,7 @@ import java.util.random.RandomGenerator;
  * <br>
  * Created by ChaosFire on 12-Dec-21
  */
+@API(status = API.Status.INTERNAL)
 public final class ShuffleUtility {
 
     private ShuffleUtility() {

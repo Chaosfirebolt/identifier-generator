@@ -19,6 +19,7 @@ package com.github.chaosfirebolt.generator.identifier.string;
 import com.github.chaosfirebolt.generator.identifier.string.rule.GeneratorRule;
 import com.github.chaosfirebolt.generator.identifier.string.validation.CompositeRuleValidator;
 import com.github.chaosfirebolt.generator.identifier.string.validation.RuleValidator;
+import org.apiguardian.api.API;
 
 import java.security.SecureRandom;
 import java.util.ArrayList;
@@ -31,6 +32,7 @@ import java.util.random.RandomGenerator;
  * @param <T> concrete type of the builder
  */
 @SuppressWarnings("unchecked")
+@API(status = API.Status.INTERNAL, since = "2.0.0")
 abstract class BaseStringIdentifierGeneratorBuilder<T extends BaseStringIdentifierGeneratorBuilder<T>> {
 
     private RandomGenerator randomGenerator;

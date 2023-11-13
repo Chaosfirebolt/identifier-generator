@@ -16,9 +16,12 @@
 
 package com.github.chaosfirebolt.generator.identifier.string;
 
+import org.apiguardian.api.API;
+
 /**
  * Factory class for builders of string based identifier generators.
  */
+@API(status = API.Status.STABLE)
 public final class StringGeneratorBuilders {
 
     private StringGeneratorBuilders() {

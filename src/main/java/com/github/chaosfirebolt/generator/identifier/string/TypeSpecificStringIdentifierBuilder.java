@@ -19,6 +19,7 @@ package com.github.chaosfirebolt.generator.identifier.string;
 import com.github.chaosfirebolt.generator.identifier.string.part.Part;
 import com.github.chaosfirebolt.generator.identifier.string.rule.BaseGeneratorRule;
 import com.github.chaosfirebolt.generator.identifier.string.rule.GeneratorRule;
+import org.apiguardian.api.API;
 
 import java.util.List;
 
@@ -26,6 +27,7 @@ import java.util.List;
  * Builder for subclasses of {@link StringIdentifierGenerator}.
  * @param <T> concrete type of the builder
  */
+@API(status = API.Status.INTERNAL)
 abstract class TypeSpecificStringIdentifierBuilder<T extends TypeSpecificStringIdentifierBuilder<T>> extends BaseStringIdentifierGeneratorBuilder<T> {
 
     TypeSpecificStringIdentifierBuilder() {

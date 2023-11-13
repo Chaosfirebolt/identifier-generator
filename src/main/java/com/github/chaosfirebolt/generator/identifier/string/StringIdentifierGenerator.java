@@ -22,6 +22,7 @@ import com.github.chaosfirebolt.generator.identifier.string.part.Part;
 import com.github.chaosfirebolt.generator.identifier.string.rule.GeneratorRule;
 import com.github.chaosfirebolt.generator.identifier.string.util.ShuffleUtility;
 import com.github.chaosfirebolt.generator.identifier.string.validation.*;
+import org.apiguardian.api.API;
 
 import java.security.SecureRandom;
 import java.util.List;
@@ -33,6 +34,7 @@ import java.util.random.RandomGenerator;
  * <br>
  * Created by ChaosFire on 12/5/2021
  */
+@API(status = API.Status.STABLE)
 public class StringIdentifierGenerator extends BaseIdentifierGenerator<String> {
 
     /**

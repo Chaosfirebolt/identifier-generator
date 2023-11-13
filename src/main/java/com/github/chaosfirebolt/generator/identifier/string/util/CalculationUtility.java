@@ -17,6 +17,7 @@
 package com.github.chaosfirebolt.generator.identifier.string.util;
 
 import com.github.chaosfirebolt.generator.identifier.string.part.Part;
+import org.apiguardian.api.API;
 
 import java.util.List;
 
@@ -25,6 +26,7 @@ import java.util.List;
  * <br>
  * Created by ChaosFire on 12/6/2021
  */
+@API(status = API.Status.INTERNAL)
 public final class CalculationUtility {
 
     private CalculationUtility() {

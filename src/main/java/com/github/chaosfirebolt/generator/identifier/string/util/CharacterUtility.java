@@ -16,6 +16,8 @@
 
 package com.github.chaosfirebolt.generator.identifier.string.util;
 
+import org.apiguardian.api.API;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -24,6 +26,7 @@ import java.util.List;
  * <br>
  * Created by ChaosFire on 12/5/2021
  */
+@API(status = API.Status.INTERNAL)
 public final class CharacterUtility {
 
     private CharacterUtility() {

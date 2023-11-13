@@ -17,12 +17,14 @@
 package com.github.chaosfirebolt.generator.identifier.string.validation;
 
 import com.github.chaosfirebolt.generator.identifier.string.rule.GeneratorRule;
+import org.apiguardian.api.API;
 
 import java.util.List;
 
 /**
- *
+ * Validator composed of other validators.
  */
+@API(status = API.Status.STABLE)
 public class CompositeRuleValidator implements RuleValidator {
 
     private final List<RuleValidator> delegates;

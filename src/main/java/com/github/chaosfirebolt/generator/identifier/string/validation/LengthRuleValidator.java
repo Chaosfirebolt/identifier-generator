@@ -18,6 +18,7 @@ package com.github.chaosfirebolt.generator.identifier.string.validation;
 
 import com.github.chaosfirebolt.generator.identifier.string.rule.GeneratorRule;
 import com.github.chaosfirebolt.generator.identifier.string.util.CalculationUtility;
+import org.apiguardian.api.API;
 
 import java.util.function.Predicate;
 
@@ -26,6 +27,7 @@ import java.util.function.Predicate;
  * <br>
  * Created by ChaosFire on 12/5/2021
  */
+@API(status = API.Status.STABLE)
 public class LengthRuleValidator extends BaseRuleValidator {
 
     private static final Predicate<GeneratorRule> CONDITION = rule -> {

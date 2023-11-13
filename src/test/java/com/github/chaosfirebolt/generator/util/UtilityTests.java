@@ -16,6 +16,7 @@
 
 package com.github.chaosfirebolt.generator.util;
 
+import com.github.chaosfirebolt.generator.identifier.string.StringGeneratorBuilders;
 import com.github.chaosfirebolt.generator.identifier.string.util.CalculationUtility;
 import com.github.chaosfirebolt.generator.identifier.string.util.CharacterUtility;
 import com.github.chaosfirebolt.generator.identifier.string.util.OptionalUtility;
@@ -33,7 +34,7 @@ import static org.junit.jupiter.api.Assertions.*;
 public class UtilityTests {
 
   private static List<Class<?>> utilityClasses() {
-    return List.of(CalculationUtility.class, CharacterUtility.class, OptionalUtility.class, ShuffleUtility.class);
+    return List.of(CalculationUtility.class, CharacterUtility.class, OptionalUtility.class, ShuffleUtility.class, StringGeneratorBuilders.class);
   }
 
   @ParameterizedTest

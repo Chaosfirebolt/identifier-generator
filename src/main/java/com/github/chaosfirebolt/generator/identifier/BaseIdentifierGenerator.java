@@ -17,6 +17,7 @@
 package com.github.chaosfirebolt.generator.identifier;
 
 import com.github.chaosfirebolt.generator.identifier.exception.TooManyAttemptsException;
+import org.apiguardian.api.API;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -29,6 +30,7 @@ import java.util.function.Predicate;
  * <br>
  * Created by ChaosFire on 12/5/2021
  */
+@API(status = API.Status.STABLE)
 public abstract class BaseIdentifierGenerator<T> implements IdentifierGenerator<T> {
 
     /**

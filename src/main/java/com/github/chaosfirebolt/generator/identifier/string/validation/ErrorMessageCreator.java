@@ -17,12 +17,14 @@
 package com.github.chaosfirebolt.generator.identifier.string.validation;
 
 import com.github.chaosfirebolt.generator.identifier.string.rule.GeneratorRule;
+import org.apiguardian.api.API;
 
 /**
  * Represents generator for error messages
  * <br>
  * Created by ChaosFire on 12/5/2021
  */
+@API(status = API.Status.STABLE)
 @FunctionalInterface
 public interface ErrorMessageCreator {
 

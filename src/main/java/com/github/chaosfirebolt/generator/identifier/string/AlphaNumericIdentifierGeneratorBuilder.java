@@ -18,6 +18,7 @@ package com.github.chaosfirebolt.generator.identifier.string;
 
 import com.github.chaosfirebolt.generator.identifier.string.part.Part;
 import com.github.chaosfirebolt.generator.identifier.string.util.OptionalUtility;
+import org.apiguardian.api.API;
 
 import java.util.List;
 import java.util.OptionalInt;
@@ -25,6 +26,7 @@ import java.util.OptionalInt;
 /**
  * Specification of {@link StringIdentifierGeneratorBuilder} to allow easier setup for alphanumeric identifier generators.
  */
+@API(status = API.Status.STABLE, since = "2.0.0")
 public final class AlphaNumericIdentifierGeneratorBuilder extends TypeSpecificStringIdentifierBuilder<AlphaNumericIdentifierGeneratorBuilder>
         implements LowerAlphabeticGeneratorBuilder<AlphaNumericIdentifierGeneratorBuilder>, UpperCaseAlphabeticBuilder<AlphaNumericIdentifierGeneratorBuilder>,
         NumericGeneratorBuilder<AlphaNumericIdentifierGeneratorBuilder> {

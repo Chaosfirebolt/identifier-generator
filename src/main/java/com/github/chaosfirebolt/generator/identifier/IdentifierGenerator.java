@@ -17,6 +17,7 @@
 package com.github.chaosfirebolt.generator.identifier;
 
 import com.github.chaosfirebolt.generator.identifier.exception.TooManyAttemptsException;
+import org.apiguardian.api.API;
 
 import java.util.function.Predicate;
 
@@ -25,6 +26,7 @@ import java.util.function.Predicate;
  * <br>
  * Created by ChaosFire on 12/5/2021
  */
+@API(status = API.Status.STABLE)
 public interface IdentifierGenerator<T> {
 
     /**

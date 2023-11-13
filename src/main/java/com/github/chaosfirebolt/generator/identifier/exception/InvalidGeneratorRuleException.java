@@ -17,12 +17,14 @@
 package com.github.chaosfirebolt.generator.identifier.exception;
 
 import com.github.chaosfirebolt.generator.identifier.string.rule.GeneratorRule;
+import org.apiguardian.api.API;
 
 /**
  * This exception signals, that a {@link GeneratorRule} is not valid.
  * <br>
  * Created by ChaosFire on 12/5/2021
  */
+@API(status = API.Status.STABLE)
 public class InvalidGeneratorRuleException extends RuntimeException {
 
     /**

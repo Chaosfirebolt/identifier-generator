@@ -16,6 +16,8 @@
 
 package com.github.chaosfirebolt.generator.identifier.string.part;
 
+import org.apiguardian.api.API;
+
 import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
@@ -25,6 +27,7 @@ import java.util.Objects;
  * <br>
  * Created by ChaosFire on 12/5/2021
  */
+@API(status = API.Status.STABLE)
 public class BasePart implements Part {
 
     private static final String LENGTH_PARAM_NAME = "Part length";

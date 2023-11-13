@@ -16,12 +16,15 @@
 
 package com.github.chaosfirebolt.generator.identifier.string.util;
 
+import org.apiguardian.api.API;
+
 import java.util.OptionalInt;
 import java.util.function.IntPredicate;
 
 /**
  * Utility methods related to optionals.
  */
+@API(status = API.Status.INTERNAL)
 public final class OptionalUtility {
 
     private OptionalUtility() {
