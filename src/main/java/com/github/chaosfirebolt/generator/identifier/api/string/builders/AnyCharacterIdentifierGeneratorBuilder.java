@@ -16,12 +16,12 @@
 
 package com.github.chaosfirebolt.generator.identifier.api.string.builders;
 
-import com.github.chaosfirebolt.generator.identifier.api.string.LowerAlphabeticGeneratorBuilder;
-import com.github.chaosfirebolt.generator.identifier.api.string.NumericGeneratorBuilder;
-import com.github.chaosfirebolt.generator.identifier.api.string.SpecialGeneratorBuilder;
-import com.github.chaosfirebolt.generator.identifier.api.string.UpperCaseAlphabeticBuilder;
 import com.github.chaosfirebolt.generator.identifier.api.string.part.Part;
 import com.github.chaosfirebolt.generator.identifier.internal.builders.TypeSpecificStringIdentifierBuilder;
+import com.github.chaosfirebolt.generator.identifier.internal.builders.mixin.LowerAlphabeticBuilderData;
+import com.github.chaosfirebolt.generator.identifier.internal.builders.mixin.NumericBuilderData;
+import com.github.chaosfirebolt.generator.identifier.internal.builders.mixin.SpecialBuilderData;
+import com.github.chaosfirebolt.generator.identifier.internal.builders.mixin.UpperAlphabeticBuilderData;
 import com.github.chaosfirebolt.generator.identifier.internal.util.OptionalUtility;
 import org.apiguardian.api.API;
 
@@ -33,8 +33,10 @@ import java.util.OptionalInt;
  */
 @API(status = API.Status.STABLE, since = "2.0.0")
 public final class AnyCharacterIdentifierGeneratorBuilder extends TypeSpecificStringIdentifierBuilder<AnyCharacterIdentifierGeneratorBuilder>
-        implements LowerAlphabeticGeneratorBuilder<AnyCharacterIdentifierGeneratorBuilder>, UpperCaseAlphabeticBuilder<AnyCharacterIdentifierGeneratorBuilder>,
-        NumericGeneratorBuilder<AnyCharacterIdentifierGeneratorBuilder>, SpecialGeneratorBuilder<AnyCharacterIdentifierGeneratorBuilder> {
+        implements LowerAlphabeticGeneratorBuilder<AnyCharacterIdentifierGeneratorBuilder>, UpperAlphabeticBuilder<AnyCharacterIdentifierGeneratorBuilder>,
+                   NumericGeneratorBuilder<AnyCharacterIdentifierGeneratorBuilder>, SpecialGeneratorBuilder<AnyCharacterIdentifierGeneratorBuilder>,
+                   LowerAlphabeticBuilderData<AnyCharacterIdentifierGeneratorBuilder>, UpperAlphabeticBuilderData<AnyCharacterIdentifierGeneratorBuilder>,
+                   NumericBuilderData<AnyCharacterIdentifierGeneratorBuilder>, SpecialBuilderData<AnyCharacterIdentifierGeneratorBuilder> {
 
     private int lowerCaseLength;
     private int minLowerCaseLength;

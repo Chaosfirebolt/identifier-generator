@@ -14,17 +14,16 @@
  * limitations under the License.
  */
 
-package com.github.chaosfirebolt.generator.identifier.api.string;
+package com.github.chaosfirebolt.generator.identifier.api.string.builders;
 
-import com.github.chaosfirebolt.generator.identifier.api.string.part.SpecialCharacterPart;
 import com.github.chaosfirebolt.generator.identifier.internal.builders.TypeSpecificStringIdentifierBuilder;
-
-import java.util.OptionalInt;
+import org.apiguardian.api.API;
 
 /**
  * Internal!
  * @param <T> concrete type of the builder
  */
+@API(status = API.Status.STABLE, since = "2.0.0")
 public interface SpecialGeneratorBuilder<T extends TypeSpecificStringIdentifierBuilder<T>> {
 
     /**
@@ -38,23 +37,4 @@ public interface SpecialGeneratorBuilder<T extends TypeSpecificStringIdentifierB
      * @return this builder
      */
     T setMinSpecialCharacterLength(int minSpecialCharacterLength);
-
-    /**
-     * @return special character length currently set in the builder
-     */
-    int getSpecialCharacterLength();
-
-    /**
-     * @return optional describing the minimum special character length currently set in the builder
-     */
-    OptionalInt getMinSpecialCharacterLength();
-
-    /**
-     * Factory method creating a {@link SpecialCharacterPart} with the current data.
-     * @return a new part
-     */
-    default SpecialCharacterPart createSpecialCharacterPart() {
-        int minLength = getMinSpecialCharacterLength().orElseGet(this::getSpecialCharacterLength);
-        return new SpecialCharacterPart(getSpecialCharacterLength(), minLength);
-    }
 }

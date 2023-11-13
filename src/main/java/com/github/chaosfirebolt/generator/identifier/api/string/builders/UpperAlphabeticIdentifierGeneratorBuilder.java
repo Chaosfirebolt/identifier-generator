@@ -16,9 +16,9 @@
 
 package com.github.chaosfirebolt.generator.identifier.api.string.builders;
 
-import com.github.chaosfirebolt.generator.identifier.api.string.UpperCaseAlphabeticBuilder;
 import com.github.chaosfirebolt.generator.identifier.api.string.part.Part;
 import com.github.chaosfirebolt.generator.identifier.internal.builders.TypeSpecificStringIdentifierBuilder;
+import com.github.chaosfirebolt.generator.identifier.internal.builders.mixin.UpperAlphabeticBuilderData;
 import com.github.chaosfirebolt.generator.identifier.internal.util.OptionalUtility;
 import org.apiguardian.api.API;
 
@@ -30,7 +30,7 @@ import java.util.OptionalInt;
  */
 @API(status = API.Status.STABLE)
 public final class UpperAlphabeticIdentifierGeneratorBuilder extends TypeSpecificStringIdentifierBuilder<UpperAlphabeticIdentifierGeneratorBuilder>
-        implements UpperCaseAlphabeticBuilder<UpperAlphabeticIdentifierGeneratorBuilder> {
+        implements UpperAlphabeticBuilder<UpperAlphabeticIdentifierGeneratorBuilder>, UpperAlphabeticBuilderData<UpperAlphabeticIdentifierGeneratorBuilder> {
 
     private int upperCaseLength;
     private int minUpperCaseLength;

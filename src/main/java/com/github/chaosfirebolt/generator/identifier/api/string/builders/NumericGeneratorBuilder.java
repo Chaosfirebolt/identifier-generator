@@ -14,17 +14,16 @@
  * limitations under the License.
  */
 
-package com.github.chaosfirebolt.generator.identifier.api.string;
+package com.github.chaosfirebolt.generator.identifier.api.string.builders;
 
-import com.github.chaosfirebolt.generator.identifier.api.string.part.NumericPart;
 import com.github.chaosfirebolt.generator.identifier.internal.builders.TypeSpecificStringIdentifierBuilder;
-
-import java.util.OptionalInt;
+import org.apiguardian.api.API;
 
 /**
  * Internal!
  * @param <T> concrete type of the builder
  */
+@API(status = API.Status.STABLE, since = "2.0.0")
 public interface NumericGeneratorBuilder<T extends TypeSpecificStringIdentifierBuilder<T>> {
 
     /**
@@ -38,23 +37,4 @@ public interface NumericGeneratorBuilder<T extends TypeSpecificStringIdentifierB
      * @return this builder
      */
     T setMinNumericLength(int minNumericLength);
-
-    /**
-     * @return numeric length currently set in the builder
-     */
-    int getNumericLength();
-
-    /**
-     * @return optional describing the minimum numeric length currently set in the builder
-     */
-    OptionalInt getMinNumericLength();
-
-    /**
-     * Factory method creating a {@link NumericPart} with the current data.
-     * @return a new part
-     */
-    default NumericPart createNumericPart() {
-        int minLowerCaseLength = getMinNumericLength().orElseGet(this::getNumericLength);
-        return new NumericPart(this.getNumericLength(), minLowerCaseLength);
-    }
 }

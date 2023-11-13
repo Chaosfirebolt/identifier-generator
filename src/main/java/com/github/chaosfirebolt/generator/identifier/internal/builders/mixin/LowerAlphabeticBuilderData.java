@@ -14,10 +14,11 @@
  * limitations under the License.
  */
 
-package com.github.chaosfirebolt.generator.identifier.api.string;
+package com.github.chaosfirebolt.generator.identifier.internal.builders.mixin;
 
 import com.github.chaosfirebolt.generator.identifier.api.string.part.LowerAlphabeticPart;
 import com.github.chaosfirebolt.generator.identifier.internal.builders.TypeSpecificStringIdentifierBuilder;
+import org.apiguardian.api.API;
 
 import java.util.OptionalInt;
 
@@ -25,19 +26,8 @@ import java.util.OptionalInt;
  * Internal!
  * @param <T> concrete type of the builder
  */
-public interface LowerAlphabeticGeneratorBuilder<T extends TypeSpecificStringIdentifierBuilder<T>> {
-
-    /**
-     * @param lowerCaseLength desired length of lower case alphabetic characters
-     * @return this builder
-     */
-    T setLowerCaseLength(int lowerCaseLength);
-
-    /**
-     * @param minLowerCaseLength desired minimum length of lower case alphabetic characters
-     * @return this builder
-     */
-    T setMinLowerCaseLength(int minLowerCaseLength);
+@API(status = API.Status.INTERNAL, since = "2.0.0")
+public interface LowerAlphabeticBuilderData<T extends TypeSpecificStringIdentifierBuilder<T>> {
 
     /**
      * @return lower case length currently set in the builder

@@ -16,9 +16,9 @@
 
 package com.github.chaosfirebolt.generator.identifier.api.string.builders;
 
-import com.github.chaosfirebolt.generator.identifier.api.string.LowerAlphabeticGeneratorBuilder;
 import com.github.chaosfirebolt.generator.identifier.api.string.part.Part;
 import com.github.chaosfirebolt.generator.identifier.internal.builders.TypeSpecificStringIdentifierBuilder;
+import com.github.chaosfirebolt.generator.identifier.internal.builders.mixin.LowerAlphabeticBuilderData;
 import com.github.chaosfirebolt.generator.identifier.internal.util.OptionalUtility;
 import org.apiguardian.api.API;
 
@@ -30,7 +30,7 @@ import java.util.OptionalInt;
  */
 @API(status = API.Status.STABLE)
 public final class LowerAlphabeticIdentifierGeneratorBuilder extends TypeSpecificStringIdentifierBuilder<LowerAlphabeticIdentifierGeneratorBuilder>
-        implements LowerAlphabeticGeneratorBuilder<LowerAlphabeticIdentifierGeneratorBuilder> {
+        implements LowerAlphabeticGeneratorBuilder<LowerAlphabeticIdentifierGeneratorBuilder>, LowerAlphabeticBuilderData<LowerAlphabeticIdentifierGeneratorBuilder> {
 
     private int lowerCaseLength;
     private int minLowerCaseLength;

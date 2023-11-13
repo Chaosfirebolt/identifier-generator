@@ -16,9 +16,9 @@
 
 package com.github.chaosfirebolt.generator.identifier.api.string.builders;
 
-import com.github.chaosfirebolt.generator.identifier.api.string.NumericGeneratorBuilder;
 import com.github.chaosfirebolt.generator.identifier.api.string.part.Part;
 import com.github.chaosfirebolt.generator.identifier.internal.builders.TypeSpecificStringIdentifierBuilder;
+import com.github.chaosfirebolt.generator.identifier.internal.builders.mixin.NumericBuilderData;
 import com.github.chaosfirebolt.generator.identifier.internal.util.OptionalUtility;
 import org.apiguardian.api.API;
 
@@ -29,7 +29,8 @@ import java.util.OptionalInt;
  * Specification of {@link StringIdentifierGeneratorBuilder} to allow easier setup for numeric identifier generators.
  */
 @API(status = API.Status.STABLE)
-public final class NumericIdentifierGeneratorBuilder extends TypeSpecificStringIdentifierBuilder<NumericIdentifierGeneratorBuilder> implements NumericGeneratorBuilder<NumericIdentifierGeneratorBuilder> {
+public final class NumericIdentifierGeneratorBuilder extends TypeSpecificStringIdentifierBuilder<NumericIdentifierGeneratorBuilder>
+        implements NumericGeneratorBuilder<NumericIdentifierGeneratorBuilder>, NumericBuilderData<NumericIdentifierGeneratorBuilder> {
 
     private int numericLength;
     private int minNumericLength;

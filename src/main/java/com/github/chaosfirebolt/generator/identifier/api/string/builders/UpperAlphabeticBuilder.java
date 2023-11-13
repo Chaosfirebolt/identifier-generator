@@ -14,18 +14,17 @@
  * limitations under the License.
  */
 
-package com.github.chaosfirebolt.generator.identifier.api.string;
+package com.github.chaosfirebolt.generator.identifier.api.string.builders;
 
-import com.github.chaosfirebolt.generator.identifier.api.string.part.UpperAlphabeticPart;
 import com.github.chaosfirebolt.generator.identifier.internal.builders.TypeSpecificStringIdentifierBuilder;
-
-import java.util.OptionalInt;
+import org.apiguardian.api.API;
 
 /**
  * Internal!
  * @param <T> concrete type of the builder
  */
-public interface UpperCaseAlphabeticBuilder<T extends TypeSpecificStringIdentifierBuilder<T>> {
+@API(status = API.Status.STABLE, since = "2.0.0")
+public interface UpperAlphabeticBuilder<T extends TypeSpecificStringIdentifierBuilder<T>> {
 
     /**
      * @param upperCaseLength desired length of upper case alphabetic characters
@@ -38,23 +37,4 @@ public interface UpperCaseAlphabeticBuilder<T extends TypeSpecificStringIdentifi
      * @return this builder
      */
     T setMinUpperCaseLength(int minUpperCaseLength);
-
-    /**
-     * @return upper case length currently set in the builder
-     */
-    int getUpperCaseLength();
-
-    /**
-     * @return optional describing the minimum lower case length currently set in the builder
-     */
-    OptionalInt getMinUpperCaseLength();
-
-    /**
-     * Factory method creating an {@link UpperAlphabeticPart} with the current data.
-     * @return a new part
-     */
-    default UpperAlphabeticPart createUpperAlphabeticPart() {
-        int minUpperCaseLength = getMinUpperCaseLength().orElseGet(this::getUpperCaseLength);
-        return new UpperAlphabeticPart(getUpperCaseLength(), minUpperCaseLength);
-    }
 }
