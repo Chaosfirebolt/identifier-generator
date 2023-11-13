@@ -16,10 +16,7 @@
 
 package com.github.chaosfirebolt.generator.identifier.string.validation;
 
-import com.github.chaosfirebolt.generator.identifier.string.rule.GeneratorRule;
 import org.apiguardian.api.API;
-
-import java.util.function.Predicate;
 
 /**
  * Validator, which considers every rule valid.
@@ -29,27 +26,10 @@ import java.util.function.Predicate;
 @API(status = API.Status.STABLE)
 public class NoOpRuleValidator extends BaseRuleValidator {
 
-    private static Predicate<GeneratorRule> ALWAYS_VALID;
-    private static ErrorMessageCreator NO_MESSAGE;
-
     /**
      * Constructs new instance of NoOpRuleValidator
      */
     public NoOpRuleValidator() {
-        super(getCondition(), getMessageCreator());
-    }
-
-    private static Predicate<GeneratorRule> getCondition() {
-        if (ALWAYS_VALID == null) {
-            ALWAYS_VALID = rule -> true;
-        }
-        return ALWAYS_VALID;
-    }
-
-    private static ErrorMessageCreator getMessageCreator() {
-        if (NO_MESSAGE == null) {
-            NO_MESSAGE = rule -> null;
-        }
-        return NO_MESSAGE;
+        super(rule -> true, rule -> null);
     }
 }
