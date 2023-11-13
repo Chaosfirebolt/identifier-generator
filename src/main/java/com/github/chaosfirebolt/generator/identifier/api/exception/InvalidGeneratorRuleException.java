@@ -14,9 +14,24 @@
  * limitations under the License.
  */
 
-package com.github.chaosfirebolt.generator.rule;
+package com.github.chaosfirebolt.generator.identifier.api.exception;
 
 import com.github.chaosfirebolt.generator.identifier.api.string.rule.GeneratorRule;
+import org.apiguardian.api.API;
 
-public record GeneratorRuleArguments(GeneratorRule rule, int expectedNumberOfParts, int expectedLength, int expectedMinLength) {
+/**
+ * This exception signals, that a {@link GeneratorRule} is not valid.
+ * <br>
+ * Created by ChaosFire on 12/5/2021
+ */
+@API(status = API.Status.STABLE)
+public class InvalidGeneratorRuleException extends RuntimeException {
+
+    /**
+     * Constructs new InvalidGeneratorRuleException with the specified message
+     * @param message the message
+     */
+    public InvalidGeneratorRuleException(String message) {
+        super(message);
+    }
 }

@@ -16,7 +16,7 @@
 
 package com.github.chaosfirebolt.generator.util;
 
-import com.github.chaosfirebolt.generator.identifier.string.util.OptionalUtility;
+import com.github.chaosfirebolt.generator.identifier.internal.util.OptionalUtility;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 

@@ -16,8 +16,8 @@
 
 package com.github.chaosfirebolt.generator.identifier.validation;
 
-import com.github.chaosfirebolt.generator.identifier.string.validation.CompositeRuleValidator;
-import com.github.chaosfirebolt.generator.identifier.string.validation.RuleValidator;
+import com.github.chaosfirebolt.generator.identifier.api.string.validation.CompositeRuleValidator;
+import com.github.chaosfirebolt.generator.identifier.api.string.validation.RuleValidator;
 import org.junit.jupiter.api.function.Executable;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;

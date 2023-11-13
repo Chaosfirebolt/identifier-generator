@@ -14,9 +14,24 @@
  * limitations under the License.
  */
 
-package com.github.chaosfirebolt.generator.rule;
+package com.github.chaosfirebolt.generator.identifier.api.string.validation;
 
 import com.github.chaosfirebolt.generator.identifier.api.string.rule.GeneratorRule;
+import org.apiguardian.api.API;
 
-public record GeneratorRuleArguments(GeneratorRule rule, int expectedNumberOfParts, int expectedLength, int expectedMinLength) {
+/**
+ * Represents generator for error messages
+ * <br>
+ * Created by ChaosFire on 12/5/2021
+ */
+@API(status = API.Status.STABLE)
+@FunctionalInterface
+public interface ErrorMessageCreator {
+
+    /**
+     * Creates error message from the supplied {@link GeneratorRule}
+     * @param rule rule to be used for message generation
+     * @return created error message
+     */
+    String create(GeneratorRule rule);
 }

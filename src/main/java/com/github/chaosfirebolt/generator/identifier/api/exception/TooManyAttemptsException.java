@@ -14,9 +14,22 @@
  * limitations under the License.
  */
 
-package com.github.chaosfirebolt.generator.rule;
+package com.github.chaosfirebolt.generator.identifier.api.exception;
 
-import com.github.chaosfirebolt.generator.identifier.api.string.rule.GeneratorRule;
+import org.apiguardian.api.API;
 
-public record GeneratorRuleArguments(GeneratorRule rule, int expectedNumberOfParts, int expectedLength, int expectedMinLength) {
+/**
+ * This exception signals, that the maximum number of attempts to generate unique identifier have been reached.
+ * <br>
+ * Created by ChaosFire on 21-Dec-21
+ */
+@API(status = API.Status.STABLE)
+public class TooManyAttemptsException extends RuntimeException {
+
+    /**
+     * @param message detailed message for the exception
+     */
+    public TooManyAttemptsException(String message) {
+        super(message);
+    }
 }

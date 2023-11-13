@@ -16,11 +16,12 @@
 
 package com.github.chaosfirebolt.generator.identifier.string;
 
-import com.github.chaosfirebolt.generator.identifier.exception.InvalidGeneratorRuleException;
-import com.github.chaosfirebolt.generator.identifier.string.part.Part;
-import com.github.chaosfirebolt.generator.identifier.string.rule.GeneratorRule;
-import com.github.chaosfirebolt.generator.identifier.string.util.CharacterUtility;
-import com.github.chaosfirebolt.generator.identifier.string.validation.MinimumLengthEqualOrLessThanLengthRuleValidator;
+import com.github.chaosfirebolt.generator.identifier.api.exception.InvalidGeneratorRuleException;
+import com.github.chaosfirebolt.generator.identifier.api.string.builders.StringIdentifierGenerator;
+import com.github.chaosfirebolt.generator.identifier.api.string.part.Part;
+import com.github.chaosfirebolt.generator.identifier.api.string.rule.GeneratorRule;
+import com.github.chaosfirebolt.generator.identifier.internal.util.CharacterUtility;
+import com.github.chaosfirebolt.generator.identifier.api.string.validation.MinimumLengthEqualOrLessThanLengthRuleValidator;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.function.Executable;
 

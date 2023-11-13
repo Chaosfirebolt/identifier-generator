@@ -16,15 +16,17 @@
 
 package com.github.chaosfirebolt.generator.identifier;
 
-import com.github.chaosfirebolt.generator.identifier.exception.TooManyAttemptsException;
-import com.github.chaosfirebolt.generator.identifier.string.StringGeneratorBuilders;
-import com.github.chaosfirebolt.generator.identifier.string.StringIdentifierGenerator;
-import com.github.chaosfirebolt.generator.identifier.string.UuidStringIdentifierGenerator;
-import com.github.chaosfirebolt.generator.identifier.string.part.NumericPart;
-import com.github.chaosfirebolt.generator.identifier.string.part.SpecialCharacterPart;
-import com.github.chaosfirebolt.generator.identifier.string.part.UpperAlphabeticPart;
-import com.github.chaosfirebolt.generator.identifier.string.rule.BaseGeneratorRule;
-import com.github.chaosfirebolt.generator.identifier.string.rule.GeneratorRule;
+import com.github.chaosfirebolt.generator.identifier.api.BaseIdentifierGenerator;
+import com.github.chaosfirebolt.generator.identifier.api.IdentifierGenerator;
+import com.github.chaosfirebolt.generator.identifier.api.exception.TooManyAttemptsException;
+import com.github.chaosfirebolt.generator.identifier.api.string.builders.StringGeneratorBuilders;
+import com.github.chaosfirebolt.generator.identifier.api.string.builders.StringIdentifierGenerator;
+import com.github.chaosfirebolt.generator.identifier.api.string.UuidStringIdentifierGenerator;
+import com.github.chaosfirebolt.generator.identifier.api.string.part.NumericPart;
+import com.github.chaosfirebolt.generator.identifier.api.string.part.SpecialCharacterPart;
+import com.github.chaosfirebolt.generator.identifier.api.string.part.UpperAlphabeticPart;
+import com.github.chaosfirebolt.generator.identifier.api.string.rule.BaseGeneratorRule;
+import com.github.chaosfirebolt.generator.identifier.api.string.rule.GeneratorRule;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.params.ParameterizedTest;

@@ -16,11 +16,11 @@
 
 package com.github.chaosfirebolt.generator.util;
 
-import com.github.chaosfirebolt.generator.identifier.string.StringGeneratorBuilders;
-import com.github.chaosfirebolt.generator.identifier.string.util.CalculationUtility;
-import com.github.chaosfirebolt.generator.identifier.string.util.CharacterUtility;
-import com.github.chaosfirebolt.generator.identifier.string.util.OptionalUtility;
-import com.github.chaosfirebolt.generator.identifier.string.util.ShuffleUtility;
+import com.github.chaosfirebolt.generator.identifier.api.string.builders.StringGeneratorBuilders;
+import com.github.chaosfirebolt.generator.identifier.internal.util.CalculationUtility;
+import com.github.chaosfirebolt.generator.identifier.internal.util.CharacterUtility;
+import com.github.chaosfirebolt.generator.identifier.internal.util.OptionalUtility;
+import com.github.chaosfirebolt.generator.identifier.internal.util.ShuffleUtility;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.MethodSource;
 

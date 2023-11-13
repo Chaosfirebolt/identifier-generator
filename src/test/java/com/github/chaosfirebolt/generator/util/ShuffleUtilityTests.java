@@ -16,7 +16,7 @@
 
 package com.github.chaosfirebolt.generator.util;
 
-import com.github.chaosfirebolt.generator.identifier.string.util.ShuffleUtility;
+import com.github.chaosfirebolt.generator.identifier.internal.util.ShuffleUtility;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertNotEquals;

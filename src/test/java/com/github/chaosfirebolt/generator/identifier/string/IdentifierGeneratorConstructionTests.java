@@ -16,10 +16,15 @@
 
 package com.github.chaosfirebolt.generator.identifier.string;
 
-import com.github.chaosfirebolt.generator.identifier.IdentifierGenerator;
-import com.github.chaosfirebolt.generator.identifier.exception.InvalidGeneratorRuleException;
-import com.github.chaosfirebolt.generator.identifier.string.validation.BaseRuleValidator;
-import com.github.chaosfirebolt.generator.identifier.string.validation.RuleValidator;
+import com.github.chaosfirebolt.generator.identifier.api.IdentifierGenerator;
+import com.github.chaosfirebolt.generator.identifier.api.exception.InvalidGeneratorRuleException;
+import com.github.chaosfirebolt.generator.identifier.api.string.builders.AlphaNumericIdentifierGeneratorBuilder;
+import com.github.chaosfirebolt.generator.identifier.api.string.builders.AlphabeticIdentifierGeneratorBuilder;
+import com.github.chaosfirebolt.generator.identifier.api.string.builders.AnyCharacterIdentifierGeneratorBuilder;
+import com.github.chaosfirebolt.generator.identifier.api.string.builders.StringGeneratorBuilders;
+import com.github.chaosfirebolt.generator.identifier.api.string.validation.BaseRuleValidator;
+import com.github.chaosfirebolt.generator.identifier.api.string.validation.RuleValidator;
+import com.github.chaosfirebolt.generator.identifier.internal.builders.TypeSpecificStringIdentifierBuilder;
 import org.junit.jupiter.api.function.Executable;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;

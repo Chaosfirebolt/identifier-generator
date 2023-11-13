@@ -14,9 +14,24 @@
  * limitations under the License.
  */
 
-package com.github.chaosfirebolt.generator.rule;
+package com.github.chaosfirebolt.generator.identifier.api.string.validation;
 
+import com.github.chaosfirebolt.generator.identifier.api.exception.InvalidGeneratorRuleException;
 import com.github.chaosfirebolt.generator.identifier.api.string.rule.GeneratorRule;
+import org.apiguardian.api.API;
 
-public record GeneratorRuleArguments(GeneratorRule rule, int expectedNumberOfParts, int expectedLength, int expectedMinLength) {
+/**
+ * Represent validator for a {@link GeneratorRule}
+ * <br>
+ * Created by ChaosFire on 12/5/2021
+ */
+@API(status = API.Status.STABLE)
+public interface RuleValidator {
+
+    /**
+     * Validates supplied rule.
+     * @param rule rule to be validated
+     * @throws InvalidGeneratorRuleException if the validator considers tested rule invalid
+     */
+    void validate(GeneratorRule rule);
 }

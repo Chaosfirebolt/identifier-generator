@@ -16,11 +16,12 @@
 
 package com.github.chaosfirebolt.generator.rule;
 
-import com.github.chaosfirebolt.generator.identifier.string.part.NumericPart;
-import com.github.chaosfirebolt.generator.identifier.string.part.Part;
-import com.github.chaosfirebolt.generator.identifier.string.part.SpecialCharacterPart;
-import com.github.chaosfirebolt.generator.identifier.string.part.UpperAlphabeticPart;
-import com.github.chaosfirebolt.generator.identifier.string.rule.*;
+import com.github.chaosfirebolt.generator.identifier.api.string.part.NumericPart;
+import com.github.chaosfirebolt.generator.identifier.api.string.part.Part;
+import com.github.chaosfirebolt.generator.identifier.api.string.part.SpecialCharacterPart;
+import com.github.chaosfirebolt.generator.identifier.api.string.part.UpperAlphabeticPart;
+import com.github.chaosfirebolt.generator.identifier.api.string.rule.BaseGeneratorRule;
+import com.github.chaosfirebolt.generator.identifier.api.string.rule.GeneratorRule;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
