@@ -47,6 +47,7 @@ public final class AnyCharacterIdentifierGeneratorBuilder extends TypeSpecificSt
     private int specialCharacterLength;
     private int minSpecialCharacterLength;
 
+    @API(status = API.Status.INTERNAL, since = "2.0.0")
     AnyCharacterIdentifierGeneratorBuilder() {
     }
 
@@ -63,11 +64,13 @@ public final class AnyCharacterIdentifierGeneratorBuilder extends TypeSpecificSt
     }
 
     @Override
+    @API(status = API.Status.INTERNAL, since = "2.0.0")
     public int getLowerCaseLength() {
         return this.lowerCaseLength;
     }
 
     @Override
+    @API(status = API.Status.INTERNAL, since = "2.0.0")
     public OptionalInt getMinLowerCaseLength() {
         return OptionalUtility.fromInt(this.minLowerCaseLength);
     }
@@ -85,11 +88,13 @@ public final class AnyCharacterIdentifierGeneratorBuilder extends TypeSpecificSt
     }
 
     @Override
+    @API(status = API.Status.INTERNAL, since = "2.0.0")
     public int getNumericLength() {
         return this.numericLength;
     }
 
     @Override
+    @API(status = API.Status.INTERNAL, since = "2.0.0")
     public OptionalInt getMinNumericLength() {
         return OptionalUtility.fromInt(this.minNumericLength);
     }
@@ -107,11 +112,13 @@ public final class AnyCharacterIdentifierGeneratorBuilder extends TypeSpecificSt
     }
 
     @Override
+    @API(status = API.Status.INTERNAL, since = "2.0.0")
     public int getSpecialCharacterLength() {
         return this.specialCharacterLength;
     }
 
     @Override
+    @API(status = API.Status.INTERNAL, since = "2.0.0")
     public OptionalInt getMinSpecialCharacterLength() {
         return OptionalUtility.fromInt(this.minSpecialCharacterLength);
     }
@@ -134,11 +141,13 @@ public final class AnyCharacterIdentifierGeneratorBuilder extends TypeSpecificSt
     }
 
     @Override
+    @API(status = API.Status.INTERNAL, since = "2.0.0")
     public int getUpperCaseLength() {
         return this.upperCaseLength;
     }
 
     @Override
+    @API(status = API.Status.INTERNAL, since = "2.0.0")
     public OptionalInt getMinUpperCaseLength() {
         return OptionalUtility.fromInt(this.minUpperCaseLength);
     }

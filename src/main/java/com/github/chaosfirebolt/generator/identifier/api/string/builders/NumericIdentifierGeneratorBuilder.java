@@ -51,11 +51,13 @@ public final class NumericIdentifierGeneratorBuilder extends TypeSpecificStringI
     }
 
     @Override
+    @API(status = API.Status.INTERNAL, since = "2.0.0")
     public int getNumericLength() {
         return this.numericLength;
     }
 
     @Override
+    @API(status = API.Status.INTERNAL, since = "2.0.0")
     public OptionalInt getMinNumericLength() {
         return OptionalUtility.fromInt(this.minNumericLength);
     }

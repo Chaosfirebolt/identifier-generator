@@ -35,6 +35,7 @@ public final class LowerAlphabeticIdentifierGeneratorBuilder extends TypeSpecifi
     private int lowerCaseLength;
     private int minLowerCaseLength;
 
+    @API(status = API.Status.INTERNAL, since = "2.0.0")
     LowerAlphabeticIdentifierGeneratorBuilder() {
     }
 
@@ -51,11 +52,13 @@ public final class LowerAlphabeticIdentifierGeneratorBuilder extends TypeSpecifi
     }
 
     @Override
+    @API(status = API.Status.INTERNAL, since = "2.0.0")
     public int getLowerCaseLength() {
         return this.lowerCaseLength;
     }
 
     @Override
+    @API(status = API.Status.INTERNAL, since = "2.0.0")
     public OptionalInt getMinLowerCaseLength() {
         return OptionalUtility.fromInt(this.minLowerCaseLength);
     }

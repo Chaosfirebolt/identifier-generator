@@ -29,6 +29,7 @@ import org.apiguardian.api.API;
 @API(status = API.Status.STABLE, since = "2.0.0")
 public final class StringIdentifierGeneratorBuilder extends BaseStringIdentifierGeneratorBuilder<StringIdentifierGeneratorBuilder> {
 
+    @API(status = API.Status.INTERNAL, since = "2.0.0")
     StringIdentifierGeneratorBuilder() {
     }
 

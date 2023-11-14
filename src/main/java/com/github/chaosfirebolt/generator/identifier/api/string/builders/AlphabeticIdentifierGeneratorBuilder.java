@@ -39,6 +39,7 @@ public final class AlphabeticIdentifierGeneratorBuilder extends TypeSpecificStri
     private int upperCaseLength;
     private int minUpperCaseLength;
 
+    @API(status = API.Status.INTERNAL, since = "2.0.0")
     AlphabeticIdentifierGeneratorBuilder() {
     }
 
@@ -60,11 +61,13 @@ public final class AlphabeticIdentifierGeneratorBuilder extends TypeSpecificStri
     }
 
     @Override
+    @API(status = API.Status.INTERNAL, since = "2.0.0")
     public int getLowerCaseLength() {
         return this.lowerCaseLength;
     }
 
     @Override
+    @API(status = API.Status.INTERNAL, since = "2.0.0")
     public OptionalInt getMinLowerCaseLength() {
         return OptionalUtility.fromInt(this.minLowerCaseLength);
     }
@@ -82,11 +85,13 @@ public final class AlphabeticIdentifierGeneratorBuilder extends TypeSpecificStri
     }
 
     @Override
+    @API(status = API.Status.INTERNAL, since = "2.0.0")
     public int getUpperCaseLength() {
         return this.upperCaseLength;
     }
 
     @Override
+    @API(status = API.Status.INTERNAL, since = "2.0.0")
     public OptionalInt getMinUpperCaseLength() {
         return OptionalUtility.fromInt(this.minUpperCaseLength);
     }
