@@ -117,9 +117,7 @@ public class StringIdentifierGenerator extends BaseIdentifierGenerator<String> {
     @Override
     public String generate(int identifierLength) {
         //in this implementation identifier length can not be less than minimum length from the rule
-        if (identifierLength < this.generatorRule.getMinLength()) {
-            identifierLength = this.generatorRule.getMinLength();
-        }
+        identifierLength = Math.max(identifierLength, this.generatorRule.getMinLength());
         char[] identifier = new char[identifierLength];
         int identifierIndex = 0;
         identifierIndex = this.fillIdentifier(identifier, identifierIndex, Part::minLength);

@@ -27,6 +27,7 @@ import com.github.chaosfirebolt.generator.identifier.api.string.part.SpecialChar
 import com.github.chaosfirebolt.generator.identifier.api.string.part.UpperAlphabeticPart;
 import com.github.chaosfirebolt.generator.identifier.api.string.rule.BaseGeneratorRule;
 import com.github.chaosfirebolt.generator.identifier.api.string.rule.GeneratorRule;
+import com.github.chaosfirebolt.generator.identifier.api.string.validation.BaseRuleValidator;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -83,29 +84,74 @@ public class IdentifierGeneratorMethodTests {
                         .setLowerCaseLength(15)
                         .setUpperCaseLength(15)
                         .build(), 10, 30, 30),
+                IdentifierArguments.of(StringGeneratorBuilders.alphabeticIdentifierGeneratorBuilder()
+                        .setLowerCaseLength(15)
+                        .setMinLowerCaseLength(10)
+                        .setUpperCaseLength(15)
+                        .setMinUpperCaseLength(10)
+                        .build(), 10, 30, 20),
                 IdentifierArguments.of(StringGeneratorBuilders.alphaNumericIdentifierGeneratorBuilder()
                         .setUpperCaseLength(15)
                         .setLowerCaseLength(15)
                         .setNumericLength(11)
                         .build(), 5, 41, 41),
+                IdentifierArguments.of(StringGeneratorBuilders.alphaNumericIdentifierGeneratorBuilder()
+                        .setUpperCaseLength(15)
+                        .setMinUpperCaseLength(5)
+                        .setLowerCaseLength(15)
+                        .setMinLowerCaseLength(7)
+                        .setNumericLength(11)
+                        .setMinNumericLength(3)
+                        .build(), 5, 41, 15),
                 IdentifierArguments.of(StringGeneratorBuilders.anyCharacterIdentifierGeneratorBuilder()
                         .setLowerCaseLength(11)
                         .setUpperCaseLength(12)
                         .setNumericLength(7)
                         .setSpecialCharacterLength(3)
                         .build(), 9, 33, 33),
+                IdentifierArguments.of(StringGeneratorBuilders.anyCharacterIdentifierGeneratorBuilder()
+                        .setLowerCaseLength(11)
+                        .setMinLowerCaseLength(5)
+                        .setUpperCaseLength(12)
+                        .setMinUpperCaseLength(5)
+                        .setNumericLength(7)
+                        .setMinNumericLength(5)
+                        .setSpecialCharacterLength(3)
+                        .setMinSpecialCharacterLength(1)
+                        .build(), 9, 33, 16),
                 IdentifierArguments.of(StringGeneratorBuilders.lowerAlphabeticIdentifierGeneratorBuilder()
                         .setLowerCaseLength(20)
                         .build(), 11, 20, 20),
+                IdentifierArguments.of(StringGeneratorBuilders.lowerAlphabeticIdentifierGeneratorBuilder()
+                        .setLowerCaseLength(20)
+                        .setMinLowerCaseLength(10)
+                        .build(), 11, 20, 10),
                 IdentifierArguments.of(StringGeneratorBuilders.numericIdentifierGeneratorBuilder()
                         .setNumericLength(29)
                         .build(), 100, 29, 29),
+                IdentifierArguments.of(StringGeneratorBuilders.numericIdentifierGeneratorBuilder()
+                        .setNumericLength(29)
+                        .setMinNumericLength(23)
+                        .build(), 100, 29, 23),
                 IdentifierArguments.of(new StringIdentifierGenerator(generatorRule), 49, 233, 233),
-                IdentifierArguments.of(StringGeneratorBuilders.stringIdentifierGeneratorBuilder().setGeneratorRule(generatorRule).build(), 49, 233, 233),
+                IdentifierArguments.of(StringGeneratorBuilders.stringIdentifierGeneratorBuilder()
+                        .setGeneratorRule(generatorRule)
+                        .build(), 49, 233, 233),
+                IdentifierArguments.of(StringGeneratorBuilders.stringIdentifierGeneratorBuilder()
+                        .setGeneratorRule(generatorRule)
+                        .addRuleValidator(new BaseRuleValidator(rule -> rule.getLength() > 100, rule -> "Rule defines too short identifier length"))
+                        .addRuleValidator(new BaseRuleValidator(rule -> rule.getLength() < 1000, rule -> "Rule defines too long identifier length"))
+                        .addRuleValidator(new BaseRuleValidator(rule -> rule.getMinLength() > 50, rule -> "Rule requires too short minimum length"))
+                        .build(), 49, 233, 233),
                 IdentifierArguments.of(StringGeneratorBuilders
                         .upperAlphabeticIdentifierGeneratorBuilder()
                         .setUpperCaseLength(111)
                         .build(), 50, 111, 111),
+                IdentifierArguments.of(StringGeneratorBuilders
+                        .upperAlphabeticIdentifierGeneratorBuilder()
+                        .setUpperCaseLength(111)
+                        .setMinUpperCaseLength(100)
+                        .build(), 50, 111, 100),
                 IdentifierArguments.of(new UuidStringIdentifierGenerator(), 20, 36, 36)
         );
     }
