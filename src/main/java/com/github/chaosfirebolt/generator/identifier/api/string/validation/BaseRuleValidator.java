@@ -25,7 +25,7 @@ import java.util.function.Predicate;
 /**
  * Created by ChaosFire on 12/5/2021
  */
-@API(status = API.Status.STABLE)
+@API(status = API.Status.STABLE, since = "2.0.0")
 public class BaseRuleValidator implements RuleValidator {
 
     /**

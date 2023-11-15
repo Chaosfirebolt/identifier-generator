@@ -24,7 +24,7 @@ import java.util.function.IntPredicate;
 /**
  * Utility methods related to optionals.
  */
-@API(status = API.Status.INTERNAL)
+@API(status = API.Status.INTERNAL, since = "2.0.0")
 public final class OptionalUtility {
 
     private OptionalUtility() {

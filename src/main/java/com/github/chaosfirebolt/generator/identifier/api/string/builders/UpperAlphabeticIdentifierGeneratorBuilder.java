@@ -28,7 +28,7 @@ import java.util.OptionalInt;
 /**
  * Specification of {@link StringIdentifierGeneratorBuilder} to allow easier setup for upper alphabetic identifier generators.
  */
-@API(status = API.Status.STABLE)
+@API(status = API.Status.STABLE, since = "2.0.0")
 public final class UpperAlphabeticIdentifierGeneratorBuilder extends TypeSpecificStringIdentifierBuilder<UpperAlphabeticIdentifierGeneratorBuilder>
         implements UpperAlphabeticBuilder<UpperAlphabeticIdentifierGeneratorBuilder>, UpperAlphabeticBuilderData<UpperAlphabeticIdentifierGeneratorBuilder> {
 

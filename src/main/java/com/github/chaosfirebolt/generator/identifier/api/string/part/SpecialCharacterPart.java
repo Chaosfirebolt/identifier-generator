@@ -27,7 +27,7 @@ import java.util.List;
  * <br>
  * Created by ChaosFire on 12/5/2021
  */
-@API(status = API.Status.STABLE)
+@API(status = API.Status.STABLE, since = "2.0.0")
 public class SpecialCharacterPart extends BasePart {
 
     private static final List<Character> CHARACTERS;

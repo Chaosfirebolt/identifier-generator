@@ -28,7 +28,7 @@ import java.util.OptionalInt;
 /**
  * Specification of {@link StringIdentifierGeneratorBuilder} to allow easier setup for lower case alphabetic identifier generators.
  */
-@API(status = API.Status.STABLE)
+@API(status = API.Status.STABLE, since = "2.0.0")
 public final class LowerAlphabeticIdentifierGeneratorBuilder extends TypeSpecificStringIdentifierBuilder<LowerAlphabeticIdentifierGeneratorBuilder>
         implements LowerAlphabeticGeneratorBuilder<LowerAlphabeticIdentifierGeneratorBuilder>, LowerAlphabeticBuilderData<LowerAlphabeticIdentifierGeneratorBuilder> {
 

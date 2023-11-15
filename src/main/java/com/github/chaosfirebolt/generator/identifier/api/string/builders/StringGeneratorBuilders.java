@@ -21,7 +21,7 @@ import org.apiguardian.api.API;
 /**
  * Factory class for builders of string based identifier generators.
  */
-@API(status = API.Status.STABLE)
+@API(status = API.Status.STABLE, since = "2.0.0")
 public final class StringGeneratorBuilders {
 
     private StringGeneratorBuilders() {

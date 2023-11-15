@@ -26,7 +26,7 @@ import java.util.function.Predicate;
  * <br>
  * Created by ChaosFire on 12-Dec-21
  */
-@API(status = API.Status.STABLE)
+@API(status = API.Status.STABLE, since = "2.0.0")
 public class MinimumLengthEqualOrLessThanLengthRuleValidator extends BaseRuleValidator {
 
     private static final Predicate<GeneratorRule> CONDITION = rule -> rule.getMinLength() <= rule.getLength();

@@ -26,7 +26,7 @@ import java.util.List;
  * <br>
  * Created by ChaosFire on 12/5/2021
  */
-@API(status = API.Status.INTERNAL)
+@API(status = API.Status.INTERNAL, since = "2.0.0")
 public final class CharacterUtility {
 
     private CharacterUtility() {

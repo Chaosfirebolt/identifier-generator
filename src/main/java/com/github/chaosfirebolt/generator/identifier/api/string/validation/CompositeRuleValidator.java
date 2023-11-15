@@ -24,7 +24,7 @@ import java.util.List;
 /**
  * Validator composed of other validators.
  */
-@API(status = API.Status.STABLE)
+@API(status = API.Status.STABLE, since = "2.0.0")
 public class CompositeRuleValidator implements RuleValidator {
 
     private final List<RuleValidator> delegates;

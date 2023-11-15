@@ -27,7 +27,7 @@ import java.util.Objects;
  * <br>
  * Created by ChaosFire on 12/5/2021
  */
-@API(status = API.Status.STABLE)
+@API(status = API.Status.STABLE, since = "2.0.0")
 public class BasePart implements Part {
 
     private static final String LENGTH_PARAM_NAME = "Part length";
