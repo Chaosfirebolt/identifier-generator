@@ -16,7 +16,7 @@
 
 package com.github.chaosfirebolt.generator.identifier.api.string;
 
-import com.github.chaosfirebolt.generator.identifier.api.string.validation.NoOpRuleValidator;
+import com.github.chaosfirebolt.generator.identifier.api.BaseIdentifierGenerator;
 import org.apiguardian.api.API;
 
 import java.util.UUID;
@@ -27,14 +27,7 @@ import java.util.UUID;
  * Created by ChaosFire on 12/5/2021
  */
 @API(status = API.Status.STABLE, since = "2.0.0")
-public class UuidStringIdentifierGenerator extends StringIdentifierGenerator {
-
-  /**
-   * Constructs new UuidStringIdentifierGenerator.
-   */
-  public UuidStringIdentifierGenerator() {
-    super(null, null, new NoOpRuleValidator());
-  }
+public class UuidStringIdentifierGenerator extends BaseIdentifierGenerator<String> {
 
   @Override
   public String generate() {
