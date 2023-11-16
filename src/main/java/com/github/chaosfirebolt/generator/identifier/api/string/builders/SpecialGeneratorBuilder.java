@@ -20,7 +20,7 @@ import com.github.chaosfirebolt.generator.identifier.internal.builders.TypeSpeci
 import org.apiguardian.api.API;
 
 /**
- * Internal!
+ * Defines functionality to configure generator with special characters.
  *
  * @param <T> concrete type of the builder
  */
