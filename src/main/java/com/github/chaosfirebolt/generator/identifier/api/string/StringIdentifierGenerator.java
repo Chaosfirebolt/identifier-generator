@@ -16,7 +16,7 @@
 
 package com.github.chaosfirebolt.generator.identifier.api.string;
 
-import com.github.chaosfirebolt.generator.identifier.api.BaseIdentifierGenerator;
+import com.github.chaosfirebolt.generator.identifier.api.BaseTargetLengthIdentifierGenerator;
 import com.github.chaosfirebolt.generator.identifier.api.exception.InvalidGeneratorRuleException;
 import com.github.chaosfirebolt.generator.identifier.api.string.part.Part;
 import com.github.chaosfirebolt.generator.identifier.api.string.rule.GeneratorRule;
@@ -35,7 +35,7 @@ import java.util.random.RandomGenerator;
  * Created by ChaosFire on 12/5/2021
  */
 @API(status = API.Status.STABLE, since = "2.0.0")
-public class StringIdentifierGenerator extends BaseIdentifierGenerator<String> {
+public class StringIdentifierGenerator extends BaseTargetLengthIdentifierGenerator<String> {
 
   /**
    * The default rule validators.

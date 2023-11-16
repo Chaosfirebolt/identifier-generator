@@ -31,15 +31,6 @@ public class RandomUuidStringIdentifierGenerator extends BaseIdentifierGenerator
 
   @Override
   public String generate() {
-    return generateRandomUuidString();
-  }
-
-  @Override
-  public String generate(int identifierLength) {
-    return generateRandomUuidString();
-  }
-
-  private static String generateRandomUuidString() {
     return UUID.randomUUID().toString();
   }
 }

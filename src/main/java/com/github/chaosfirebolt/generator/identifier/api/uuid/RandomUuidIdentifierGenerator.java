@@ -26,9 +26,4 @@ public class RandomUuidIdentifierGenerator extends BaseIdentifierGenerator<UUID>
   public UUID generate() {
     return UUID.randomUUID();
   }
-
-  @Override
-  public UUID generate(int identifierLength) {
-    return UUID.randomUUID();
-  }
 }

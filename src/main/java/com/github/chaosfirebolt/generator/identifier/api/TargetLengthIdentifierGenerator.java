@@ -17,31 +17,30 @@
 package com.github.chaosfirebolt.generator.identifier.api;
 
 import com.github.chaosfirebolt.generator.identifier.api.exception.TooManyAttemptsException;
-import org.apiguardian.api.API;
 
 import java.util.function.Predicate;
 
 /**
- * This interface defines the basic functionality for generating identifiers.
+ * Extension of {@link IdentifierGenerator} allowing to generate identifiers with desired length.
  * @param <T> type of the generated identifier
- * Created by ChaosFire on 12/5/2021
  */
-@API(status = API.Status.STABLE, since = "2.0.0")
-public interface IdentifierGenerator<T> {
+public interface TargetLengthIdentifierGenerator<T> extends IdentifierGenerator<T> {
 
   /**
-   * Generates an identifier
+   * Generates an identifier with the specified length
    *
+   * @param identifierLength required length of the generated identifier
    * @return the generated identifier
    */
-  T generate();
+  T generate(int identifierLength);
 
   /**
-   * Generates an identifier which is unique according to the provided condition
+   * Generates an identifier with the specified length, which is unique according to the provided condition
    *
+   * @param identifierLength    required length of the generated identifier
    * @param uniquenessCondition condition for uniqueness of the generated identifier
    * @return the generated unique identifier
    * @throws TooManyAttemptsException if a maximum number of attempts to generate unique identifier has been set, and that number is reached
    */
-  T generate(Predicate<T> uniquenessCondition);
+  T generate(int identifierLength, Predicate<T> uniquenessCondition);
 }

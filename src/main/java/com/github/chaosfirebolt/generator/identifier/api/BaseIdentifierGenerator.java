@@ -28,6 +28,7 @@ import java.util.function.Predicate;
  * <br>
  * New identifiers will be generated until the condition proves one to be unique.
  * <br>
+ * @param <T> type of the generated identifier
  * Created by ChaosFire on 12/5/2021
  */
 @API(status = API.Status.STABLE, since = "2.0.0")
@@ -72,7 +73,10 @@ public abstract class BaseIdentifierGenerator<T> implements IdentifierGenerator<
     return identifier;
   }
 
-  private void throwIfMaxAttemptsExceeded(int currentCount) {
+  /**
+   * @param currentCount current attempt to generate unique identifier
+   */
+  protected final void throwIfMaxAttemptsExceeded(int currentCount) {
     if (this.maximumAttempts > 0 && currentCount >= this.maximumAttempts) {
       String message = "Maximum number of attempts to generate unique identifier reached - " + currentCount;
       this.logger.debug(message);
@@ -93,36 +97,6 @@ public abstract class BaseIdentifierGenerator<T> implements IdentifierGenerator<
   @SuppressWarnings("unused")
   protected T regenerateIdentifier(T previousIdentifier) {
     return this.generate();
-  }
-
-  @Override
-  public T generate(int identifierLength, Predicate<T> uniquenessCondition) {
-    T identifier = this.generate(identifierLength);
-    int count = 1;
-    this.logger.debug("Starting unique identifier generation");
-    while (!uniquenessCondition.test(identifier)) {
-      this.throwIfMaxAttemptsExceeded(count);
-      identifier = this.regenerateIdentifier(identifier, identifierLength);
-      count++;
-    }
-    this.logger.debug("Unique identifier generated after {} attempts", count);
-    return identifier;
-  }
-
-  /**
-   * Generates a new identifier, if the previously generated one is not unique.
-   * <br>
-   * This implementation will just create a new one from scratch, without taking into account the previous identifier.
-   * <br>
-   * Override this method for better/faster regeneration.
-   *
-   * @param previousIdentifier previously generated and not unique identifier
-   * @param identifierLength   required length of the identifier
-   * @return newly generated identifier
-   */
-  @SuppressWarnings("unused")
-  protected T regenerateIdentifier(T previousIdentifier, int identifierLength) {
-    return this.generate(identifierLength);
   }
 
   /**

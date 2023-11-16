@@ -18,6 +18,7 @@ package com.github.chaosfirebolt.generator.identifier;
 
 import com.github.chaosfirebolt.generator.identifier.api.BaseIdentifierGenerator;
 import com.github.chaosfirebolt.generator.identifier.api.IdentifierGenerator;
+import com.github.chaosfirebolt.generator.identifier.api.TargetLengthIdentifierGenerator;
 import com.github.chaosfirebolt.generator.identifier.api.exception.TooManyAttemptsException;
 import com.github.chaosfirebolt.generator.identifier.api.string.StringIdentifierGenerator;
 import com.github.chaosfirebolt.generator.identifier.api.string.RandomUuidStringIdentifierGenerator;
@@ -41,7 +42,7 @@ import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 import static org.junit.jupiter.api.Assertions.*;
-import static org.junit.jupiter.api.Assumptions.assumeFalse;
+import static org.junit.jupiter.api.Assumptions.assumeTrue;
 import static org.mockito.Mockito.doReturn;
 
 /**
@@ -212,9 +213,15 @@ public class IdentifierGeneratorMethodTests {
   @ParameterizedTest
   @MethodSource("generatorsWithExpectedMinLength")
   public void generateIdentifierWithLength_LengthIsLessThanMinimum_IdentifierShouldHaveCorrectLength(IdentifierGenerator<String> identifierGenerator, int expectedMinLength) {
+    assumeTrue(isTargetLengthIdentifierGenerator(identifierGenerator), () -> "Test not applicable for - " + identifierGenerator.getClass().getSimpleName());
     int length = expectedMinLength / 2;
-    String identifier = identifierGenerator.generate(length);
+    TargetLengthIdentifierGenerator<String> generator = (TargetLengthIdentifierGenerator<String>) identifierGenerator;
+    String identifier = generator.generate(length);
     assertEquals(expectedMinLength, identifier.length());
+  }
+
+  private static boolean isTargetLengthIdentifierGenerator(IdentifierGenerator<String> generator) {
+    return generator instanceof TargetLengthIdentifierGenerator<String>;
   }
 
   private static List<Arguments> generatorsWithExpectedMinLength() {
@@ -224,17 +231,20 @@ public class IdentifierGeneratorMethodTests {
   @ParameterizedTest
   @MethodSource("generatorsWithExpectedMinLength")
   public void generateIdentifierWithLength_LengthIsMoreThanMinimum_IdentifierShouldHaveCorrectLength(IdentifierGenerator<String> identifierGenerator, int expectedMinLength) {
-    assumeFalse(identifierGenerator.getClass().equals(RandomUuidStringIdentifierGenerator.class), "Test not applicable for uuid identifier generator");
+    assumeTrue(isTargetLengthIdentifierGenerator(identifierGenerator), () -> "Test not applicable for - " + identifierGenerator.getClass().getSimpleName());
+    TargetLengthIdentifierGenerator<String> generator = (TargetLengthIdentifierGenerator<String>) identifierGenerator;
     int length = expectedMinLength * 2;
-    String identifier = identifierGenerator.generate(length);
+    String identifier = generator.generate(length);
     assertEquals(length, identifier.length());
   }
 
   @ParameterizedTest
   @MethodSource("generators")
   public void generateIdentifierWithLength_GenerateMany_AllShouldBeDifferent(IdentifierGenerator<String> identifierGenerator) {
+    assumeTrue(isTargetLengthIdentifierGenerator(identifierGenerator), () -> "Test not applicable for - " + identifierGenerator.getClass().getSimpleName());
+    TargetLengthIdentifierGenerator<String> generator = (TargetLengthIdentifierGenerator<String>) identifierGenerator;
     for (int i = 0; i < 100; i++) {
-      String identifier = identifierGenerator.generate(100);
+      String identifier = generator.generate(100);
       boolean exists = !this.existingIdentifiers.add(identifier);
       assertFalse(exists, () -> String.format("identifier '%s' already generated", identifier));
     }
@@ -244,16 +254,19 @@ public class IdentifierGeneratorMethodTests {
   @MethodSource("generatorsWithExpectedMinLength")
   public void generateUniqueIdentifierWithLength_LengthIsLessThanMinimum_IdentifierShouldHaveCorrectLength(IdentifierGenerator<String> identifierGenerator, int expectedMinLength) {
     int length = expectedMinLength / 2;
-    String identifier = identifierGenerator.generate(length, this.uniqueCondition);
+    assumeTrue(isTargetLengthIdentifierGenerator(identifierGenerator), () -> "Test not applicable for - " + identifierGenerator.getClass().getSimpleName());
+    TargetLengthIdentifierGenerator<String> generator = (TargetLengthIdentifierGenerator<String>) identifierGenerator;
+    String identifier = generator.generate(length, this.uniqueCondition);
     assertEquals(expectedMinLength, identifier.length());
   }
 
   @ParameterizedTest
   @MethodSource("generatorsWithExpectedMinLength")
   public void generateUniqueIdentifierWithLength_LengthIsMoreThanMinimum_IdentifierShouldHaveCorrectLength(IdentifierGenerator<String> identifierGenerator, int expectedMinLength) {
-    assumeFalse(identifierGenerator.getClass().equals(RandomUuidStringIdentifierGenerator.class), "Test not applicable for uuid identifier generator");
+    assumeTrue(isTargetLengthIdentifierGenerator(identifierGenerator), () -> "Test not applicable for - " + identifierGenerator.getClass().getSimpleName());
+    TargetLengthIdentifierGenerator<String> generator = (TargetLengthIdentifierGenerator<String>) identifierGenerator;
     int length = expectedMinLength * 2;
-    String identifier = identifierGenerator.generate(length, this.uniqueCondition);
+    String identifier = generator.generate(length, this.uniqueCondition);
     assertEquals(length, identifier.length());
   }
 
@@ -261,8 +274,10 @@ public class IdentifierGeneratorMethodTests {
   @MethodSource("generators")
   public void generateUniqueIdentifierWithLength_ExpectedNumberOfUniqueIdentifiersShouldBeGenerated(IdentifierGenerator<String> identifierGenerator) {
     int targetCount = 1_000;
+    assumeTrue(isTargetLengthIdentifierGenerator(identifierGenerator), () -> "Test not applicable for - " + identifierGenerator.getClass().getSimpleName());
+    TargetLengthIdentifierGenerator<String> generator = (TargetLengthIdentifierGenerator<String>) identifierGenerator;
     for (int i = 0; i < targetCount; i++) {
-      identifierGenerator.generate(100, this.uniqueCondition);
+      generator.generate(100, this.uniqueCondition);
     }
     assertEquals(targetCount, this.existingIdentifiers.size());
   }
@@ -270,9 +285,12 @@ public class IdentifierGeneratorMethodTests {
   @ParameterizedTest
   @MethodSource("generatorsWithMaxAttempts")
   public void generateUniqueIdentifierWithLength_MaximumAttemptsReached_ShouldThrowTooManyAttemptsExceptionWithCorrectMessage(IdentifierGenerator<String> identifierGenerator, int maxAttempts) {
+    assumeTrue(isTargetLengthIdentifierGenerator(identifierGenerator), () -> "Test not applicable for - " + identifierGenerator.getClass().getSimpleName());
+    TargetLengthIdentifierGenerator<String> targetLengthIdentifierGenerator = (TargetLengthIdentifierGenerator<String>) identifierGenerator;
+
     int length = 100;
-    String toBeReturned = identifierGenerator.generate(length);
-    IdentifierGenerator<String> generator = Mockito.spy(identifierGenerator);
+    String toBeReturned = targetLengthIdentifierGenerator.generate(length);
+    TargetLengthIdentifierGenerator<String> generator = Mockito.spy(targetLengthIdentifierGenerator);
     doReturn(toBeReturned).when(generator).generate(length);
 
     String firstGenerated = generator.generate(length, this.uniqueCondition);

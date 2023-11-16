@@ -60,14 +60,6 @@ public class RandomUuidIdentifierGeneratorTests {
     }
   }
 
-  @ParameterizedTest
-  @ValueSource(ints = { 1, 11, 111, 1111, 11111 })
-  public void generateWithLengthShouldReturnDifferentUuidsAndNotThrow(int iterations) {
-    for (int i = 0; i < iterations; i++) {
-      this.generator.generate(11, this.generatedUuids::add);
-    }
-  }
-
   @Test
   public void generateNonUnique_ShouldThrowWhenMaxAttemptsAreReached() {
     UUID result = UUID.randomUUID();
