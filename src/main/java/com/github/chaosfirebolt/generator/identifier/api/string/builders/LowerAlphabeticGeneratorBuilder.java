@@ -21,20 +21,21 @@ import org.apiguardian.api.API;
 
 /**
  * Internal!
+ *
  * @param <T> concrete type of the builder
  */
 @API(status = API.Status.STABLE, since = "2.0.0")
 public interface LowerAlphabeticGeneratorBuilder<T extends TypeSpecificStringIdentifierBuilder<T>> {
 
-    /**
-     * @param lowerCaseLength desired length of lower case alphabetic characters
-     * @return this builder
-     */
-    T setLowerCaseLength(int lowerCaseLength);
+  /**
+   * @param lowerCaseLength desired length of lower case alphabetic characters
+   * @return this builder
+   */
+  T setLowerCaseLength(int lowerCaseLength);
 
-    /**
-     * @param minLowerCaseLength desired minimum length of lower case alphabetic characters
-     * @return this builder
-     */
-    T setMinLowerCaseLength(int minLowerCaseLength);
+  /**
+   * @param minLowerCaseLength desired minimum length of lower case alphabetic characters
+   * @return this builder
+   */
+  T setMinLowerCaseLength(int minLowerCaseLength);
 }

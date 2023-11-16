@@ -29,10 +29,10 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
  */
 public class CharacterUtilityTests {
 
-    @Test
-    public void getCharacterListFromRange_ShouldReturnCorrect() {
-        List<Character> expected = Arrays.asList('A', 'B', 'C');
-        List<Character> actual = CharacterUtility.characterListFromIntRange(65, 68);
-        assertEquals(expected, actual);
-    }
+  @Test
+  public void getCharacterListFromRange_ShouldReturnCorrect() {
+    List<Character> expected = Arrays.asList('A', 'B', 'C');
+    List<Character> actual = CharacterUtility.characterListFromIntRange(65, 68);
+    assertEquals(expected, actual);
+  }
 }

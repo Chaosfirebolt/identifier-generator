@@ -27,33 +27,33 @@ import java.util.List;
 @API(status = API.Status.STABLE, since = "2.0.0")
 public class CompositeRuleValidator implements RuleValidator {
 
-    private final List<RuleValidator> delegates;
+  private final List<RuleValidator> delegates;
 
-    /**
-     * @param delegates array of the actual validators
-     * @throws IllegalArgumentException if {@code delegates} is null or empty
-     */
-    public CompositeRuleValidator(RuleValidator... delegates) {
-        this(delegates == null ? List.of() : List.of(delegates));
-    }
+  /**
+   * @param delegates array of the actual validators
+   * @throws IllegalArgumentException if {@code delegates} is null or empty
+   */
+  public CompositeRuleValidator(RuleValidator... delegates) {
+    this(delegates == null ? List.of() : List.of(delegates));
+  }
 
-    /**
-     * @param delegates list of the actual validators
-     * @throws IllegalArgumentException if {@code delegates} is null or empty
-     */
-    public CompositeRuleValidator(List<RuleValidator> delegates) {
-        this.delegates = validateDelegates(delegates);
-    }
+  /**
+   * @param delegates list of the actual validators
+   * @throws IllegalArgumentException if {@code delegates} is null or empty
+   */
+  public CompositeRuleValidator(List<RuleValidator> delegates) {
+    this.delegates = validateDelegates(delegates);
+  }
 
-    private static List<RuleValidator> validateDelegates(List<RuleValidator> validators) {
-        if (validators == null || validators.isEmpty()) {
-            throw new IllegalArgumentException("Missing rule validators");
-        }
-        return validators;
+  private static List<RuleValidator> validateDelegates(List<RuleValidator> validators) {
+    if (validators == null || validators.isEmpty()) {
+      throw new IllegalArgumentException("Missing rule validators");
     }
+    return validators;
+  }
 
-    @Override
-    public void validate(GeneratorRule rule) {
-        this.delegates.forEach(delegate -> delegate.validate(rule));
-    }
+  @Override
+  public void validate(GeneratorRule rule) {
+    this.delegates.forEach(delegate -> delegate.validate(rule));
+  }
 }

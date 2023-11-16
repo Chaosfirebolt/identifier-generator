@@ -21,20 +21,21 @@ import org.apiguardian.api.API;
 
 /**
  * Internal!
+ *
  * @param <T> concrete type of the builder
  */
 @API(status = API.Status.STABLE, since = "2.0.0")
 public interface SpecialGeneratorBuilder<T extends TypeSpecificStringIdentifierBuilder<T>> {
 
-    /**
-     * @param specialCharacterLength desired length of special characters
-     * @return this builder
-     */
-    T setSpecialCharacterLength(int specialCharacterLength);
+  /**
+   * @param specialCharacterLength desired length of special characters
+   * @return this builder
+   */
+  T setSpecialCharacterLength(int specialCharacterLength);
 
-    /**
-     * @param minSpecialCharacterLength desired minimum length of special characters
-     * @return this builder
-     */
-    T setMinSpecialCharacterLength(int minSpecialCharacterLength);
+  /**
+   * @param minSpecialCharacterLength desired minimum length of special characters
+   * @return this builder
+   */
+  T setMinSpecialCharacterLength(int minSpecialCharacterLength);
 }

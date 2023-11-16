@@ -29,23 +29,26 @@ import java.util.List;
 @API(status = API.Status.STABLE, since = "2.0.0")
 public interface GeneratorRule {
 
-    /**
-     * Get identifier parts required by this rule
-     * @return the identifier parts
-     */
-    List<Part> getParts();
+  /**
+   * Get identifier parts required by this rule
+   *
+   * @return the identifier parts
+   */
+  List<Part> getParts();
 
-    /**
-     * Get identifier length required by this rule
-     * @return total length of the identifier
-     */
-    int getLength();
+  /**
+   * Get identifier length required by this rule
+   *
+   * @return total length of the identifier
+   */
+  int getLength();
 
-    /**
-     * Get the minimum length required by this rule
-     * @return the minimum length of the identifier
-     */
-    default int getMinLength() {
-        return this.getLength();
-    }
+  /**
+   * Get the minimum length required by this rule
+   *
+   * @return the minimum length of the identifier
+   */
+  default int getMinLength() {
+    return this.getLength();
+  }
 }

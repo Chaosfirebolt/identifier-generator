@@ -29,24 +29,24 @@ import java.util.UUID;
 @API(status = API.Status.STABLE, since = "2.0.0")
 public class UuidStringIdentifierGenerator extends StringIdentifierGenerator {
 
-    /**
-     * Constructs new UuidStringIdentifierGenerator.
-     */
-    public UuidStringIdentifierGenerator() {
-        super(null, null, new NoOpRuleValidator());
-    }
+  /**
+   * Constructs new UuidStringIdentifierGenerator.
+   */
+  public UuidStringIdentifierGenerator() {
+    super(null, null, new NoOpRuleValidator());
+  }
 
-    @Override
-    public String generate() {
-        return generateRandomUuidString();
-    }
+  @Override
+  public String generate() {
+    return generateRandomUuidString();
+  }
 
-    @Override
-    public String generate(int identifierLength) {
-        return generateRandomUuidString();
-    }
+  @Override
+  public String generate(int identifierLength) {
+    return generateRandomUuidString();
+  }
 
-    private static String generateRandomUuidString() {
-        return UUID.randomUUID().toString();
-    }
+  private static String generateRandomUuidString() {
+    return UUID.randomUUID().toString();
+  }
 }

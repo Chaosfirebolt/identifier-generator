@@ -28,14 +28,14 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 public class OptionalUtilityTests {
 
   @ParameterizedTest
-  @ValueSource(ints = { 1, 5, 9 })
+  @ValueSource(ints = {1, 5, 9})
   public void conditionIsFulfilled_ShouldBeEmpty(int value) {
     OptionalInt optionalInt = OptionalUtility.fromInt(value, num -> num > 0);
     assertTrue(optionalInt.isEmpty(), "Optional should have been empty");
   }
 
   @ParameterizedTest
-  @ValueSource(ints = { 0, -5, -7, -11, -1371 })
+  @ValueSource(ints = {0, -5, -7, -11, -1371})
   public void conditionIsNotFulfilled_ShouldBePresent(int value) {
     OptionalInt optionalInt = OptionalUtility.fromInt(value, num -> num > 0);
     assertTrue(optionalInt.isPresent(), "Optional should have contained a value");
@@ -43,14 +43,14 @@ public class OptionalUtilityTests {
   }
 
   @ParameterizedTest
-  @ValueSource(ints = { 0, -3, -19 })
+  @ValueSource(ints = {0, -3, -19})
   public void defaultConditionIsFulfilled_ShouldBeEmpty(int value) {
     OptionalInt optionalInt = OptionalUtility.fromInt(value);
     assertTrue(optionalInt.isEmpty(), "Optional should have been empty");
   }
 
   @ParameterizedTest
-  @ValueSource(ints = { 1, 5, 7, 11, 1371 })
+  @ValueSource(ints = {1, 5, 7, 11, 1371})
   public void defaultConditionIsNotFulfilled_ShouldBePresent(int value) {
     OptionalInt optionalInt = OptionalUtility.fromInt(value);
     assertTrue(optionalInt.isPresent(), "Optional should have contained a value");

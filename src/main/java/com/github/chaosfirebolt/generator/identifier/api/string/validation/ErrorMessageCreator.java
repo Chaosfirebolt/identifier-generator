@@ -28,10 +28,11 @@ import org.apiguardian.api.API;
 @FunctionalInterface
 public interface ErrorMessageCreator {
 
-    /**
-     * Creates error message from the supplied {@link GeneratorRule}
-     * @param rule rule to be used for message generation
-     * @return created error message
-     */
-    String create(GeneratorRule rule);
+  /**
+   * Creates error message from the supplied {@link GeneratorRule}
+   *
+   * @param rule rule to be used for message generation
+   * @return created error message
+   */
+  String create(GeneratorRule rule);
 }

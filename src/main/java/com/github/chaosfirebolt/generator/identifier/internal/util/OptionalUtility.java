@@ -27,25 +27,26 @@ import java.util.function.IntPredicate;
 @API(status = API.Status.INTERNAL, since = "2.0.0")
 public final class OptionalUtility {
 
-    private OptionalUtility() {
-        throw new RuntimeException("No instances allowed");
-    }
+  private OptionalUtility() {
+    throw new RuntimeException("No instances allowed");
+  }
 
-    /**
-     * @param value the value
-     * @param emptyCondition condition to determine, whether the optional should be empty
-     * @return an optional int
-     */
-    public static OptionalInt fromInt(int value, IntPredicate emptyCondition) {
-        return emptyCondition.test(value) ? OptionalInt.empty() : OptionalInt.of(value);
-    }
+  /**
+   * @param value          the value
+   * @param emptyCondition condition to determine, whether the optional should be empty
+   * @return an optional int
+   */
+  public static OptionalInt fromInt(int value, IntPredicate emptyCondition) {
+    return emptyCondition.test(value) ? OptionalInt.empty() : OptionalInt.of(value);
+  }
 
-    /**
-     * Creates an {@link OptionalInt} from provided value. If {@code value} is less than 1, returns empty optional.
-     * @param value the value
-     * @return an optional int
-     */
-    public static OptionalInt fromInt(int value) {
-        return fromInt(value, val -> val < 1);
-    }
+  /**
+   * Creates an {@link OptionalInt} from provided value. If {@code value} is less than 1, returns empty optional.
+   *
+   * @param value the value
+   * @return an optional int
+   */
+  public static OptionalInt fromInt(int value) {
+    return fromInt(value, val -> val < 1);
+  }
 }

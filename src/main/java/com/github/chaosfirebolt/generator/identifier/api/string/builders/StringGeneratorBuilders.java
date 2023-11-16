@@ -24,63 +24,70 @@ import org.apiguardian.api.API;
 @API(status = API.Status.STABLE, since = "2.0.0")
 public final class StringGeneratorBuilders {
 
-    private StringGeneratorBuilders() {
-        throw new RuntimeException("No instances allowed");
-    }
+  private StringGeneratorBuilders() {
+    throw new RuntimeException("No instances allowed");
+  }
 
-    /**
-     * Returns a new {@link StringIdentifierGeneratorBuilder}.
-     * @return a new builder
-     */
-    public static StringIdentifierGeneratorBuilder stringIdentifierGeneratorBuilder() {
-        return new StringIdentifierGeneratorBuilder();
-    }
+  /**
+   * Returns a new {@link StringIdentifierGeneratorBuilder}.
+   *
+   * @return a new builder
+   */
+  public static StringIdentifierGeneratorBuilder stringIdentifierGeneratorBuilder() {
+    return new StringIdentifierGeneratorBuilder();
+  }
 
-    /**
-     * Returns a new builder to set up a generator for alphabetic identifier - 'ikuhYTgbH', 'GhjkYUhnbfJt', etc.
-     * @return builder for alphabetic identifier generator
-     */
-    public static AlphabeticIdentifierGeneratorBuilder alphabeticIdentifierGeneratorBuilder() {
-        return new AlphabeticIdentifierGeneratorBuilder();
-    }
+  /**
+   * Returns a new builder to set up a generator for alphabetic identifier - 'ikuhYTgbH', 'GhjkYUhnbfJt', etc.
+   *
+   * @return builder for alphabetic identifier generator
+   */
+  public static AlphabeticIdentifierGeneratorBuilder alphabeticIdentifierGeneratorBuilder() {
+    return new AlphabeticIdentifierGeneratorBuilder();
+  }
 
-    /**
-     * Returns a new builder to set up a generator for alphanumeric identifier - 'aas5F4eD', 'nj67r6Yh98', etc.
-     * @return builder for alphanumeric identifier generator
-     */
-    public static AlphaNumericIdentifierGeneratorBuilder alphaNumericIdentifierGeneratorBuilder() {
-        return new AlphaNumericIdentifierGeneratorBuilder();
-    }
+  /**
+   * Returns a new builder to set up a generator for alphanumeric identifier - 'aas5F4eD', 'nj67r6Yh98', etc.
+   *
+   * @return builder for alphanumeric identifier generator
+   */
+  public static AlphaNumericIdentifierGeneratorBuilder alphaNumericIdentifierGeneratorBuilder() {
+    return new AlphaNumericIdentifierGeneratorBuilder();
+  }
 
-    /**
-     * Returns a new builder to set up a generator for any character (alphanumeric + special symbol) identifier - 'asdf67gHn8IK$ed#lOf', etc.
-     * @return builder for any character identifier generator
-     */
-    public static AnyCharacterIdentifierGeneratorBuilder anyCharacterIdentifierGeneratorBuilder() {
-        return new AnyCharacterIdentifierGeneratorBuilder();
-    }
+  /**
+   * Returns a new builder to set up a generator for any character (alphanumeric + special symbol) identifier - 'asdf67gHn8IK$ed#lOf', etc.
+   *
+   * @return builder for any character identifier generator
+   */
+  public static AnyCharacterIdentifierGeneratorBuilder anyCharacterIdentifierGeneratorBuilder() {
+    return new AnyCharacterIdentifierGeneratorBuilder();
+  }
 
-    /**
-     * Returns a new builder to set up a generator for lower case alphabetic identifier - 'jhdoimeg', etc.
-     * @return builder for lower case alphabetic identifier generator
-     */
-    public static LowerAlphabeticIdentifierGeneratorBuilder lowerAlphabeticIdentifierGeneratorBuilder() {
-        return new LowerAlphabeticIdentifierGeneratorBuilder();
-    }
-    
-    /**
-     * Returns a new builder to set up a generator for numeric identifier - '185236970', etc.
-     * @return builder for numeric identifier generator
-     */
-    public static NumericIdentifierGeneratorBuilder numericIdentifierGeneratorBuilder() {
-        return new NumericIdentifierGeneratorBuilder();
-    }
+  /**
+   * Returns a new builder to set up a generator for lower case alphabetic identifier - 'jhdoimeg', etc.
+   *
+   * @return builder for lower case alphabetic identifier generator
+   */
+  public static LowerAlphabeticIdentifierGeneratorBuilder lowerAlphabeticIdentifierGeneratorBuilder() {
+    return new LowerAlphabeticIdentifierGeneratorBuilder();
+  }
 
-    /**
-     * Returns a new builder to set up a generator for upper case alphabetic identifier - 'YHAMOIESWNBS', etc.
-     * @return builder for upper case alphabetic identifier generator
-     */
-    public static UpperAlphabeticIdentifierGeneratorBuilder upperAlphabeticIdentifierGeneratorBuilder() {
-        return new UpperAlphabeticIdentifierGeneratorBuilder();
-    }
+  /**
+   * Returns a new builder to set up a generator for numeric identifier - '185236970', etc.
+   *
+   * @return builder for numeric identifier generator
+   */
+  public static NumericIdentifierGeneratorBuilder numericIdentifierGeneratorBuilder() {
+    return new NumericIdentifierGeneratorBuilder();
+  }
+
+  /**
+   * Returns a new builder to set up a generator for upper case alphabetic identifier - 'YHAMOIESWNBS', etc.
+   *
+   * @return builder for upper case alphabetic identifier generator
+   */
+  public static UpperAlphabeticIdentifierGeneratorBuilder upperAlphabeticIdentifierGeneratorBuilder() {
+    return new UpperAlphabeticIdentifierGeneratorBuilder();
+  }
 }

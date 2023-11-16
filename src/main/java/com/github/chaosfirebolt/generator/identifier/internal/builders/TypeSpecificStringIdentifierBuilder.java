@@ -26,28 +26,30 @@ import java.util.List;
 
 /**
  * Builder for subclasses of {@link StringIdentifierGenerator}.
+ *
  * @param <T> concrete type of the builder
  */
 @API(status = API.Status.INTERNAL, since = "2.0.0")
 public abstract class TypeSpecificStringIdentifierBuilder<T extends TypeSpecificStringIdentifierBuilder<T>> extends BaseStringIdentifierGeneratorBuilder<T> {
 
-    protected TypeSpecificStringIdentifierBuilder() {
-    }
+  protected TypeSpecificStringIdentifierBuilder() {
+  }
 
-    @Override
-    protected final T setGeneratorRule(GeneratorRule generatorRule) {
-        //no funny stuff with reflection
-        throw new UnsupportedOperationException(getClass().getSimpleName() + " does not support directly setting generator rule");
-    }
+  @Override
+  protected final T setGeneratorRule(GeneratorRule generatorRule) {
+    //no funny stuff with reflection
+    throw new UnsupportedOperationException(getClass().getSimpleName() + " does not support directly setting generator rule");
+  }
 
-    @Override
-    protected final GeneratorRule getGeneratorRule() {
-        return new BaseGeneratorRule(getParts());
-    }
+  @Override
+  protected final GeneratorRule getGeneratorRule() {
+    return new BaseGeneratorRule(getParts());
+  }
 
-    /**
-     * Get the parts the generator rule should be composed of.
-     * @return the parts
-     */
-    protected abstract List<Part> getParts();
+  /**
+   * Get the parts the generator rule should be composed of.
+   *
+   * @return the parts
+   */
+  protected abstract List<Part> getParts();
 }

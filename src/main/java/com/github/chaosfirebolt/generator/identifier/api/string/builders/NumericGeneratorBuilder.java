@@ -21,20 +21,21 @@ import org.apiguardian.api.API;
 
 /**
  * Internal!
+ *
  * @param <T> concrete type of the builder
  */
 @API(status = API.Status.STABLE, since = "2.0.0")
 public interface NumericGeneratorBuilder<T extends TypeSpecificStringIdentifierBuilder<T>> {
 
-    /**
-     * @param numericLength desired length of numeric characters
-     * @return this builder
-     */
-    T setNumericLength(int numericLength);
+  /**
+   * @param numericLength desired length of numeric characters
+   * @return this builder
+   */
+  T setNumericLength(int numericLength);
 
-    /**
-     * @param minNumericLength desired minimum length of numeric characters
-     * @return this builder
-     */
-    T setMinNumericLength(int minNumericLength);
+  /**
+   * @param minNumericLength desired minimum length of numeric characters
+   * @return this builder
+   */
+  T setMinNumericLength(int minNumericLength);
 }

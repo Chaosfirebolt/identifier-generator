@@ -32,39 +32,39 @@ import java.util.OptionalInt;
 public final class UpperAlphabeticIdentifierGeneratorBuilder extends TypeSpecificStringIdentifierBuilder<UpperAlphabeticIdentifierGeneratorBuilder>
         implements UpperAlphabeticBuilder<UpperAlphabeticIdentifierGeneratorBuilder>, UpperAlphabeticBuilderData<UpperAlphabeticIdentifierGeneratorBuilder> {
 
-    private int upperCaseLength;
-    private int minUpperCaseLength;
+  private int upperCaseLength;
+  private int minUpperCaseLength;
 
-    @API(status = API.Status.INTERNAL, since = "2.0.0")
-    UpperAlphabeticIdentifierGeneratorBuilder() {
-    }
+  @API(status = API.Status.INTERNAL, since = "2.0.0")
+  UpperAlphabeticIdentifierGeneratorBuilder() {
+  }
 
-    @Override
-    protected List<Part> getParts() {
-        return List.of(createUpperAlphabeticPart());
-    }
+  @Override
+  protected List<Part> getParts() {
+    return List.of(createUpperAlphabeticPart());
+  }
 
-    @Override
-    public UpperAlphabeticIdentifierGeneratorBuilder setUpperCaseLength(int upperCaseLength) {
-        this.upperCaseLength = upperCaseLength;
-        return this;
-    }
+  @Override
+  public UpperAlphabeticIdentifierGeneratorBuilder setUpperCaseLength(int upperCaseLength) {
+    this.upperCaseLength = upperCaseLength;
+    return this;
+  }
 
-    @Override
-    public UpperAlphabeticIdentifierGeneratorBuilder setMinUpperCaseLength(int minUpperCaseLength) {
-        this.minUpperCaseLength = minUpperCaseLength;
-        return this;
-    }
+  @Override
+  public UpperAlphabeticIdentifierGeneratorBuilder setMinUpperCaseLength(int minUpperCaseLength) {
+    this.minUpperCaseLength = minUpperCaseLength;
+    return this;
+  }
 
-    @Override
-    @API(status = API.Status.INTERNAL, since = "2.0.0")
-    public int getUpperCaseLength() {
-        return this.upperCaseLength;
-    }
+  @Override
+  @API(status = API.Status.INTERNAL, since = "2.0.0")
+  public int getUpperCaseLength() {
+    return this.upperCaseLength;
+  }
 
-    @Override
-    @API(status = API.Status.INTERNAL, since = "2.0.0")
-    public OptionalInt getMinUpperCaseLength() {
-        return OptionalUtility.fromInt(this.minUpperCaseLength);
-    }
+  @Override
+  @API(status = API.Status.INTERNAL, since = "2.0.0")
+  public OptionalInt getMinUpperCaseLength() {
+    return OptionalUtility.fromInt(this.minUpperCaseLength);
+  }
 }

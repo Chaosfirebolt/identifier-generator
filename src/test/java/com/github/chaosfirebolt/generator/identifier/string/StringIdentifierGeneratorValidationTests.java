@@ -20,8 +20,8 @@ import com.github.chaosfirebolt.generator.identifier.api.exception.InvalidGenera
 import com.github.chaosfirebolt.generator.identifier.api.string.StringIdentifierGenerator;
 import com.github.chaosfirebolt.generator.identifier.api.string.part.Part;
 import com.github.chaosfirebolt.generator.identifier.api.string.rule.GeneratorRule;
-import com.github.chaosfirebolt.generator.identifier.internal.util.CharacterUtility;
 import com.github.chaosfirebolt.generator.identifier.api.string.validation.MinimumLengthEqualOrLessThanLengthRuleValidator;
+import com.github.chaosfirebolt.generator.identifier.internal.util.CharacterUtility;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.function.Executable;
 
@@ -36,92 +36,92 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
  */
 public class StringIdentifierGeneratorValidationTests {
 
-    private static final List<Character> CHARACTERS = CharacterUtility.characterListFromIntRange(97, 123);
+  private static final List<Character> CHARACTERS = CharacterUtility.characterListFromIntRange(97, 123);
 
-    private static void assertException(Executable executable, String expectedMessage) {
-        InvalidGeneratorRuleException exception = assertThrows(InvalidGeneratorRuleException.class, executable);
-        String actualMessage = exception.getMessage();
-        assertEquals(expectedMessage, actualMessage);
+  private static void assertException(Executable executable, String expectedMessage) {
+    InvalidGeneratorRuleException exception = assertThrows(InvalidGeneratorRuleException.class, executable);
+    String actualMessage = exception.getMessage();
+    assertEquals(expectedMessage, actualMessage);
+  }
+
+  @Test
+  public void minimumLengthHigherThanLength_ShouldThrowInvalidGeneratorRuleException() {
+    Part part = new TestPart(15, 10, CHARACTERS);
+    GeneratorRule rule = new TestGeneratorRule(part, 15, 16);
+    String expectedErrorMessage = "Required minimum length of '16' must be equal to or less than total length, which is '15'";
+    assertException(() -> new StringIdentifierGenerator(rule, new MinimumLengthEqualOrLessThanLengthRuleValidator()), expectedErrorMessage);
+  }
+
+  @Test
+  public void ruleMinimumLengthLessThanPartsMinLength_ShouldThrowInvalidGeneratorRuleException() {
+    Part part = new TestPart(15, 10, CHARACTERS);
+    GeneratorRule rule = new TestGeneratorRule(part, 15, 9);
+    String expectedErrorMessage = "Required minimum length of '9' must be equal to sum of parts minimum lengths, which is '10'";
+    assertException(() -> new StringIdentifierGenerator(rule), expectedErrorMessage);
+  }
+
+  @Test
+  public void ruleMinimumLengthMoreThanPartsMinLength_ShouldThrowInvalidGeneratorRuleException() {
+    Part part = new TestPart(15, 10, CHARACTERS);
+    GeneratorRule rule = new TestGeneratorRule(part, 15, 11);
+    String expectedErrorMessage = "Required minimum length of '11' must be equal to sum of parts minimum lengths, which is '10'";
+    assertException(() -> new StringIdentifierGenerator(rule), expectedErrorMessage);
+  }
+
+  @Test
+  public void ruleLengthLessThanPartsLength_ShouldThrowInvalidGeneratorRuleException() {
+    Part part = new TestPart(15, 10, CHARACTERS);
+    GeneratorRule rule = new TestGeneratorRule(part, 14, 10);
+    String expectedErrorMessage = "Required length of '14' must be equal to sum of parts lengths, which is '15'";
+    assertException(() -> new StringIdentifierGenerator(rule), expectedErrorMessage);
+  }
+
+  @Test
+  public void ruleLengthMoreThanPartsLength_ShouldThrowInvalidGeneratorRuleException() {
+    Part part = new TestPart(15, 10, CHARACTERS);
+    GeneratorRule rule = new TestGeneratorRule(part, 16, 10);
+    String expectedErrorMessage = "Required length of '16' must be equal to sum of parts lengths, which is '15'";
+    assertException(() -> new StringIdentifierGenerator(rule), expectedErrorMessage);
+  }
+
+  private record TestPart(int length, int minLength, List<Character> characters) implements Part {
+
+    @Override
+    public int getLength() {
+      return length();
     }
 
-    @Test
-    public void minimumLengthHigherThanLength_ShouldThrowInvalidGeneratorRuleException() {
-        Part part = new TestPart(15, 10, CHARACTERS);
-        GeneratorRule rule = new TestGeneratorRule(part, 15, 16);
-        String expectedErrorMessage = "Required minimum length of '16' must be equal to or less than total length, which is '15'";
-        assertException(() -> new StringIdentifierGenerator(rule, new MinimumLengthEqualOrLessThanLengthRuleValidator()), expectedErrorMessage);
+    @Override
+    public List<Character> getCharacters() {
+      return characters();
+    }
+  }
+
+  private static final class TestGeneratorRule implements GeneratorRule {
+
+    private final List<Part> parts;
+    private final int length;
+    private final int minLength;
+
+    private TestGeneratorRule(Part part, int length, int minLength) {
+      this.parts = Collections.singletonList(part);
+      this.length = length;
+      this.minLength = minLength;
     }
 
-    @Test
-    public void ruleMinimumLengthLessThanPartsMinLength_ShouldThrowInvalidGeneratorRuleException() {
-        Part part = new TestPart(15, 10, CHARACTERS);
-        GeneratorRule rule = new TestGeneratorRule(part, 15, 9);
-        String expectedErrorMessage = "Required minimum length of '9' must be equal to sum of parts minimum lengths, which is '10'";
-        assertException(() -> new StringIdentifierGenerator(rule), expectedErrorMessage);
+    @Override
+    public List<Part> getParts() {
+      return this.parts;
     }
 
-    @Test
-    public void ruleMinimumLengthMoreThanPartsMinLength_ShouldThrowInvalidGeneratorRuleException() {
-        Part part = new TestPart(15, 10, CHARACTERS);
-        GeneratorRule rule = new TestGeneratorRule(part, 15, 11);
-        String expectedErrorMessage = "Required minimum length of '11' must be equal to sum of parts minimum lengths, which is '10'";
-        assertException(() -> new StringIdentifierGenerator(rule), expectedErrorMessage);
+    @Override
+    public int getLength() {
+      return this.length;
     }
 
-    @Test
-    public void ruleLengthLessThanPartsLength_ShouldThrowInvalidGeneratorRuleException() {
-        Part part = new TestPart(15, 10, CHARACTERS);
-        GeneratorRule rule = new TestGeneratorRule(part, 14, 10);
-        String expectedErrorMessage = "Required length of '14' must be equal to sum of parts lengths, which is '15'";
-        assertException(() -> new StringIdentifierGenerator(rule), expectedErrorMessage);
+    @Override
+    public int getMinLength() {
+      return this.minLength;
     }
-
-    @Test
-    public void ruleLengthMoreThanPartsLength_ShouldThrowInvalidGeneratorRuleException() {
-        Part part = new TestPart(15, 10, CHARACTERS);
-        GeneratorRule rule = new TestGeneratorRule(part, 16, 10);
-        String expectedErrorMessage = "Required length of '16' must be equal to sum of parts lengths, which is '15'";
-        assertException(() -> new StringIdentifierGenerator(rule), expectedErrorMessage);
-    }
-
-    private record TestPart(int length, int minLength, List<Character> characters) implements Part {
-
-        @Override
-        public int getLength() {
-            return length();
-        }
-
-        @Override
-        public List<Character> getCharacters() {
-            return characters();
-        }
-    }
-
-    private static final class TestGeneratorRule implements GeneratorRule {
-
-        private final List<Part> parts;
-        private final int length;
-        private final int minLength;
-
-        private TestGeneratorRule(Part part, int length, int minLength) {
-            this.parts = Collections.singletonList(part);
-            this.length = length;
-            this.minLength = minLength;
-        }
-
-        @Override
-        public List<Part> getParts() {
-            return this.parts;
-        }
-
-        @Override
-        public int getLength() {
-            return this.length;
-        }
-
-        @Override
-        public int getMinLength() {
-            return this.minLength;
-        }
-    }
+  }
 }

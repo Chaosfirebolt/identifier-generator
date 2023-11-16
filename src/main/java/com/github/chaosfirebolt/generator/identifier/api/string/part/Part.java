@@ -28,23 +28,26 @@ import java.util.List;
 @API(status = API.Status.STABLE, since = "2.0.0")
 public interface Part {
 
-    /**
-     * Gets the length of this identifier part
-     * @return the length of this part
-     */
-    int getLength();
+  /**
+   * Gets the length of this identifier part
+   *
+   * @return the length of this part
+   */
+  int getLength();
 
-    /**
-     * Get the minimum length for this identifier part
-     * @return the minimum length of this part
-     */
-    default int minLength() {
-        return this.getLength();
-    }
+  /**
+   * Get the minimum length for this identifier part
+   *
+   * @return the minimum length of this part
+   */
+  default int minLength() {
+    return this.getLength();
+  }
 
-    /**
-     * Get possible characters for this identifier part.
-     * @return possible characters for this part
-     */
-    List<Character> getCharacters();
+  /**
+   * Get possible characters for this identifier part.
+   *
+   * @return possible characters for this part
+   */
+  List<Character> getCharacters();
 }

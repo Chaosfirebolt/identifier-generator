@@ -21,20 +21,21 @@ import org.apiguardian.api.API;
 
 /**
  * Internal!
+ *
  * @param <T> concrete type of the builder
  */
 @API(status = API.Status.STABLE, since = "2.0.0")
 public interface UpperAlphabeticBuilder<T extends TypeSpecificStringIdentifierBuilder<T>> {
 
-    /**
-     * @param upperCaseLength desired length of upper case alphabetic characters
-     * @return this builder
-     */
-    T setUpperCaseLength(int upperCaseLength);
+  /**
+   * @param upperCaseLength desired length of upper case alphabetic characters
+   * @return this builder
+   */
+  T setUpperCaseLength(int upperCaseLength);
 
-    /**
-     * @param minUpperCaseLength desired minimum length of upper case alphabetic characters
-     * @return this builder
-     */
-    T setMinUpperCaseLength(int minUpperCaseLength);
+  /**
+   * @param minUpperCaseLength desired minimum length of upper case alphabetic characters
+   * @return this builder
+   */
+  T setMinUpperCaseLength(int minUpperCaseLength);
 }

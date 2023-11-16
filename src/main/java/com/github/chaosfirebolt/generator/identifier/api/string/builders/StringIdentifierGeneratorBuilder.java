@@ -29,13 +29,13 @@ import org.apiguardian.api.API;
 @API(status = API.Status.STABLE, since = "2.0.0")
 public final class StringIdentifierGeneratorBuilder extends BaseStringIdentifierGeneratorBuilder<StringIdentifierGeneratorBuilder> {
 
-    @API(status = API.Status.INTERNAL, since = "2.0.0")
-    StringIdentifierGeneratorBuilder() {
-    }
+  @API(status = API.Status.INTERNAL, since = "2.0.0")
+  StringIdentifierGeneratorBuilder() {
+  }
 
-    @Override
-    public StringIdentifierGeneratorBuilder setGeneratorRule(GeneratorRule generatorRule) {
-        //expose the functionality
-        return super.setGeneratorRule(generatorRule);
-    }
+  @Override
+  public StringIdentifierGeneratorBuilder setGeneratorRule(GeneratorRule generatorRule) {
+    //expose the functionality
+    return super.setGeneratorRule(generatorRule);
+  }
 }

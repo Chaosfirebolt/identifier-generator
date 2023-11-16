@@ -29,33 +29,35 @@ import java.util.List;
 @API(status = API.Status.INTERNAL, since = "2.0.0")
 public final class CalculationUtility {
 
-    private CalculationUtility() {
-        throw new RuntimeException("No instances allowed");
-    }
+  private CalculationUtility() {
+    throw new RuntimeException("No instances allowed");
+  }
 
-    /**
-     * Calculates the total length of all parts.
-     * @param parts parts whose total length is to be calculated
-     * @return the total length
-     */
-    public static int totalLength(List<Part> parts) {
-        int sum = 0;
-        for (Part part : parts) {
-            sum += part.getLength();
-        }
-        return sum;
+  /**
+   * Calculates the total length of all parts.
+   *
+   * @param parts parts whose total length is to be calculated
+   * @return the total length
+   */
+  public static int totalLength(List<Part> parts) {
+    int sum = 0;
+    for (Part part : parts) {
+      sum += part.getLength();
     }
+    return sum;
+  }
 
-    /**
-     * Calculates the minimum length of all parts.
-     * @param parts parts whose total minimum length is to be calculated
-     * @return the total minimum length
-     */
-    public static int minimumLength(List<Part> parts) {
-        int sum = 0;
-        for (Part part : parts) {
-            sum += part.minLength();
-        }
-        return sum;
+  /**
+   * Calculates the minimum length of all parts.
+   *
+   * @param parts parts whose total minimum length is to be calculated
+   * @return the total minimum length
+   */
+  public static int minimumLength(List<Part> parts) {
+    int sum = 0;
+    for (Part part : parts) {
+      sum += part.minLength();
     }
+    return sum;
+  }
 }

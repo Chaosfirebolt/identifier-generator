@@ -29,29 +29,31 @@ import java.util.random.RandomGenerator;
 @API(status = API.Status.INTERNAL, since = "2.0.0")
 public final class ShuffleUtility {
 
-    private ShuffleUtility() {
-        throw new RuntimeException("No instances allowed");
-    }
+  private ShuffleUtility() {
+    throw new RuntimeException("No instances allowed");
+  }
 
-    /**
-     * Shuffles the array using Fisher-Yates algorithm.
-     * @param randomGenerator rng to generate random indexes
-     * @param array array to be shuffled
-     */
-    public static void shuffleFisherYates(RandomGenerator randomGenerator, char[] array) {
-        for (int i = array.length - 1; i > 0; i--) {
-            int randomIndex = randomGenerator.nextInt(i + 1);
-            char temp = array[i];
-            array[i] = array[randomIndex];
-            array[randomIndex] = temp;
-        }
+  /**
+   * Shuffles the array using Fisher-Yates algorithm.
+   *
+   * @param randomGenerator rng to generate random indexes
+   * @param array           array to be shuffled
+   */
+  public static void shuffleFisherYates(RandomGenerator randomGenerator, char[] array) {
+    for (int i = array.length - 1; i > 0; i--) {
+      int randomIndex = randomGenerator.nextInt(i + 1);
+      char temp = array[i];
+      array[i] = array[randomIndex];
+      array[randomIndex] = temp;
     }
+  }
 
-    /**
-     * Shuffles the array using Fisher-Yates algorithm.
-     * @param array array to be shuffled
-     */
-    public static void shuffleFisherYates(char[] array) {
-        shuffleFisherYates(new SecureRandom(), array);
-    }
+  /**
+   * Shuffles the array using Fisher-Yates algorithm.
+   *
+   * @param array array to be shuffled
+   */
+  public static void shuffleFisherYates(char[] array) {
+    shuffleFisherYates(new SecureRandom(), array);
+  }
 }

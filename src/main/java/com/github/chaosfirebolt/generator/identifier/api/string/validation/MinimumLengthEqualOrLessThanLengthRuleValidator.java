@@ -29,14 +29,14 @@ import java.util.function.Predicate;
 @API(status = API.Status.STABLE, since = "2.0.0")
 public class MinimumLengthEqualOrLessThanLengthRuleValidator extends BaseRuleValidator {
 
-    private static final Predicate<GeneratorRule> CONDITION = rule -> rule.getMinLength() <= rule.getLength();
-    private static final ErrorMessageCreator ERROR_MESSAGE_CREATOR = rule ->
-            String.format("Required minimum length of '%d' must be equal to or less than total length, which is '%d'", rule.getMinLength(), rule.getLength());
+  private static final Predicate<GeneratorRule> CONDITION = rule -> rule.getMinLength() <= rule.getLength();
+  private static final ErrorMessageCreator ERROR_MESSAGE_CREATOR = rule ->
+          String.format("Required minimum length of '%d' must be equal to or less than total length, which is '%d'", rule.getMinLength(), rule.getLength());
 
-    /**
-     * Constructs new MinimumLengthEqualOrLessThanLengthRuleValidator with preconfigured condition for rule validity and error message creator.
-     */
-    public MinimumLengthEqualOrLessThanLengthRuleValidator() {
-        super(CONDITION, ERROR_MESSAGE_CREATOR);
-    }
+  /**
+   * Constructs new MinimumLengthEqualOrLessThanLengthRuleValidator with preconfigured condition for rule validity and error message creator.
+   */
+  public MinimumLengthEqualOrLessThanLengthRuleValidator() {
+    super(CONDITION, ERROR_MESSAGE_CREATOR);
+  }
 }

@@ -27,11 +27,12 @@ import org.apiguardian.api.API;
 @API(status = API.Status.STABLE, since = "2.0.0")
 public class InvalidGeneratorRuleException extends RuntimeException {
 
-    /**
-     * Constructs new InvalidGeneratorRuleException with the specified message
-     * @param message the message
-     */
-    public InvalidGeneratorRuleException(String message) {
-        super(message);
-    }
+  /**
+   * Constructs new InvalidGeneratorRuleException with the specified message
+   *
+   * @param message the message
+   */
+  public InvalidGeneratorRuleException(String message) {
+    super(message);
+  }
 }

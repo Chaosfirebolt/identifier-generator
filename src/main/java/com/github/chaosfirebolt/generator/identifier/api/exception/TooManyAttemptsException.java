@@ -26,10 +26,10 @@ import org.apiguardian.api.API;
 @API(status = API.Status.STABLE, since = "2.0.0")
 public class TooManyAttemptsException extends RuntimeException {
 
-    /**
-     * @param message detailed message for the exception
-     */
-    public TooManyAttemptsException(String message) {
-        super(message);
-    }
+  /**
+   * @param message detailed message for the exception
+   */
+  public TooManyAttemptsException(String message) {
+    super(message);
+  }
 }

@@ -38,56 +38,56 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
  */
 public class GeneratorRuleTests {
 
-    @ParameterizedTest
-    @MethodSource
-    public void getParts_ShouldReturnCorrectNumberOfParts(GeneratorRule generatorRule, int expectedNumberOfParts) {
-        int size = generatorRule.getParts().size();
-        assertEquals(expectedNumberOfParts, size);
+  @ParameterizedTest
+  @MethodSource
+  public void getParts_ShouldReturnCorrectNumberOfParts(GeneratorRule generatorRule, int expectedNumberOfParts) {
+    int size = generatorRule.getParts().size();
+    assertEquals(expectedNumberOfParts, size);
+  }
+
+  private static Stream<Arguments> getParts_ShouldReturnCorrectNumberOfParts() {
+    return allData().map(args -> Arguments.of(args.rule(), args.expectedNumberOfParts()));
+  }
+
+  @ParameterizedTest
+  @MethodSource
+  public void getLength_ShouldReturnCorrectLength(GeneratorRule generatorRule, int expectedLength) {
+    int length = generatorRule.getLength();
+    assertEquals(expectedLength, length);
+  }
+
+  private static Stream<Arguments> getLength_ShouldReturnCorrectLength() {
+    return allData().map(args -> Arguments.of(args.rule(), args.expectedLength()));
+  }
+
+  @ParameterizedTest
+  @MethodSource
+  public void getMinLength_ShouldReturnCorrectMinLength(GeneratorRule generatorRule, int expectedMinLength) {
+    int minLength = generatorRule.getMinLength();
+    assertEquals(expectedMinLength, minLength);
+  }
+
+  private static Stream<Arguments> getMinLength_ShouldReturnCorrectMinLength() {
+    return allData().map(args -> Arguments.of(args.rule(), args.expectedMinLength()));
+  }
+
+  private static Stream<GeneratorRuleArguments> allData() {
+    return Stream.of(
+            new GeneratorRuleArguments(new BaseGeneratorRule(Arrays.asList(new SpecialCharacterPart(3, 1), new NumericPart(19, 17))), 2, 22, 18),
+            new GeneratorRuleArguments(new UnvalidatedGeneratorRule(Collections.singletonList(new UpperAlphabeticPart(10)), 10), 1, 10, 10)
+    );
+  }
+
+  private record UnvalidatedGeneratorRule(List<Part> parts, int length) implements GeneratorRule {
+
+    @Override
+    public List<Part> getParts() {
+      return parts();
     }
 
-    private static Stream<Arguments> getParts_ShouldReturnCorrectNumberOfParts() {
-        return allData().map(args -> Arguments.of(args.rule(), args.expectedNumberOfParts()));
+    @Override
+    public int getLength() {
+      return length();
     }
-
-    @ParameterizedTest
-    @MethodSource
-    public void getLength_ShouldReturnCorrectLength(GeneratorRule generatorRule, int expectedLength) {
-        int length = generatorRule.getLength();
-        assertEquals(expectedLength, length);
-    }
-
-    private static Stream<Arguments> getLength_ShouldReturnCorrectLength() {
-        return allData().map(args -> Arguments.of(args.rule(), args.expectedLength()));
-    }
-
-    @ParameterizedTest
-    @MethodSource
-    public void getMinLength_ShouldReturnCorrectMinLength(GeneratorRule generatorRule, int expectedMinLength) {
-        int minLength = generatorRule.getMinLength();
-        assertEquals(expectedMinLength, minLength);
-    }
-
-    private static Stream<Arguments> getMinLength_ShouldReturnCorrectMinLength() {
-        return allData().map(args -> Arguments.of(args.rule(), args.expectedMinLength()));
-    }
-
-    private static Stream<GeneratorRuleArguments> allData() {
-        return Stream.of(
-                new GeneratorRuleArguments(new BaseGeneratorRule(Arrays.asList(new SpecialCharacterPart(3, 1), new NumericPart(19, 17))), 2, 22, 18),
-                new GeneratorRuleArguments(new UnvalidatedGeneratorRule(Collections.singletonList(new UpperAlphabeticPart(10)), 10), 1, 10, 10)
-        );
-    }
-
-    private record UnvalidatedGeneratorRule(List<Part> parts, int length) implements GeneratorRule {
-
-        @Override
-        public List<Part> getParts() {
-            return parts();
-        }
-
-        @Override
-        public int getLength() {
-            return length();
-        }
-    }
+  }
 }

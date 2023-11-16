@@ -24,27 +24,29 @@ import java.util.OptionalInt;
 
 /**
  * Internal!
+ *
  * @param <T> concrete type of the builder
  */
 @API(status = API.Status.INTERNAL, since = "2.0.0")
 public interface UpperAlphabeticBuilderData<T extends TypeSpecificStringIdentifierBuilder<T>> {
 
-    /**
-     * @return upper case length currently set in the builder
-     */
-    int getUpperCaseLength();
+  /**
+   * @return upper case length currently set in the builder
+   */
+  int getUpperCaseLength();
 
-    /**
-     * @return optional describing the minimum lower case length currently set in the builder
-     */
-    OptionalInt getMinUpperCaseLength();
+  /**
+   * @return optional describing the minimum lower case length currently set in the builder
+   */
+  OptionalInt getMinUpperCaseLength();
 
-    /**
-     * Factory method creating an {@link UpperAlphabeticPart} with the current data.
-     * @return a new part
-     */
-    default UpperAlphabeticPart createUpperAlphabeticPart() {
-        int minUpperCaseLength = getMinUpperCaseLength().orElseGet(this::getUpperCaseLength);
-        return new UpperAlphabeticPart(getUpperCaseLength(), minUpperCaseLength);
-    }
+  /**
+   * Factory method creating an {@link UpperAlphabeticPart} with the current data.
+   *
+   * @return a new part
+   */
+  default UpperAlphabeticPart createUpperAlphabeticPart() {
+    int minUpperCaseLength = getMinUpperCaseLength().orElseGet(this::getUpperCaseLength);
+    return new UpperAlphabeticPart(getUpperCaseLength(), minUpperCaseLength);
+  }
 }

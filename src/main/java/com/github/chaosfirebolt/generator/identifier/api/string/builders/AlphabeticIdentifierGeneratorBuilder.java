@@ -34,65 +34,65 @@ public final class AlphabeticIdentifierGeneratorBuilder extends TypeSpecificStri
         implements LowerAlphabeticGeneratorBuilder<AlphabeticIdentifierGeneratorBuilder>, UpperAlphabeticBuilder<AlphabeticIdentifierGeneratorBuilder>,
                    LowerAlphabeticBuilderData<AlphabeticIdentifierGeneratorBuilder>, UpperAlphabeticBuilderData<AlphabeticIdentifierGeneratorBuilder> {
 
-    private int lowerCaseLength;
-    private int minLowerCaseLength;
-    private int upperCaseLength;
-    private int minUpperCaseLength;
+  private int lowerCaseLength;
+  private int minLowerCaseLength;
+  private int upperCaseLength;
+  private int minUpperCaseLength;
 
-    @API(status = API.Status.INTERNAL, since = "2.0.0")
-    AlphabeticIdentifierGeneratorBuilder() {
-    }
+  @API(status = API.Status.INTERNAL, since = "2.0.0")
+  AlphabeticIdentifierGeneratorBuilder() {
+  }
 
-    @Override
-    protected List<Part> getParts() {
-        return List.of(createLowerAlphabeticPart(), createUpperAlphabeticPart());
-    }
+  @Override
+  protected List<Part> getParts() {
+    return List.of(createLowerAlphabeticPart(), createUpperAlphabeticPart());
+  }
 
-    @Override
-    public AlphabeticIdentifierGeneratorBuilder setLowerCaseLength(int lowerCaseLength) {
-        this.lowerCaseLength = lowerCaseLength;
-        return this;
-    }
+  @Override
+  public AlphabeticIdentifierGeneratorBuilder setLowerCaseLength(int lowerCaseLength) {
+    this.lowerCaseLength = lowerCaseLength;
+    return this;
+  }
 
-    @Override
-    public AlphabeticIdentifierGeneratorBuilder setMinLowerCaseLength(int minLowerCaseLength) {
-        this.minLowerCaseLength = minLowerCaseLength;
-        return this;
-    }
+  @Override
+  public AlphabeticIdentifierGeneratorBuilder setMinLowerCaseLength(int minLowerCaseLength) {
+    this.minLowerCaseLength = minLowerCaseLength;
+    return this;
+  }
 
-    @Override
-    @API(status = API.Status.INTERNAL, since = "2.0.0")
-    public int getLowerCaseLength() {
-        return this.lowerCaseLength;
-    }
+  @Override
+  @API(status = API.Status.INTERNAL, since = "2.0.0")
+  public int getLowerCaseLength() {
+    return this.lowerCaseLength;
+  }
 
-    @Override
-    @API(status = API.Status.INTERNAL, since = "2.0.0")
-    public OptionalInt getMinLowerCaseLength() {
-        return OptionalUtility.fromInt(this.minLowerCaseLength);
-    }
+  @Override
+  @API(status = API.Status.INTERNAL, since = "2.0.0")
+  public OptionalInt getMinLowerCaseLength() {
+    return OptionalUtility.fromInt(this.minLowerCaseLength);
+  }
 
-    @Override
-    public AlphabeticIdentifierGeneratorBuilder setUpperCaseLength(int upperCaseLength) {
-        this.upperCaseLength = upperCaseLength;
-        return this;
-    }
+  @Override
+  public AlphabeticIdentifierGeneratorBuilder setUpperCaseLength(int upperCaseLength) {
+    this.upperCaseLength = upperCaseLength;
+    return this;
+  }
 
-    @Override
-    public AlphabeticIdentifierGeneratorBuilder setMinUpperCaseLength(int minUpperCaseLength) {
-        this.minUpperCaseLength = minUpperCaseLength;
-        return this;
-    }
+  @Override
+  public AlphabeticIdentifierGeneratorBuilder setMinUpperCaseLength(int minUpperCaseLength) {
+    this.minUpperCaseLength = minUpperCaseLength;
+    return this;
+  }
 
-    @Override
-    @API(status = API.Status.INTERNAL, since = "2.0.0")
-    public int getUpperCaseLength() {
-        return this.upperCaseLength;
-    }
+  @Override
+  @API(status = API.Status.INTERNAL, since = "2.0.0")
+  public int getUpperCaseLength() {
+    return this.upperCaseLength;
+  }
 
-    @Override
-    @API(status = API.Status.INTERNAL, since = "2.0.0")
-    public OptionalInt getMinUpperCaseLength() {
-        return OptionalUtility.fromInt(this.minUpperCaseLength);
-    }
+  @Override
+  @API(status = API.Status.INTERNAL, since = "2.0.0")
+  public OptionalInt getMinUpperCaseLength() {
+    return OptionalUtility.fromInt(this.minUpperCaseLength);
+  }
 }

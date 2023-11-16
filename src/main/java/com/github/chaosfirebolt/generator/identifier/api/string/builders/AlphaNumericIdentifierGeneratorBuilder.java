@@ -36,91 +36,91 @@ public final class AlphaNumericIdentifierGeneratorBuilder extends TypeSpecificSt
                    NumericGeneratorBuilder<AlphaNumericIdentifierGeneratorBuilder>, LowerAlphabeticBuilderData<AlphaNumericIdentifierGeneratorBuilder>,
                    UpperAlphabeticBuilderData<AlphaNumericIdentifierGeneratorBuilder>, NumericBuilderData<AlphaNumericIdentifierGeneratorBuilder> {
 
-    private int lowerCaseLength;
-    private int minLowerCaseLength;
-    private int upperCaseLength;
-    private int minUpperCaseLength;
-    private int numericLength;
-    private int minNumericLength;
+  private int lowerCaseLength;
+  private int minLowerCaseLength;
+  private int upperCaseLength;
+  private int minUpperCaseLength;
+  private int numericLength;
+  private int minNumericLength;
 
-    @API(status = API.Status.INTERNAL, since = "2.0.0")
-    AlphaNumericIdentifierGeneratorBuilder() {
-    }
+  @API(status = API.Status.INTERNAL, since = "2.0.0")
+  AlphaNumericIdentifierGeneratorBuilder() {
+  }
 
-    @Override
-    public AlphaNumericIdentifierGeneratorBuilder setLowerCaseLength(int lowerCaseLength) {
-        this.lowerCaseLength = lowerCaseLength;
-        return this;
-    }
+  @Override
+  public AlphaNumericIdentifierGeneratorBuilder setLowerCaseLength(int lowerCaseLength) {
+    this.lowerCaseLength = lowerCaseLength;
+    return this;
+  }
 
-    @Override
-    public AlphaNumericIdentifierGeneratorBuilder setMinLowerCaseLength(int minLowerCaseLength) {
-        this.minLowerCaseLength = minLowerCaseLength;
-        return this;
-    }
+  @Override
+  public AlphaNumericIdentifierGeneratorBuilder setMinLowerCaseLength(int minLowerCaseLength) {
+    this.minLowerCaseLength = minLowerCaseLength;
+    return this;
+  }
 
-    @Override
-    @API(status = API.Status.INTERNAL, since = "2.0.0")
-    public int getLowerCaseLength() {
-        return this.lowerCaseLength;
-    }
+  @Override
+  @API(status = API.Status.INTERNAL, since = "2.0.0")
+  public int getLowerCaseLength() {
+    return this.lowerCaseLength;
+  }
 
-    @Override
-    @API(status = API.Status.INTERNAL, since = "2.0.0")
-    public OptionalInt getMinLowerCaseLength() {
-        return OptionalUtility.fromInt(this.minLowerCaseLength);
-    }
+  @Override
+  @API(status = API.Status.INTERNAL, since = "2.0.0")
+  public OptionalInt getMinLowerCaseLength() {
+    return OptionalUtility.fromInt(this.minLowerCaseLength);
+  }
 
-    @Override
-    public AlphaNumericIdentifierGeneratorBuilder setNumericLength(int numericLength) {
-        this.numericLength = numericLength;
-        return this;
-    }
+  @Override
+  public AlphaNumericIdentifierGeneratorBuilder setNumericLength(int numericLength) {
+    this.numericLength = numericLength;
+    return this;
+  }
 
-    @Override
-    public AlphaNumericIdentifierGeneratorBuilder setMinNumericLength(int minNumericLength) {
-        this.minNumericLength = minNumericLength;
-        return this;
-    }
+  @Override
+  public AlphaNumericIdentifierGeneratorBuilder setMinNumericLength(int minNumericLength) {
+    this.minNumericLength = minNumericLength;
+    return this;
+  }
 
-    @Override
-    @API(status = API.Status.INTERNAL, since = "2.0.0")
-    public int getNumericLength() {
-        return this.numericLength;
-    }
+  @Override
+  @API(status = API.Status.INTERNAL, since = "2.0.0")
+  public int getNumericLength() {
+    return this.numericLength;
+  }
 
-    @Override
-    @API(status = API.Status.INTERNAL, since = "2.0.0")
-    public OptionalInt getMinNumericLength() {
-        return OptionalUtility.fromInt(this.minNumericLength);
-    }
+  @Override
+  @API(status = API.Status.INTERNAL, since = "2.0.0")
+  public OptionalInt getMinNumericLength() {
+    return OptionalUtility.fromInt(this.minNumericLength);
+  }
 
-    @Override
-    protected List<Part> getParts() {
-        return List.of(createLowerAlphabeticPart(), createUpperAlphabeticPart(), createNumericPart());
-    }
+  @Override
+  protected List<Part> getParts() {
+    return List.of(createLowerAlphabeticPart(), createUpperAlphabeticPart(), createNumericPart());
+  }
 
-    @Override
-    public AlphaNumericIdentifierGeneratorBuilder setUpperCaseLength(int upperCaseLength) {
-        this.upperCaseLength = upperCaseLength;
-        return this;
-    }
+  @Override
+  public AlphaNumericIdentifierGeneratorBuilder setUpperCaseLength(int upperCaseLength) {
+    this.upperCaseLength = upperCaseLength;
+    return this;
+  }
 
-    @Override
-    public AlphaNumericIdentifierGeneratorBuilder setMinUpperCaseLength(int minUpperCaseLength) {
-        this.minUpperCaseLength = minUpperCaseLength;
-        return this;
-    }
+  @Override
+  public AlphaNumericIdentifierGeneratorBuilder setMinUpperCaseLength(int minUpperCaseLength) {
+    this.minUpperCaseLength = minUpperCaseLength;
+    return this;
+  }
 
-    @Override
-    @API(status = API.Status.INTERNAL, since = "2.0.0")
-    public int getUpperCaseLength() {
-        return this.upperCaseLength;
-    }
+  @Override
+  @API(status = API.Status.INTERNAL, since = "2.0.0")
+  public int getUpperCaseLength() {
+    return this.upperCaseLength;
+  }
 
-    @Override
-    @API(status = API.Status.INTERNAL, since = "2.0.0")
-    public OptionalInt getMinUpperCaseLength() {
-        return OptionalUtility.fromInt(this.minUpperCaseLength);
-    }
+  @Override
+  @API(status = API.Status.INTERNAL, since = "2.0.0")
+  public OptionalInt getMinUpperCaseLength() {
+    return OptionalUtility.fromInt(this.minUpperCaseLength);
+  }
 }

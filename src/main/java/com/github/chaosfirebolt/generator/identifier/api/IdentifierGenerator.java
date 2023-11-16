@@ -29,33 +29,37 @@ import java.util.function.Predicate;
 @API(status = API.Status.STABLE, since = "2.0.0")
 public interface IdentifierGenerator<T> {
 
-    /**
-     * Generates an identifier
-     * @return the generated identifier
-     */
-    T generate();
+  /**
+   * Generates an identifier
+   *
+   * @return the generated identifier
+   */
+  T generate();
 
-    /**
-     * Generates an identifier which is unique according to the provided condition
-     * @param uniquenessCondition condition for uniqueness of the generated identifier
-     * @return the generated unique identifier
-     * @throws TooManyAttemptsException if a maximum number of attempts to generate unique identifier has been set, and that number is reached
-     */
-    T generate(Predicate<T> uniquenessCondition);
+  /**
+   * Generates an identifier which is unique according to the provided condition
+   *
+   * @param uniquenessCondition condition for uniqueness of the generated identifier
+   * @return the generated unique identifier
+   * @throws TooManyAttemptsException if a maximum number of attempts to generate unique identifier has been set, and that number is reached
+   */
+  T generate(Predicate<T> uniquenessCondition);
 
-    /**
-     * Generates an identifier with the specified length
-     * @param identifierLength required length of the generated identifier
-     * @return the generated identifier
-     */
-    T generate(int identifierLength);
+  /**
+   * Generates an identifier with the specified length
+   *
+   * @param identifierLength required length of the generated identifier
+   * @return the generated identifier
+   */
+  T generate(int identifierLength);
 
-    /**
-     * Generates an identifier with the specified length, which is unique according to the provided condition
-     * @param identifierLength required length of the generated identifier
-     * @param uniquenessCondition condition for uniqueness of the generated identifier
-     * @return the generated unique identifier
-     * @throws TooManyAttemptsException if a maximum number of attempts to generate unique identifier has been set, and that number is reached
-     */
-    T generate(int identifierLength, Predicate<T> uniquenessCondition);
+  /**
+   * Generates an identifier with the specified length, which is unique according to the provided condition
+   *
+   * @param identifierLength    required length of the generated identifier
+   * @param uniquenessCondition condition for uniqueness of the generated identifier
+   * @return the generated unique identifier
+   * @throws TooManyAttemptsException if a maximum number of attempts to generate unique identifier has been set, and that number is reached
+   */
+  T generate(int identifierLength, Predicate<T> uniquenessCondition);
 }

@@ -34,51 +34,51 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
  */
 public class PartMethodTests {
 
-    @ParameterizedTest
-    @MethodSource
-    public void getLength_ResultShouldBeCorrect(Part part, int expectedLength) {
-        int actual = part.getLength();
-        assertEquals(expectedLength, actual);
-    }
+  @ParameterizedTest
+  @MethodSource
+  public void getLength_ResultShouldBeCorrect(Part part, int expectedLength) {
+    int actual = part.getLength();
+    assertEquals(expectedLength, actual);
+  }
 
-    private static Stream<Arguments> getLength_ResultShouldBeCorrect() {
-        return allData().map(args -> Arguments.of(args.part(), args.expectedLength()));
-    }
+  private static Stream<Arguments> getLength_ResultShouldBeCorrect() {
+    return allData().map(args -> Arguments.of(args.part(), args.expectedLength()));
+  }
 
-    @ParameterizedTest
-    @MethodSource
-    public void getMinLength_ResultShouldBeCorrect(Part part, int expectedMinLength) {
-        int actual = part.minLength();
-        assertEquals(expectedMinLength, actual);
-    }
+  @ParameterizedTest
+  @MethodSource
+  public void getMinLength_ResultShouldBeCorrect(Part part, int expectedMinLength) {
+    int actual = part.minLength();
+    assertEquals(expectedMinLength, actual);
+  }
 
-    private static Stream<Arguments> getMinLength_ResultShouldBeCorrect() {
-        return allData().map(args -> Arguments.of(args.part(), args.expectedMinLength()));
-    }
+  private static Stream<Arguments> getMinLength_ResultShouldBeCorrect() {
+    return allData().map(args -> Arguments.of(args.part(), args.expectedMinLength()));
+  }
 
-    @ParameterizedTest
-    @MethodSource
-    public void getCharacters_ResultShouldBeCorrect(Part part, List<Character> expectedCharacters) {
-        List<Character> actual = part.getCharacters();
-        assertEquals(expectedCharacters, actual);
-    }
+  @ParameterizedTest
+  @MethodSource
+  public void getCharacters_ResultShouldBeCorrect(Part part, List<Character> expectedCharacters) {
+    List<Character> actual = part.getCharacters();
+    assertEquals(expectedCharacters, actual);
+  }
 
-    private static Stream<Arguments> getCharacters_ResultShouldBeCorrect() {
-        return allData().map(args -> Arguments.of(args.part(), args.expectedCharacters()));
-    }
+  private static Stream<Arguments> getCharacters_ResultShouldBeCorrect() {
+    return allData().map(args -> Arguments.of(args.part(), args.expectedCharacters()));
+  }
 
-    private static Stream<PartArguments> allData() {
-        List<Character> specialChars = Arrays.asList('!', '"', '#', '$', '%', '&', '\'', '(', ')', '*', '+', ',', '-', '.', '/', ':', ';', '<', '=', '>', '?', '@', '[', '\\', ']',
-                '^', '_', '`', '{', '|', '}', '~');
-        return Stream.of(
-                new PartArguments(new SpecialCharacterPart(5, 4), specialChars, 5, 4),
-                new PartArguments(new LowerAlphabeticPart(5, 4), codesToChars(97, 123), 5, 4),
-                new PartArguments(new NumericPart(7, 3), codesToChars(48, 58), 7, 3),
-                new PartArguments(new UpperAlphabeticPart(5, 4), codesToChars(65, 91), 5, 4)
-        );
-    }
+  private static Stream<PartArguments> allData() {
+    List<Character> specialChars = Arrays.asList('!', '"', '#', '$', '%', '&', '\'', '(', ')', '*', '+', ',', '-', '.', '/', ':', ';', '<', '=', '>', '?', '@', '[', '\\', ']',
+            '^', '_', '`', '{', '|', '}', '~');
+    return Stream.of(
+            new PartArguments(new SpecialCharacterPart(5, 4), specialChars, 5, 4),
+            new PartArguments(new LowerAlphabeticPart(5, 4), codesToChars(97, 123), 5, 4),
+            new PartArguments(new NumericPart(7, 3), codesToChars(48, 58), 7, 3),
+            new PartArguments(new UpperAlphabeticPart(5, 4), codesToChars(65, 91), 5, 4)
+    );
+  }
 
-    private static List<Character> codesToChars(int startInclusive, int endExclusive) {
-        return IntStream.range(startInclusive, endExclusive).mapToObj(n -> (char) n).collect(Collectors.toList());
-    }
+  private static List<Character> codesToChars(int startInclusive, int endExclusive) {
+    return IntStream.range(startInclusive, endExclusive).mapToObj(n -> (char) n).collect(Collectors.toList());
+  }
 }

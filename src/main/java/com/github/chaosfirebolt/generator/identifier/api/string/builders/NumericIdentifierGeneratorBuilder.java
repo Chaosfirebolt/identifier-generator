@@ -32,38 +32,38 @@ import java.util.OptionalInt;
 public final class NumericIdentifierGeneratorBuilder extends TypeSpecificStringIdentifierBuilder<NumericIdentifierGeneratorBuilder>
         implements NumericGeneratorBuilder<NumericIdentifierGeneratorBuilder>, NumericBuilderData<NumericIdentifierGeneratorBuilder> {
 
-    private int numericLength;
-    private int minNumericLength;
+  private int numericLength;
+  private int minNumericLength;
 
-    NumericIdentifierGeneratorBuilder() {
-    }
+  NumericIdentifierGeneratorBuilder() {
+  }
 
-    @Override
-    public NumericIdentifierGeneratorBuilder setNumericLength(int numericLength) {
-        this.numericLength = numericLength;
-        return this;
-    }
+  @Override
+  public NumericIdentifierGeneratorBuilder setNumericLength(int numericLength) {
+    this.numericLength = numericLength;
+    return this;
+  }
 
-    @Override
-    public NumericIdentifierGeneratorBuilder setMinNumericLength(int minNumericLength) {
-        this.minNumericLength = minNumericLength;
-        return this;
-    }
+  @Override
+  public NumericIdentifierGeneratorBuilder setMinNumericLength(int minNumericLength) {
+    this.minNumericLength = minNumericLength;
+    return this;
+  }
 
-    @Override
-    @API(status = API.Status.INTERNAL, since = "2.0.0")
-    public int getNumericLength() {
-        return this.numericLength;
-    }
+  @Override
+  @API(status = API.Status.INTERNAL, since = "2.0.0")
+  public int getNumericLength() {
+    return this.numericLength;
+  }
 
-    @Override
-    @API(status = API.Status.INTERNAL, since = "2.0.0")
-    public OptionalInt getMinNumericLength() {
-        return OptionalUtility.fromInt(this.minNumericLength);
-    }
+  @Override
+  @API(status = API.Status.INTERNAL, since = "2.0.0")
+  public OptionalInt getMinNumericLength() {
+    return OptionalUtility.fromInt(this.minNumericLength);
+  }
 
-    @Override
-    protected List<Part> getParts() {
-        return List.of(createNumericPart());
-    }
+  @Override
+  protected List<Part> getParts() {
+    return List.of(createNumericPart());
+  }
 }

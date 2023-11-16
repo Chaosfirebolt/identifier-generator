@@ -17,8 +17,8 @@
 package com.github.chaosfirebolt.generator.identifier.internal.builders;
 
 import com.github.chaosfirebolt.generator.identifier.api.string.StringIdentifierGenerator;
-import com.github.chaosfirebolt.generator.identifier.api.string.validation.CompositeRuleValidator;
 import com.github.chaosfirebolt.generator.identifier.api.string.rule.GeneratorRule;
+import com.github.chaosfirebolt.generator.identifier.api.string.validation.CompositeRuleValidator;
 import com.github.chaosfirebolt.generator.identifier.api.string.validation.RuleValidator;
 import org.apiguardian.api.API;
 
@@ -30,87 +30,92 @@ import java.util.random.RandomGenerator;
 
 /**
  * The base builder for string based identifier generators.
+ *
  * @param <T> concrete type of the builder
  */
 @SuppressWarnings("unchecked")
 @API(status = API.Status.INTERNAL, since = "2.0.0")
 public abstract class BaseStringIdentifierGeneratorBuilder<T extends BaseStringIdentifierGeneratorBuilder<T>> {
 
-    private RandomGenerator randomGenerator;
-    private GeneratorRule generatorRule;
-    private List<RuleValidator> ruleValidators;
+  private RandomGenerator randomGenerator;
+  private GeneratorRule generatorRule;
+  private List<RuleValidator> ruleValidators;
 
-    protected BaseStringIdentifierGeneratorBuilder() {
-    }
+  protected BaseStringIdentifierGeneratorBuilder() {
+  }
 
-    /**
-     * @param randomGenerator the random generator to be used
-     * @return this instance
-     */
-    public T setRandomGenerator(RandomGenerator randomGenerator) {
-        this.randomGenerator = randomGenerator;
-        return (T) this;
-    }
+  /**
+   * @param randomGenerator the random generator to be used
+   * @return this instance
+   */
+  public T setRandomGenerator(RandomGenerator randomGenerator) {
+    this.randomGenerator = randomGenerator;
+    return (T) this;
+  }
 
-    /**
-     * @param generatorRule the generator rule to be used
-     * @return this instance
-     */
-    protected T setGeneratorRule(GeneratorRule generatorRule) {
-        this.generatorRule = generatorRule;
-        return (T) this;
-    }
+  /**
+   * @param generatorRule the generator rule to be used
+   * @return this instance
+   */
+  protected T setGeneratorRule(GeneratorRule generatorRule) {
+    this.generatorRule = generatorRule;
+    return (T) this;
+  }
 
-    /**
-     * Replaces the current validators with the new ones.
-     * @param ruleValidators validators replacing current ones
-     * @return this instance
-     */
-    public T setRuleValidators(List<RuleValidator> ruleValidators) {
-        this.ruleValidators = ruleValidators;
-        return (T) this;
-    }
+  /**
+   * Replaces the current validators with the new ones.
+   *
+   * @param ruleValidators validators replacing current ones
+   * @return this instance
+   */
+  public T setRuleValidators(List<RuleValidator> ruleValidators) {
+    this.ruleValidators = ruleValidators;
+    return (T) this;
+  }
 
-    /**
-     * Adds the validator to the list of validators.
-     * @param ruleValidator validator to add
-     * @return this instance
-     */
-    public T addRuleValidator(RuleValidator ruleValidator) {
-        if (this.ruleValidators == null) {
-            this.ruleValidators = new ArrayList<>();
-        }
-        this.ruleValidators.add(ruleValidator);
-        return (T) this;
+  /**
+   * Adds the validator to the list of validators.
+   *
+   * @param ruleValidator validator to add
+   * @return this instance
+   */
+  public T addRuleValidator(RuleValidator ruleValidator) {
+    if (this.ruleValidators == null) {
+      this.ruleValidators = new ArrayList<>();
     }
+    this.ruleValidators.add(ruleValidator);
+    return (T) this;
+  }
 
-    /**
-     * Creates new instance of {@link StringIdentifierGenerator}. Provides defaults of some of the parameters are missing, wherever possible.
-     * @return a new instance
-     * @throws NullPointerException if parameter is missing and can't supply default value for it
-     */
-    public StringIdentifierGenerator build() {
-        RandomGenerator randomGenerator = this.randomGenerator == null ? new SecureRandom() : this.randomGenerator;
-        RuleValidator ruleValidator;
-        if (this.ruleValidators == null || this.ruleValidators.isEmpty()) {
-            ruleValidator = StringIdentifierGenerator.DEFAULT_VALIDATOR;
-        } else if (this.ruleValidators.size() == 1) {
-            ruleValidator = this.ruleValidators.get(0);
-        } else {
-            ruleValidator = new CompositeRuleValidator(this.ruleValidators);
-        }
-        GeneratorRule generatorRule = Objects.requireNonNull(getGeneratorRule(), "Missing generator rule");
-        return new StringIdentifierGenerator(randomGenerator, generatorRule, ruleValidator);
+  /**
+   * Creates new instance of {@link StringIdentifierGenerator}. Provides defaults of some of the parameters are missing, wherever possible.
+   *
+   * @return a new instance
+   * @throws NullPointerException if parameter is missing and can't supply default value for it
+   */
+  public StringIdentifierGenerator build() {
+    RandomGenerator randomGenerator = this.randomGenerator == null ? new SecureRandom() : this.randomGenerator;
+    RuleValidator ruleValidator;
+    if (this.ruleValidators == null || this.ruleValidators.isEmpty()) {
+      ruleValidator = StringIdentifierGenerator.DEFAULT_VALIDATOR;
+    } else if (this.ruleValidators.size() == 1) {
+      ruleValidator = this.ruleValidators.get(0);
+    } else {
+      ruleValidator = new CompositeRuleValidator(this.ruleValidators);
     }
+    GeneratorRule generatorRule = Objects.requireNonNull(getGeneratorRule(), "Missing generator rule");
+    return new StringIdentifierGenerator(randomGenerator, generatorRule, ruleValidator);
+  }
 
-    /**
-     * Factory method, returning the rule to use.
-     * <br>
-     * Override wherever applicable.
-     * @return generator rule to use
-     * @throws IllegalArgumentException in case of invalid rule setup
-     */
-    protected GeneratorRule getGeneratorRule() {
-        return this.generatorRule;
-    }
+  /**
+   * Factory method, returning the rule to use.
+   * <br>
+   * Override wherever applicable.
+   *
+   * @return generator rule to use
+   * @throws IllegalArgumentException in case of invalid rule setup
+   */
+  protected GeneratorRule getGeneratorRule() {
+    return this.generatorRule;
+  }
 }

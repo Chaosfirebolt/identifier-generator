@@ -35,31 +35,31 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
  */
 public class CalculationUtilityTests {
 
-    private final List<Part> parts = new ArrayList<>();
+  private final List<Part> parts = new ArrayList<>();
 
-    @BeforeEach
-    void setUp() {
-        this.parts.add(new LowerAlphabeticPart(5, 3));
-        this.parts.add(new UpperAlphabeticPart(15, 10));
-        this.parts.add(new NumericPart(35, 20));
-    }
+  @BeforeEach
+  void setUp() {
+    this.parts.add(new LowerAlphabeticPart(5, 3));
+    this.parts.add(new UpperAlphabeticPart(15, 10));
+    this.parts.add(new NumericPart(35, 20));
+  }
 
-    @AfterEach
-    void tearDown() {
-        this.parts.clear();
-    }
+  @AfterEach
+  void tearDown() {
+    this.parts.clear();
+  }
 
-    @Test
-    public void calculateTotalLength_ShouldReturnCorrect() {
-        int expected = 55;
-        int actual = CalculationUtility.totalLength(this.parts);
-        assertEquals(expected, actual);
-    }
+  @Test
+  public void calculateTotalLength_ShouldReturnCorrect() {
+    int expected = 55;
+    int actual = CalculationUtility.totalLength(this.parts);
+    assertEquals(expected, actual);
+  }
 
-    @Test
-    public void calculateMinimumLength_ShouldReturnCorrect() {
-        int expected = 33;
-        int actual = CalculationUtility.minimumLength(this.parts);
-        assertEquals(expected, actual);
-    }
+  @Test
+  public void calculateMinimumLength_ShouldReturnCorrect() {
+    int expected = 33;
+    int actual = CalculationUtility.minimumLength(this.parts);
+    assertEquals(expected, actual);
+  }
 }

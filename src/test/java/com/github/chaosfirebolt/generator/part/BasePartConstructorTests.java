@@ -28,23 +28,23 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
  */
 public class BasePartConstructorTests {
 
-    @Test
-    public void intIntListConstructor_ListIsNull_ShouldThrowNullPointerException() {
-        assertThrows(NullPointerException.class, () -> new BasePart(5, 3, null));
-    }
+  @Test
+  public void intIntListConstructor_ListIsNull_ShouldThrowNullPointerException() {
+    assertThrows(NullPointerException.class, () -> new BasePart(5, 3, null));
+  }
 
-    @Test
-    public void intIntListConstructor_ListIsEmpty_ShouldThrowIllegalArgumentException() {
-        assertThrows(IllegalArgumentException.class, () -> new BasePart(9, 8, Collections.emptyList()));
-    }
+  @Test
+  public void intIntListConstructor_ListIsEmpty_ShouldThrowIllegalArgumentException() {
+    assertThrows(IllegalArgumentException.class, () -> new BasePart(9, 8, Collections.emptyList()));
+  }
 
-    @Test
-    public void intListConstructor_ListIsNull_ShouldThrowNullPointerException() {
-        assertThrows(NullPointerException.class, () -> new BasePart(5, null));
-    }
+  @Test
+  public void intListConstructor_ListIsNull_ShouldThrowNullPointerException() {
+    assertThrows(NullPointerException.class, () -> new BasePart(5, null));
+  }
 
-    @Test
-    public void intListConstructor_ListIsEmpty_ShouldThrowIllegalArgumentException() {
-        assertThrows(IllegalArgumentException.class, () -> new BasePart(9, Collections.emptyList()));
-    }
+  @Test
+  public void intListConstructor_ListIsEmpty_ShouldThrowIllegalArgumentException() {
+    assertThrows(IllegalArgumentException.class, () -> new BasePart(9, Collections.emptyList()));
+  }
 }

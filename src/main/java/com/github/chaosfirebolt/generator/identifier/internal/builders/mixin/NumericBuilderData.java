@@ -24,27 +24,29 @@ import java.util.OptionalInt;
 
 /**
  * Internal!
+ *
  * @param <T> concrete type of the builder
  */
 @API(status = API.Status.INTERNAL, since = "2.0.0")
 public interface NumericBuilderData<T extends TypeSpecificStringIdentifierBuilder<T>> {
 
-    /**
-     * @return numeric length currently set in the builder
-     */
-    int getNumericLength();
+  /**
+   * @return numeric length currently set in the builder
+   */
+  int getNumericLength();
 
-    /**
-     * @return optional describing the minimum numeric length currently set in the builder
-     */
-    OptionalInt getMinNumericLength();
+  /**
+   * @return optional describing the minimum numeric length currently set in the builder
+   */
+  OptionalInt getMinNumericLength();
 
-    /**
-     * Factory method creating a {@link NumericPart} with the current data.
-     * @return a new part
-     */
-    default NumericPart createNumericPart() {
-        int minLowerCaseLength = getMinNumericLength().orElseGet(this::getNumericLength);
-        return new NumericPart(this.getNumericLength(), minLowerCaseLength);
-    }
+  /**
+   * Factory method creating a {@link NumericPart} with the current data.
+   *
+   * @return a new part
+   */
+  default NumericPart createNumericPart() {
+    int minLowerCaseLength = getMinNumericLength().orElseGet(this::getNumericLength);
+    return new NumericPart(this.getNumericLength(), minLowerCaseLength);
+  }
 }

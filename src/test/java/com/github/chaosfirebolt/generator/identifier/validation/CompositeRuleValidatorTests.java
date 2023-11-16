@@ -32,47 +32,47 @@ import static org.mockito.Mockito.mock;
 
 public class CompositeRuleValidatorTests {
 
-    @NullAndEmptySource
-    @ParameterizedTest
-    public void listConstructor_MissingDelegates_ShouldThrowIllegalArgumentException(List<RuleValidator> validators) {
-        assertRequiredException(() -> new CompositeRuleValidator(validators));
-    }
+  @NullAndEmptySource
+  @ParameterizedTest
+  public void listConstructor_MissingDelegates_ShouldThrowIllegalArgumentException(List<RuleValidator> validators) {
+    assertRequiredException(() -> new CompositeRuleValidator(validators));
+  }
 
-    private static void assertRequiredException(Executable constructorInvocation) {
-        IllegalArgumentException exc = assertThrows(IllegalArgumentException.class, constructorInvocation, "Constructor invocation should have thrown exception");
-        String errorMessage = exc.getMessage();
-        assertTrue(errorMessage != null && !errorMessage.isBlank(), "Missing error message");
-    }
+  private static void assertRequiredException(Executable constructorInvocation) {
+    IllegalArgumentException exc = assertThrows(IllegalArgumentException.class, constructorInvocation, "Constructor invocation should have thrown exception");
+    String errorMessage = exc.getMessage();
+    assertTrue(errorMessage != null && !errorMessage.isBlank(), "Missing error message");
+  }
 
-    @NullAndEmptySource
-    @ParameterizedTest
-    public void varArgsConstructor_MissingDelegates_ShouldThrowIllegalArgumentException(RuleValidator[] validators) {
-        assertRequiredException(() -> new CompositeRuleValidator(validators));
-    }
+  @NullAndEmptySource
+  @ParameterizedTest
+  public void varArgsConstructor_MissingDelegates_ShouldThrowIllegalArgumentException(RuleValidator[] validators) {
+    assertRequiredException(() -> new CompositeRuleValidator(validators));
+  }
 
-    @ParameterizedTest
-    @MethodSource("validatorStream")
-    public void listConstructor_validDelegates_ShouldNotThrowException(Stream<RuleValidator> validatorStream) {
-        Executable constructorInvocation = () -> new CompositeRuleValidator(validatorStream.toList());
-        assertNoException(constructorInvocation);
-    }
+  @ParameterizedTest
+  @MethodSource("validatorStream")
+  public void listConstructor_validDelegates_ShouldNotThrowException(Stream<RuleValidator> validatorStream) {
+    Executable constructorInvocation = () -> new CompositeRuleValidator(validatorStream.toList());
+    assertNoException(constructorInvocation);
+  }
 
-    private static List<Arguments> validatorStream() {
-        return List.of(
-                Arguments.of(Stream.of(mock(RuleValidator.class))),
-                Arguments.of(Stream.of(mock(RuleValidator.class), mock(RuleValidator.class))),
-                Arguments.of(Stream.of(mock(RuleValidator.class), mock(RuleValidator.class), mock(RuleValidator.class)))
-        );
-    }
+  private static List<Arguments> validatorStream() {
+    return List.of(
+            Arguments.of(Stream.of(mock(RuleValidator.class))),
+            Arguments.of(Stream.of(mock(RuleValidator.class), mock(RuleValidator.class))),
+            Arguments.of(Stream.of(mock(RuleValidator.class), mock(RuleValidator.class), mock(RuleValidator.class)))
+    );
+  }
 
-    private static void assertNoException(Executable constructorInvocation) {
-        assertDoesNotThrow(constructorInvocation, "Constructor invocation should not have thrown exception");
-    }
+  private static void assertNoException(Executable constructorInvocation) {
+    assertDoesNotThrow(constructorInvocation, "Constructor invocation should not have thrown exception");
+  }
 
-    @ParameterizedTest
-    @MethodSource("validatorStream")
-    public void varargsConstructor_validDelegates_ShouldNotThrowException(Stream<RuleValidator> validatorStream) {
-        Executable constructorInvocation = () -> new CompositeRuleValidator(validatorStream.toArray(RuleValidator[]::new));
-        assertNoException(constructorInvocation);
-    }
+  @ParameterizedTest
+  @MethodSource("validatorStream")
+  public void varargsConstructor_validDelegates_ShouldNotThrowException(Stream<RuleValidator> validatorStream) {
+    Executable constructorInvocation = () -> new CompositeRuleValidator(validatorStream.toArray(RuleValidator[]::new));
+    assertNoException(constructorInvocation);
+  }
 }

@@ -32,39 +32,39 @@ import java.util.OptionalInt;
 public final class LowerAlphabeticIdentifierGeneratorBuilder extends TypeSpecificStringIdentifierBuilder<LowerAlphabeticIdentifierGeneratorBuilder>
         implements LowerAlphabeticGeneratorBuilder<LowerAlphabeticIdentifierGeneratorBuilder>, LowerAlphabeticBuilderData<LowerAlphabeticIdentifierGeneratorBuilder> {
 
-    private int lowerCaseLength;
-    private int minLowerCaseLength;
+  private int lowerCaseLength;
+  private int minLowerCaseLength;
 
-    @API(status = API.Status.INTERNAL, since = "2.0.0")
-    LowerAlphabeticIdentifierGeneratorBuilder() {
-    }
+  @API(status = API.Status.INTERNAL, since = "2.0.0")
+  LowerAlphabeticIdentifierGeneratorBuilder() {
+  }
 
-    @Override
-    public LowerAlphabeticIdentifierGeneratorBuilder setLowerCaseLength(int lowerCaseLength) {
-        this.lowerCaseLength = lowerCaseLength;
-        return this;
-    }
+  @Override
+  public LowerAlphabeticIdentifierGeneratorBuilder setLowerCaseLength(int lowerCaseLength) {
+    this.lowerCaseLength = lowerCaseLength;
+    return this;
+  }
 
-    @Override
-    public LowerAlphabeticIdentifierGeneratorBuilder setMinLowerCaseLength(int minLowerCaseLength) {
-        this.minLowerCaseLength = minLowerCaseLength;
-        return this;
-    }
+  @Override
+  public LowerAlphabeticIdentifierGeneratorBuilder setMinLowerCaseLength(int minLowerCaseLength) {
+    this.minLowerCaseLength = minLowerCaseLength;
+    return this;
+  }
 
-    @Override
-    @API(status = API.Status.INTERNAL, since = "2.0.0")
-    public int getLowerCaseLength() {
-        return this.lowerCaseLength;
-    }
+  @Override
+  @API(status = API.Status.INTERNAL, since = "2.0.0")
+  public int getLowerCaseLength() {
+    return this.lowerCaseLength;
+  }
 
-    @Override
-    @API(status = API.Status.INTERNAL, since = "2.0.0")
-    public OptionalInt getMinLowerCaseLength() {
-        return OptionalUtility.fromInt(this.minLowerCaseLength);
-    }
+  @Override
+  @API(status = API.Status.INTERNAL, since = "2.0.0")
+  public OptionalInt getMinLowerCaseLength() {
+    return OptionalUtility.fromInt(this.minLowerCaseLength);
+  }
 
-    @Override
-    protected List<Part> getParts() {
-        return List.of(createLowerAlphabeticPart());
-    }
+  @Override
+  protected List<Part> getParts() {
+    return List.of(createLowerAlphabeticPart());
+  }
 }

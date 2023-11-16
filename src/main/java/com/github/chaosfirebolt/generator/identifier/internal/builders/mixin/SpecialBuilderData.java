@@ -24,27 +24,29 @@ import java.util.OptionalInt;
 
 /**
  * Internal!
+ *
  * @param <T> concrete type of the builder
  */
 @API(status = API.Status.INTERNAL, since = "2.0.0")
 public interface SpecialBuilderData<T extends TypeSpecificStringIdentifierBuilder<T>> {
 
-    /**
-     * @return special character length currently set in the builder
-     */
-    int getSpecialCharacterLength();
+  /**
+   * @return special character length currently set in the builder
+   */
+  int getSpecialCharacterLength();
 
-    /**
-     * @return optional describing the minimum special character length currently set in the builder
-     */
-    OptionalInt getMinSpecialCharacterLength();
+  /**
+   * @return optional describing the minimum special character length currently set in the builder
+   */
+  OptionalInt getMinSpecialCharacterLength();
 
-    /**
-     * Factory method creating a {@link SpecialCharacterPart} with the current data.
-     * @return a new part
-     */
-    default SpecialCharacterPart createSpecialCharacterPart() {
-        int minLength = getMinSpecialCharacterLength().orElseGet(this::getSpecialCharacterLength);
-        return new SpecialCharacterPart(getSpecialCharacterLength(), minLength);
-    }
+  /**
+   * Factory method creating a {@link SpecialCharacterPart} with the current data.
+   *
+   * @return a new part
+   */
+  default SpecialCharacterPart createSpecialCharacterPart() {
+    int minLength = getMinSpecialCharacterLength().orElseGet(this::getSpecialCharacterLength);
+    return new SpecialCharacterPart(getSpecialCharacterLength(), minLength);
+  }
 }

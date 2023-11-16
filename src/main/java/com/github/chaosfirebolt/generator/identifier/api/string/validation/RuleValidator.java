@@ -28,10 +28,11 @@ import org.apiguardian.api.API;
 @API(status = API.Status.STABLE, since = "2.0.0")
 public interface RuleValidator {
 
-    /**
-     * Validates supplied rule.
-     * @param rule rule to be validated
-     * @throws InvalidGeneratorRuleException if the validator considers tested rule invalid
-     */
-    void validate(GeneratorRule rule);
+  /**
+   * Validates supplied rule.
+   *
+   * @param rule rule to be validated
+   * @throws InvalidGeneratorRuleException if the validator considers tested rule invalid
+   */
+  void validate(GeneratorRule rule);
 }

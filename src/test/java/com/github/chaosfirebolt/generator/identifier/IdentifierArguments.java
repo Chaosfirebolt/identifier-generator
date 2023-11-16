@@ -20,7 +20,7 @@ import com.github.chaosfirebolt.generator.identifier.api.BaseIdentifierGenerator
 
 public record IdentifierArguments(BaseIdentifierGenerator<String> generator, int maxAttempts, int expectedLength, int expectedMinLength) {
 
-    public static IdentifierArguments of(BaseIdentifierGenerator<String> generator, int maxAttempts, int expectedLength, int expectedMinLength) {
-        return new IdentifierArguments(generator, maxAttempts, expectedLength, expectedMinLength);
-    }
+  public static IdentifierArguments of(BaseIdentifierGenerator<String> generator, int maxAttempts, int expectedLength, int expectedMinLength) {
+    return new IdentifierArguments(generator, maxAttempts, expectedLength, expectedMinLength);
+  }
 }

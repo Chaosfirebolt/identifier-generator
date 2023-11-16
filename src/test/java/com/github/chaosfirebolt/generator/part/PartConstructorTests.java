@@ -35,73 +35,73 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
  */
 public class PartConstructorTests {
 
-    @ParameterizedTest
-    @MethodSource
-    public void positiveLength_ShouldNotThrowException(Executable constructorInvocation) {
-        assertDoesNotThrow(constructorInvocation, "Supplying positive length to part constructor should not have thrown exception");
-    }
+  @ParameterizedTest
+  @MethodSource
+  public void positiveLength_ShouldNotThrowException(Executable constructorInvocation) {
+    assertDoesNotThrow(constructorInvocation, "Supplying positive length to part constructor should not have thrown exception");
+  }
 
-    private static List<Executable> positiveLength_ShouldNotThrowException() {
-        List<Executable> invocations = new ArrayList<>();
-        for (IntFunction<Part> constructorInvocation : lengthConstructorInvocations()) {
-            for (Integer validLength : validLengths()) {
-                invocations.add(() -> constructorInvocation.apply(validLength));
-            }
+  private static List<Executable> positiveLength_ShouldNotThrowException() {
+    List<Executable> invocations = new ArrayList<>();
+    for (IntFunction<Part> constructorInvocation : lengthConstructorInvocations()) {
+      for (Integer validLength : validLengths()) {
+        invocations.add(() -> constructorInvocation.apply(validLength));
+      }
+    }
+    for (BiFunction<Integer, Integer, Part> constructorInvocation : lengthMinLengthConstructorInvocations()) {
+      for (Integer validLength1 : validLengths()) {
+        for (Integer validLength2 : validLengths()) {
+          addIfLengthIsGreaterThanOrEqualToMinLength(invocations, constructorInvocation, validLength1, validLength2);
+          addIfLengthIsGreaterThanOrEqualToMinLength(invocations, constructorInvocation, validLength2, validLength1);
         }
-        for (BiFunction<Integer, Integer, Part> constructorInvocation : lengthMinLengthConstructorInvocations()) {
-            for (Integer validLength1 : validLengths()) {
-                for (Integer validLength2 : validLengths()) {
-                    addIfLengthIsGreaterThanOrEqualToMinLength(invocations, constructorInvocation, validLength1, validLength2);
-                    addIfLengthIsGreaterThanOrEqualToMinLength(invocations, constructorInvocation, validLength2, validLength1);
-                }
-            }
+      }
+    }
+    return invocations;
+  }
+
+  private static void addIfLengthIsGreaterThanOrEqualToMinLength(List<Executable> invocations, BiFunction<Integer, Integer, Part> constructorInvocation, int length, int minLength) {
+    if (length >= minLength) {
+      invocations.add(() -> constructorInvocation.apply(length, minLength));
+    }
+  }
+
+  @ParameterizedTest
+  @MethodSource
+  public void negativeOrZeroLength_ShouldThrowException(Executable constructorInvocation) {
+    assertThrows(IllegalArgumentException.class, constructorInvocation, "Supplying negative or zero length to part constructor should have thrown 'IllegalArgumentException'");
+  }
+
+  private static List<Executable> negativeOrZeroLength_ShouldThrowException() {
+    List<Executable> invocations = new ArrayList<>();
+    for (IntFunction<Part> constructorInvocation : lengthConstructorInvocations()) {
+      for (Integer invalidLength : invalidLengths()) {
+        invocations.add(() -> constructorInvocation.apply(invalidLength));
+      }
+    }
+    for (BiFunction<Integer, Integer, Part> constructorInvocation : lengthMinLengthConstructorInvocations()) {
+      for (Integer invalidLength : invalidLengths()) {
+        for (Integer validLength : validLengths()) {
+          invocations.add(() -> constructorInvocation.apply(invalidLength, validLength));
+          invocations.add(() -> constructorInvocation.apply(validLength, invalidLength));
         }
-        return invocations;
+      }
     }
+    return invocations;
+  }
 
-    private static void addIfLengthIsGreaterThanOrEqualToMinLength(List<Executable> invocations, BiFunction<Integer, Integer, Part> constructorInvocation, int length, int minLength) {
-        if (length >= minLength) {
-            invocations.add(() -> constructorInvocation.apply(length, minLength));
-        }
-    }
+  private static List<IntFunction<Part>> lengthConstructorInvocations() {
+    return Arrays.asList(LowerAlphabeticPart::new, NumericPart::new, SpecialCharacterPart::new, UpperAlphabeticPart::new);
+  }
 
-    @ParameterizedTest
-    @MethodSource
-    public void negativeOrZeroLength_ShouldThrowException(Executable constructorInvocation) {
-        assertThrows(IllegalArgumentException.class, constructorInvocation, "Supplying negative or zero length to part constructor should have thrown 'IllegalArgumentException'");
-    }
+  private static List<BiFunction<Integer, Integer, Part>> lengthMinLengthConstructorInvocations() {
+    return Arrays.asList(LowerAlphabeticPart::new, NumericPart::new, SpecialCharacterPart::new, UpperAlphabeticPart::new);
+  }
 
-    private static List<Executable> negativeOrZeroLength_ShouldThrowException() {
-        List<Executable> invocations = new ArrayList<>();
-        for (IntFunction<Part> constructorInvocation : lengthConstructorInvocations()) {
-            for (Integer invalidLength : invalidLengths()) {
-                invocations.add(() -> constructorInvocation.apply(invalidLength));
-            }
-        }
-        for (BiFunction<Integer, Integer, Part> constructorInvocation : lengthMinLengthConstructorInvocations()) {
-            for (Integer invalidLength : invalidLengths()) {
-                for (Integer validLength : validLengths()) {
-                    invocations.add(() -> constructorInvocation.apply(invalidLength, validLength));
-                    invocations.add(() -> constructorInvocation.apply(validLength, invalidLength));
-                }
-            }
-        }
-        return invocations;
-    }
+  private static List<Integer> invalidLengths() {
+    return Arrays.asList(0, -3, -4);
+  }
 
-    private static List<IntFunction<Part>> lengthConstructorInvocations() {
-        return Arrays.asList(LowerAlphabeticPart::new, NumericPart::new, SpecialCharacterPart::new, UpperAlphabeticPart::new);
-    }
-
-    private static List<BiFunction<Integer, Integer, Part>> lengthMinLengthConstructorInvocations() {
-        return Arrays.asList(LowerAlphabeticPart::new, NumericPart::new, SpecialCharacterPart::new, UpperAlphabeticPart::new);
-    }
-
-    private static List<Integer> invalidLengths() {
-        return Arrays.asList(0, -3, -4);
-    }
-
-    private static List<Integer> validLengths() {
-        return Arrays.asList(1, 11, 23);
-    }
+  private static List<Integer> validLengths() {
+    return Arrays.asList(1, 11, 23);
+  }
 }

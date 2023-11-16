@@ -30,86 +30,88 @@ import java.util.Objects;
 @API(status = API.Status.STABLE, since = "2.0.0")
 public class BasePart implements Part {
 
-    private static final String LENGTH_PARAM_NAME = "Part length";
-    private static final String MIN_LENGTH_PARAM_NAME = "Minimum part length";
-    private static final int MIN_PART_LENGTH = 1;
-    private static final String NULL_CHARACTERS_ERROR_MESSAGE = "Characters list can't be null";
-    private static final String EMPTY_CHARACTERS_ERROR_MESSAGE = "Characters list can't be empty";
+  private static final String LENGTH_PARAM_NAME = "Part length";
+  private static final String MIN_LENGTH_PARAM_NAME = "Minimum part length";
+  private static final int MIN_PART_LENGTH = 1;
+  private static final String NULL_CHARACTERS_ERROR_MESSAGE = "Characters list can't be null";
+  private static final String EMPTY_CHARACTERS_ERROR_MESSAGE = "Characters list can't be empty";
 
-    /**
-     * Desired length of this part.
-     */
-    private final int length;
+  /**
+   * Desired length of this part.
+   */
+  private final int length;
 
-    /**
-     * Desired minimum length of this part.
-     */
-    private final int minLength;
+  /**
+   * Desired minimum length of this part.
+   */
+  private final int minLength;
 
-    /**
-     * Possible characters fot this part.
-     */
-    private final List<Character> characters;
+  /**
+   * Possible characters fot this part.
+   */
+  private final List<Character> characters;
 
-    /**
-     * Constructor creating identifier part from supplied length and characters.
-     * <br>
-     * Collection of characters is changed to unmodifiable list.
-     * @param length required length of the part
-     * @param characters possible characters for the part
-     * @throws IllegalArgumentException if length is less than 1, or characters is empty
-     * @throws NullPointerException if characters is null
-     */
-    public BasePart(int length, List<Character> characters) {
-        this(length, length, characters);
+  /**
+   * Constructor creating identifier part from supplied length and characters.
+   * <br>
+   * Collection of characters is changed to unmodifiable list.
+   *
+   * @param length     required length of the part
+   * @param characters possible characters for the part
+   * @throws IllegalArgumentException if length is less than 1, or characters is empty
+   * @throws NullPointerException     if characters is null
+   */
+  public BasePart(int length, List<Character> characters) {
+    this(length, length, characters);
+  }
+
+  /**
+   * Constructor creating identifier part from supplied length, minimum length and characters.
+   * <br>
+   * Collection of characters is changed to unmodifiable list.
+   *
+   * @param length     required length of the part
+   * @param minLength  required minimum length of the part
+   * @param characters possible characters for the part
+   * @throws IllegalArgumentException if length or minLength are less than 1, length is less than minLength, or characters is empty
+   * @throws NullPointerException     if characters is null
+   */
+  public BasePart(int length, int minLength, List<Character> characters) {
+    validateLength(LENGTH_PARAM_NAME, MIN_PART_LENGTH, length);
+    validateLength(MIN_LENGTH_PARAM_NAME, MIN_PART_LENGTH, minLength);
+    validateLength(LENGTH_PARAM_NAME, minLength, length);
+    validateCharacters(characters);
+    this.length = length;
+    this.minLength = minLength;
+    this.characters = Collections.unmodifiableList(characters);
+  }
+
+  private static void validateLength(String parameter, int minValue, int actualValue) {
+    if (actualValue < minValue) {
+      String errorMessage = String.format("%s can't be less than '%d', but was '%d'", parameter, minValue, actualValue);
+      throw new IllegalArgumentException(errorMessage);
     }
+  }
 
-    /**
-     * Constructor creating identifier part from supplied length, minimum length and characters.
-     * <br>
-     * Collection of characters is changed to unmodifiable list.
-     * @param length required length of the part
-     * @param minLength required minimum length of the part
-     * @param characters possible characters for the part
-     * @throws IllegalArgumentException if length or minLength are less than 1, length is less than minLength, or characters is empty
-     * @throws NullPointerException if characters is null
-     */
-    public BasePart(int length, int minLength, List<Character> characters) {
-        validateLength(LENGTH_PARAM_NAME, MIN_PART_LENGTH, length);
-        validateLength(MIN_LENGTH_PARAM_NAME, MIN_PART_LENGTH, minLength);
-        validateLength(LENGTH_PARAM_NAME, minLength, length);
-        validateCharacters(characters);
-        this.length = length;
-        this.minLength = minLength;
-        this.characters = Collections.unmodifiableList(characters);
+  private static void validateCharacters(List<Character> characters) {
+    Objects.requireNonNull(characters, NULL_CHARACTERS_ERROR_MESSAGE);
+    if (characters.isEmpty()) {
+      throw new IllegalArgumentException(EMPTY_CHARACTERS_ERROR_MESSAGE);
     }
+  }
 
-    private static void validateLength(String parameter, int minValue, int actualValue) {
-        if (actualValue < minValue) {
-            String errorMessage = String.format("%s can't be less than '%d', but was '%d'", parameter, minValue, actualValue);
-            throw new IllegalArgumentException(errorMessage);
-        }
-    }
+  @Override
+  public int getLength() {
+    return this.length;
+  }
 
-    private static void validateCharacters(List<Character> characters) {
-        Objects.requireNonNull(characters, NULL_CHARACTERS_ERROR_MESSAGE);
-        if (characters.isEmpty()) {
-            throw new IllegalArgumentException(EMPTY_CHARACTERS_ERROR_MESSAGE);
-        }
-    }
+  @Override
+  public int minLength() {
+    return this.minLength;
+  }
 
-    @Override
-    public int getLength() {
-        return this.length;
-    }
-
-    @Override
-    public int minLength() {
-        return this.minLength;
-    }
-
-    @Override
-    public List<Character> getCharacters() {
-        return this.characters;
-    }
+  @Override
+  public List<Character> getCharacters() {
+    return this.characters;
+  }
 }

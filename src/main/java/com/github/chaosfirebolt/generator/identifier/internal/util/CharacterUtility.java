@@ -29,21 +29,22 @@ import java.util.List;
 @API(status = API.Status.INTERNAL, since = "2.0.0")
 public final class CharacterUtility {
 
-    private CharacterUtility() {
-        throw new RuntimeException("No instances allowed");
-    }
+  private CharacterUtility() {
+    throw new RuntimeException("No instances allowed");
+  }
 
-    /**
-     * Creates a list of characters from supplied range of integers cast to char
-     * @param start range start, inclusive
-     * @param end range end, exclusive
-     * @return list of chars
-     */
-    public static List<Character> characterListFromIntRange(int start, int end) {
-        List<Character> result = new ArrayList<>(end - start);
-        for (int i = start; i < end; i++) {
-            result.add((char) i);
-        }
-        return result;
+  /**
+   * Creates a list of characters from supplied range of integers cast to char
+   *
+   * @param start range start, inclusive
+   * @param end   range end, exclusive
+   * @return list of chars
+   */
+  public static List<Character> characterListFromIntRange(int start, int end) {
+    List<Character> result = new ArrayList<>(end - start);
+    for (int i = start; i < end; i++) {
+      result.add((char) i);
     }
+    return result;
+  }
 }

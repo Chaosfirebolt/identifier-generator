@@ -30,19 +30,19 @@ import java.util.function.Predicate;
 @API(status = API.Status.STABLE, since = "2.0.0")
 public class LengthRuleValidator extends BaseRuleValidator {
 
-    private static final Predicate<GeneratorRule> CONDITION = rule -> {
-        int sum = CalculationUtility.totalLength(rule.getParts());
-        return rule.getLength() == sum;
-    };
-    private static final ErrorMessageCreator ERROR_MESSAGE_CREATOR = rule -> {
-        int sum = CalculationUtility.totalLength(rule.getParts());
-        return String.format("Required length of '%d' must be equal to sum of parts lengths, which is '%d'", rule.getLength(), sum);
-    };
+  private static final Predicate<GeneratorRule> CONDITION = rule -> {
+    int sum = CalculationUtility.totalLength(rule.getParts());
+    return rule.getLength() == sum;
+  };
+  private static final ErrorMessageCreator ERROR_MESSAGE_CREATOR = rule -> {
+    int sum = CalculationUtility.totalLength(rule.getParts());
+    return String.format("Required length of '%d' must be equal to sum of parts lengths, which is '%d'", rule.getLength(), sum);
+  };
 
-    /**
-     * Constructs new LengthRuleValidator with preconfigured condition for rule validity and error message creator.
-     */
-    public LengthRuleValidator() {
-        super(CONDITION, ERROR_MESSAGE_CREATOR);
-    }
+  /**
+   * Constructs new LengthRuleValidator with preconfigured condition for rule validity and error message creator.
+   */
+  public LengthRuleValidator() {
+    super(CONDITION, ERROR_MESSAGE_CREATOR);
+  }
 }
