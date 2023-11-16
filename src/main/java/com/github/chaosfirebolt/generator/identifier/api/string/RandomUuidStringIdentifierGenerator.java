@@ -27,7 +27,7 @@ import java.util.UUID;
  * Created by ChaosFire on 12/5/2021
  */
 @API(status = API.Status.STABLE, since = "2.0.0")
-public class UuidStringIdentifierGenerator extends BaseIdentifierGenerator<String> {
+public class RandomUuidStringIdentifierGenerator extends BaseIdentifierGenerator<String> {
 
   @Override
   public String generate() {

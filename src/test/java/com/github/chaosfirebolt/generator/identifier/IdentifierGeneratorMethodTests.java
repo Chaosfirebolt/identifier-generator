@@ -20,7 +20,7 @@ import com.github.chaosfirebolt.generator.identifier.api.BaseIdentifierGenerator
 import com.github.chaosfirebolt.generator.identifier.api.IdentifierGenerator;
 import com.github.chaosfirebolt.generator.identifier.api.exception.TooManyAttemptsException;
 import com.github.chaosfirebolt.generator.identifier.api.string.StringIdentifierGenerator;
-import com.github.chaosfirebolt.generator.identifier.api.string.UuidStringIdentifierGenerator;
+import com.github.chaosfirebolt.generator.identifier.api.string.RandomUuidStringIdentifierGenerator;
 import com.github.chaosfirebolt.generator.identifier.api.string.builders.StringGeneratorBuilders;
 import com.github.chaosfirebolt.generator.identifier.api.string.part.NumericPart;
 import com.github.chaosfirebolt.generator.identifier.api.string.part.SpecialCharacterPart;
@@ -152,7 +152,7 @@ public class IdentifierGeneratorMethodTests {
                     .setUpperCaseLength(111)
                     .setMinUpperCaseLength(100)
                     .build(), 50, 111, 100),
-            IdentifierArguments.of(new UuidStringIdentifierGenerator(), 20, 36, 36)
+            IdentifierArguments.of(new RandomUuidStringIdentifierGenerator(), 20, 36, 36)
     );
   }
 
@@ -224,7 +224,7 @@ public class IdentifierGeneratorMethodTests {
   @ParameterizedTest
   @MethodSource("generatorsWithExpectedMinLength")
   public void generateIdentifierWithLength_LengthIsMoreThanMinimum_IdentifierShouldHaveCorrectLength(IdentifierGenerator<String> identifierGenerator, int expectedMinLength) {
-    assumeFalse(identifierGenerator.getClass().equals(UuidStringIdentifierGenerator.class), "Test not applicable for uuid identifier generator");
+    assumeFalse(identifierGenerator.getClass().equals(RandomUuidStringIdentifierGenerator.class), "Test not applicable for uuid identifier generator");
     int length = expectedMinLength * 2;
     String identifier = identifierGenerator.generate(length);
     assertEquals(length, identifier.length());
@@ -251,7 +251,7 @@ public class IdentifierGeneratorMethodTests {
   @ParameterizedTest
   @MethodSource("generatorsWithExpectedMinLength")
   public void generateUniqueIdentifierWithLength_LengthIsMoreThanMinimum_IdentifierShouldHaveCorrectLength(IdentifierGenerator<String> identifierGenerator, int expectedMinLength) {
-    assumeFalse(identifierGenerator.getClass().equals(UuidStringIdentifierGenerator.class), "Test not applicable for uuid identifier generator");
+    assumeFalse(identifierGenerator.getClass().equals(RandomUuidStringIdentifierGenerator.class), "Test not applicable for uuid identifier generator");
     int length = expectedMinLength * 2;
     String identifier = identifierGenerator.generate(length, this.uniqueCondition);
     assertEquals(length, identifier.length());
