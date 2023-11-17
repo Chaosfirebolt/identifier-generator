@@ -1,17 +1,19 @@
 # Identifier Generator
 Library for identifier generation.
-Provides abstraction for identifier generation - main interface defining functionality is [IdentifierGenerator](src/main/java/com/github/chaosfirebolt/generator/identifier/IdentifierGenerator.java), and implementations for string based identifiers.
-Most combinations of alphabetic, numeric and special characters are covered by provided implementations.
+Provides abstraction for identifier generation - main interfaces defining functionality are [IdentifierGenerator](src/main/java/com/github/chaosfirebolt/generator/identifier/api/IdentifierGenerator.java) and [TargetLengthIdentifierGenerator](src/main/java/com/github/chaosfirebolt/generator/identifier/api/TargetLengthIdentifierGenerator.java), and implementations for string based identifiers.
+Most combinations of alphabetic, numeric and special characters are covered by provided [builders](src/main/java/com/github/chaosfirebolt/generator/identifier/api/string/builders/StringGeneratorBuilders.java).
+
+Versions before `2.0.0` require java 8. Since `2.0.0` required java version is 17.
 
 # Latest version
-Current latest version is 1.0.1
+Current latest version is 2.0.0
 <br/>
 Maven dependency
 ```
 <dependency>
     <groupId>com.github.chaosfirebolt.generator</groupId>
     <artifactId>identifier-generator</artifactId>
-    <version>1.0.1</version>
+    <version>2.0.0</version>
 </dependency>
 ```
 [All artifacts in maven central](https://mvnrepository.com/artifact/com.github.chaosfirebolt.generator/identifier-generator)
@@ -20,29 +22,35 @@ Maven dependency
 
 Print alphanumeric identifier
 ```
-IdentifierGenerator<String> generator = new AlphaNumericIdentifierGenerator(10, 10, 3);
+IdentifierGenerator<String> generator = StringGeneratorBuilders.alphaNumericIdentifierGeneratorBuilder()
+                .setLowerCaseLength(10)
+                .setUpperCaseLength(10)
+                .setNumericLength(3)
+                .build();
 String token = generator.generate();
 System.out.println(token);
-//prints - QHx0qPCWnFjdxd5MFseS8Fl for example.
+//prints - yXJpAwjD3zZbi7ePQ3vSXMf for example.
 ```
 
 Print lower alphabetic identifier
 ```
-IdentifierGenerator<String> generator = new LowerAlphabeticIdentifierGenerator(19);
+IdentifierGenerator<String> generator = StringGeneratorBuilders.lowerAlphabeticIdentifierGeneratorBuilder()
+                .setLowerCaseLength(19)
+                .build();
 String identifier = generator.generate();
 System.out.println(identifier);
-//prints - jvqacptjtzocgmhqrtq for example.
+//prints - bmqnsrcuzfkpyggjgyv for example.
 ```
 
 Print uuid identifier
 ```
-IdentifierGenerator<String> generator = new UuidStringIdentifierGenerator();
+IdentifierGenerator<String> generator = new RandomUuidStringIdentifierGenerator();
 String identifier = generator.generate();
 System.out.println(identifier);
 //prints - d3f4d5c5-050e-4e5b-a44e-014deb694bf7 for example.
 ```
 
-Print identifiers comprising numeric and special characters, which are previously generated
+Print identifiers comprising numeric and special characters, with uniqueness condition
 ```
 Set<String> existing = new HashSet<>();
 Part numericPart = new NumericPart(19);
@@ -54,38 +62,51 @@ Predicate<GeneratorRule> ruleValidityCondition = rule -> rule.getLength() >= min
 ErrorMessageCreator errorMessageCreator = rule -> "Minimum identifier length is " + minTotalLength;
 RuleValidator ruleValidator = new BaseRuleValidator(ruleValidityCondition, errorMessageCreator);
 
-IdentifierGenerator<String> generator = new StringIdentifierGenerator(generatorRule, Collections.singletonList(ruleValidator));
+IdentifierGenerator<String> generator = StringGeneratorBuilders.stringIdentifierGeneratorBuilder()
+        .setGeneratorRule(generatorRule)
+        .setRandomGenerator(RandomGenerator.of("Xoroshiro128PlusPlus"))
+        .addRuleValidator(ruleValidator)
+        .build();
 for (int i = 0; i < 10_000; i++) {
     String identifier = generator.generate(existing::add);
     System.out.println("Identifier - " + identifier);
-    //for example - 28999`957211294`6638|2^"
+    //for example - 7+!602!14822943^7,405917
 }
 ```
 
 Invalid - either example will throw IllegalArgumentException
 ```
-IdentifierGenerator<String> generator1 = new LowerAlphabeticIdentifierGenerator(0);
-IdentifierGenerator<String> generator2 = new LowerAlphabeticIdentifierGenerator(-3);
+IdentifierGenerator<String> generator1 = StringGeneratorBuilders.lowerAlphabeticIdentifierGeneratorBuilder()
+                .setLowerCaseLength(0)
+                .build();
+IdentifierGenerator<String> generator2 = StringGeneratorBuilders.lowerAlphabeticIdentifierGeneratorBuilder()
+                .setLowerCaseLength(-3)
+                .build();
 ```
 
 Invalid - will throw InvalidGeneratorRuleException
 ```
 int minLength = 11;
 RuleValidator validator = new BaseRuleValidator(rule -> rule.getLength() >= minLength, rule -> "identifier length can't be less than " + minLength);
-IdentifierGenerator<String> generator = new NumericIdentifierGenerator(9, Collections.singletonList(validator));
+IdentifierGenerator<String> generator = StringGeneratorBuilders.numericIdentifierGeneratorBuilder()
+        .setNumericLength(9)
+        .setRuleValidators(List.of(validator))
+        .build();
 ```
 
 Throwing exception if unable to generate unique identifier after too many attempts
 ```
 Set<String> existing = new HashSet<>();
 //length is short, to make sure all combinations are created quickly
-NumericIdentifierGenerator generator = new NumericIdentifierGenerator(2);
+StringIdentifierGenerator generator = StringGeneratorBuilders.numericIdentifierGeneratorBuilder()
+        .setNumericLength(2)
+        .build();
 //setting maximum attempts to generate unique id, default will attempt forever
 generator.setMaximumAttempts(10);
 for (int i = 0; i < 100; i++) {
-    String identifier = generator.generate(existing::add);
-    System.out.println("Identifier - " + identifier);
-    //will throw TooManyAttemptsException at some point during this loop
+  String identifier = generator.generate(existing::add);
+  System.out.println("Identifier - " + identifier);
+  //will throw TooManyAttemptsException at some point during this loop
 }
 ```
 
