@@ -59,5 +59,6 @@ class FiniteSequence<E> implements Sequence<E> {
   @Override
   public void reset() {
     this.previousValue = null;
+    this.nextValue = null;
   }
 }
