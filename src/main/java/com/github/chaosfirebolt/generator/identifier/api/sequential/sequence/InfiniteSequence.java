@@ -20,12 +20,12 @@ import com.github.chaosfirebolt.generator.identifier.api.sequential.calculation.
 import org.apiguardian.api.API;
 
 @API(status = API.Status.STABLE, since = "2.1.0")
-public class InfiniteSequence<E> implements Sequence<E> {
+class InfiniteSequence<E> implements Sequence<E> {
 
   private final Calculation<E> calculation;
   private E previousValue;
 
-  public InfiniteSequence(E initialValue, Calculation<E> calculation) {
+  InfiniteSequence(E initialValue, Calculation<E> calculation) {
     this.calculation = Calculation.nullSafe(calculation, initialValue);
     this.previousValue = null;
   }
