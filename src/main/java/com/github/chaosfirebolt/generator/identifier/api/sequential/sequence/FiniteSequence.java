@@ -19,7 +19,7 @@ package com.github.chaosfirebolt.generator.identifier.api.sequential.sequence;
 import com.github.chaosfirebolt.generator.identifier.api.sequential.calculation.Calculation;
 import org.apiguardian.api.API;
 
-import java.util.NoSuchElementException;
+import java.util.Optional;
 import java.util.function.Predicate;
 
 @API(status = API.Status.INTERNAL, since = "2.1.0")
@@ -38,18 +38,17 @@ class FiniteSequence<E> implements Sequence<E> {
   }
 
   @Override
-  public E next() {
+  public Optional<E> next() {
     if (!hasNext()) {
-      throw new NoSuchElementException("Sequence can't produce more elements");
+      return Optional.empty();
     }
     E next = this.nextValue != null ? this.nextValue : this.calculation.calculate(this.previousValue);
     this.previousValue = next;
     this.nextValue = null;
-    return next;
+    return Optional.of(next);
   }
 
-  @Override
-  public boolean hasNext() {
+  private boolean hasNext() {
     if (this.nextValue == null) {
       this.nextValue = this.calculation.calculate(this.previousValue);
     }

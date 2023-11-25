@@ -20,24 +20,26 @@ import org.apiguardian.api.API;
 
 import java.util.Optional;
 
-/**
- * Represents a sequence of elements.
- * @param <E> type of the elements in the sequence
- */
-@API(status = API.Status.STABLE, since = "2.1.0")
-public interface Sequence<E> {
+@API(status = API.Status.INTERNAL, since = "2.1.0")
+class ResettableSequence<T> implements Sequence<T> {
 
-  /**
-   * Calculates and returns the next element of the sequence.
-   * If the sequence is unable to produce more elements, returns an empty optional.
-   *
-   * @return an optional describing the next element in this sequence
-   */
-  Optional<E> next();
+  private final Sequence<T> delegate;
 
-  /**
-   * Resets the sequence. If the sequence was unable to produce more elements, e.g. {@link #next()} would return an empty {@link Optional},
-   * after invoking this method the sequence must be able to produce elements again.
-   */
-  void reset();
+  ResettableSequence(Sequence<T> delegate) {
+    this.delegate = delegate;
+  }
+
+  @Override
+  public Optional<T> next() {
+    Optional<T> next = this.delegate.next();
+    return next.or(() -> {
+      this.reset();
+      return this.delegate.next();
+    });
+  }
+
+  @Override
+  public void reset() {
+    this.delegate.reset();
+  }
 }

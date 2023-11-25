@@ -19,6 +19,8 @@ package com.github.chaosfirebolt.generator.identifier.api.sequential.sequence;
 import com.github.chaosfirebolt.generator.identifier.api.sequential.calculation.Calculation;
 import org.apiguardian.api.API;
 
+import java.util.Optional;
+
 @API(status = API.Status.STABLE, since = "2.1.0")
 class InfiniteSequence<E> implements Sequence<E> {
 
@@ -31,15 +33,10 @@ class InfiniteSequence<E> implements Sequence<E> {
   }
 
   @Override
-  public E next() {
+  public Optional<E> next() {
     E next = this.calculation.calculate(this.previousValue);
     this.previousValue = next;
-    return next;
-  }
-
-  @Override
-  public boolean hasNext() {
-    return true;
+    return Optional.of(next);
   }
 
   @Override
