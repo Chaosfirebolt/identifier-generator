@@ -18,18 +18,22 @@ package com.github.chaosfirebolt.generator.identifier.api.sequential.calculation
 
 import org.apiguardian.api.API;
 
-/**
- * Operation producing the same result as the input.
- * @param <T> type of the input and result
- */
-@API(status = API.Status.STABLE, since = "2.1.0")
-@FunctionalInterface
-public interface Calculation<T> {
+@API(status = API.Status.INTERNAL, since = "2.1.0")
+abstract class FallbackCalculation<R> implements Calculation<R> {
 
-  /**
-   * Applies this operation to the input
-   * @param input the input
-   * @return result after this operation is applied on the input
-   */
-  T calculate(T input);
+  private final Calculation<R> actualCalculation;
+
+  FallbackCalculation(Calculation<R> actualCalculation) {
+    this.actualCalculation = actualCalculation;
+  }
+
+  @Override
+  public R calculate(R input) {
+    if (input == null) {
+      return this.calculateFallbackValue();
+    }
+    return this.actualCalculation.calculate(input);
+  }
+
+  protected abstract R calculateFallbackValue();
 }

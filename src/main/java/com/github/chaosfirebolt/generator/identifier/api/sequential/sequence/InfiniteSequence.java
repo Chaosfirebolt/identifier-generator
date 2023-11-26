@@ -17,6 +17,7 @@
 package com.github.chaosfirebolt.generator.identifier.api.sequential.sequence;
 
 import com.github.chaosfirebolt.generator.identifier.api.sequential.calculation.Calculation;
+import com.github.chaosfirebolt.generator.identifier.api.sequential.calculation.CalculationFactories;
 import org.apiguardian.api.API;
 
 import java.util.Optional;
@@ -28,7 +29,7 @@ class InfiniteSequence<E> implements Sequence<E> {
   private E previousValue;
 
   InfiniteSequence(E initialValue, Calculation<E> calculation) {
-    this.calculation = Calculation.nullSafe(calculation, initialValue);
+    this.calculation = CalculationFactories.fallback(calculation, initialValue);
     this.previousValue = null;
   }
 

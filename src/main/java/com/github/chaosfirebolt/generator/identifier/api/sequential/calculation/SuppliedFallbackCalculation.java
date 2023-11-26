@@ -16,24 +16,19 @@
 
 package com.github.chaosfirebolt.generator.identifier.api.sequential.calculation;
 
-import org.apiguardian.api.API;
+import java.util.function.Supplier;
 
-@API(status = API.Status.INTERNAL, since = "2.1.0")
-class NullSafeCalculation<T> implements Calculation<T> {
+class SuppliedFallbackCalculation<R> extends FallbackCalculation<R> {
 
-  private final Calculation<T> actualCalculation;
-  private final T fallbackValue;
+  private final Supplier<R> fallbackValueSupplier;
 
-  NullSafeCalculation(Calculation<T> actualCalculation, T fallbackValue) {
-    this.actualCalculation = actualCalculation;
-    this.fallbackValue = fallbackValue;
+  SuppliedFallbackCalculation(Calculation<R> actualCalculation, Supplier<R> fallbackValueSupplier) {
+    super(actualCalculation);
+    this.fallbackValueSupplier = fallbackValueSupplier;
   }
 
   @Override
-  public T calculate(T input) {
-    if (input == null) {
-      return fallbackValue;
-    }
-    return this.actualCalculation.calculate(input);
+  protected R calculateFallbackValue() {
+    return this.fallbackValueSupplier.get();
   }
 }
