@@ -19,7 +19,7 @@ package com.github.chaosfirebolt.generator.identifier.sequential;
 import com.github.chaosfirebolt.generator.identifier.api.sequential.SequentialIdentifierGenerator;
 import com.github.chaosfirebolt.generator.identifier.api.sequential.builders.SequentialIdentifierGeneratorBuilder;
 import com.github.chaosfirebolt.generator.identifier.api.sequential.sequence.Sequence;
-import com.github.chaosfirebolt.generator.identifier.api.sequential.sequence.SequenceFactory;
+import com.github.chaosfirebolt.generator.identifier.api.sequential.sequence.SequenceFactories;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.MethodSource;
@@ -53,7 +53,7 @@ public class SequentialGeneratorBuilderTests {
   }
 
   private static List<SequentialIdentifierGeneratorBuilder<String, String>> noExceptionFactorySet_ShouldNotThrow() {
-    Sequence<String> sequence = SequenceFactory.infinite("a", s -> s + s);
+    Sequence<String> sequence = SequenceFactories.infinite("a", s -> s + s);
     Function<String, String> mapper = Function.identity();
     return List.of(SequentialIdentifierGenerator.<String, String>fluidTypeBuilder().setSequence(sequence).setMapper(mapper),
             SequentialIdentifierGenerator.<String>constantTypeBuilder().setSequence(sequence).setMapper(mapper));
@@ -62,7 +62,7 @@ public class SequentialGeneratorBuilderTests {
   @Test
   public void fluidBuilderWithoutMapper_ShouldThrowException() {
     SequentialIdentifierGeneratorBuilder<String, String> builder = SequentialIdentifierGenerator.<String, String>fluidTypeBuilder()
-            .setSequence(SequenceFactory.infinite("a", s -> s + s))
+            .setSequence(SequenceFactories.infinite("a", s -> s + s))
             .setExceptionFactory(() -> new RuntimeException("msg"));
     assertThrows(NullPointerException.class, builder::build, "Fluid type builder without mapper should have thrown NPE");
   }
@@ -70,7 +70,7 @@ public class SequentialGeneratorBuilderTests {
   @Test
   public void constantBuilderWithoutMapper_ShouldCreateSuccessfully() {
     SequentialIdentifierGeneratorBuilder<String, String> builder = SequentialIdentifierGenerator.<String>constantTypeBuilder()
-            .setSequence(SequenceFactory.infinite("a", s -> s + s))
+            .setSequence(SequenceFactories.infinite("a", s -> s + s))
             .setExceptionFactory(() -> new RuntimeException("msg"));
     assertDoesNotThrow(builder::build, "Constant type builder without mapper should have created a generator successfully");
   }

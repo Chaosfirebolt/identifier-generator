@@ -19,26 +19,31 @@ package com.github.chaosfirebolt.generator.identifier.api.sequential.sequence;
 import com.github.chaosfirebolt.generator.identifier.api.sequential.calculation.Calculation;
 import org.apiguardian.api.API;
 
+import java.util.List;
 import java.util.Objects;
+import java.util.function.BinaryOperator;
 import java.util.function.Predicate;
 
 /**
  * Factory for creating different {@link Sequence}s.
  */
 @API(status = API.Status.STABLE, since = "2.1.0")
-public class SequenceFactory {
+public class SequenceFactories {
 
-  private SequenceFactory() {
+  private static final String NO_SEQUENCES_ERROR_MESSAGE = "No sequences provided";
+
+  private SequenceFactories() {
     throw new RuntimeException("No instances allowed");
   }
 
   /**
    * Creates a finite sequence of elements from provided arguments. For the purpose of creating identifier generator, {@link #infinite} or {@link #resettable} sequences are preferred.
+   *
    * @param initialValue the initial value of the sequence
-   * @param calculation calculates the next element, using the previous one as input
-   * @param hasNext condition to determine when the sequence is unable to produce more elements
+   * @param calculation  calculates the next element, using the previous one as input
+   * @param hasNext      condition to determine when the sequence is unable to produce more elements
+   * @param <O>          type of elements produced by this sequence
    * @return finite sequence of elements
-   * @param <O> type of elements produced by this sequence
    * @throws NullPointerException if any of the arguments is null
    */
   public static <O> Sequence<O> finite(O initialValue, Calculation<O> calculation, Predicate<O> hasNext) {
@@ -47,10 +52,11 @@ public class SequenceFactory {
 
   /**
    * Creates an infinite sequence of elements from provided arguments
+   *
    * @param initialValue the initial value of the sequence
-   * @param calculation calculates the next element, using the previous one as input
+   * @param calculation  calculates the next element, using the previous one as input
+   * @param <O>          type of elements produced by this sequence
    * @return infinite sequence of elements
-   * @param <O> type of elements produced by this sequence
    * @throws NullPointerException if any of the arguments is null
    */
   public static <O> Sequence<O> infinite(O initialValue, Calculation<O> calculation) {
@@ -59,12 +65,31 @@ public class SequenceFactory {
 
   /**
    * Creates a self resetting sequence from the supplied one.
+   *
    * @param sequence sequence to wrap as a resettable one
+   * @param <O>      type of elements produced by this sequence
    * @return a resettable sequence
-   * @param <O> type of elements produced by this sequence
    * @throws NullPointerException if supplied sequence is null
    */
   public static <O> Sequence<O> resettable(Sequence<O> sequence) {
     return new ResettableSequence<>(Objects.requireNonNull(sequence, "Null sequence"));
+  }
+
+  /**
+   * Creates a new composite sequence from provided sequences and accumulator function.
+   *
+   * @param sequences   sequences, composing the new sequence
+   * @param accumulator function for combining the result of two sequences
+   * @param <O>         type of elements produced by this sequence
+   * @return sequence composed of provided sequences
+   * @throws NullPointerException     if any argument is null
+   * @throws IllegalArgumentException if the list of sequences is empty
+   */
+  public static <O> Sequence<O> composite(List<Sequence<O>> sequences, BinaryOperator<O> accumulator) {
+    if (Objects.requireNonNull(sequences, NO_SEQUENCES_ERROR_MESSAGE).isEmpty()) {
+      throw new IllegalArgumentException(NO_SEQUENCES_ERROR_MESSAGE);
+    }
+    Objects.requireNonNull(accumulator, "No accumulator provided");
+    return new CompositeSequence<>(List.copyOf(sequences), accumulator);
   }
 }

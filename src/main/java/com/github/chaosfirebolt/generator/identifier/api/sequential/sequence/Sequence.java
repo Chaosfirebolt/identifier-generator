@@ -22,6 +22,7 @@ import java.util.Optional;
 
 /**
  * Represents a sequence of elements.
+ *
  * @param <E> type of the elements in the sequence
  */
 @API(status = API.Status.STABLE, since = "2.1.0")

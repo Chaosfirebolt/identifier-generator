@@ -18,7 +18,7 @@ package com.github.chaosfirebolt.generator.identifier.sequence;
 
 import com.github.chaosfirebolt.generator.identifier.api.sequential.calculation.Calculation;
 import com.github.chaosfirebolt.generator.identifier.api.sequential.sequence.Sequence;
-import com.github.chaosfirebolt.generator.identifier.api.sequential.sequence.SequenceFactory;
+import com.github.chaosfirebolt.generator.identifier.api.sequential.sequence.SequenceFactories;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.MethodSource;
@@ -52,20 +52,20 @@ public class SequenceTests {
   private static List<Sequence<Integer>> correctSequenceOfElements() {
     Integer initial = 1;
     Calculation<Integer> calculation = i -> i + 2;
-    return List.of(SequenceFactory.infinite(initial, calculation), SequenceFactory.finite(initial, calculation, num -> num < 1000));
+    return List.of(SequenceFactories.infinite(initial, calculation), SequenceFactories.finite(initial, calculation, num -> num < 1000));
   }
 
   @Test
   public void finiteSequence_ShouldProduceCorrectElements() {
     List<Integer> expected = List.of(1, 3, 5, 7, 9);
-    Sequence<Integer> finiteSequence = SequenceFactory.finite(1, i -> i + 2, i -> i < 11);
+    Sequence<Integer> finiteSequence = SequenceFactories.finite(1, i -> i + 2, i -> i < 11);
     List<Integer> actual = extractElements(finiteSequence);
     assertEquals(expected, actual, "Incorrect result from finite sequence");
   }
 
   @Test
   public void finiteSequence_ShouldReturnEmptyWhenCannotProduceMore() {
-    Sequence<Integer> finiteSequence = SequenceFactory.finite(1, i -> i + 2, i -> i < 11);
+    Sequence<Integer> finiteSequence = SequenceFactories.finite(1, i -> i + 2, i -> i < 11);
     extractElements(finiteSequence);
     Optional<Integer> next = finiteSequence.next();
     assertTrue(next.isEmpty(), "Sequence should not have produced a result");
@@ -73,7 +73,7 @@ public class SequenceTests {
 
   @Test
   public void finiteSequence_ShouldProduceSameElementsAfterReset() {
-    Sequence<Integer> finiteSequence = SequenceFactory.finite(1, i -> i + 2, i -> i < 11);
+    Sequence<Integer> finiteSequence = SequenceFactories.finite(1, i -> i + 2, i -> i < 11);
     List<Integer> firstElements = extractElements(finiteSequence);
     Optional<Integer> next = finiteSequence.next();
     assertTrue(next.isEmpty(), "Sequence should not have produced a result");
@@ -97,7 +97,7 @@ public class SequenceTests {
   public void infiniteSequence_ShouldContinueProducingCorrectElements() {
     int target = 1_000_000;//can't really test infinite, so going with big enough
     int initialValue = 0;
-    Sequence<Integer> infiniteSequence = SequenceFactory.infinite(initialValue, i -> i + 1);
+    Sequence<Integer> infiniteSequence = SequenceFactories.infinite(initialValue, i -> i + 1);
     List<Integer> actual = getElements(infiniteSequence, target);
     List<Integer> expected = IntStream.range(0, target).sequential().boxed().toList();
     assertEquals(expected, actual, "Incorrect elements produced by infinite sequence");
@@ -107,7 +107,7 @@ public class SequenceTests {
   public void infiniteSequence_ShouldContinueProducingElements() {
     int target = 1_000_000;//can't really test infinite, so going with big enough
     int initialValue = 0;
-    Sequence<Integer> infiniteSequence = SequenceFactory.infinite(initialValue, i -> i + 1);
+    Sequence<Integer> infiniteSequence = SequenceFactories.infinite(initialValue, i -> i + 1);
     getElements(infiniteSequence, target);
     for (int i = 0; i < target; i++) {
       assertDoesNotThrow(infiniteSequence::next, "Producing elements should not have thrown");
@@ -116,7 +116,7 @@ public class SequenceTests {
 
   @Test
   public void infiniteSequence_ShouldProduceSameElementsAfterReset() {
-    Sequence<Integer> infiniteSequence = SequenceFactory.infinite(0, i -> i + 1);
+    Sequence<Integer> infiniteSequence = SequenceFactories.infinite(0, i -> i + 1);
 
     int targetElementsCount = 10_000;
     List<Integer> firstElements = getElementsFromInfiniteSequence(infiniteSequence, targetElementsCount);
@@ -142,8 +142,8 @@ public class SequenceTests {
 
   @Test
   public void resettingSequence_ShouldProduceSame() {
-    Sequence<Integer> finiteSequence = SequenceFactory.finite(1, i -> i + 1, i -> i <= 3);
-    Sequence<Integer> resettableSequence = SequenceFactory.resettable(finiteSequence);
+    Sequence<Integer> finiteSequence = SequenceFactories.finite(1, i -> i + 1, i -> i <= 3);
+    Sequence<Integer> resettableSequence = SequenceFactories.resettable(finiteSequence);
     List<Integer> actualResult = new ArrayList<>();
     for (int i = 0; i < 9; i++) {
       actualResult.add(resettableSequence.next().orElseThrow(() -> new AssertionError("Resettable sequence should not have returned empty optional")));

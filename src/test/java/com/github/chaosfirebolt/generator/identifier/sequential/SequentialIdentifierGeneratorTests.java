@@ -18,7 +18,7 @@ package com.github.chaosfirebolt.generator.identifier.sequential;
 
 import com.github.chaosfirebolt.generator.identifier.api.sequential.SequentialIdentifierGenerator;
 import com.github.chaosfirebolt.generator.identifier.api.sequential.sequence.Sequence;
-import com.github.chaosfirebolt.generator.identifier.api.sequential.sequence.SequenceFactory;
+import com.github.chaosfirebolt.generator.identifier.api.sequential.sequence.SequenceFactories;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -35,7 +35,7 @@ public class SequentialIdentifierGeneratorTests {
 
   @BeforeEach
   public void setUp() {
-    Sequence<Long> sequence = SequenceFactory.infinite(1L, i -> i + 1);
+    Sequence<Long> sequence = SequenceFactories.infinite(1L, i -> i + 1);
     Function<Long, String> mapper = num -> String.format("%010d", num);
     this.generator = SequentialIdentifierGenerator.<Long, String>fluidTypeBuilder()
             .setSequence(sequence)
