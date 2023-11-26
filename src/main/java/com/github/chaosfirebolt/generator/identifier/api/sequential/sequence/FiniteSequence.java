@@ -17,7 +17,6 @@
 package com.github.chaosfirebolt.generator.identifier.api.sequential.sequence;
 
 import com.github.chaosfirebolt.generator.identifier.api.sequential.calculation.Calculation;
-import com.github.chaosfirebolt.generator.identifier.api.sequential.calculation.CalculationFactories;
 import org.apiguardian.api.API;
 
 import java.util.Optional;
@@ -31,8 +30,8 @@ class FiniteSequence<E> implements Sequence<E> {
   private E previousValue;
   private E nextValue;
 
-  FiniteSequence(E initialValue, Calculation<E> calculation, Predicate<E> hasNext) {
-    this.calculation = CalculationFactories.fallback(calculation, initialValue);
+  FiniteSequence(Calculation<E> calculation, Predicate<E> hasNext) {
+    this.calculation = calculation;
     this.hasNext = hasNext;
     this.previousValue = null;
     this.nextValue = null;

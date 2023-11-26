@@ -17,6 +17,7 @@
 package com.github.chaosfirebolt.generator.identifier.api.sequential.sequence;
 
 import com.github.chaosfirebolt.generator.identifier.api.sequential.calculation.Calculation;
+import com.github.chaosfirebolt.generator.identifier.api.sequential.calculation.CalculationFactories;
 import org.apiguardian.api.API;
 
 import java.util.List;
@@ -37,7 +38,7 @@ public class SequenceFactories {
   }
 
   /**
-   * Creates a finite sequence of elements from provided arguments. For the purpose of creating identifier generator, {@link #infinite} or {@link #resettable} sequences are preferred.
+   * Creates a finite sequence of elements from provided arguments. For the purpose of creating identifier generator, {@link #infinite}, {@link #composite} or {@link #resettable} sequences are preferred.
    *
    * @param initialValue the initial value of the sequence
    * @param calculation  calculates the next element, using the previous one as input
@@ -47,7 +48,10 @@ public class SequenceFactories {
    * @throws NullPointerException if any of the arguments is null
    */
   public static <O> Sequence<O> finite(O initialValue, Calculation<O> calculation, Predicate<O> hasNext) {
-    return new FiniteSequence<>(Objects.requireNonNull(initialValue, "Null initial value passed"), Objects.requireNonNull(calculation, "Null calculation passed"), Objects.requireNonNull(hasNext));
+    Objects.requireNonNull(calculation, "Null calculation passed");
+    Objects.requireNonNull(initialValue, "Null initial value passed");
+    Calculation<O> fallbackCalculation = CalculationFactories.fallback(calculation, initialValue);
+    return new FiniteSequence<>(fallbackCalculation, Objects.requireNonNull(hasNext));
   }
 
   /**
@@ -60,7 +64,10 @@ public class SequenceFactories {
    * @throws NullPointerException if any of the arguments is null
    */
   public static <O> Sequence<O> infinite(O initialValue, Calculation<O> calculation) {
-    return new InfiniteSequence<>(Objects.requireNonNull(initialValue, "Null initial value passed"), Objects.requireNonNull(calculation, "Null calculation passed"));
+    Objects.requireNonNull(initialValue, "Null initial value passed");
+    Objects.requireNonNull(calculation, "Null calculation passed");
+    Calculation<O> fallbackCalculation = CalculationFactories.fallback(calculation, initialValue);
+    return new InfiniteSequence<>(fallbackCalculation);
   }
 
   /**
