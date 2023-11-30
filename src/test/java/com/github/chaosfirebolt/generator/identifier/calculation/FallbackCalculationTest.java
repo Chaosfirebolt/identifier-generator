@@ -39,9 +39,9 @@ public class FallbackCalculationTest {
   }
 
   private static List<Calculation<String>> nullInput_ShouldReturnInitialValue() {
-    Calculation<String> constantFallbackCalculation = CalculationFactories.fallback(createActualCalculation(), INITIAL_VALUE);
+    Calculation<String> constantFallbackCalculation = CalculationFactories.constantFallback(createActualCalculation(), INITIAL_VALUE);
     Supplier<String> fallbackValueSUpplier = () -> INITIAL_VALUE;
-    Calculation<String> suppliedFallbackCalculation = CalculationFactories.fallback(createActualCalculation(), fallbackValueSUpplier);
+    Calculation<String> suppliedFallbackCalculation = CalculationFactories.computableFallback(createActualCalculation(), fallbackValueSUpplier);
     return List.of(constantFallbackCalculation, suppliedFallbackCalculation);
   }
 
@@ -62,11 +62,11 @@ public class FallbackCalculationTest {
 
   private static List<Arguments> nonNullInput_ShouldInvokeTheActualCalculation() {
     Calculation<String> actualCalculationConstant = createActualCalculation();
-    Calculation<String> constantFallbackCalculation = CalculationFactories.fallback(actualCalculationConstant, INITIAL_VALUE);
+    Calculation<String> constantFallbackCalculation = CalculationFactories.constantFallback(actualCalculationConstant, INITIAL_VALUE);
 
     Calculation<String> actualCalculationSupplied = createActualCalculation();
     Supplier<String> fallbackValueSUpplier = () -> INITIAL_VALUE;
-    Calculation<String> suppliedFallbackCalculation = CalculationFactories.fallback(actualCalculationSupplied, fallbackValueSUpplier);
+    Calculation<String> suppliedFallbackCalculation = CalculationFactories.computableFallback(actualCalculationSupplied, fallbackValueSUpplier);
     return List.of(
             Arguments.of(constantFallbackCalculation, actualCalculationConstant),
             Arguments.of(suppliedFallbackCalculation, actualCalculationSupplied)

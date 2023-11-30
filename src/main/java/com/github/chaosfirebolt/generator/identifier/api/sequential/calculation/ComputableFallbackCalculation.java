@@ -18,11 +18,11 @@ package com.github.chaosfirebolt.generator.identifier.api.sequential.calculation
 
 import java.util.function.Supplier;
 
-class SuppliedFallbackCalculation<R> extends FallbackCalculation<R> {
+class ComputableFallbackCalculation<R> extends FallbackCalculation<R> {
 
   private final Supplier<R> fallbackValueSupplier;
 
-  SuppliedFallbackCalculation(Calculation<R> actualCalculation, Supplier<R> fallbackValueSupplier) {
+  ComputableFallbackCalculation(Calculation<R> actualCalculation, Supplier<R> fallbackValueSupplier) {
     super(actualCalculation);
     this.fallbackValueSupplier = fallbackValueSupplier;
   }

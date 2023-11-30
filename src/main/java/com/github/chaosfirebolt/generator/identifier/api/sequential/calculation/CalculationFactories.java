@@ -37,7 +37,7 @@ public class CalculationFactories {
    * @return fallback {@link Calculation}
    * @throws NullPointerException if any argument is null
    */
-  public static <O> Calculation<O> fallback(Calculation<O> calculation, O fallbackValue) {
+  public static <O> Calculation<O> constantFallback(Calculation<O> calculation, O fallbackValue) {
     return new ConstantFallbackCalculation<>(Objects.requireNonNull(calculation, NULL_CALCULATION_ERROR_MESSAGE), Objects.requireNonNull(fallbackValue, "Null fallback value provided"));
   }
 
@@ -51,7 +51,7 @@ public class CalculationFactories {
    * @return fallback {@link Calculation}
    * @throws NullPointerException if any argument is null
    */
-  public static <O> Calculation<O> fallback(Calculation<O> calculation, Supplier<O> fallbackValueSupplier) {
-    return new SuppliedFallbackCalculation<>(Objects.requireNonNull(calculation, NULL_CALCULATION_ERROR_MESSAGE), Objects.requireNonNull(fallbackValueSupplier, "Null fallback value supplier provided"));
+  public static <O> Calculation<O> computableFallback(Calculation<O> calculation, Supplier<O> fallbackValueSupplier) {
+    return new ComputableFallbackCalculation<>(Objects.requireNonNull(calculation, NULL_CALCULATION_ERROR_MESSAGE), Objects.requireNonNull(fallbackValueSupplier, "Null fallback value supplier provided"));
   }
 }
