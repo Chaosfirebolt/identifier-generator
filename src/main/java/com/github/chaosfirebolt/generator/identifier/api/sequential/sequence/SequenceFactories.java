@@ -115,22 +115,4 @@ public class SequenceFactories {
   public static <O> Sequence<O> resettable(Sequence<O> sequence) {
     return new ResettableSequence<>(Objects.requireNonNull(sequence, "Null sequence"));
   }
-
-  /**
-   * Creates a new composite sequence from provided sequences and accumulator function.
-   *
-   * @param sequences   sequences, composing the new sequence
-   * @param accumulator function for combining the result of two sequences
-   * @param <O>         type of elements produced by this sequence
-   * @return sequence composed of provided sequences
-   * @throws NullPointerException     if any argument is null
-   * @throws IllegalArgumentException if the list of sequences is empty
-   */
-  public static <O> Sequence<O> composite(List<Sequence<O>> sequences, BinaryOperator<O> accumulator) {
-    if (Objects.requireNonNull(sequences, NO_SEQUENCES_ERROR_MESSAGE).isEmpty()) {
-      throw new IllegalArgumentException(NO_SEQUENCES_ERROR_MESSAGE);
-    }
-    Objects.requireNonNull(accumulator, "No accumulator provided");
-    return new CompositeSequence<>(List.copyOf(sequences), accumulator);
-  }
 }
