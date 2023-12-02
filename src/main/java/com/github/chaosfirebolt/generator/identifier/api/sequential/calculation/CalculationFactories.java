@@ -19,6 +19,9 @@ package com.github.chaosfirebolt.generator.identifier.api.sequential.calculation
 import java.util.Objects;
 import java.util.function.Supplier;
 
+/**
+ * Factories for {@link Calculation}.
+ */
 public class CalculationFactories {
 
   private static final String NULL_CALCULATION_ERROR_MESSAGE = "Null calculation provided";
