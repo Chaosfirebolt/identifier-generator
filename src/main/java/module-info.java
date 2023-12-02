@@ -13,4 +13,6 @@ module identifier.generator {
   exports com.github.chaosfirebolt.generator.identifier.api.string.part;
   exports com.github.chaosfirebolt.generator.identifier.api.string.rule;
   exports com.github.chaosfirebolt.generator.identifier.api.string.validation;
+
+  exports com.github.chaosfirebolt.generator.identifier.api.uuid;
 }
