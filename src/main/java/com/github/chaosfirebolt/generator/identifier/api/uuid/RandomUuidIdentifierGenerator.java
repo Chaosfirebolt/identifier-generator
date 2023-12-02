@@ -17,9 +17,14 @@
 package com.github.chaosfirebolt.generator.identifier.api.uuid;
 
 import com.github.chaosfirebolt.generator.identifier.api.BaseIdentifierGenerator;
+import org.apiguardian.api.API;
 
 import java.util.UUID;
 
+/**
+ * Generator for random {@link UUID} identifiers.
+ */
+@API(status = API.Status.STABLE, since = "2.0.1")
 public class RandomUuidIdentifierGenerator extends BaseIdentifierGenerator<UUID> {
 
   @Override
