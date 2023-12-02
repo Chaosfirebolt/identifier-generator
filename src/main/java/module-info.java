@@ -15,4 +15,9 @@ module identifier.generator {
   exports com.github.chaosfirebolt.generator.identifier.api.string.validation;
 
   exports com.github.chaosfirebolt.generator.identifier.api.uuid;
+
+  exports com.github.chaosfirebolt.generator.identifier.api.sequential;
+  exports com.github.chaosfirebolt.generator.identifier.api.sequential.builders;
+  exports com.github.chaosfirebolt.generator.identifier.api.sequential.calculation;
+  exports com.github.chaosfirebolt.generator.identifier.api.sequential.sequence;
 }
