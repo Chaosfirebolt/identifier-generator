@@ -6,14 +6,14 @@ Most combinations of alphabetic, numeric and special characters are covered by p
 Versions before `2.0.0` require java 8. Since `2.0.0` required java version is 17.
 
 # Latest version
-Current latest version is 2.0.0
+Current latest version is 2.0.1
 <br/>
 Maven dependency
 ```
 <dependency>
     <groupId>com.github.chaosfirebolt.generator</groupId>
     <artifactId>identifier-generator</artifactId>
-    <version>2.0.0</version>
+    <version>2.0.1</version>
 </dependency>
 ```
 [All artifacts in maven central](https://mvnrepository.com/artifact/com.github.chaosfirebolt.generator/identifier-generator)
