@@ -23,6 +23,12 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.MethodSource;
 
+import java.time.Duration;
+import java.time.Instant;
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -150,5 +156,41 @@ public class SequenceTests {
     }
     List<Integer> expectedResult = List.of(1, 2, 3, 1, 2, 3, 1, 2, 3);
     assertEquals(expectedResult, actualResult, "Result not as expected");
+  }
+
+  @Test
+  public void decoratedSequenceWithMapperTest() {
+    ZoneId zone = ZoneId.of("Europe/Sofia");
+    Instant start = ZonedDateTime.of(LocalDate.of(2023, 1, 1), LocalTime.MIDNIGHT, zone).toInstant();
+    DurationSkippingClock clock = new DurationSkippingClock(zone, Duration.ofHours(2), start);
+
+    Sequence<Integer> numberSequence = SequenceFactories.infinite(1, num -> num + 1);
+
+    Sequence<String> decorated = SequenceFactories.decorated(numberSequence, new NumberPaddingMapper('0', 5), new DateDecoration(clock));
+    Sequence<String> selfResettingSequence = SequenceFactories.resettable(decorated);
+
+    List<String> actualElements = new ArrayList<>();
+    for (int i = 0; i < 15; i++) {
+      actualElements.add(selfResettingSequence.next().orElseThrow(() -> new RuntimeException("Something went wrong")));
+    }
+
+    List<String> expectedElements = List.of(
+            "2023010100001",
+            "2023010100002",
+            "2023010100003",
+            "2023010100004",
+            "2023010100005",
+            "2023010100006",
+            "2023010100007",
+            "2023010100008",
+            "2023010100009",
+            "2023010100010",
+            "2023010100011",
+            "2023010100012",
+            "2023010200001",
+            "2023010200002",
+            "2023010200003"
+    );
+    assertEquals(expectedElements, actualElements, "Incorrect sequence");
   }
 }
