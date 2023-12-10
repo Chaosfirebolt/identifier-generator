@@ -19,24 +19,13 @@ package com.github.chaosfirebolt.generator.identifier.api.sequential.sequence;
 import com.github.chaosfirebolt.generator.identifier.api.sequential.calculation.Calculation;
 import org.apiguardian.api.API;
 
-import java.util.Optional;
-
 @API(status = API.Status.INTERNAL, since = "2.1.0")
-final class InfiniteSequence<E> extends BaseSequence<E> {
+abstract sealed class BaseSequence<E> implements Sequence<E> permits FiniteSequence, InfiniteSequence {
 
-  InfiniteSequence(Calculation<E> calculation) {
-    super(calculation);
-  }
+  protected final Calculation<E> calculation;
+  protected E previousValue;
 
-  @Override
-  public Optional<E> next() {
-    E next = this.calculation.calculate(this.previousValue);
-    this.previousValue = next;
-    return Optional.of(next);
-  }
-
-  @Override
-  public void reset() {
-    this.previousValue = null;
+  BaseSequence(Calculation<E> calculation) {
+    this.calculation = calculation;
   }
 }

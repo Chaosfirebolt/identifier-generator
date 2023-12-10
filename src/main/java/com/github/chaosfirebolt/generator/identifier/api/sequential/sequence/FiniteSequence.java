@@ -23,17 +23,14 @@ import java.util.Optional;
 import java.util.function.Predicate;
 
 @API(status = API.Status.INTERNAL, since = "2.1.0")
-class FiniteSequence<E> implements Sequence<E> {
+final class FiniteSequence<E> extends BaseSequence<E> {
 
-  private final Calculation<E> calculation;
   private final Predicate<E> hasNext;
-  private E previousValue;
   private E nextValue;
 
   FiniteSequence(Calculation<E> calculation, Predicate<E> hasNext) {
-    this.calculation = calculation;
+    super(calculation);
     this.hasNext = hasNext;
-    this.previousValue = null;
     this.nextValue = null;
   }
 
