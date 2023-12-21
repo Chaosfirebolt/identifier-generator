@@ -37,7 +37,6 @@ public class SequentialIdentifierGenerator<E, ID> extends BaseIdentifierGenerato
   private final Function<E, ID> mapper;
   private final Supplier<? extends RuntimeException> exceptionFactory;
 
-  @API(status = API.Status.INTERNAL, since = "2.1.0")
   private SequentialIdentifierGenerator(Sequence<E> sequence, Function<E, ID> mapper, Supplier<? extends RuntimeException> exceptionFactory) {
     this.sequence = sequence;
     this.mapper = mapper;
