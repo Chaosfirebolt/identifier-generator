@@ -19,6 +19,7 @@ package com.github.chaosfirebolt.generator.identifier.api.sequential;
 import com.github.chaosfirebolt.generator.identifier.api.BaseIdentifierGenerator;
 import com.github.chaosfirebolt.generator.identifier.api.sequential.builders.SequentialIdentifierGeneratorBuilder;
 import com.github.chaosfirebolt.generator.identifier.api.sequential.sequence.Sequence;
+import com.github.chaosfirebolt.generator.identifier.api.sequential.sequence.SequenceDecoration;
 import org.apiguardian.api.API;
 
 import java.util.Optional;
@@ -35,11 +36,13 @@ public class SequentialIdentifierGenerator<E, ID> extends BaseIdentifierGenerato
 
   private final Sequence<E> sequence;
   private final Function<E, ID> mapper;
+  private final SequenceDecoration<ID> decoration;
   private final Supplier<? extends RuntimeException> exceptionFactory;
 
-  private SequentialIdentifierGenerator(Sequence<E> sequence, Function<E, ID> mapper, Supplier<? extends RuntimeException> exceptionFactory) {
+  private SequentialIdentifierGenerator(Sequence<E> sequence, Function<E, ID> mapper, SequenceDecoration<ID> decoration, Supplier<? extends RuntimeException> exceptionFactory) {
     this.sequence = sequence;
     this.mapper = mapper;
+    this.decoration = decoration;
     this.exceptionFactory = exceptionFactory;
   }
 
@@ -64,7 +67,19 @@ public class SequentialIdentifierGenerator<E, ID> extends BaseIdentifierGenerato
 
   @Override
   public ID generate() {
-    Optional<ID> id = this.sequence.next().map(this.mapper);
-    return id.orElseThrow(this.exceptionFactory);
+    Optional<ID> decorated = this.nextDecoratedId();
+    if (decorated.isEmpty()) {
+      this.decoration.reset();
+      this.sequence.reset();
+      decorated = this.nextDecoratedId();
+    }
+    return decorated.orElseThrow(this.exceptionFactory);
+  }
+
+  private Optional<ID> nextDecoratedId() {
+    ID nextId = this.sequence.next()
+            .map(this.mapper)
+            .orElseThrow(this.exceptionFactory);
+    return this.decoration.apply(nextId);
   }
 }

@@ -18,6 +18,7 @@ package com.github.chaosfirebolt.generator.identifier.internal.builders;
 
 import com.github.chaosfirebolt.generator.identifier.api.sequential.SequentialIdentifierGenerator;
 import com.github.chaosfirebolt.generator.identifier.api.sequential.sequence.Sequence;
+import com.github.chaosfirebolt.generator.identifier.api.sequential.sequence.SequenceDecoration;
 import org.apiguardian.api.API;
 
 import java.util.function.Function;
@@ -35,5 +36,5 @@ public interface SequentialIdentifierGeneratorFactory<E, ID> {
    * Internal, do not use!
    * Creates new instance of {@link SequentialIdentifierGenerator} from provided arguments.
    */
-  SequentialIdentifierGenerator<E, ID> create(Sequence<E> sequence, Function<E, ID> mapper, Supplier<? extends RuntimeException> exceptionFactory);
+  SequentialIdentifierGenerator<E, ID> create(Sequence<E> sequence, Function<E, ID> mapper, SequenceDecoration<ID> decoration, Supplier<? extends RuntimeException> exceptionFactory);
 }

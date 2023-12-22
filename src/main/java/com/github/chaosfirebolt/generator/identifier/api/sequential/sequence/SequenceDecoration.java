@@ -29,8 +29,7 @@ import java.util.Optional;
 public interface SequenceDecoration<E> {
 
   /**
-   * Applies the decoration on provided input. Returning empty optional serves as a signal that the decorating sequence is unable to generate more elements.
-   * The decorator will return empty optional, regardless of the result from the underlying sequence.
+   * Applies the decoration on provided input. Returning empty optional serves as a signal that more elements can't be generated.
    * After returning an empty optional once, all subsequent calls to this method <strong>must</strong> return an empty optional, unless the decoration is {@link #reset()}.
    *
    * @param input element to decorate
@@ -43,4 +42,14 @@ public interface SequenceDecoration<E> {
    * May or may not succeed.
    */
   void reset();
+
+  /**
+   * Decoration, which does not perform any operation on the input.
+   *
+   * @param <E> type of input and result
+   * @return a no op decoration
+   */
+  static <E> SequenceDecoration<E> noOp() {
+    return new NoOpDecoration<>();
+  }
 }
