@@ -20,4 +20,5 @@ module identifier.generator {
   exports com.github.chaosfirebolt.generator.identifier.api.sequential.builders;
   exports com.github.chaosfirebolt.generator.identifier.api.sequential.calculation;
   exports com.github.chaosfirebolt.generator.identifier.api.sequential.sequence;
+  exports com.github.chaosfirebolt.generator.identifier.api.sequential.export;
 }

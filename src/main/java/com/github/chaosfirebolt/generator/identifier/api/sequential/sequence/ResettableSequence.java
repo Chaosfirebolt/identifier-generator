@@ -16,12 +16,14 @@
 
 package com.github.chaosfirebolt.generator.identifier.api.sequential.sequence;
 
+import com.github.chaosfirebolt.generator.identifier.api.sequential.export.Export;
+import com.github.chaosfirebolt.generator.identifier.api.sequential.export.ExportStrategy;
 import org.apiguardian.api.API;
 
 import java.util.Optional;
 
 @API(status = API.Status.INTERNAL, since = "2.1.0")
-class ResettableSequence<T> implements Sequence<T> {
+final class ResettableSequence<T> implements Sequence<T> {
 
   private final Sequence<T> delegate;
 
@@ -41,5 +43,10 @@ class ResettableSequence<T> implements Sequence<T> {
   @Override
   public void reset() {
     this.delegate.reset();
+  }
+
+  @Override
+  public Export<T> export(ExportStrategy<T> strategy) {
+    return this.delegate.export(strategy);
   }
 }

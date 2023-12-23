@@ -28,8 +28,8 @@ final class FiniteSequence<E> extends BaseSequence<E> {
   private final Predicate<E> hasNext;
   private E nextValue;
 
-  FiniteSequence(Calculation<E> calculation, Predicate<E> hasNext) {
-    super(calculation);
+  FiniteSequence(E initialValue, Calculation<E> calculation, Predicate<E> hasNext) {
+    super(initialValue, calculation);
     this.hasNext = hasNext;
     this.nextValue = null;
   }

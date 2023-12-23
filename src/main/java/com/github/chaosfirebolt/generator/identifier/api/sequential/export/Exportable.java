@@ -14,22 +14,13 @@
  * limitations under the License.
  */
 
-package com.github.chaosfirebolt.generator.identifier.api.sequential.calculation;
+package com.github.chaosfirebolt.generator.identifier.api.sequential.export;
 
-import org.apiguardian.api.API;
+public interface Exportable<E> {
 
-@API(status = API.Status.INTERNAL, since = "2.1.0")
-final class ConstantFallbackCalculation<T> extends FallbackCalculation<T> {
+  Export<E> export(ExportStrategy<E> strategy);
 
-  private final T fallbackValue;
-
-  ConstantFallbackCalculation(Calculation<T> actualCalculation, T fallbackValue) {
-    super(actualCalculation);
-    this.fallbackValue = fallbackValue;
-  }
-
-  @Override
-  protected T calculateFallbackValue() {
-    return this.fallbackValue;
+  default Export<E> export() {
+    return export(SequenceExport::new);
   }
 }

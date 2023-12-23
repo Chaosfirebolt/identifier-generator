@@ -16,6 +16,7 @@
 
 package com.github.chaosfirebolt.generator.identifier.api.sequential.sequence;
 
+import com.github.chaosfirebolt.generator.identifier.api.sequential.export.Exportable;
 import org.apiguardian.api.API;
 
 import java.util.Optional;
@@ -26,7 +27,7 @@ import java.util.Optional;
  * @param <E> type of the elements in the sequence
  */
 @API(status = API.Status.STABLE, since = "2.1.0")
-public interface Sequence<E> {
+public interface Sequence<E> extends Exportable<E> {
 
   /**
    * Calculates and returns the next element of the sequence.

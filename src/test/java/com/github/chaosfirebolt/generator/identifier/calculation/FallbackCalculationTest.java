@@ -23,7 +23,6 @@ import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
 import java.util.List;
-import java.util.function.Supplier;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
@@ -40,9 +39,7 @@ public class FallbackCalculationTest {
 
   private static List<Calculation<String>> nullInput_ShouldReturnInitialValue() {
     Calculation<String> constantFallbackCalculation = CalculationFactories.constantFallback(createActualCalculation(), INITIAL_VALUE);
-    Supplier<String> fallbackValueSUpplier = () -> INITIAL_VALUE;
-    Calculation<String> suppliedFallbackCalculation = CalculationFactories.computableFallback(createActualCalculation(), fallbackValueSUpplier);
-    return List.of(constantFallbackCalculation, suppliedFallbackCalculation);
+    return List.of(constantFallbackCalculation);
   }
 
   @ParameterizedTest
@@ -63,13 +60,8 @@ public class FallbackCalculationTest {
   private static List<Arguments> nonNullInput_ShouldInvokeTheActualCalculation() {
     Calculation<String> actualCalculationConstant = createActualCalculation();
     Calculation<String> constantFallbackCalculation = CalculationFactories.constantFallback(actualCalculationConstant, INITIAL_VALUE);
-
-    Calculation<String> actualCalculationSupplied = createActualCalculation();
-    Supplier<String> fallbackValueSUpplier = () -> INITIAL_VALUE;
-    Calculation<String> suppliedFallbackCalculation = CalculationFactories.computableFallback(actualCalculationSupplied, fallbackValueSUpplier);
     return List.of(
-            Arguments.of(constantFallbackCalculation, actualCalculationConstant),
-            Arguments.of(suppliedFallbackCalculation, actualCalculationSupplied)
+            Arguments.of(constantFallbackCalculation, actualCalculationConstant)
     );
   }
 }

@@ -18,6 +18,9 @@ package com.github.chaosfirebolt.generator.identifier.api.sequential;
 
 import com.github.chaosfirebolt.generator.identifier.api.BaseIdentifierGenerator;
 import com.github.chaosfirebolt.generator.identifier.api.sequential.builders.SequentialIdentifierGeneratorBuilder;
+import com.github.chaosfirebolt.generator.identifier.api.sequential.export.Export;
+import com.github.chaosfirebolt.generator.identifier.api.sequential.export.ExportStrategy;
+import com.github.chaosfirebolt.generator.identifier.api.sequential.export.Exportable;
 import com.github.chaosfirebolt.generator.identifier.api.sequential.sequence.Sequence;
 import com.github.chaosfirebolt.generator.identifier.api.sequential.sequence.SequenceDecoration;
 import org.apiguardian.api.API;
@@ -28,11 +31,12 @@ import java.util.function.Supplier;
 
 /**
  * Identifier generator, which produces identifiers from a sequence.
- * @param <E> type of the element produced by the sequence
+ *
+ * @param <E>  type of the element produced by the sequence
  * @param <ID> type of the identifier produced by generator
  */
 @API(status = API.Status.STABLE, since = "2.1.0")
-public class SequentialIdentifierGenerator<E, ID> extends BaseIdentifierGenerator<ID> {
+public class SequentialIdentifierGenerator<E, ID> extends BaseIdentifierGenerator<ID> implements Exportable<E> {
 
   private final Sequence<E> sequence;
   private final Function<E, ID> mapper;
@@ -48,9 +52,10 @@ public class SequentialIdentifierGenerator<E, ID> extends BaseIdentifierGenerato
 
   /**
    * Builder for sequential generator, producing identifiers with different type than the underlying sequence.
-   * @return new builder
-   * @param <E> type of the element produced by the sequence
+   *
+   * @param <E>  type of the element produced by the sequence
    * @param <ID> type of the identifier produced by generator
+   * @return new builder
    */
   public static <E, ID> SequentialIdentifierGeneratorBuilder<E, ID> fluidTypeBuilder() {
     return SequentialIdentifierGeneratorBuilder.fluidTypeBuilder(SequentialIdentifierGenerator::new);
@@ -58,8 +63,9 @@ public class SequentialIdentifierGenerator<E, ID> extends BaseIdentifierGenerato
 
   /**
    * Builder for sequential generator, producing identifiers with same type as the underlying sequence.
-   * @return new builder
+   *
    * @param <ID> type of the element produced by the sequence and the identifiers produced the generator
+   * @return new builder
    */
   public static <ID> SequentialIdentifierGeneratorBuilder<ID, ID> constantTypeBuilder() {
     return SequentialIdentifierGeneratorBuilder.constantTypeBuilder(SequentialIdentifierGenerator::new);
@@ -81,5 +87,10 @@ public class SequentialIdentifierGenerator<E, ID> extends BaseIdentifierGenerato
             .map(this.mapper)
             .orElseThrow(this.exceptionFactory);
     return this.decoration.apply(nextId);
+  }
+
+  @Override
+  public Export<E> export(ExportStrategy<E> strategy) {
+    return this.sequence.export(strategy);
   }
 }

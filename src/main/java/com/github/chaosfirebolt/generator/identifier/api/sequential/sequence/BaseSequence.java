@@ -16,16 +16,25 @@
 
 package com.github.chaosfirebolt.generator.identifier.api.sequential.sequence;
 
+import com.github.chaosfirebolt.generator.identifier.api.sequential.export.Export;
 import com.github.chaosfirebolt.generator.identifier.api.sequential.calculation.Calculation;
+import com.github.chaosfirebolt.generator.identifier.api.sequential.export.ExportStrategy;
 import org.apiguardian.api.API;
 
 @API(status = API.Status.INTERNAL, since = "2.1.0")
 abstract sealed class BaseSequence<E> implements Sequence<E> permits FiniteSequence, InfiniteSequence {
 
+  private final E initialValie;
   protected final Calculation<E> calculation;
   protected E previousValue;
 
-  BaseSequence(Calculation<E> calculation) {
+  BaseSequence(E initialValie, Calculation<E> calculation) {
+    this.initialValie = initialValie;
     this.calculation = calculation;
+  }
+
+  @Override
+  public Export<E> export(ExportStrategy<E> strategy) {
+    return strategy.apply(this.initialValie, this.previousValue);
   }
 }

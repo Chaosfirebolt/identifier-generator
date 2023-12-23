@@ -14,29 +14,20 @@
  * limitations under the License.
  */
 
-package com.github.chaosfirebolt.generator.identifier.api.sequential.sequence;
+package com.github.chaosfirebolt.generator.identifier.api.sequential.export;
 
-import com.github.chaosfirebolt.generator.identifier.api.sequential.calculation.Calculation;
 import org.apiguardian.api.API;
 
-import java.util.Optional;
+@API(status = API.Status.STABLE, since = "2.1.0")
+public record SequenceExport<E>(E initialElement, E latestElement) implements Export<E> {
 
-@API(status = API.Status.INTERNAL, since = "2.1.0")
-final class InfiniteSequence<E> extends BaseSequence<E> {
-
-  InfiniteSequence(E initialValue, Calculation<E> calculation) {
-    super(initialValue, calculation);
+  @Override
+  public E initialValue() {
+    return initialElement();
   }
 
   @Override
-  public Optional<E> next() {
-    E next = this.calculation.calculate(this.previousValue);
-    this.previousValue = next;
-    return Optional.of(next);
-  }
-
-  @Override
-  public void reset() {
-    this.previousValue = null;
+  public E latestValue() {
+    return latestElement();
   }
 }

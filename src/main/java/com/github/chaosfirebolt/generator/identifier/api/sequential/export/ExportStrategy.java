@@ -14,21 +14,9 @@
  * limitations under the License.
  */
 
-package com.github.chaosfirebolt.generator.identifier.api.sequential.calculation;
+package com.github.chaosfirebolt.generator.identifier.api.sequential.export;
 
-import java.util.function.Supplier;
+public interface ExportStrategy<E> {
 
-class ComputableFallbackCalculation<R> extends FallbackCalculation<R> {
-
-  private final Supplier<R> fallbackValueSupplier;
-
-  ComputableFallbackCalculation(Calculation<R> actualCalculation, Supplier<R> fallbackValueSupplier) {
-    super(actualCalculation);
-    this.fallbackValueSupplier = fallbackValueSupplier;
-  }
-
-  @Override
-  protected R calculateFallbackValue() {
-    return this.fallbackValueSupplier.get();
-  }
+  Export<E> apply(E initialValue, E latestValue);
 }

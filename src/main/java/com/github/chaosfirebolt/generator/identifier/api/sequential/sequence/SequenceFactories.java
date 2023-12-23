@@ -47,7 +47,7 @@ public class SequenceFactories {
     Objects.requireNonNull(calculation, "Null calculation passed");
     Objects.requireNonNull(initialValue, "Null initial value passed");
     Calculation<O> fallbackCalculation = CalculationFactories.constantFallback(calculation, initialValue);
-    return new FiniteSequence<>(fallbackCalculation, Objects.requireNonNull(hasNext));
+    return new FiniteSequence<>(initialValue, fallbackCalculation, Objects.requireNonNull(hasNext));
   }
 
   /**
@@ -63,7 +63,7 @@ public class SequenceFactories {
     Objects.requireNonNull(initialValue, "Null initial value passed");
     Objects.requireNonNull(calculation, "Null calculation passed");
     Calculation<O> fallbackCalculation = CalculationFactories.constantFallback(calculation, initialValue);
-    return new InfiniteSequence<>(fallbackCalculation);
+    return new InfiniteSequence<>(initialValue, fallbackCalculation);
   }
 
   /**
