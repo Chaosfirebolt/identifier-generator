@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.github.chaosfirebolt.generator.identifier.sequence;
+package com.github.chaosfirebolt.generator.identifier.sequential;
 
 import com.github.chaosfirebolt.generator.identifier.api.sequential.sequence.SequenceDecoration;
 
