@@ -18,10 +18,25 @@ package com.github.chaosfirebolt.generator.identifier.api.sequential.export;
 
 import org.apiguardian.api.API;
 
+/**
+ * Data exported from {@link Exportable}.
+ *
+ * @param <E>
+ */
 @API(status = API.Status.STABLE, since = "2.1.0")
 public interface Export<E> {
 
+  /**
+   * Gets the initial value.
+   *
+   * @return the initial value
+   */
   E initialValue();
 
+  /**
+   * Gets the latest generated value.
+   *
+   * @return the latest value
+   */
   E latestValue();
 }

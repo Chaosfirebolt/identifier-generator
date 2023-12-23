@@ -18,8 +18,8 @@ package com.github.chaosfirebolt.generator.identifier.api.sequential.export;
 
 import org.apiguardian.api.API;
 
-@API(status = API.Status.STABLE, since = "2.1.0")
-public record SequenceExport<E>(E initialElement, E latestElement) implements Export<E> {
+@API(status = API.Status.INTERNAL, since = "2.1.0")
+record SequenceExport<E>(E initialElement, E latestElement) implements Export<E> {
 
   @Override
   public E initialValue() {

@@ -16,7 +16,22 @@
 
 package com.github.chaosfirebolt.generator.identifier.api.sequential.export;
 
+import org.apiguardian.api.API;
+
+/**
+ * A strategy to create an export object from provided data.
+ *
+ * @param <E>
+ */
+@API(status = API.Status.STABLE, since = "2.1.0")
 public interface ExportStrategy<E> {
 
+  /**
+   * Creates an export from the initial and latest values.
+   *
+   * @param initialValue the initial value of a sequence
+   * @param latestValue  the latest value extracted from a sequence
+   * @return an export
+   */
   Export<E> apply(E initialValue, E latestValue);
 }
