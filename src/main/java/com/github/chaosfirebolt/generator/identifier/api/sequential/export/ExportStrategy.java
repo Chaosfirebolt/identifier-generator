@@ -21,7 +21,7 @@ import org.apiguardian.api.API;
 /**
  * A strategy to create an export object from provided data.
  *
- * @param <E>
+ * @param <E> type of the data contained, that the {@link Export} will contain
  */
 @API(status = API.Status.EXPERIMENTAL, since = "2.1.0")
 public interface ExportStrategy<E> {

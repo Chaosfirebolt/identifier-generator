@@ -23,10 +23,15 @@ import java.io.Serializable;
 /**
  * Data exported from {@link Exportable}.
  *
- * @param <E>
+ * @param <E> type of the data contained
  */
 @API(status = API.Status.EXPERIMENTAL, since = "2.1.0")
 public interface Export<E> extends Serializable {
 
+  /**
+   * Transform this export into an object for importing.
+   *
+   * @return an import, created from this export
+   */
   Import<E> toImport();
 }

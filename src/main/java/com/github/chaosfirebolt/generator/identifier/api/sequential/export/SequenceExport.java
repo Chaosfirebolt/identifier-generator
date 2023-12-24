@@ -21,9 +21,9 @@ import org.apiguardian.api.API;
 /**
  * The default implementation for Export and Import.
  *
- * @param initialElement
- * @param latestElement
- * @param <E>
+ * @param initialElement the initial element
+ * @param latestElement the latest extracted element
+ * @param <E> type of the data contained
  */
 @API(status = API.Status.EXPERIMENTAL, since = "2.1.0")
 public record SequenceExport<E>(E initialElement, E latestElement) implements Export<E>, Import<E> {

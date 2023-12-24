@@ -18,6 +18,11 @@ package com.github.chaosfirebolt.generator.identifier.api.sequential.export;
 
 import org.apiguardian.api.API;
 
+/**
+ * An import object, containing the data required to recreate an {@link Exportable} to its' previous state.
+ *
+ * @param <E> type of the data contained
+ */
 @API(status = API.Status.EXPERIMENTAL, since = "2.1.0")
 public interface Import<E> {
 
