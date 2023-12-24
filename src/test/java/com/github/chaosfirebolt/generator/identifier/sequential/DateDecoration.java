@@ -23,14 +23,14 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Optional;
 
-class DateDecoration implements SequenceDecoration<String> {
+public class DateDecoration implements SequenceDecoration<String> {
 
   private static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("yyyyMMdd");
 
   private final Clock clock;
   private LocalDateTime validUntil;
 
-  DateDecoration(Clock clock) {
+  public DateDecoration(Clock clock) {
     this.clock = clock;
   }
 

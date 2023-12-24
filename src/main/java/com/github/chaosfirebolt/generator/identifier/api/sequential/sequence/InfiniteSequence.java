@@ -28,6 +28,10 @@ final class InfiniteSequence<E> extends BaseSequence<E> {
     super(initialValue, calculation);
   }
 
+  InfiniteSequence(E initialValue, Calculation<E> calculation, E previousValue) {
+    super(initialValue, calculation, previousValue);
+  }
+
   @Override
   public Optional<E> next() {
     E next = this.calculation.calculate(this.previousValue);

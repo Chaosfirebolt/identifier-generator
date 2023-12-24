@@ -23,7 +23,7 @@ import org.apiguardian.api.API;
  *
  * @param <E>
  */
-@API(status = API.Status.STABLE, since = "2.1.0")
+@API(status = API.Status.EXPERIMENTAL, since = "2.1.0")
 public interface ExportStrategy<E> {
 
   /**

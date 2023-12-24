@@ -18,28 +18,20 @@ package com.github.chaosfirebolt.generator.identifier.api.sequential.export;
 
 import org.apiguardian.api.API;
 
-/**
- * An object, whose internal state can be exported.
- *
- * @param <E> type of the data the export holds.
- */
 @API(status = API.Status.EXPERIMENTAL, since = "2.1.0")
-public interface Exportable<E> {
+public interface Import<E> {
 
   /**
-   * Creates an export according to the specified strategy.
+   * Gets the initial value.
    *
-   * @param strategy strategy to create the export
-   * @return exported data
+   * @return the initial value
    */
-  Export<E> export(ExportStrategy<E> strategy);
+  E initialValue();
 
   /**
-   * Creates an export using a default strategy.
+   * Gets the latest generated value.
    *
-   * @return exported data
+   * @return the latest value
    */
-  default Export<E> export() {
-    return export(SequenceExport::new);
-  }
+  E latestValue();
 }

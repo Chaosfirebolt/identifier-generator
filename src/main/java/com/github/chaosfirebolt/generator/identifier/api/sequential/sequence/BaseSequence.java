@@ -29,8 +29,13 @@ abstract sealed class BaseSequence<E> implements Sequence<E> permits FiniteSeque
   protected E previousValue;
 
   BaseSequence(E initialValie, Calculation<E> calculation) {
+    this(initialValie, calculation, null);
+  }
+
+  BaseSequence(E initialValie, Calculation<E> calculation, E previousValue) {
     this.initialValie = initialValie;
     this.calculation = calculation;
+    this.previousValue = previousValue;
   }
 
   @Override

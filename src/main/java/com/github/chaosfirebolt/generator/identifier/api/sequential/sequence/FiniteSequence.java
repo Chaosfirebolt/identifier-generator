@@ -34,6 +34,12 @@ final class FiniteSequence<E> extends BaseSequence<E> {
     this.nextValue = null;
   }
 
+  FiniteSequence(E initialValue, Calculation<E> calculation, E previousValue, Predicate<E> hasNext) {
+    super(initialValue, calculation, previousValue);
+    this.hasNext = hasNext;
+    this.nextValue = null;
+  }
+
   @Override
   public Optional<E> next() {
     if (!hasNext()) {

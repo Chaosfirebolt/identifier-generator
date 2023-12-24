@@ -18,16 +18,28 @@ package com.github.chaosfirebolt.generator.identifier.api.sequential.export;
 
 import org.apiguardian.api.API;
 
-@API(status = API.Status.INTERNAL, since = "2.1.0")
-record SequenceExport<E>(E initialElement, E latestElement) implements Export<E> {
+/**
+ * The default implementation for Export and Import.
+ *
+ * @param initialElement
+ * @param latestElement
+ * @param <E>
+ */
+@API(status = API.Status.EXPERIMENTAL, since = "2.1.0")
+public record SequenceExport<E>(E initialElement, E latestElement) implements Export<E>, Import<E> {
+
+  @Override
+  public Import<E> toImport() {
+    return this;
+  }
 
   @Override
   public E initialValue() {
-    return initialElement();
+    return this.initialElement();
   }
 
   @Override
   public E latestValue() {
-    return latestElement();
+    return this.latestElement();
   }
 }

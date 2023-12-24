@@ -14,32 +14,14 @@
  * limitations under the License.
  */
 
+/**
+ * <strong>Experimental</strong> feature.
+ * The goal is to be able to persist the state of a sequence based generators, in order to restore them with a state, which allows to continue generating identifiers from where they left of.
+ * For example after application restart.
+ * <br>
+ * Use with <strong>caution</strong>! The classes in this package <strong>may</strong> be subject to sudden backwards incompatible changes.
+ */
+@API(status = API.Status.EXPERIMENTAL, since = "2.1.0")
 package com.github.chaosfirebolt.generator.identifier.api.sequential.export;
 
 import org.apiguardian.api.API;
-
-/**
- * An object, whose internal state can be exported.
- *
- * @param <E> type of the data the export holds.
- */
-@API(status = API.Status.EXPERIMENTAL, since = "2.1.0")
-public interface Exportable<E> {
-
-  /**
-   * Creates an export according to the specified strategy.
-   *
-   * @param strategy strategy to create the export
-   * @return exported data
-   */
-  Export<E> export(ExportStrategy<E> strategy);
-
-  /**
-   * Creates an export using a default strategy.
-   *
-   * @return exported data
-   */
-  default Export<E> export() {
-    return export(SequenceExport::new);
-  }
-}

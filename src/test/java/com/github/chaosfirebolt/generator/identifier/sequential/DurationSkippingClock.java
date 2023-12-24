@@ -21,13 +21,13 @@ import java.time.Duration;
 import java.time.Instant;
 import java.time.ZoneId;
 
-class DurationSkippingClock extends Clock {
+public class DurationSkippingClock extends Clock {
 
   private final ZoneId zoneId;
   private final Duration skipDuration;
   private Instant currentInstant;
 
-  DurationSkippingClock(ZoneId zoneId, Duration skipDuration, Instant currentInstant) {
+  public DurationSkippingClock(ZoneId zoneId, Duration skipDuration, Instant currentInstant) {
     this.zoneId = zoneId;
     this.skipDuration = skipDuration;
     this.currentInstant = currentInstant;
