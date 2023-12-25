@@ -24,6 +24,9 @@ import com.github.chaosfirebolt.generator.identifier.api.sequential.sequence.Seq
 import com.github.chaosfirebolt.generator.identifier.sequential.DateDecoration;
 import com.github.chaosfirebolt.generator.identifier.sequential.DurationSkippingClock;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
 
 import java.time.Duration;
 import java.time.Instant;
@@ -63,8 +66,9 @@ public class SequenceExportTests {
     }
   }
 
-  @Test
-  public void exportImportGenerator() {
+  @ParameterizedTest
+  @MethodSource
+  public void exportImportGenerator(int beforeExportCount, int afterExportCount) {
     Calculation<Integer> calculation = num -> num + 1;
     Predicate<Integer> condition = num -> num < 100;
     Sequence<Integer> sequence = SequenceFactories.finite(1, calculation, condition);
@@ -82,7 +86,7 @@ public class SequenceExportTests {
             .setExceptionFactory(() -> new RuntimeException("Incorrect generator setup"))
             .build();
     List<String> actual = new ArrayList<>();
-    extractIds(generator, actual, 10);
+    extractIds(generator, actual, beforeExportCount);
 
     byte[] serializedSequence = ExportSerializer.serialize(generator.export());
     Export<Integer> deserializedExport = ExportSerializer.deserialize(serializedSequence);
@@ -94,7 +98,7 @@ public class SequenceExportTests {
             .setDecoration(dateDecoration)
             .setExceptionFactory(() -> new RuntimeException("Incorrect generator setup"))
             .build();
-    extractIds(recreatedGenerator, actual, 5);
+    extractIds(recreatedGenerator, actual, afterExportCount);
 
     List<String> expected = List.of(
             "2023010100001",
@@ -120,5 +124,13 @@ public class SequenceExportTests {
     for (int i = 0; i < count; i++) {
       ids.add(generator.generate());
     }
+  }
+
+  private static List<Arguments> exportImportGenerator() {
+    return List.of(
+            Arguments.of(10, 5),
+            Arguments.of(12, 3),
+            Arguments.of(14, 1)
+    );
   }
 }
