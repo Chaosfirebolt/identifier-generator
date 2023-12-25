@@ -2,18 +2,19 @@
 Library for identifier generation.
 Provides abstraction for identifier generation - main interfaces defining functionality are [IdentifierGenerator](src/main/java/com/github/chaosfirebolt/generator/identifier/api/IdentifierGenerator.java) and [TargetLengthIdentifierGenerator](src/main/java/com/github/chaosfirebolt/generator/identifier/api/TargetLengthIdentifierGenerator.java), and implementations for string based identifiers.
 Most combinations of alphabetic, numeric and special characters are covered by provided [builders](src/main/java/com/github/chaosfirebolt/generator/identifier/api/string/builders/StringGeneratorBuilders.java).
+Also supports sequence based generators with [SequentialIdentifierGenerator](src/main/java/com/github/chaosfirebolt/generator/identifier/api/sequential/SequentialIdentifierGenerator.java).
 
 Versions before `2.0.0` require java 8. Since `2.0.0` required java version is 17.
 
 # Latest version
-Current latest version is 2.0.1
+Current latest version is 2.1.0
 <br/>
 Maven dependency
 ```
 <dependency>
     <groupId>com.github.chaosfirebolt.generator</groupId>
     <artifactId>identifier-generator</artifactId>
-    <version>2.0.1</version>
+    <version>2.1.0</version>
 </dependency>
 ```
 [All artifacts in maven central](https://mvnrepository.com/artifact/com.github.chaosfirebolt.generator/identifier-generator)
@@ -107,6 +108,39 @@ for (int i = 0; i < 100; i++) {
   String identifier = generator.generate(existing::add);
   System.out.println("Identifier - " + identifier);
   //will throw TooManyAttemptsException at some point during this loop
+}
+```
+
+Sequence identifier generator with **all** options. [DateDecoration](src/test/java/com/github/chaosfirebolt/generator/identifier/sequential/DateDecoration.java)
+```java
+public static void main(String[] args) {
+  SequentialIdentifierGenerator<Integer, String> generator = SequentialIdentifierGenerator.<Integer, String>fluidTypeBuilder()
+          .setSequence(SequenceFactories.infinite(1, num -> num + 1))
+          .setMapper(num -> String.format("%05d", num))//pad left with zeroes
+          .setDecoration(new DateDecoration(Clock.systemUTC()))//decoration prepending the date and resetting sequence for the next day
+          .setExceptionFactory(() -> new MyCustomException("No more identifiers"))//throw some custom exception when the generator cannot generate more identifiers
+          .build();
+  for (int i = 0; i < 5; i++) {
+    System.out.println(generator.generate());
+  }
+  //At the time of writing prints
+  //2023122400001
+  //2023122400002
+  //2023122400003
+  //2023122400004
+  //2023122400005
+}
+```
+
+Sequence identifier generator with **minimalistic** setup.
+```java
+public static void main(String[] args) {
+  SequentialIdentifierGenerator<Integer, Integer> generator = SequentialIdentifierGenerator.<Integer>constantTypeBuilder()
+          .setSequence(SequenceFactories.infinite(1, num -> num + 1))
+          .build();
+  for (int i = 0; i < 5; i++) {
+    System.out.println(generator.generate());
+  }
 }
 ```
 

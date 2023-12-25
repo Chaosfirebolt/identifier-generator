@@ -16,6 +16,8 @@
 
 package com.github.chaosfirebolt.generator.util;
 
+import com.github.chaosfirebolt.generator.identifier.api.sequential.calculation.CalculationFactories;
+import com.github.chaosfirebolt.generator.identifier.api.sequential.sequence.SequenceFactories;
 import com.github.chaosfirebolt.generator.identifier.api.string.builders.StringGeneratorBuilders;
 import com.github.chaosfirebolt.generator.identifier.internal.util.CalculationUtility;
 import com.github.chaosfirebolt.generator.identifier.internal.util.CharacterUtility;
@@ -34,7 +36,7 @@ import static org.junit.jupiter.api.Assertions.*;
 public class UtilityTests {
 
   private static List<Class<?>> utilityClasses() {
-    return List.of(CalculationUtility.class, CharacterUtility.class, OptionalUtility.class, ShuffleUtility.class, StringGeneratorBuilders.class);
+    return List.of(CalculationUtility.class, CharacterUtility.class, OptionalUtility.class, ShuffleUtility.class, StringGeneratorBuilders.class, SequenceFactories.class, CalculationFactories.class);
   }
 
   @ParameterizedTest
