@@ -17,9 +17,12 @@
 package com.github.chaosfirebolt.generator.identifier.sequence;
 
 import com.github.chaosfirebolt.generator.identifier.api.sequential.calculation.Calculation;
+import com.github.chaosfirebolt.generator.identifier.api.sequential.export.ExportStrategy;
+import com.github.chaosfirebolt.generator.identifier.api.sequential.export.SequenceExport;
 import com.github.chaosfirebolt.generator.identifier.api.sequential.sequence.Sequence;
 import com.github.chaosfirebolt.generator.identifier.api.sequential.sequence.SequenceFactories;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.function.Executable;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.MethodSource;
 
@@ -29,6 +32,8 @@ import java.util.Optional;
 import java.util.stream.IntStream;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.spy;
+import static org.mockito.Mockito.verify;
 
 public class SequenceTests {
 
@@ -50,9 +55,20 @@ public class SequenceTests {
   }
 
   private static List<Sequence<Integer>> correctSequenceOfElements() {
+    List<Integer> source = IntStream.iterate(1, i -> i + 2)
+            .boxed()
+            .limit(100)
+            .toList();
     Integer initial = 1;
     Calculation<Integer> calculation = i -> i + 2;
-    return List.of(SequenceFactories.infinite(initial, calculation), SequenceFactories.finite(initial, calculation, num -> num < 1000));
+    return List.of(
+            SequenceFactories.infinite(initial, calculation),
+            SequenceFactories.finite(initial, calculation, num -> num < 1000),
+            SequenceFactories.iterator(source.iterator()),
+            SequenceFactories.stream(source.stream()),
+            SequenceFactories.spliterator(source.spliterator()),
+            SequenceFactories.iterable(source)
+    );
   }
 
   @Test
@@ -140,15 +156,68 @@ public class SequenceTests {
     return result;
   }
 
-  @Test
-  public void resettingSequence_ShouldProduceSame() {
-    Sequence<Integer> finiteSequence = SequenceFactories.finite(1, i -> i + 1, i -> i <= 3);
-    Sequence<Integer> resettableSequence = SequenceFactories.resettable(finiteSequence);
+  @ParameterizedTest
+  @MethodSource
+  public void selfResettingSequence_ShouldProduceSame(Sequence<Integer> sequence) {
+    Sequence<Integer> resettableSequence = SequenceFactories.resettable(sequence);
     List<Integer> actualResult = new ArrayList<>();
     for (int i = 0; i < 9; i++) {
       actualResult.add(resettableSequence.next().orElseThrow(() -> new AssertionError("Resettable sequence should not have returned empty optional")));
     }
     List<Integer> expectedResult = List.of(1, 2, 3, 1, 2, 3, 1, 2, 3);
     assertEquals(expectedResult, actualResult, "Result not as expected");
+  }
+
+  private static List<Sequence<Integer>> selfResettingSequence_ShouldProduceSame() {
+    return List.of(
+            SequenceFactories.finite(1, i -> i + 1, i -> i <= 3),
+            SequenceFactories.iterable(List.of(1, 2, 3))
+    );
+  }
+
+  @ParameterizedTest
+  @MethodSource("nonExportableNonResettableSequences_ShouldThrowUnsupportedOperationException")
+  public void nonExportableSequences_ShouldThrowUnsupportedOperationException(Sequence<Integer> sequence) {
+    assertUnsupportedOperationException(sequence::export);
+    assertUnsupportedOperationException(() -> sequence.export(SequenceExport::new));
+  }
+
+  private static void assertUnsupportedOperationException(Executable executable) {
+    UnsupportedOperationException exc = assertThrows(UnsupportedOperationException.class, executable, "Expected exception not thrown");
+    String message = exc.getMessage();
+    final String missingMessage = "No exception message";
+    assertNotNull(message, missingMessage);
+    assertFalse(message.isBlank(), missingMessage);
+  }
+
+  private static List<Sequence<Integer>> nonExportableNonResettableSequences_ShouldThrowUnsupportedOperationException() {
+    List<Integer> source = List.of(1, 2, 3, 4, 5);
+    return List.of(
+            SequenceFactories.iterator(source.iterator()),
+            SequenceFactories.spliterator(source.spliterator()),
+            SequenceFactories.stream(source.stream())
+    );
+  }
+
+  @ParameterizedTest
+  @MethodSource("nonExportableNonResettableSequences_ShouldThrowUnsupportedOperationException")
+  public void nonResettableSequences_ShouldThrowUnsupportedOperationException(Sequence<Integer> sequence) {
+    assertUnsupportedOperationException(sequence::reset);
+  }
+
+  @Test
+  public void resettableSequence_ShouldDelegateTheOperations() {
+    Sequence<Integer> delegate = spy(SequenceFactories.infinite(1, i -> i + 1));
+    Sequence<Integer> resettableSequence = SequenceFactories.resettable(delegate);
+
+    resettableSequence.next();
+    verify(delegate).next();
+
+    resettableSequence.reset();
+    verify(delegate).reset();
+
+    ExportStrategy<Integer> exportStrategy = SequenceExport::new;
+    resettableSequence.export(exportStrategy);
+    verify(delegate).export(exportStrategy);
   }
 }
