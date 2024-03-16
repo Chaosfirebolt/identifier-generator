@@ -31,6 +31,7 @@ public interface Exportable<E> {
    *
    * @param strategy strategy to create the export
    * @return exported data
+   * @throws UnsupportedOperationException if export is not supported
    */
   Export<E> export(ExportStrategy<E> strategy);
 
@@ -38,6 +39,7 @@ public interface Exportable<E> {
    * Creates an export using a default strategy.
    *
    * @return exported data
+   * @throws UnsupportedOperationException if export is not supported
    */
   default Export<E> export() {
     return export(SequenceExport::new);
