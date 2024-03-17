@@ -17,7 +17,7 @@ Maven dependency
     <version>2.2.0</version>
 </dependency>
 ```
-[All artifacts in maven central](https://mvnrepository.com/artifact/com.github.chaosfirebolt.generator/identifier-generator)
+[All artefacts in maven central](https://mvnrepository.com/artifact/com.github.chaosfirebolt.generator/identifier-generator)
 
 # Examples
 
