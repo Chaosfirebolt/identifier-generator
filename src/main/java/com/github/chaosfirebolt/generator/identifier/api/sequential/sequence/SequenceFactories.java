@@ -21,8 +21,12 @@ import com.github.chaosfirebolt.generator.identifier.api.sequential.calculation.
 import com.github.chaosfirebolt.generator.identifier.api.sequential.export.Import;
 import org.apiguardian.api.API;
 
+import java.util.Iterator;
 import java.util.Objects;
+import java.util.Spliterator;
+import java.util.Spliterators;
 import java.util.function.Predicate;
+import java.util.stream.Stream;
 
 /**
  * Factory for creating different {@link Sequence}s.
@@ -116,5 +120,58 @@ public class SequenceFactories {
    */
   public static <O> Sequence<O> resettable(Sequence<O> sequence) {
     return new ResettableSequence<>(Objects.requireNonNull(sequence, "Null sequence"));
+  }
+
+  /**
+   * Creates a sequence from the supplied iterator. This sequence does not support reset and export operations.
+   * The iterator must not return null elements.
+   *
+   * @param iterator iterator to base the sequence on
+   * @param <O>      type of the elements produced by the sequence
+   * @return iterator based sequence
+   * @throws NullPointerException if supplied iterator is null
+   */
+  public static <O> Sequence<O> iterator(Iterator<O> iterator) {
+    return new IteratorBasedSequence<>(Objects.requireNonNull(iterator, "Null iterator"));
+  }
+
+  /**
+   * Creates a sequence from the supplied stream. This sequence does not support reset and export operations.
+   * The stream must not return null elements.
+   *
+   * @param stream stream to base the sequence on
+   * @param <O>    type of the elements produced by the sequence
+   * @return sequence based on the streams' iterator
+   * @throws NullPointerException if supplied stream is null
+   */
+  public static <O> Sequence<O> stream(Stream<O> stream) {
+    Iterator<O> iterator = Objects.requireNonNull(stream, "Null stream").iterator();
+    return iterator(iterator);
+  }
+
+  /**
+   * Creates a sequence from the supplied spliterator. This sequence does not support reset and export operations.
+   *
+   * @param spliterator spliterator to base the sequence on
+   * @param <O>         type of the elements produced by the sequence
+   * @return sequence based on an iterator created from the spliterator
+   * @throws NullPointerException if supplied spliterator is null
+   */
+  public static <O> Sequence<O> spliterator(Spliterator<O> spliterator) {
+    Objects.requireNonNull(spliterator, "Null spliterator");
+    return iterator(Spliterators.iterator(spliterator));
+  }
+
+  /**
+   * Creates a sequence from the supplied iterable. This sequence does not support export operations.
+   * The iterable must not contain null elements.
+   *
+   * @param iterable iterable to base the sequence on
+   * @param <O>      type of the elements produced by the sequence
+   * @return iterable based sequence
+   * @throws NullPointerException if supplied iterator is null
+   */
+  public static <O> Sequence<O> iterable(Iterable<O> iterable) {
+    return new IterableBasedSequence<>(Objects.requireNonNull(iterable, "Null iterable"));
   }
 }

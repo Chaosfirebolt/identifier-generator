@@ -40,6 +40,8 @@ public interface Sequence<E> extends Exportable<E> {
   /**
    * Resets the sequence. If the sequence was unable to produce more elements, e.g. {@link #next()} would return an empty {@link Optional},
    * after invoking this method the sequence must be able to produce elements again.
+   *
+   * @throws UnsupportedOperationException if the sequence does not support a reset
    */
   void reset();
 }

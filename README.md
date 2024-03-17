@@ -7,17 +7,17 @@ Also supports sequence based generators with [SequentialIdentifierGenerator](src
 Versions before `2.0.0` require java 8. Since `2.0.0` required java version is 17.
 
 # Latest version
-Current latest version is 2.1.0
+Current latest version is 2.2.0
 <br/>
 Maven dependency
 ```
 <dependency>
     <groupId>com.github.chaosfirebolt.generator</groupId>
     <artifactId>identifier-generator</artifactId>
-    <version>2.1.0</version>
+    <version>2.2.0</version>
 </dependency>
 ```
-[All artifacts in maven central](https://mvnrepository.com/artifact/com.github.chaosfirebolt.generator/identifier-generator)
+[All artefacts in maven central](https://mvnrepository.com/artifact/com.github.chaosfirebolt.generator/identifier-generator)
 
 # Examples
 
@@ -137,6 +137,18 @@ Sequence identifier generator with **minimalistic** setup.
 public static void main(String[] args) {
   SequentialIdentifierGenerator<Integer, Integer> generator = SequentialIdentifierGenerator.<Integer>constantTypeBuilder()
           .setSequence(SequenceFactories.infinite(1, num -> num + 1))
+          .build();
+  for (int i = 0; i < 5; i++) {
+    System.out.println(generator.generate());
+  }
+}
+```
+
+Sequence identifier generator backed by a collection.
+```java
+public static void main(String[] args) {
+  SequentialIdentifierGenerator<Integer, Integer> generator = SequentialIdentifierGenerator.<Integer>constantTypeBuilder()
+          .setSequence(SequenceFactories.iterable(List.of(1, 2, 3, 4, 5, 6, 7)))
           .build();
   for (int i = 0; i < 5; i++) {
     System.out.println(generator.generate());
