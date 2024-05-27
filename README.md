@@ -19,6 +19,8 @@ Maven dependency
 ```
 [All artefacts in maven central](https://mvnrepository.com/artifact/com.github.chaosfirebolt.generator/identifier-generator)
 
+[Javadoc](https://javadoc.io/doc/com.github.chaosfirebolt.generator/identifier-generator/latest/identifier.generator/module-summary.html)
+
 # Examples
 
 Print alphanumeric identifier
